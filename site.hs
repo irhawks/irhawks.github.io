@@ -16,9 +16,9 @@ main = hakyll $ do
 
     match "resources/**" $ route idRoute >> compile copyFileCompiler
 
-    tags <- buildTags "posts/*" $ fromCapture "tags/*.html"
+    tags <- buildTags "posts/**" $ fromCapture "tags/*.html"
 
-    match "posts/*" $ do
+    match "posts/**" $ do
         route $ setExtension "html"
         compile $ pandocCompiler'
             >>= loadAndApplyTemplate "templates/post.html" (taggedPostCtx tags)
@@ -40,7 +40,7 @@ main = hakyll $ do
                 >>= relativizeUrls
 
     tagsRules tags $ \tag pattern -> do
-        let tagCtx = constField "title" ("Posts tagged " ++ tag) `mappend` defaultContext
+        let tagCtx = constField "title" ("具有" ++ tag ++ "的文章") `mappend` defaultContext
 
         route idRoute
         compile $ postsTagged tags pattern recentFirst
@@ -52,7 +52,7 @@ main = hakyll $ do
     create ["tags.html"] $ do
         route idRoute
         compile $ do
-            let cloudCtx = constField "title" "Tags" `mappend` defaultContext
+            let cloudCtx = constField "title" "标签云" `mappend` defaultContext
 
             renderTagCloud 100 300 tags
                 >>= makeItem
@@ -64,7 +64,7 @@ main = hakyll $ do
         route idRoute
         compile $ do
             let indexCtx = field "post" $ const (itemBody <$> mostRecentPost)
-            let homeCtx = constField "title" "Home" `mappend` defaultContext
+            let homeCtx = constField "title" "主页" `mappend` defaultContext
 
             getResourceBody
                 >>= applyAsTemplate indexCtx
@@ -86,11 +86,11 @@ extensions = Set.fromList [Ext_inline_notes, Ext_raw_html, Ext_tex_math_dollars]
 
 feedConfig :: FeedConfiguration
 feedConfig = FeedConfiguration {
-        feedTitle       = "AustinRochford.com",
-        feedDescription = "Math, Data, and Software",
-        feedAuthorName  = "Austin Rochford",
-        feedAuthorEmail = "austin.rochford@gmail.com",
-        feedRoot        = "http://austinrochford.com"
+        feedTitle       = "irhawks.github.io",
+        feedDescription = "IRI's blog on irhawks.github.io",
+        feedAuthorName  = "irhawks",
+        feedAuthorEmail = "2927670573@qq.com",
+        feedRoot        = "http://irhawks.github.io"
     }
 
 mostRecentPost :: Compiler (Item String)

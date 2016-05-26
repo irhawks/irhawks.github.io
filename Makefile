@@ -33,13 +33,12 @@ deploy-source-github : rebuild
 
 	git add -A
 	git commit -am "更新博客源文件 $$(date)"
-	git push github source
+	git push github master:source --tags
 
 deploy-target-github : rebuild
 
 	cd _site && git add remote github git@github.com:irhawks/irhawks.github.io.git
-	cd _site && git checkout master
 	make rebuild
 	cd _site && git add -A
 	cd _site && git commit -am "更新github上面的博客 $$(date)"
-	git push github master
+	git push -f github master   ## 强制将博客目录推送到github的master分支上

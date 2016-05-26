@@ -11,11 +11,12 @@ ${SITE_GEN_PROG} : blog.cabal
 rebuild: ${SITE_GEN_PROG}
 	${SITE_GEN_PROG} rebuild
 
+### you should never clean the _site directory
 clean: ${SITE_GEN_PROG}
 	${SITE_GEN_PROG} clean
 
 preview: rebuild
-	${SITE_GEN_PROG} watch -h "0.0.0.0:8000"
+	${SITE_GEN_PROG} watch -h "0.0.0.0"
 
 ### 接下来我们想使用github来作为部署的平台，部署到irhawks.github.io
 ### 包括部署源代码与部署网站

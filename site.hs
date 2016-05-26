@@ -64,7 +64,8 @@ main = hakyll $ do
         route idRoute
         compile $ do
             let indexCtx = field "post" $ const (itemBody <$> mostRecentPost)
-            let homeCtx = constField "title" "主页" `mappend` defaultContext
+            -- let homeCtx = constField "title" "主页" `mappend` defaultContext
+            let homeCtx = constField "title" "最新文章" `mappend` defaultContext
 
             getResourceBody
                 >>= applyAsTemplate indexCtx

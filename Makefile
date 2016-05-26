@@ -63,7 +63,7 @@ deploy-target-github : rebuild
 	### 问题是每次rebuild的时候，hakyll都会清空_site目录，所以每次都要init
 	cp -av _site /tmp/TEMPDIRS
 	git submodule init && git submodule update
-	cd _site && git checkout master
+	cd _site && git checkout -f master
 	cd _site && rm -rf ./*
 	cp -av /tmp/TEMPDIRS/_site/* _site/
 	cd _site && git add -A

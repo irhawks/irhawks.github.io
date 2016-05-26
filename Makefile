@@ -58,4 +58,7 @@ deploy-target-github : rebuild
 	git submodule init && git submodule update
 	cd _site && git add -A
 	cd _site && git commit -am "更新github上面的博客 $$(date)"
+	cd _site && git branch detached
+	cd _site && git merge detached
+	cd _site && git branch -d detached
 	cd _site && git push -f origin master   ## 强制推送到github的master

@@ -24,3 +24,13 @@ This code is distributed under the [MIT License](http://opensource.org/licenses/
 ## 注意事项
 
 注意，修改site.hs需要重新编译cabal。
+
+
+在克隆回来之后需要添加remote如下：　
+
+```shell
+git remote add aliyun git@code.aliyun.com:irhawks/homepage-my.git
+git remote add github git@github.com:irhawks/irhawks.github.io.git
+```
+
+

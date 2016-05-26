@@ -40,9 +40,8 @@ deploy-source-github : ${SITE_GEN_PROG}
 
 deploy-target-github : rebuild
 
+	### 现在_site目录是指向github.io.git上面的一个master分支的子模块
 	ping -c 2 github.com
-	cd _site && git init .
-	cd _site && git remote add github git@github.com:irhawks/irhawks.github.io.git
 	cd _site && git add -A
 	cd _site && git commit -am "更新github上面的博客 $$(date)"
-	cd _site && git push -f github master   ## 强制推送到github的master
+	cd _site && git push github master   ## 强制推送到github的master

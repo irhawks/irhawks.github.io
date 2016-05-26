@@ -1,0 +1,4 @@
+[submodule "github"]
+	path = _site
+	url = git@github.com:irhawks/irhawks.github.io.git
+	branch = master

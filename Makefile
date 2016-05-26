@@ -24,6 +24,17 @@ preview: rebuild
 ### 	(github) git@github.com:irhawks/irhawks.github.io.git
 ### 	(aliyun) git@code.aliyun.com:irhawks/homepage-my.git
 
+commit-source-target :
+
+	make commit-source
+	make deploy-target-github
+
+commit-source : 
+	
+	make auto-commit
+	make deploy-source-aliyun
+	make deploy-source-github
+
 auto-commit : 
 
 	git add -A
@@ -43,6 +54,8 @@ deploy-target-github : rebuild
 
 	### 现在_site目录是指向github.io.git上面的一个master分支的子模块
 	ping -c 2 github.com
+	### 问题是每次rebuild的时候，hakyll都会清空_site目录，所以每次都要init
+	git submodule init && git submodule update
 	cd _site && git add -A
 	cd _site && git commit -am "更新github上面的博客 $$(date)"
-	cd _site && git push -f github master   ## 强制推送到github的master
+	cd _site && git push -f origin master   ## 强制推送到github的master

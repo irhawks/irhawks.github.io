@@ -1,0 +1,77 @@
+/*
+FLAT UI Flavored Adminer Theme by M. Mahbubur Rahman (mahbub@mahbubblog.com) 
+Screenshot : http://pappu687.github.io/screenshots/adminer-screenshot.png
+Based on work by : Lukáš Brandejs	
+https://raw.github.com/vrana/adminer/master/designs/ng9/adminer.css
+*/
+
+
+#content table thead span, #content table thead a {
+	font-weight:bold;
+	color:#FFF;
+	text-shadow:0px 01px 0px #000;
+}
+
+#content table thead span {
+	background-color: #34495e;
+}
+
+#content table thead a:hover {
+	background:none;
+	text-decoration:underline;
+	color:black;
+}
+
+table{
+	margin:10px 0px;
+	border:1px solid #E6E6E6;
+	background-color:#FFFFFF;	
+}
+
+tbody tr:hover td,tbody tr:hover th{
+	background:#edf4ff
+}
+
+thead th, thead td {
+	text-align:center;
+	vertical-align:middle;
+	font-weight:bold;
+	white-space:nowrap;
+	border-right:1px solid #34495e;
+	background:#34495e;
+	color:#FFFFFF;	
+	padding-right:10px;
+}
+thead th acronym, thead td acronym, thead th sup, thead td sup{
+	color:#CCDDFF;
+}
+
+th,td{
+	border:1px solid rgba(233,233,233,.3);
+	padding:3px 6px;
+	vertical-align:top;	
+}
+
+th a {
+	font-weight:bold;
+	padding-bottom:0px;
+	text-shadow:1px 1px 1px #FFF;
+}
+
+th {
+	background:white;
+}
+
+tr.odd td {
+	background:#fcfaf5;
+}
+
+#content tbody tr.checked td, tr.checked.odd td {
+	background:#fbe2e2;
+	color:red;
+}
+
+table
+{
+	position: relative;
+}

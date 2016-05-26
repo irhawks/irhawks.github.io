@@ -45,4 +45,4 @@ deploy-target-github : rebuild
 	ping -c 2 github.com
 	cd _site && git add -A
 	cd _site && git commit -am "更新github上面的博客 $$(date)"
-	cd _site && git push github master   ## 强制推送到github的master
+	cd _site && git push origin master   ## 强制推送到github的master

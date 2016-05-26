@@ -23,22 +23,26 @@ preview: rebuild
 ### 	(github) git@github.com:irhawks/irhawks.github.io.git
 ### 	(aliyun) git@code.aliyun.com:irhawks/homepage-my.git
 
-deploy-source-aliyun : rebuild
+auto-commit : 
 
 	git add -A
 	git commit -am "更新博客源文件 $$(date)"
+
+deploy-source-aliyun : ${SITE_GEN_PROG}
+	
+	ping -c 2 code.aliyun.com
 	git push aliyun master --tags
 
-deploy-source-github : rebuild
+deploy-source-github : ${SITE_GEN_PROG}
 
-	git add -A
-	git commit -am "更新博客源文件 $$(date)"
+	ping -c 2 github.com
 	git push github master:source --tags
 
 deploy-target-github : rebuild
 
-	cd _site && git add remote github git@github.com:irhawks/irhawks.github.io.git
-	make rebuild
+	ping -c 2 github.com
+	cd _site && git init .
+	cd _site && git remote add github git@github.com:irhawks/irhawks.github.io.git
 	cd _site && git add -A
 	cd _site && git commit -am "更新github上面的博客 $$(date)"
-	git push -f github master   ## 强制将博客目录推送到github的master分支上
+	cd _site && git push -f github master   ## 强制推送到github的master

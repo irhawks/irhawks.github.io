@@ -12,6 +12,12 @@ main = hakyll $ do
 
     match "static/favicon.ico" $ route staticRoute >> compile copyFileCompiler
 
+    -- 用于百度站长工具的一些文件，比如robots.txt、站点管理验证等。
+    -- 第一个是robots.txt
+    -- 第二个是百度站点管理工具验证
+    match "static/robots.txt" $ route staticRoute >> compile copyFileCompiler
+    match "static/baidu_verify_hGcluqdQRU.html" $ route staticRoute >> compile copyFileCompiler
+
     match "static/*.mkd" staticMarkdownRule
 
     match "resources/**" $ route idRoute >> compile copyFileCompiler

@@ -29,6 +29,12 @@ commit-source-target :
 	make commit-source
 	make deploy-target-github
 
+push-all : 
+
+	make deploy-source-aliyun
+	make deploy-source-github
+	make deploy-target-github
+
 commit-source : 
 	
 	make auto-commit

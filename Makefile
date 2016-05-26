@@ -1,20 +1,38 @@
-LIVE_URI=s3://austinrochford.com/
-AWS_IAM_USER=blog
-
 CABAL=cabal
-EXECUTABLE=./dist/build/blog/blog
+SITE_GEN_PROG=./dist/build/blog/blog
 
-clean: ${EXECUTABLE}
-	${EXECUTABLE} clean
+### 首先使用cabal安装blog程序，然后使用blog程序生成网站
 
-deploy:
-	aws --profile ${AWS_IAM_USER} s3 sync _site/ ${LIVE_URI}
+default : preview
+    
+${SITE_GEN_PROG} : blog.cabal
+	cabal build
+
+rebuild: ${SITE_GEN_PROG}
+	${SITE_GEN_PROG} rebuild
+
+clean: ${SITE_GEN_PROG}
+	${SITE_GEN_PROG} clean
 
 preview: rebuild
-	${EXECUTABLE} watch -h "0.0.0.0"
+	${SITE_GEN_PROG} watch -h "0.0.0.0:8000"
 
-rebuild: ${EXECUTABLE}
-	${EXECUTABLE} rebuild
+### 接下来我们想使用github来作为部署的平台，部署到irhawks.github.io
+### 包括部署源代码与部署网站
+### 将主目录中的remote设置为
+### 	(github) git@github.com:irhawks/irhawks.github.io.git
+### 	(aliyun) git@code.aliyun.com:irhawks/homepage-my.git
 
-${EXECUTABLE}: site.hs
-	${CABAL} build
+deploy-source-aliyun : rebuild
+
+	git checkout source
+	git add -A
+	git commit -am "更新博客源文件 $$(date)"
+	git push aliyun master --tags
+
+deploy-source-github : rebuild
+
+	git checkout source
+	git add -A
+	git commit -am "更新博客源文件 $$(date)"
+	git push github master

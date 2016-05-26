@@ -25,14 +25,12 @@ preview: rebuild
 
 deploy-source-aliyun : rebuild
 
-	git checkout source
 	git add -A
 	git commit -am "更新博客源文件 $$(date)"
 	git push aliyun master --tags
 
 deploy-source-github : rebuild
 
-	git checkout source
 	git add -A
 	git commit -am "更新博客源文件 $$(date)"
 	git push github source

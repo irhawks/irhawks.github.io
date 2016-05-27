@@ -51,6 +51,7 @@ deploy-source-all :
 
 	make deploy-source-coding
 	make deploy-source-aliyun
+	make deploy-source-github
 
 deploy-source-aliyun : ${SITE_GEN_PROG}
 	

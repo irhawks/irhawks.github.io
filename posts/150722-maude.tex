@@ -1,0 +1,37 @@
+---
+title : Maude语言
+date  : 2015-07-22
+tags  : maude, 重写逻辑, rewriting logic
+---
+
+Maude是一个使用重写逻辑的语言，由SRI开发。Maude的Rewritting Logic是对Equational Logic的一个扩展。Maude非常强调元编程的概念。Maude也可以看成是一种逻辑编程语言、Logic Programming Language、Extensible syntax Programming Language、Term-rewriting programming Language。
+
+Maude语言和Mathematica是类似的，但是也许比Mathematica在语言的表现力方面上更强大。本身的计算也是基于模式的匹配，当然是非常自然的。这种项重写跟Mathematica的原理是类似的。
+
+高级的编程语言大概都能应用于软件规约，以及逻辑编程语言也可以。Maude有一系列的模型检查的库，这可能是它具有优越性的地方\url{http://maude.cs.illinois.edu/w/index.php?title=Maude_Tools}。
+
+Maude更强调的是元编程，元编程有多条路线，而Maude的元编程是通过反射实现的。所谓的反射，就是在运行的时候能够检查和修改程序的行为与结构。这其实是应用程序在运行的时候能够探查程序的结构的能力。
+
+Java的反射是这样的：
+
+\begin{minted}{java}
+Object foo = Class.forName("complete.classpath.and.Foo").newInstance()
+Method m = foo.getClass().getDeclaredMethod("hello",new Class<?>[0]);
+m.invoke(foo);
+\end{minted}
+
+其中的第一句是反射一个对象（通过字符串来找到一个类），而第二句是通过字符串查找一个方法，以及通过对象查找类的名子。很多语言都支持反射。虽然很多功能也可以不通过使用反射的方法来完成。反射的实现得依赖于特殊的函数。比如Python中，
+
+\begin{minted}{python}
+class_name = "Foo"
+method = "hello"
+obj = globals()[class_name]()
+getattr(obj, method)()
+eval("Foo().hello()")
+\end{minted}
+
+其中第三句话是根据类名字符串查找这个类并新建一个这个类的对象，而第四句是从这个对象中找到名为hello的方法。最后一个是直接把字符串当成是程序代码执行。
+
+R软件等也支持反射。反射的几个例子可见\url{https://en.wikipedia.org/wiki/Reflection_%28computer_programming%29}。可能在使用反射的时候，最大的问题在于完全破坏之前存在的编程模式，通过直接操纵编译器运行时系统的方法来编程。这样的话，虽然功能十分强大，但是又好像太过灵活。反射与Self-modifying code、self-hosting这些术语都有比较近的关系。
+
+这里需要说明的是，虽然应用程序员接触得不多，但是支持反射的语言有一大堆，包括APL、Io、Java（通过java.lang.reflect包）、Lisp、Mathematica、C\#、Maude、Python、R、POP-11、Ruby、Scheme等。也有上百种之多了。

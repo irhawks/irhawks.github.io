@@ -40,6 +40,7 @@ commit-source :
 	make auto-commit
 	make deploy-source-aliyun
 	make deploy-source-github
+	make deploy-source-coding
 
 auto-commit : 
 
@@ -58,43 +59,35 @@ deploy-source-github : ${SITE_GEN_PROG}
 
 deploy-source-coding : ${SITE_GEN_PROG}
 
-	ping -c 2 coding.net
+	ping -c 2 git.coding.net
 	git push coding master:source --tags
 
-deploy-target-github : rebuild
+
+.PHONY : commit-target deploy-target-github deploy-target-coding
+
+
+commit-target : rebuild
 
 	### 现在_site目录是指向github.io.git上面的一个master分支的子模块
-	ping -c 2 github.com
 	### 问题是每次rebuild的时候，hakyll都会清空_site目录，所以每次都要init
 	cp -av _site /tmp/TEMPDIRS
 	git submodule init && git submodule update
 	cd _site && git checkout -f master
 	cd _site && rm -rf ./*
 	cp -av /tmp/TEMPDIRS/_site/* _site/
+	cd _site && git remote add coding git@git.coding.net:irhawks/irhawks.git
 	cd _site && git add -A
 	cd _site && git commit -am "更新github上面的博客 $$(date)"
 
-	## -cd _site && git branch detached
-	## cd _site && git merge detached
-	## cd _site && git branch -d detached
+deploy-target-github : 
+
+	ping -c 2 github.com
+	make commit-target
 	cd _site && git push -f origin master   ## 强制推送到github的master
 
+deploy-target-coding : 
 
-deploy-target-coding : rebuild
-
-	### 现在_site目录是指向github.io.git上面的一个master分支的子模块
 	ping -c 2 coding.net
-	### 问题是每次rebuild的时候，hakyll都会清空_site目录，所以每次都要init
-	cp -av _site /tmp/TEMPDIRS
-	git submodule init && git submodule update
-	cd _site && git checkout -f master
-	cd _site && rm -rf ./*
-	cp -av /tmp/TEMPDIRS/_site/* _site/
-	cd _site && git add -A
-	cd _site && git commit -am "更新github上面的博客 $$(date)"
-
-	## -cd _site && git branch detached
-	## cd _site && git merge detached
-	## cd _site && git branch -d detached
-	cd _site && git remote add coding git@git.coding.net:irhawks/blogpage.git
+	make commit-target
 	cd _site && git push -f coding master   ## 强制推送到github的master
+

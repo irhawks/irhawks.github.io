@@ -14,9 +14,11 @@ main = hakyll $ do
 
     -- 用于百度站长工具的一些文件，比如robots.txt、站点管理验证等。
     -- 第一个是robots.txt
-    -- 第二个是百度站点管理工具验证
+    -- 第二个是百度站点管理工具验证（用于验证github）
     match "static/robots.txt" $ route staticRoute >> compile copyFileCompiler
     match "static/baidu_verify_hGcluqdQRU.html" $ route staticRoute >> compile copyFileCompiler
+    -- 百度站点管理工具验证（用于验证irhawks.coding.me）
+    match "static/baidu_verify_vjCtJE2mnq.html" $ route staticRoute >> compile copyFileCompiler
 
     match "static/*.mkd" staticMarkdownRule
 

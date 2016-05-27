@@ -48,7 +48,7 @@ main = hakyll $ do
                 >>= relativizeUrls
 
     tagsRules tags $ \tag pattern -> do
-        let tagCtx = constField "title" ("具有" ++ tag ++ "的文章") `mappend` defaultContext
+        let tagCtx = constField "title" ("具有“" ++ tag ++ "”的文章") `mappend` defaultContext
 
         route idRoute
         compile $ postsTagged tags pattern recentFirst

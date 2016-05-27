@@ -80,6 +80,7 @@ commit-target : rebuild
 
 	### 现在_site目录是指向github.io.git上面的一个master分支的子模块
 	### 问题是每次rebuild的时候，hakyll都会清空_site目录，所以每次都要init
+	-rm -rf /temp/TEMPDIRS
 	cp -av _site /tmp/TEMPDIRS
 	git submodule init && git submodule update
 	cd _site && git checkout -f master

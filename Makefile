@@ -5,7 +5,7 @@ SITE_GEN_PROG=./dist/build/blog/blog
 
 default : preview
     
-${SITE_GEN_PROG} : blog.cabal
+${SITE_GEN_PROG} : blog.cabal site.hs
 	cabal build
 
 rebuild: ${SITE_GEN_PROG}
@@ -38,14 +38,19 @@ push-all :
 commit-source : 
 	
 	make auto-commit
-	make deploy-source-aliyun
-	make deploy-source-github
-	make deploy-source-coding
+	make deploy-source-all
 
 auto-commit : 
 
 	git add -A
 	git commit -am "更新博客源文件 $$(date)"
+
+.PHONY : deploy-source-all deploy-source-aliyun deploy-source-coding
+
+deploy-source-all :
+
+	make deploy-source-coding
+	make deploy-source-aliyun
 
 deploy-source-aliyun : ${SITE_GEN_PROG}
 	
@@ -63,8 +68,12 @@ deploy-source-coding : ${SITE_GEN_PROG}
 	git push coding master:source --tags
 
 
-.PHONY : commit-target deploy-target-github deploy-target-coding
+.PHONY : commit-target commit-target-deploy-all
 
+commit-target-deploy-all : 
+
+	make commit-target
+	make deploy-target-all
 
 commit-target : rebuild
 
@@ -75,19 +84,24 @@ commit-target : rebuild
 	cd _site && git checkout -f master
 	cd _site && rm -rf ./*
 	cp -av /tmp/TEMPDIRS/_site/* _site/
-	cd _site && git remote add coding git@git.coding.net:irhawks/irhawks.git
+	-cd _site && git remote add coding git@git.coding.net:irhawks/irhawks.git
 	cd _site && git add -A
-	cd _site && git commit -am "更新github上面的博客 $$(date)"
+	-cd _site && git commit -am "更新github上面的博客 $$(date)"
+
+.PHONY : deploy-target-github deploy-target-coding deploy-target-all
+
+deploy-target-all : 
+
+	make deploy-target-github
+	make deploy-target-coding
 
 deploy-target-github : 
 
 	ping -c 2 github.com
-	make commit-target
 	cd _site && git push -f origin master   ## 强制推送到github的master
 
 deploy-target-coding : 
 
 	ping -c 2 coding.net
-	make commit-target
 	cd _site && git push -f coding master   ## 强制推送到github的master
 

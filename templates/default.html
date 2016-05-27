@@ -18,6 +18,31 @@
 <link rel="stylesheet" type="text/css" href="/css/syntax.css" />
 <link rel="stylesheet" type="text/css" href="/css/custom.css" />
 <link rel="stylesheet" type="text/css" href="/css/fancytable.css" />
+
+<!-- 百度统计(github) -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?763bee904aa6d81fdf017659d162188f";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<!-- 百度统计(coding.me) -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?6e35a1bd830cee92f78da56041fc0e3a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
 </head>
 <body>
 <div class="container">
@@ -52,8 +77,8 @@
 <div class="row">
 <div class="col-md-10 col-md-offset-1">
 
-
 $body$
+
 </div>
 </div>
 </div>
@@ -69,16 +94,7 @@ $body$
 
 <!-- 在国内显然是用不了google analystics的，只能用baidu analystics -->
 
-<!-- 百度统计 -->
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?763bee904aa6d81fdf017659d162188f";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
+
 
 
 <!-- 谷歌统计
@@ -93,8 +109,21 @@ ga('send', 'pageview');
 </script>
 -->
 
-<script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=10354926017023744366' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
-
+<!-- 自动提交页面 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
 
 </body>
 

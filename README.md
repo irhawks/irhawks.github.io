@@ -39,3 +39,24 @@ git remote add github git@github.com:irhawks/irhawks.github.io.git
 
 这句话现在有两种意思。第一种意思是静态网站像动态网站那样有明确的数据层。只不过，这些数据是在构建网站的时候生成的，比如yst的向yaml文件中查询最近的消息。另一种意思就是具有动态变化的功能。比如使用百度统计、Disqus评论系统，或者像Openswift这样的搜索功能。添加这些功能，对于网站的交互性有好处。
 
+
+网站使用说明
+---------------------------------------------------------
+
+网站使用hakyll来构建，本文档前面就是构建说明。
+
+appendix目录
+~ [原作者](http://austinrochford.com/)的博客部署模板（Vagrant文件）
+
+posts目录
+~ 存放有博客的markdown文件
+
+static目录
+~ 网站静态文件，原样复制，包括css等各种资源文件
+
+templates目录：网站模板，用于指导从Markdown生成HTML
+
+Makefile目录
+~ 自动化部署脚本
+
+

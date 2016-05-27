@@ -102,6 +102,6 @@ deploy-target-github :
 
 deploy-target-coding : 
 
-	ping -c 2 coding.net
+	ping -c 2 git.coding.net
 	cd _site && git push -f coding master   ## 强制推送到github的master
 

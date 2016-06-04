@@ -85,6 +85,7 @@ commit-target : rebuild
 	git submodule init && git submodule update
 	cd _site && git checkout -f master
 	cd _site && rm -rf ./*
+	-rm -rf _site
 	cp -av /tmp/TEMPDIRS _site
 	-cd _site && git remote add coding git@git.coding.net:irhawks/irhawks.git
 	cd _site && git add -A

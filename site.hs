@@ -12,6 +12,10 @@ main = hakyll $ do
 
     match "static/favicon.ico" $ route staticRoute >> compile copyFileCompiler
 
+    -- 单独列出一个图片目录
+    match "static/img/**" $ route staticRoute >> compile copyFileCompiler   
+
+
     -- 用于百度站长工具的一些文件，比如robots.txt、站点管理验证等。
     -- 第一个是robots.txt
     -- 第二个是百度站点管理工具验证（用于验证github）
@@ -90,6 +94,21 @@ main = hakyll $ do
 
     match "templates/*" $ compile templateCompiler
 
+--    create ["sitemap.xml"] $ do
+--        route   idRoute
+--        compile $ do
+--          posts <- recentFirst =<< loadAll "posts/*/*"
+--          pages <- loadAll "pages/*"
+--          let allPosts = (return (pages ++ posts))
+--          let sitemapCtx = mconcat
+--                           [ listField "entries" postCtx allPosts
+--                           , constField "host" "irhawks.coding.me"
+--                           , defaultContext
+--                           ]
+--          makeItem ""
+--           >>= loadAndApplyTemplate "templates/sitemap.xml" sitemapCtx
+--           >>= cleanIndexHtmls
+
 extensions :: Set.Set Extension
 extensions = Set.fromList [Ext_inline_notes, Ext_raw_html, Ext_tex_math_dollars]
 
@@ -146,3 +165,29 @@ staticRoute = gsubRoute "static/" (const "")
 
 taggedPostCtx :: Tags -> Context String
 taggedPostCtx tags = tagsField "tags" tags `mappend` postCtx
+
+
+------------------------------------------------------------------
+-- to generate sitemap.xml
+
+myCtx :: Context String
+myCtx = mconcat
+  [ constField "superTitle" "80x24的转化器"
+  , defaultContext
+  ]
+
+pageCtx :: Context String
+pageCtx = mconcat
+    [ modificationTimeField "date" "%U"
+    , modificationTimeField "date" "%Y-%m-%d"
+    , constField "host" "irhawks.coding.me"
+    , constField "source" "https://github.com/irhawks/irhawks.github.io"
+    , dateField "date" "%B %e, %Y"
+    , myCtx
+    ]
+
+cleanIndexHtmls :: Item String -> Compiler (Item String)
+cleanIndexHtmls = return . fmap (replaceAll pattern replacement)
+    where
+      pattern = "/index.html"
+      replacement = const "/"

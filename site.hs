@@ -94,6 +94,23 @@ main = hakyll $ do
 
     match "templates/*" $ compile templateCompiler
 
+    create ["sitemap.xml"] $ do
+           route   idRoute
+           compile $ do
+             posts <- recentFirst =<< loadAll "posts/*"
+             let allPosts = (return posts)
+             let sitemapCtx = mconcat
+                              [ listField "entries" pageCtx allPosts
+                              , constField "host" host
+                              , defaultContext
+                              ]
+             makeItem ""
+              >>= loadAndApplyTemplate "templates/sitemap.xml" sitemapCtx
+              >>= cleanIndexHtmls
+
+
+
+
 --    create ["sitemap.xml"] $ do
 --        route   idRoute
 --        compile $ do
@@ -176,13 +193,13 @@ myCtx = mconcat
   , defaultContext
   ]
 
+host :: String
+host = "http://irhawks.coding.me"
+
 pageCtx :: Context String
 pageCtx = mconcat
-    [ modificationTimeField "date" "%U"
-    , modificationTimeField "date" "%Y-%m-%d"
+    [ modificationTimeField "date" "%Y-%m-%d"
     , constField "host" "irhawks.coding.me"
-    , constField "source" "https://github.com/irhawks/irhawks.github.io"
-    , dateField "date" "%B %e, %Y"
     , myCtx
     ]
 

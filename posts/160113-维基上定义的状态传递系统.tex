@@ -1,0 +1,108 @@
+---
+title : 维基上定义的传递系统
+date : 2016-01-13
+tags : STS, 状态传递系统, LTS
+---
+
+众所周知的是传递系统只是从系统转换的观点来看问题，其理论的根据跟抽象重写系统是一样的，但是可能说明的角度不一样吧。传递系统分成两类，带标签的和不带标签的系统。传递系统在应用于模型检查的时候经常使用带标签的形式。
+
+Action Language是专门描述状态传递系统STS（state transition systems）的语言。经常用于形式化地创建一系列的模型。PDDL是著名的一种Action Language。
+
+状态转移系统往往显得太过抽象。感觉好像跟动力系统理论和自动机理论都有一些差别。或许它们是研究离散状态的一种抽象理论吧。状态转移系统自然是关联着状态及其转移的。但是动力系统呢？
+
+目前，我们似乎可以这样关联状态转移与动力系统理论。所谓的系统，我们关注的还是系统的演化的特性，也就是系统的存在及其演化。那么，自然中心的问题是，系统是怎样随时间变化的？因而，首先的问题就是所谓的对于状态的定义。在动力系统中，状态是由一个实参量标识的，它可以对时间演化可微。而在状态转移系统中，状态是一种不同的数学结构，比如说，状态是一个有穷序列，而时间也是离散的。那么，基于这种认识，似乎结合起来看，所谓的系统理论，就是某个数学结构上面的参数的理论。就像是微分几种中，每一点附上一个特定的数学结构一样，系统理论是演化过程中的每一时间点附上一个状态--似乎系统理论研究的情况，都是底空间是低维的情况。
+
+另外，状态转移系统中，虽然状态是连续的，但是状态转移的过程可以是连续的。
+
+\section{互模拟与LTS基础介绍}
+
+\begin{definition}[Bisimulation]
+Given a labelled state transition system $(S,\Lambda, \to)$, a bisimulation relation is a binary relation $R$ over $S$ such that both $R^{-1}$ and $R$ are simulations. Equivalently $R$ is a bisimulation if for every pair of elements $p,q$ is $S$ with $(p,q)$ in $R$, for all $\alpha$ in $\Lambda$:
+\begin{enumerate}
+\item for all $p'$ in $S$, $p\overset{\alpha}{\rightarrow} p'$ implies that there is a $q' \in S$ such that $q \overset{\alpha}{\rightarrow} q'$ and $(p', q')\in R$.
+\item for all $q'$ in $S$, $q\overset{\alpha}{\rightarrow} q'$ implies that there is a $p' \in S$ such that $p \overset{\alpha}{\rightarrow} p'$ and $(p', q')\in R$.
+\end{enumerate}
+\end{definition}
+Given two states $p$ and $q$ in $S$, $p$ is \emph{bisimilar} to $q$, written $p \sim q$,  if there is a bisimultion $R$ such that $(p,q)$ is in $R$.
+
+也就是说，如果两个状态标记系统是互模拟的，那么我们称这两个系统是相互等价的。这个时候，$p$可以模拟$q$，而$q$也可以模拟$p$（但是反过来则不成立，因为还需要一些附加的条件）。我们可以证明，两个状态的相似性是一个等价关系。互模拟有多个定义，比较不动点的定义。可能是我们必须要熟悉的。
+
+下面我们来看什么是transition systems.
+
+In theoretical computer science, a transition system is a concept used in the sutdy of computation. It is used to describe the potential \emph{behavior} of discrete systems. It consists of states and transitions between states, which may be labeled with labels chosen from a set; the same label may appear on more than one transition. 
+
+\textbf{Transition systems coincide mathematically with abstract rewriting systems}. and directed graphs. They differ from finite state automata in several ways:
+\begin{enumerate}
+\item The set of states is not necessarily finite, or even countable.
+\item The set of transitions if not necessarily finite, or even countable.
+\item No ``start'' state or ``final'' states are given.
+\end{enumerate}
+Transition systems can be represented as directed graphs.
+
+\def\ltrans#1{\overset{#1}{\rightarrow}}
+
+\begin{definition}[transition system]
+A transition system is a pair $(S,\rightarrow)$ where $S$ is a set of states and $\rightarrow$ is a set of state transitions, i.e., $\rightarrow \in S\times S$. The fact that there is a transition from step $P$ to state $q$, i.e. $(p,q)\in\rightarrow$, is written as $p\rightarrow q$.
+\end{definition}
+
+\begin{definition}[labelled transition system]
+A labelled transition system is a tuple $(S,\Lambda,\rightarrow)$ where $S$ is a set of states, $\Lambda$ is a set of labels and $\rightarrow$ is a set of labelled transitions (where $\rightarrow \in S\times \Lambda\times S$). The fact that $(p, \alpha, q)\in \rightarrow$ is written as $p \overset{\alpha}{\rightarrow} q$.
+\end{definition}
+
+Labels can represent different things depending on the language of interest. Typical uses of labels include representing input expected , conditions that must be true to trigger the transition, or actions performed during the transition. Labelled transitions systems were originally introduced as \emph{named transition systems}.
+
+我们都知道状态机广泛用于系统的行为的建模，TS(Transition System)也是如此。状态与转换我们都容易理解，但是可能label就不那么容易理解了。labels可以表示发生这一转换的时候的各种来自环境的需求，比较发生转换的条件，转换的输出，转换的时候需要执行的代码等等。label集$\Lambda$实际上可以有复杂的结构，用于满足各种不同目的的状态转换系统建模的需求。
+
+LTS在数学上等价于ARS（Abstract Rewritting System），而后者在数学与数理逻辑中被广泛用来表示逻辑推理的过程。但是考察的角度不一样。逻辑推理系统关心的重点与离散系统关心的重点不一样。虽然自己觉得ARS是逻辑学的研究的重点，但是觉得，在SC.3的笔记中引入ARS作为LTS的等价物也没有什么不妥，毕竟SC.3当然可以引入各种逻辑学的知识。
+
+In mathematical logic and theoretical computer science, an \emph{abstract rewriting system} (\emph{reduction system}, \emph{abstract reduction system}, \emph{abstract rewrite system}, abbreviation \emph{ARS}) is a formalism that captures the quintessential（精髓，精粹） notion and properties of rewriting systems. in its simplest form, an ARS is simply a set of ``objects'' together with a binary relation, traditionally denoted with $\rightarrow$. this definition can be further refined if we index (label) subsets of the binary relation. Desipte its simplicity, an ARS is sufficient to describe important properties of rewriting systems link normal forms, termination, and various notions of confluence.
+
+ARS与LTS的定义就是特价的，只不过数学上关注的重点不太一样。假设$(A,\rightarrow)$是一个ARS，那么数学上关心的是$trans$这个二元关系的传递闭包、反射闭包等。
+
+ARS的定义可能引起人的混淆，因为有时候它就像是一个语法生成式，只不过，一个重写规则的左边与右边都是一个单独的对象，而不是不同的语法项。所以ARS中只有$a\rightarrow b$而没有$a\rightarrow b c$这样的形式。
+
+下面我们介绍数学家对于ARS的研究兴趣。
+
+\begin{definition}[reducible objects]
+	An object $x\in A$ is called \emph{reducible} in $(A,\rightarrow)$ if $\exists y\in A$ such that $x\rightarrow y$. otherwise it is called \emph{irreducible} or a \emph{normal form}.
+\end{definition}
+
+\begin{definition}[normal form]
+	Denoting that $\overset{*}{\leftrightarrow}$ is the transitive closure of $\leftrightarrow \cup =$, where $\leftrightarrow$ is $\leftarrow \cup \leftarrow^{-1}$, an object $y\in A$ is called a normal form of $x$ if $x\overset{*}{\leftrightarrow} y$, where $y$ is irreducible. If $x$ has a \emph{unique normal form}, then this is usually denoted with $x\downarrow$. If every object has at least one normal form, the ARS is called \emph{normalizing}.
+\end{definition}
+
+\begin{definition}[Word Problem]
+	Given $x$ and $y\in A$, are they equivalent under $\overset{*}{\leftrightarrow}$ ?
+\end{definition}
+
+接下来对于ARS，自然而然地引入所谓的Church-Rosser定理。因为$\lambda$演算具有这样的性质。不过，对于模型检查等应用来说，TS才是比较实用的工具。下面我们就借助于TS来给bisimulation几种等价的，但是表述不同的定义。
+
+\begin{definition}[Relational definition of bisimulation]
+Given a labelled transition system $(S, \Lambda, \rightarrow)$, a bisimulation is a binary relation $R$ over $S$ such that $\forall \alpha \in \Lambda$, 
+\begin{equation}
+	R;\overset{\alpha}{\rightarrow} \subseteq \overset{\alpha}{\rightarrow};R
+\end{equation}
+and 
+\begin{equation}
+	R^{-1};\overset{\alpha}{\rightarrow} \subseteq \overset{\alpha}{\rightarrow};R^{-1}
+\end{equation}
+\end{definition}
+
+\begin{definition}[Fixpoint definition of bisimulation]
+	Given a labelled transition system $(S, \Lambda, \rightarrow)$, define 
+	\begin{equation}
+		F: 2^{S\times S} \mapsto 2^{S\times S}
+	\end{equation}
+	to be a function from binary relations over $S$ to binary relations over $S$, as follows: let $R$ be any binary relation over $S$, $F(R)$ is defnied to be the set of all pairs $(p,q)\in S\times S$ such that
+	\begin{equation}
+		\forall \alpha\in\Lambda, p'\in S, p\overset{\alpha}{\rightarrow} p' \Rightarrow
+		\exists q' \in S, q\overset{q'}{\rightarrow}, (p',q')\in R
+	\end{equation}
+	\begin{equation}
+		\forall \alpha\in\Lambda, q'\in S, q\overset{\alpha}{\rightarrow} q' \Rightarrow
+		\exists p' \in S, p\overset{p'}{\rightarrow}, (p',q')\in R
+	\end{equation}
+	Then, bisimilarity is defined to be the greatest fixed point of $F$.
+\end{definition}
+
+从博弈的角度也可以定义互模拟。另外，从余代数的角度的定义可能在理论上更坚实一些，因为余代数可以对共模拟的字义作出推广。因为TS的共模拟可以看成是共代数模拟的特殊的情况。因为TS可以给出编程语言的操作语义，所以LTS在编程语言中的设计当中也变得非常重要。  

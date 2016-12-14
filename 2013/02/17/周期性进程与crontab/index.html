@@ -1,0 +1,1055 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans,en,default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="linux,周期性进程,cron,crontab,系统管理,计划执行," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="80x24" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="周期性进程这一部分的内容需要很多的实践才能看出来。所以这里也就仅仅是学习周期性进程的管理方式，做一个理论上的理解。实际以后当然还是需要很多的锻练的。
+系统管理员应当让更多的任务能够自动完成以减轻系统管理的压力。为此应当选择适当的辅助工具。首先是能提高管理效率的系统命令。比如使用adduser来代替手动向系统中添加用户。其次是使用各种各样的自动脚本完成管理任务。这种情况下就要建立所谓的系统管理工具集">
+<meta property="og:type" content="article">
+<meta property="og:title" content="周期性进程与crontab">
+<meta property="og:url" content="http://yoursite.com/2013/02/17/周期性进程与crontab/index.html">
+<meta property="og:site_name" content="80x24">
+<meta property="og:description" content="周期性进程这一部分的内容需要很多的实践才能看出来。所以这里也就仅仅是学习周期性进程的管理方式，做一个理论上的理解。实际以后当然还是需要很多的锻练的。
+系统管理员应当让更多的任务能够自动完成以减轻系统管理的压力。为此应当选择适当的辅助工具。首先是能提高管理效率的系统命令。比如使用adduser来代替手动向系统中添加用户。其次是使用各种各样的自动脚本完成管理任务。这种情况下就要建立所谓的系统管理工具集">
+<meta property="og:updated_time" content="2016-12-14T08:49:15.936Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="周期性进程与crontab">
+<meta name="twitter:description" content="周期性进程这一部分的内容需要很多的实践才能看出来。所以这里也就仅仅是学习周期性进程的管理方式，做一个理论上的理解。实际以后当然还是需要很多的锻练的。
+系统管理员应当让更多的任务能够自动完成以减轻系统管理的压力。为此应当选择适当的辅助工具。首先是能提高管理效率的系统命令。比如使用adduser来代替手动向系统中添加用户。其次是使用各种各样的自动脚本完成管理任务。这种情况下就要建立所谓的系统管理工具集">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2013/02/17/周期性进程与crontab/"/>
+
+
+
+
+
+  <title> 周期性进程与crontab | 80x24 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?763bee904aa6d81fdf017659d162188f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">80x24</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Keep Stupid, Keep Hungry</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/atom.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            Sitemap
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2013/02/17/周期性进程与crontab/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Istyasna">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="80x24">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="80x24" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                周期性进程与crontab
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2013-02-17T00:00:00+08:00">
+                2013-02-17
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              <span class="post-meta-item-text">更新于</span>
+              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T16:49:15+08:00">
+                2016-12-14
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2013/02/17/周期性进程与crontab/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/02/17/周期性进程与crontab/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>周期性进程这一部分的内容需要很多的实践才能看出来。所以这里也就仅仅是学习周期性进程的管理方式，做一个理论上的理解。实际以后当然还是需要很多的锻练的。</p>
+<p>系统管理员应当让更多的任务能够自动完成以减轻系统管理的压力。为此应当选择适当的辅助工具。首先是能提高管理效率的系统命令。比如使用adduser来代替手动向系统中添加用户。其次是使用各种各样的自动脚本完成管理任务。这种情况下就要建立所谓的系统管理工具集或脚本集之类的工具了。然后我们也应该使用自动运行或者计划任务，以让我们有一个充分的休息机会，让那些经常重复的工作变成计算机自动会完成的工作。</p>
+<h3 id="关于cron工具">关于cron工具</h3>
+<!--unix系统里的工具有时根本不能平等看待。像cron这样的工具有时更像是系统的核心功能，因而与ls之类的命令区分很大。-->
+<p>unix下周期执行的任务一般由cron这个守护进程来处理。在系统工作的时候它通常都会保持运行。cron在工作的时修读取一个或多个配置文件，并启动sh来完成其中的任务。因此差不多所有能够手工从shell完成的任务都能通过cron完成。</p>
+<p>cron最初出现在20世纪70年代的UNIX家族中。linux发行版本所带的cron称为ISC cron或者Vixie-cron.它是由Paul Vixie重写的，并提供了许多新的功能，减少了使用cron遇到的麻烦。</p>
+<p>cron的配置文件称为crontab.cron在三个地方查找crontab文件。/var/spool/cron,在SUSE上是/var/spool/cron/tabs./etc/cron.d和/etc/crontab.每个用户的crontab文件都保存在/var/spool/cron目录下，以用户的名称命名。一般每个用户只能有一个crontab文件。cron会使用文件名作为运行命令时所使用的UID.</p>
+<p>计划任务需要权限的限制，以使得普通用户多数时候只在其登录期间有对于计算机的使用权限。更多时候，计划任务作为系统管理的手段。</p>
+<p>在/etc/cron.d以及/etc/crontab里的文件格式与用户的crontab文件略有不同，因为前者允许以任何身份执行命令。/etc/crontab供系统管理员手工维护，而/etc/cron.d里常存放软件包所需要的crontab项目。</p>
+<p>cron启动时检查它的所有配置文件（但cron一般随系统的启动而启动），并把它们保存到内存当中。每一分钟cron就会醒来一次，检查crontab的修改时间，并重新载入有修改的文件。然后在返回睡眠状态前执行这一分钟安排要执行的所有任务。</p>
+<p>cron通过syslog为它的活动做日志。</p>
+<h2 id="crontab文件的格式">crontab文件的格式</h2>
+<p>crontab文件中以<code>#</code>开头的行代表注释。每个非注释行包括6或7个字段，它代表的含义为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">minute hour day month weekday [username] command</div></pre></td></tr></table></figure>
+<p>前六个字段都会用空白分开，但是到了command后，所有空格都算在command里面。用户自己的crontab文件中没有username项。</p>
+<p>日期与时间格式会在很多地方用到，所以得有一个全局的思维才行。一般来说，首等应清楚表示的区间在一天以内还是一个比较长的日期。其次要确定所表示的地区。另外就是从大到小还是从小到大。我们可以这样进行分类：</p>
+<ol style="list-style-type: decimal">
+<li>时间内有时分秒，表达一天内的时间。次要的标准有时辰，早中晚等；</li>
+<li>日期内有年月日。次要的还有星期，公元；</li>
+<li>时区则是要遵守国际相关的规范了；</li>
+<li>按表示顺序，有从大到小，也有从小到大，crontab里就是从小到大。</li>
+</ol>
+<p>crontab每的时间字段中可以采用数值表示，可以使用通配符，可以用逗号，也可以用范围，表示的是“或”的关系。因为cron的含义即是这一分钟要不要运行该程序。crontab中的命令可以使用百分号作为换行。不过为了简便，用一个shell命令还是很好的。</p>
+<p>更多细节见手册页crontab(5).</p>
+<h3 id="crontab的管理">crontab的管理</h3>
+<p>crontab filename用于把文件安装为crontab文件。它将替换用户原来的版本。更多的用法参考crontab命令帮助。</p>
+<p>特别提醒的是，直接使用crontab命令将会要求用户输入crontab.如果这时使用C-D会覆盖掉原来的配置。因此一般要使用C-C来终止crontab程序，以免用户覆盖。</p>
+<p>/etc/cron.allow与/etc/cron.deny这两个配置文件用于限制用户提交crontab文件的权限。有allow的时候先通过allow里的用户，未通过则禁止用户登录。无allow文件时查deny里的用户。如果都没有，就会采用cron默认的设置。在大多数系统下，默认只允许root提交crontab.因此既不在allow又不在deny里的用户会被禁止提交crontab文件。</p>
+<p>cron的这种设置与acl还不同。在acl中，中间过程只有肯定权，没有否定权。</p>
+<p>分析crontab程序的权限也比较有意思。可以知道它是一个setuid的程序。实际运行的时候用户是root.</p>
+<p>为了方便管理，通常还在/etc下建立了cron.daily,cron.weekly等脚本。里面的文件会自动每天或者每周运行一次（只需写好相应命令即可）。</p>
+<h3 id="cron的通常用法">cron的通常用法</h3>
+<p>使用cron非常要求对系统有某种程度的理解。在unix下文件的删除工作往往得自己完成。此外，在网络环境中分发配置文件也常通过cron完成。然后，有些日志文件得自己完成分割。</p>
+<h3 id="其它日程安排程序">其它日程安排程序</h3>
+<p>其实日程安排要比日程安排程序更好理解一些。一个好的日程安排程序关键是能不能表达日程安排的某种逻辑。相关的替代软件有anacron和fcron等。</p>
+<h3 id="日程安排思考">日程安排思考</h3>
+<p>计划任务在Windows下是和开机启动混合在一起的。但是unix经常很长时间不关机的，于是就采用了开机脚本和计划任务相分隔的做法。不过因为cron守护进程一直在运行，用户当然也能够很容易地编写一个脚本运行相关的任务。比如使用一个咨询文件就可以办到只在开机的时候运行一次。我们很显然能发现。一旦计划任务程序开始运行，只要相关的脚本能根据系统状态作出某种反应，把日程安排改造成开机启动也不是一件困难的事。</p>
+<h2 id="习题与思考">习题与思考</h2>
+<p>在此次学习中，我们并没有接触到cron的配置。因此关于性能的很多问题都没有涉及到。实际上如果同一网络多台主机同时运行cron时可能会造成一些问题。所以建议cron通过调用脚本间接调用程序。而脚本里有诸如sleep 5这样的代码。</p>
+<h3 id="关于管理crontab的权限">关于管理crontab的权限</h3>
+<p>一般来说一个用户因为使用不合理的crontab文件。系统管理员应当删除其crontab文件并禁止它的crontab权限。</p>
+<p>盲目地复制一个文件夹下以.开头的文件安全么</p>
+<p>这个当然是不安全的。一个目录的inode里包含自己和它的父目录。如果我们这样复制文件，就会使得所复制的文件追溯到它的同级目录里。</p>
+<p>系统分析的一个应用</p>
+<p>cron经常会和邮件系统结合在一起。除了在完成计划任务时把输出发到用户的邮箱，它还可以让用户自己通过shell发送自己感兴趣的内容。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+            <a href="/tags/周期性进程/" rel="tag"># 周期性进程</a>
+          
+            <a href="/tags/cron/" rel="tag"># cron</a>
+          
+            <a href="/tags/crontab/" rel="tag"># crontab</a>
+          
+            <a href="/tags/系统管理/" rel="tag"># 系统管理</a>
+          
+            <a href="/tags/计划执行/" rel="tag"># 计划执行</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/01/05/Linux-Daemon/" rel="next" title="linux下的守护进程">
+                <i class="fa fa-chevron-left"></i> linux下的守护进程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/02/17/Linux-Log/" rel="prev" title="Linux下的日志记录及其策略">
+                Linux下的日志记录及其策略 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2013/02/17/周期性进程与crontab/"
+           data-title="周期性进程与crontab" data-url="http://yoursite.com/2013/02/17/周期性进程与crontab/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Istyasna" />
+          <p class="site-author-name" itemprop="name">Istyasna</p>
+          <p class="site-description motion-element" itemprop="description">GO FORTH now and create masterpieces of the publishing art!</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">198</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/irhawks" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://coding.aliyun.com/u/irhawks" target="_blank" title="Aliyun">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Aliyun
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="./" title="Title" target="_blank">Title</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hainu.edu.cn" title="Hainan University" target="_blank">Hainan University</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于cron工具"><span class="nav-number">1.</span> <span class="nav-text">关于cron工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#crontab文件的格式"><span class="nav-number"></span> <span class="nav-text">crontab文件的格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#crontab的管理"><span class="nav-number">1.</span> <span class="nav-text">crontab的管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cron的通常用法"><span class="nav-number">2.</span> <span class="nav-text">cron的通常用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其它日程安排程序"><span class="nav-number">3.</span> <span class="nav-text">其它日程安排程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日程安排思考"><span class="nav-number">4.</span> <span class="nav-text">日程安排思考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#习题与思考"><span class="nav-number"></span> <span class="nav-text">习题与思考</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于管理crontab的权限"><span class="nav-number">1.</span> <span class="nav-text">关于管理crontab的权限</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Istyasna</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"irhawks"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

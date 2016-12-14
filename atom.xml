@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-12-14T08:36:23.455Z</updated>
+  <updated>2016-12-14T10:40:49.318Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2016/12/14/hello-world/"/>
-    <id>http://yoursite.com/2016/12/14/hello-world/</id>
-    <published>2016-12-14T08:36:23.659Z</published>
-    <updated>2016-12-14T08:36:23.455Z</updated>
+    <title>Hello world from Hexo with NexT theme</title>
+    <link href="http://yoursite.com/2016/12/15/hello-world/"/>
+    <id>http://yoursite.com/2016/12/15/hello-world/</id>
+    <published>2016-12-15T00:24:48.000Z</published>
+    <updated>2016-12-14T10:40:49.318Z</updated>
     
     <summary type="html">
     
@@ -28,36 +28,32 @@
     
     </summary>
     
+      <category term="Publish" scheme="http://yoursite.com/categories/Publish/"/>
     
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2016/12/14/hello-world2/"/>
-    <id>http://yoursite.com/2016/12/14/hello-world2/</id>
-    <published>2016-12-14T08:36:23.331Z</published>
-    <updated>2016-12-14T08:36:23.127Z</updated>
+      <category term="Blog" scheme="http://yoursite.com/categories/Publish/Blog/"/>
     
-    <summary type="html">
     
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-    
-    </summary>
-    
+      <category term="Hexo, NexT, Blog" scheme="http://yoursite.com/tags/Hexo-NexT-Blog/"/>
     
   </entry>
   
   <entry>
     <title>Solr搜索介绍（继续）</title>
-    <link href="http://yoursite.com/2016/06/03/160603-Solr/"/>
-    <id>http://yoursite.com/2016/06/03/160603-Solr/</id>
+    <link href="http://yoursite.com/2016/06/03/Solr/"/>
+    <id>http://yoursite.com/2016/06/03/Solr/</id>
     <published>2016-06-02T16:00:00.000Z</published>
-    <updated>2016-12-14T08:36:22.807Z</updated>
+    <updated>2016-12-14T10:40:49.318Z</updated>
     
     <summary type="html">
     
       &lt;h2 id=&quot;solr继续&quot;&gt;Solr继续&lt;/h2&gt;
-&lt;p&gt;Solr 5.0之后就不再以&lt;code&gt;.war&lt;/code&gt;包的格式发布了。而是以一个单独的linux进程发布（daemon）。在其目录下面可以找到&lt;code&gt;init.d&lt;/code&gt;目录中的solr，通过该脚本可
+&lt;p&gt;Solr 5.0之后就不再以&lt;code&gt;.war&lt;/code&gt;包的格式发布了。而是以一个单独的linux进程发布（daemon）。在其目录下面可以找到&lt;code&gt;init.d&lt;/code&gt;目录中的solr，通过该脚本可以启动&lt;code&gt;/opt/solr&lt;/code&gt;目录下面的solr工具。但是之后的Solr可能还能够部署到容器当中，但是不是官方所支持的了。&lt;/p&gt;
+&lt;p&gt;是这样配置的，首先将Solr的tgz后下载之后解压到一个文件夹当中。然后将&lt;code&gt;bin/init.d&lt;/code&gt;中的&lt;code&gt;solr&lt;/code&gt;文件复制到&lt;code&gt;/etc/init.d&lt;/code&gt;目录之下，并需要修改里面的脚本文件。特别是其中的&lt;code&gt;SOLR_INSTALL_DIR&lt;/code&gt;变量。然后将&lt;code&gt;solr.in.sh&lt;/code&gt;脚本复制到&lt;code&gt;/etc/default&lt;/code&gt;目录之下。注意设置&lt;code&gt;RUNAS=&amp;quot;root&amp;quot;&lt;/code&gt;变量的值，以及&lt;code&gt;SOLR_ENV&lt;/code&gt;的值。设置好之后应该就可以通过&lt;code&gt;service solr start&lt;/code&gt;启动服务了。这个时候可以通过&lt;code&gt;netstat&lt;/code&gt;命令看到7983端口与8983端口已经被监听了。然后打开&lt;code&gt;localhost:8983&lt;/code&gt;也可以进入Solr的管理界面。&lt;/p&gt;
+&lt;p&gt;快速开始教程参考&lt;a href=&quot;http://lucene.apache.org/solr/quickstart.html&quot; class=&quot;uri&quot;&gt;http://lucene.apache.org/solr/quickstart.html&lt;/a&gt;。Lucene/Solr的架构见&lt;a href=&quot;http://www.solr.cc/blog/?p=167&quot; class=&quot;uri&quot;&gt;http://www.solr.cc/blog/?p=167&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;要使用快速开始，就不能够使用linux daemon的方式直接启动Solr，必须能够加载example里面的collection名称（core名称）。启动的时候，命令改成&lt;code&gt;bin/solr start -e cloud -noprompt&lt;/code&gt;，其中的&lt;code&gt;-e&lt;/code&gt;选项后面跟例子名称，比如&lt;code&gt;cloud&lt;/code&gt;。在这种方式之下启动，我们可以看到管理台界面的各个collection了。然后就可以使用post工具提交待索引的文档（XML、JSON等格式了）。&lt;a href=&quot;http://blog.csdn.net/near1024/article/details/44105935&quot; class=&quot;uri&quot;&gt;http://blog.csdn.net/near1024/article/details/44105935&lt;/a&gt;上面列出了PDF、CSV、XML、JSON、PPT等格式。&lt;/p&gt;
+&lt;p&gt;之后我们登录控制台，在控制台当中找到getting started的collection，在collection里面选择query，查询一个词，比如&lt;code&gt;2006&lt;/code&gt;，在右边就可以返回结果了。&lt;a href=&quot;https://lucene.apache.org/solr/quickstart.html&quot; class=&quot;uri&quot;&gt;https://lucene.apache.org/solr/quickstart.html&lt;/a&gt;上面的教程我们可以完全参考，以尝试如何进行POST，QUERY等操作。里面还介绍了如何通过HTTP来进行查询与得到查询结果。还可以找到Solr的各种高级搜索的表达式。详细参考&lt;a href=&quot;https://cwiki.apache.org/confluence/display/solr/Apache+Solr+Reference+Guide&quot;&gt;Solr Reference Guide&lt;/a&gt;。Solr的集群，则应该参考Admin Guide。&lt;/p&gt;
+&lt;!-- Hexo的Next主题可以识别&lt;!-- more -- --&gt;
+&lt;p&gt;，并且在主页当中展示文章的时候自动断行–&amp;gt;
     
     </summary>
     
@@ -72,14 +68,27 @@
   
   <entry>
     <title>Apache Nutch的介绍与基本使用</title>
-    <link href="http://yoursite.com/2016/06/01/160601-Nutch/"/>
-    <id>http://yoursite.com/2016/06/01/160601-Nutch/</id>
+    <link href="http://yoursite.com/2016/06/01/apache-nutch/"/>
+    <id>http://yoursite.com/2016/06/01/apache-nutch/</id>
     <published>2016-05-31T16:00:00.000Z</published>
-    <updated>2016-12-14T08:36:22.227Z</updated>
+    <updated>2016-12-14T11:02:43.873Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;Nutch本是一个单独的程序，通过程序可以进行全文的挖掘并定制有关的服务。挖掘出来之后还可以使用Solr进行索引。这样就产生了各个页面。但是另外一方面，Java的程序包又都可以通过包的形式调用，因此在Scala当中也可以使用。但是要在Scala当中使用的话，显然是需要读Nu
+      &lt;p&gt;Nutch本是一个单独的程序，通过程序可以进行全文的挖掘并定制有关的服务。挖掘出来之后还可以使用Solr进行索引。这样就产生了各个页面。但是另外一方面，Java的程序包又都可以通过包的形式调用，因此在Scala当中也可以使用。但是要在Scala当中使用的话，显然是需要读Nutch的API文档及其用法的。&lt;/p&gt;
+&lt;h2 id=&quot;关于nutch&quot;&gt;关于Nutch&lt;/h2&gt;
+&lt;p&gt;2015年1月，Apache Nutch v2.3已经发布了，建议所有使用2.X系列的用户和开发人员升级到这个版本。这个版本提供了一个基于Apache Wicket的Web管理界面，解决了143个问题，提供了Maven依赖，升级到Gora v0.5，支持的底层存储为：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Apache Hadoop 1.0.1 &amp;amp; 2.4.0&lt;/li&gt;
+&lt;li&gt;Apache Cassandra 2.0.2&lt;/li&gt;
+&lt;li&gt;Apache HBase 0.94.14&lt;/li&gt;
+&lt;li&gt;Apache Accumulo 1.5.1&lt;/li&gt;
+&lt;li&gt;MongoDB 2.12.2&lt;/li&gt;
+&lt;li&gt;Apache Solr 4.8.1&lt;/li&gt;
+&lt;li&gt;Apache Avro 1.7.6&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;同时请注意，Gora对SQL的支持已经过时了。&lt;/p&gt;
+&lt;p&gt;Nutch的创始人是Doug Cutting，他同时也是Lucene、Hadoop和Avro开源项目的创始人。&lt;/p&gt;
     
     </summary>
     
@@ -99,16 +108,44 @@
   </entry>
   
   <entry>
+    <title>随机微分方程的一种引入方法</title>
+    <link href="http://yoursite.com/2016/03/17/stochastic-differential-equation-intro/"/>
+    <id>http://yoursite.com/2016/03/17/stochastic-differential-equation-intro/</id>
+    <published>2016-03-16T16:00:00.000Z</published>
+    <updated>2016-12-14T11:00:03.326Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我们该怎样引入随机微分方程呢？大概是这样的，首先考虑常的微分方程ODE为$x’=V(x)$, $x\in \Omega\subseteq\mathbb{R}^n$，然后此方程刻划物理现象的时候作为物体运动的轨迹，其解$x(t), t\geq 0$是关于$t$的光滑的曲线。但是在许多应用中，从实验所观测到的轨迹不如确定性方程所描述的那样光滑。因此有必要改正ODE为SDE。&lt;/p&gt;
+&lt;p&gt;也就是变成微分&lt;br&gt;$$d X(t) = V(X(t)) d t + G(X(t))\xi(t)$$&lt;br&gt;的形式。其中的$G(X)$是$n\times m$的矩阵。$\xi$是$m$维的白噪声。但是问题在于，在数学上如何严格定义白噪音。作为一个随机过程，其解又是什么意思？&lt;/p&gt;
+&lt;p&gt;直观的解释是使用连续随机过程来处理随机微分方程。每个$X$表示是一个随机变量，而$X(t)$整体表示的是求解一族随机过程本身。因此也就变成了求随机变量分布或者密度与时间的参数的关系。比如线性单自由度体系的运动方程&lt;br&gt;$$mX’’(t) + cX’(t) + kX(t) = Y(t), X(0) = X_0, X’(0) = X’_0$$&lt;br&gt;中，引入$X_1(t) = X(t)$，就写成使用状态变量描述动态系统的方法。这种方法是系统工程与现代控制理论的重要的手段。在振动工程中有许多方便的应用。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="概率统计" scheme="http://yoursite.com/categories/%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1/"/>
+    
+      <category term="随机过程" scheme="http://yoursite.com/categories/%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1/%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B/"/>
+    
+    
+      <category term="随机微分方程" scheme="http://yoursite.com/tags/%E9%9A%8F%E6%9C%BA%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/"/>
+    
+      <category term="随机过程" scheme="http://yoursite.com/tags/%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
     <title>快速了解Modelica与OpenModelica建模2-ModelicaML与方程</title>
-    <link href="http://yoursite.com/2016/03/13/160313-Modelica%E5%BB%BA%E6%A8%A1-ModelicaML/"/>
-    <id>http://yoursite.com/2016/03/13/160313-Modelica建模-ModelicaML/</id>
+    <link href="http://yoursite.com/2016/03/13/modelica-modeling-2/"/>
+    <id>http://yoursite.com/2016/03/13/modelica-modeling-2/</id>
     <published>2016-03-12T16:00:00.000Z</published>
-    <updated>2016-12-14T08:36:21.367Z</updated>
+    <updated>2016-12-14T11:06:20.712Z</updated>
     
     <summary type="html">
     
       &lt;h2 id=&quot;modelicaml&quot;&gt;ModelicaML&lt;/h2&gt;
-&lt;p&gt;ModelicaML同样地用于系统建模。不过不是语言的方式，而是首先以UML类似的模型表示出相应关系，然后这种模型被转换成Modelica的代码。转换代码后就可以执行，模拟出结果。ModelicaML是
+&lt;p&gt;ModelicaML同样地用于系统建模。不过不是语言的方式，而是首先以UML类似的模型表示出相应关系，然后这种模型被转换成Modelica的代码。转换代码后就可以执行，模拟出结果。ModelicaML是UML Profile的一个具体的扩展。&lt;/p&gt;
+&lt;p&gt;ModelicaML的一个开发的方法是在Papyrus UML环境下进行。在此环境之下，通过Acceleo工具生成Modelica的代码，经过M2T工具生成Modelica的.mo文件，之后可以通过任何一个符合Modelica语言要求的模拟工具中运行出来结果。安装Modelica Development Tool的Eclipse插件之后，新建Papyrus工程，在模型语言（Diagram Language）提供的UML、SysML、ModelicaML、Profile中选择ModelicaML，这样就进入了ModelicaML的建模的环境了。之后我们就可以使用ModelicaML来完成建模了（UML本身可以用于元建模，这个时候，UML规范本身就是元元建模工具了）。&lt;/p&gt;
+&lt;p&gt;Modelica使用类UML的图形表示模型。有结构图、需求图、行为图等描述方法。注意到Modelica本身也是一种元模型规范。Modelica中的元素被看成是prototype，所有的类都是继承自该原型。ModelicaML充分利用了Modelica语言的特性，可以在状态图中使用Modelica的谓词语言与条件判断，同时，也增强了UML建模算法的能力（算法流程以及代数方程）。&lt;/p&gt;
     
     </summary>
     
@@ -129,16 +166,20 @@
   
   <entry>
     <title>快速了解Modelica与OpenModelica建模1-基本知识</title>
-    <link href="http://yoursite.com/2016/03/11/160311-Modelica%E5%BB%BA%E6%A8%A1%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-    <id>http://yoursite.com/2016/03/11/160311-Modelica建模基础知识/</id>
+    <link href="http://yoursite.com/2016/03/11/modelica-basics/"/>
+    <id>http://yoursite.com/2016/03/11/modelica-basics/</id>
     <published>2016-03-10T16:00:00.000Z</published>
-    <updated>2016-12-14T08:36:21.083Z</updated>
+    <updated>2016-12-14T11:06:52.664Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;Modelica里面倒是有不少的面向对象的建模的工具，也支持PetriNet的描述。而且最近也有相关的论文的发表&lt;span class=&quot;citation&quot;&gt;(Proß et al. 2012)&lt;/span&gt;。OpenModelica上面的PNlib工具包倒好像是不错的。&lt;
+      &lt;p&gt;Modelica里面倒是有不少的面向对象的建模的工具，也支持PetriNet的描述。而且最近也有相关的论文的发表&lt;span class=&quot;citation&quot;&gt;(Proß et al. 2012)&lt;/span&gt;。OpenModelica上面的PNlib工具包倒好像是不错的。&lt;/p&gt;
+&lt;p&gt;OpenModelica是其一个实现。OpenModelica环境由若干个子系统构顶成。包括文本模型与图形模型编辑器、编译器调试器与执行环境、笔记本、优化器以及Eclipse插件。其中的编译子系统用于将Modelica语言编译成C代码。面向Eclipse的插件被称为MDT。最基本的方式自然是安装之后点击OMShell进入文本编辑环境。里面输入Modelica的代码。OMShell命令会打开一个新的窗格，使用OMShell-terminal命令可以直接在Linux终端中进入OpenModelica的环境。这时进入的就是交互式模式。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;model A Integer t= 1.5; end A;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;instantiateModel(A);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;model C&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Integer a;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Real b;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;equation&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    der(a) = b;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    der(b) = 12.0;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;end C&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
+    
+      <category term="仿真" scheme="http://yoursite.com/categories/%E4%BB%BF%E7%9C%9F/"/>
     
     
       <category term="Modelica" scheme="http://yoursite.com/tags/Modelica/"/>
@@ -151,16 +192,27 @@
   
   <entry>
     <title>常见的数据结构的抽象</title>
-    <link href="http://yoursite.com/2016/01/15/160115-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%8A%BD%E8%B1%A1/"/>
-    <id>http://yoursite.com/2016/01/15/160115-数据类型抽象/</id>
+    <link href="http://yoursite.com/2016/01/15/datatype-abstraction/"/>
+    <id>http://yoursite.com/2016/01/15/datatype-abstraction/</id>
     <published>2016-01-14T16:00:00.000Z</published>
-    <updated>2016-12-14T08:52:21.595Z</updated>
+    <updated>2016-12-14T11:04:04.007Z</updated>
     
     <summary type="html">
     
       &lt;p&gt;为了编程的顺利进行，自然有一种控制复杂性的措施。而且复杂性的控制从编程语言一开始的时候就有了，成为所谓的内部模式：内建的数据结构，甚至是语言机制里面的内容。现在我们看一些常见的数据类型。&lt;/p&gt;
 &lt;h3 id=&quot;数组&quot;&gt;数组&lt;/h3&gt;
-&lt;p&gt;按照Wiki的要求，应该按照数据
+&lt;p&gt;按照Wiki的要求，应该按照数据结构和数据类型两个不同的角度讲数组array。作为数据结构的数组是由一系列元素（值或者变量）构成的，每个元素数数组由键或者索引来标识。按照要求，数组里的元素的存储应该可以按照数学公式来计算，也就是说，数组的标识不能是简单的字符串，而要使用一个域，特别是使用整数来标识。&lt;/p&gt;
+&lt;p&gt;数组在历史上出现得是非常早的，经常作为列表list以及字符串string的实现。在现代计算机当中，内存通常都是按照一维数组的方式来计算的。而现代计算机中的优化，特别是向量处理机，都是针对数组的操作而优化的。（数据结构就是数据结构，跟它们使用硬件或者软件实现并没有关系）。&lt;/p&gt;
+&lt;p&gt;数组的一个大优势在于所使用的下标可以在运行时候被计算出来。但是需要注意的是，在底层数据结构也可能非常复杂。数组可能用哈希表、链表、查找树等结构实现。总而言之，底层数据结构与顶层数据结构有很大的不同。1945年John von Neumann写了第一个数组排序的算法。&lt;/p&gt;
+&lt;p&gt;作为抽象数据类型的列表，包含的操作有：&lt;/p&gt;
+&lt;ol style=&quot;list-style-type: decimal&quot;&gt;
+&lt;li&gt;创建一个空表；&lt;/li&gt;
+&lt;li&gt;测试当前列表是否为空；&lt;/li&gt;
+&lt;li&gt;添加一个元素到列表的第一个位置；&lt;/li&gt;
+&lt;li&gt;添加一个元素到列表的最后位置；&lt;/li&gt;
+&lt;li&gt;得到列表的第一个元素；&lt;/li&gt;
+&lt;li&gt;引用列表中除了第一个元素之外的其它元素。&lt;/li&gt;
+&lt;/ol&gt;
     
     </summary>
     
@@ -180,18 +232,53 @@
   </entry>
   
   <entry>
+    <title>维基上定义的传递系统</title>
+    <link href="http://yoursite.com/2016/01/13/wikipedia-transition-system/"/>
+    <id>http://yoursite.com/2016/01/13/wikipedia-transition-system/</id>
+    <published>2016-01-12T16:00:00.000Z</published>
+    <updated>2016-12-14T11:07:27.273Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;众所周知的是传递系统只是从系统转换的观点来看问题，其理论的根据跟抽象重写系统是一样的，但是可能说明的角度不一样吧。传递系统分成两类，带标签的和不带标签的系统。传递系统在应用于模型检查的时候经常使用带标签的形式。&lt;/p&gt;
+&lt;p&gt;Action Language是专门描述状态传递系统STS（state transition systems）的语言。经常用于形式化地创建一系列的模型。PDDL是著名的一种Action Language。&lt;/p&gt;
+&lt;p&gt;状态转移系统往往显得太过抽象。感觉好像跟动力系统理论和自动机理论都有一些差别。或许它们是研究离散状态的一种抽象理论吧。状态转移系统自然是关联着状态及其转移的。但是动力系统呢？&lt;/p&gt;
+&lt;p&gt;目前，我们似乎可以这样关联状态转移与动力系统理论。所谓的系统，我们关注的还是系统的演化的特性，也就是系统的存在及其演化。那么，自然中心的问题是，系统是怎样随时间变化的？因而，首先的问题就是所谓的对于状态的定义。在动力系统中，状态是由一个实参量标识的，它可以对时间演化可微。而在状态转移系统中，状态是一种不同的数学结构，比如说，状态是一个有穷序列，而时间也是离散的。那么，基于这种认识，似乎结合起来看，所谓的系统理论，就是某个数学结构上面的参数的理论。就像是微分几何中，每一点附上一个特定的数学结构一样，系统理论是演化过程中的每一时间点附上一个状态–似乎系统理论研究的情况，都是底空间是低维的情况。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="计算机科学" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/"/>
+    
+      <category term="计算模型" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%9E%8B/"/>
+    
+    
+      <category term="STS" scheme="http://yoursite.com/tags/STS/"/>
+    
+      <category term="状态传递系统" scheme="http://yoursite.com/tags/%E7%8A%B6%E6%80%81%E4%BC%A0%E9%80%92%E7%B3%BB%E7%BB%9F/"/>
+    
+      <category term="LTS" scheme="http://yoursite.com/tags/LTS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>信息几何简介</title>
-    <link href="http://yoursite.com/2016/01/06/160106-%E4%BF%A1%E6%81%AF%E5%87%A0%E4%BD%95/"/>
-    <id>http://yoursite.com/2016/01/06/160106-信息几何/</id>
+    <link href="http://yoursite.com/2016/01/06/information-geometry/"/>
+    <id>http://yoursite.com/2016/01/06/information-geometry/</id>
     <published>2016-01-05T16:00:00.000Z</published>
-    <updated>2016-12-14T08:44:06.447Z</updated>
+    <updated>2016-12-14T11:13:56.024Z</updated>
     
     <summary type="html">
     
       &lt;h2 id=&quot;认识信息几何&quot;&gt;认识信息几何&lt;/h2&gt;
-&lt;p&gt;信息几何的方法其实是将统计理论中的参数问题变成额外的一个空间，在这个空间上建立统计函数之间的距离，相当于仍然是使用测度的理论研究问题。这种方法自然对于参数的生成有重要的启示。启示我们为什么要选择这样的参数，这什么参数有
+&lt;p&gt;信息几何的方法其实是将统计理论中的参数问题变成额外的一个空间，在这个空间上建立统计函数之间的距离，相当于仍然是使用测度的理论研究问题。这种方法自然对于参数的生成有重要的启示。启示我们为什么要选择这样的参数，这什么参数有这些形态。在扩大的空间当中，自然而然地可以非常方便地研究统计系统的重多的要素。在机器学习中也有更多的应用。&lt;/p&gt;
+&lt;p&gt;然而单纯起来看，并非信息是几何的，而是因为分布函数之间的距离就是可以度量的。这样的话，未必形成微分流形，甚至是更一般的内容也可以，比如离散分布与离散参数的问题。总而言之，关键在于考察“所有可能的参数所形成的空间”，而不是“某个参数下的分布”所起的作用吧。&lt;/p&gt;
+&lt;p&gt;信息几何有几种经典的方法。第一是基于流形上的Riemann度量的方法，第二种是基于&lt;span class=&quot;math inline&quot;&gt;\(\alpha\)&lt;/span&gt;联络与对偶几何的方法。还可以是基于曲率度量的方法，或者基于信息散度(divergence)的方法。散度在信息什么几何中充当距离函数，用来度量两个点之间的分离度或者差异，但散度不是严格意义上的距离函数。&lt;/p&gt;
     
     </summary>
+    
+      <category term="数学" scheme="http://yoursite.com/categories/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="几何" scheme="http://yoursite.com/categories/%E6%95%B0%E5%AD%A6/%E5%87%A0%E4%BD%95/"/>
     
     
       <category term="信息几何" scheme="http://yoursite.com/tags/%E4%BF%A1%E6%81%AF%E5%87%A0%E4%BD%95/"/>
@@ -204,16 +291,20 @@
   
   <entry>
     <title>Hello World from the Hexo</title>
-    <link href="http://yoursite.com/2016/01/01/160101-Hexo%E8%AF%B4%E6%98%8E/"/>
-    <id>http://yoursite.com/2016/01/01/160101-Hexo说明/</id>
+    <link href="http://yoursite.com/2016/01/01/blog-hexo-1/"/>
+    <id>http://yoursite.com/2016/01/01/blog-hexo-1/</id>
     <published>2015-12-31T16:00:00.000Z</published>
-    <updated>2016-12-14T08:36:20.147Z</updated>
+    <updated>2016-12-14T11:22:49.248Z</updated>
     
     <summary type="html">
     
       A short description of the blog
     
     </summary>
+    
+      <category term="出版" scheme="http://yoursite.com/categories/%E5%87%BA%E7%89%88/"/>
+    
+      <category term="博客" scheme="http://yoursite.com/categories/%E5%87%BA%E7%89%88/%E5%8D%9A%E5%AE%A2/"/>
     
     
       <category term="hello" scheme="http://yoursite.com/tags/hello/"/>
@@ -226,16 +317,26 @@
   
   <entry>
     <title>守护进程的编写思路（C与Python）</title>
-    <link href="http://yoursite.com/2015/12/09/151209-Daemon-Programming/"/>
-    <id>http://yoursite.com/2015/12/09/151209-Daemon-Programming/</id>
+    <link href="http://yoursite.com/2015/12/09/programming-daemon/"/>
+    <id>http://yoursite.com/2015/12/09/programming-daemon/</id>
     <published>2015-12-08T16:00:00.000Z</published>
-    <updated>2016-12-14T08:36:19.855Z</updated>
+    <updated>2016-12-14T11:18:28.344Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;参考&lt;a href=&quot;http://www.netzmafia.de/skripten/unix/linux-daemon-howto.html&quot; class=&quot;uri&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.netzmafia
+      &lt;p&gt;参考&lt;a href=&quot;http://www.netzmafia.de/skripten/unix/linux-daemon-howto.html&quot; class=&quot;uri&quot;&gt;http://www.netzmafia.de/skripten/unix/linux-daemon-howto.html&lt;/a&gt;。上面提到Linux守护进程应该做的基本的事情，守护进程主要包括了&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;从主程序中创建子进程&lt;/li&gt;
+&lt;li&gt;改变文件的umask任务&lt;/li&gt;
+&lt;li&gt;打开日志文件以记录日志&lt;/li&gt;
+&lt;li&gt;创建会话ID&lt;/li&gt;
+&lt;li&gt;将工作目录移动到一个安全的位置&lt;/li&gt;
+&lt;li&gt;关闭标准的文件描述符（守护进程不存在标准输入与输出的问题）&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
+    
+      <category term="操作系统" scheme="http://yoursite.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
     
       <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
@@ -252,16 +353,22 @@
   
   <entry>
     <title>Scheme语言概要</title>
-    <link href="http://yoursite.com/2015/08/31/150831-Scheme%E8%AF%AD%E8%A8%80%E6%A6%82%E8%A6%81/"/>
-    <id>http://yoursite.com/2015/08/31/150831-Scheme语言概要/</id>
+    <link href="http://yoursite.com/2015/08/31/scheme-lang/"/>
+    <id>http://yoursite.com/2015/08/31/scheme-lang/</id>
     <published>2015-08-30T16:00:00.000Z</published>
-    <updated>2016-12-14T08:36:19.387Z</updated>
+    <updated>2016-12-14T11:08:10.697Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;在人工智能语言中我们应该接触过Scheme。根据介绍，Scheme和CommonLisp是两种主要的Lisp方言之一，也就是说，在讲Lisp语言的时候，我们也包括了讲Lisp或者CommonLisp语言。Scheme语言的地位是由一系列的Lambda论文决定的。见&lt;a hr
+      &lt;p&gt;在人工智能语言中我们应该接触过Scheme。根据介绍，Scheme和CommonLisp是两种主要的Lisp方言之一，也就是说，在讲Lisp语言的时候，我们也包括了讲Lisp或者CommonLisp语言。Scheme语言的地位是由一系列的Lambda论文决定的。见&lt;a href=&quot;https://en.wikipedia.org/wiki/History_of_the_Scheme_programming_language#The_Lambda_Papers&quot; class=&quot;uri&quot;&gt;https://en.wikipedia.org/wiki/History_of_the_Scheme_programming_language#The_Lambda_Papers&lt;/a&gt;。Scheme的后缀扩展名是.scm或者.ss。Scheme是动态强类型的语言，具有词法作用域，当然是函数式语言。此外，Scheme的特点是它是第一个实现了头等延续的语言（这里的延续指的是计算机程序的控制状态，头等延续指的是可以创建，保存、赋值程序的状态给一个变量，并根据需要恢复程序的运行上下文）。对于延续的介绍可见&lt;a href=&quot;https://en.wikipedia.org/wiki/Continuation&quot; class=&quot;uri&quot;&gt;https://en.wikipedia.org/wiki/Continuation&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;Scheme对于CommonLisp的设计产生了重要的影响。Scheme的开发其实是基于实现当时的Actor并发模型的思想。Scheme的最新标准是R7RS，制定于2013年。&lt;/p&gt;
+&lt;p&gt;描述Scheme的最佳的方式或许是这样的。首先，Scheme的语法风格来自于简洁的S-表达式。然后数据结构是基于表处理的，刚开始的时候我们会看到很多的表处理的模式（如果有可能的话，我们也可以在其它的编程语言中模仿它），这种表处理的模式导致了我们很容易在运行的时候动态地创建Scheme代码。另外就是，它支持头等函数。虽然声称Lisp是函数式语言，但是其实Lisp的基本思想其实并不是高阶函数，而是所谓的抽象重写系统。另外的特点，就是对于&lt;span class=&quot;math inline&quot;&gt;\(\lambda\)&lt;/span&gt;-演算和词法作用域的支持了。&lt;/p&gt;
     
     </summary>
+    
+      <category term="计算机科学" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/"/>
+    
+      <category term="编程语言" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
     
     
       <category term="scheme" scheme="http://yoursite.com/tags/scheme/"/>
@@ -273,45 +380,49 @@
   </entry>
   
   <entry>
-    <title>Scala编程概要（四）：控制抽象, 集合, 模式匹配, 编译器</title>
-    <link href="http://yoursite.com/2015/07/02/150702-Scala%E7%BC%96%E7%A8%8B%E7%90%86%E8%AE%BA%E8%A7%86%E8%A7%92/"/>
-    <id>http://yoursite.com/2015/07/02/150702-Scala编程理论视角/</id>
-    <published>2015-07-01T16:00:00.000Z</published>
-    <updated>2016-12-14T08:36:18.819Z</updated>
+    <title>Maude语言</title>
+    <link href="http://yoursite.com/2015/07/22/maude-lang/"/>
+    <id>http://yoursite.com/2015/07/22/maude-lang/</id>
+    <published>2015-07-21T16:00:00.000Z</published>
+    <updated>2016-12-14T11:08:38.764Z</updated>
     
     <summary type="html">
     
-      &lt;h3 id=&quot;scala的控制抽象&quot;&gt;Scala的控制抽象&lt;/h3&gt;
-&lt;p&gt;Haskell有自己的抽制抽象。使用的是单体。但是在Scala中，没有必要做得那么纯函数式。所以为了调用控制流，Scala使用了&lt;code&gt;() =&amp;gt; Unit&lt;/code&gt;类型。比如说，我们要在
+      &lt;p&gt;Maude是一个使用重写逻辑的语言，由SRI开发。Maude的Rewritting Logic是对Equational Logic的一个扩展。Maude非常强调元编程的概念。Maude也可以看成是一种逻辑编程语言、Logic Programming Language、Extensible syntax Programming Language、Term-rewriting programming Language。&lt;/p&gt;
+&lt;p&gt;Maude语言和Mathematica是类似的，但是也许比Mathematica在语言的表现力方面上更强大。本身的计算也是基于模式的匹配，当然是非常自然的。这种项重写跟Mathematica的原理是类似的。&lt;/p&gt;
+&lt;p&gt;高级的编程语言大概都能应用于软件规约，以及逻辑编程语言也可以。Maude有一系列的模型检查的库，这可能是它具有优越性的地方&lt;a href=&quot;http://maude.cs.illinois.edu/w/index.php?title=Maude_Tools&quot; class=&quot;uri&quot;&gt;http://maude.cs.illinois.edu/w/index.php?title=Maude_Tools&lt;/a&gt;。&lt;/p&gt;
     
     </summary>
     
+      <category term="编程语言" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
     
-      <category term="scala" scheme="http://yoursite.com/tags/scala/"/>
     
-      <category term="控制抽象" scheme="http://yoursite.com/tags/%E6%8E%A7%E5%88%B6%E6%8A%BD%E8%B1%A1/"/>
+      <category term="maude" scheme="http://yoursite.com/tags/maude/"/>
     
-      <category term="集合" scheme="http://yoursite.com/tags/%E9%9B%86%E5%90%88/"/>
+      <category term="重写逻辑" scheme="http://yoursite.com/tags/%E9%87%8D%E5%86%99%E9%80%BB%E8%BE%91/"/>
     
-      <category term="模式匹配" scheme="http://yoursite.com/tags/%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D/"/>
-    
-      <category term="编译器" scheme="http://yoursite.com/tags/%E7%BC%96%E8%AF%91%E5%99%A8/"/>
+      <category term="rewriting logic" scheme="http://yoursite.com/tags/rewriting-logic/"/>
     
   </entry>
   
   <entry>
     <title>Scala编程概要（三）：进程控制与shell，函数式特性</title>
-    <link href="http://yoursite.com/2015/07/02/150702-%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/"/>
-    <id>http://yoursite.com/2015/07/02/150702-进程控制/</id>
+    <link href="http://yoursite.com/2015/07/02/scala-process-and-shell/"/>
+    <id>http://yoursite.com/2015/07/02/scala-process-and-shell/</id>
     <published>2015-07-01T16:00:00.000Z</published>
-    <updated>2016-12-14T08:36:19.099Z</updated>
+    <updated>2016-12-14T11:14:50.274Z</updated>
     
     <summary type="html">
     
       &lt;p&gt;应该说，这种特性是可以让人大吼大叫的。简单的示例如下：&lt;/p&gt;
-&lt;figure class=&quot;highlight scala&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;l
+&lt;figure class=&quot;highlight scala&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; sys.process._&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;ls -al ..&quot;&lt;/span&gt; !&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;之所以可以这样做，是因为sys.process包含一个从字符串到ProcessBuild对象的隐式类型转换。注意后面的&lt;code&gt;!&lt;/code&gt;号操作符，以ProcessBuild类型为参数类型，返回的是被执行程序的返回值。如果需要返回的是程序的输出的字符串，可以使用&lt;code&gt;!!&lt;/code&gt;代替&lt;code&gt;!&lt;/code&gt;号。&lt;/p&gt;
     
     </summary>
+    
+      <category term="编程语言" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="Scala" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Scala/"/>
     
     
       <category term="进程" scheme="http://yoursite.com/tags/%E8%BF%9B%E7%A8%8B/"/>
@@ -333,18 +444,52 @@
   </entry>
   
   <entry>
+    <title>Scala编程概要（四）：控制抽象, 集合, 模式匹配, 编译器</title>
+    <link href="http://yoursite.com/2015/07/02/scala-overview-4/"/>
+    <id>http://yoursite.com/2015/07/02/scala-overview-4/</id>
+    <published>2015-07-01T16:00:00.000Z</published>
+    <updated>2016-12-14T11:09:01.020Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;scala的控制抽象&quot;&gt;Scala的控制抽象&lt;/h3&gt;
+&lt;p&gt;Haskell有自己的抽制抽象。使用的是单体。但是在Scala中，没有必要做得那么纯函数式。所以为了调用控制流，Scala使用了&lt;code&gt;() =&amp;gt; Unit&lt;/code&gt;类型。比如说，我们要在某个线程当中创建一个过程：&lt;/p&gt;
+&lt;figure class=&quot;highlight scala&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;runInThread() &amp;#123; () =&amp;gt; println(&lt;span class=&quot;string&quot;&gt;&quot;Hi&quot;&lt;/span&gt;); &lt;span class=&quot;type&quot;&gt;Thread&lt;/span&gt;.sleep(&lt;span class=&quot;number&quot;&gt;1000&lt;/span&gt;); println(&lt;span class=&quot;string&quot;&gt;&quot;Bye&quot;&lt;/span&gt;) &amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;其中定义的runInThead函数是：&lt;/p&gt;
+&lt;figure class=&quot;highlight scala&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;runInThread&lt;/span&gt;&lt;/span&gt;( block : () =&amp;gt; &lt;span class=&quot;type&quot;&gt;Unit&lt;/span&gt;) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;type&quot;&gt;Thread&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;		&lt;span class=&quot;keyword&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;run&lt;/span&gt;&lt;/span&gt;() &amp;#123; block() &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	&amp;#125;.start()&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="scala" scheme="http://yoursite.com/tags/scala/"/>
+    
+      <category term="控制抽象" scheme="http://yoursite.com/tags/%E6%8E%A7%E5%88%B6%E6%8A%BD%E8%B1%A1/"/>
+    
+      <category term="集合" scheme="http://yoursite.com/tags/%E9%9B%86%E5%90%88/"/>
+    
+      <category term="模式匹配" scheme="http://yoursite.com/tags/%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D/"/>
+    
+      <category term="编译器" scheme="http://yoursite.com/tags/%E7%BC%96%E8%AF%91%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Scala编程概要（二）：基本结构，常用模式</title>
-    <link href="http://yoursite.com/2015/07/01/150701-Scala%E5%9F%BA%E6%9C%AC%E8%AF%AD%E5%8F%A5/"/>
-    <id>http://yoursite.com/2015/07/01/150701-Scala基本语句/</id>
+    <link href="http://yoursite.com/2015/07/01/scala-sentences/"/>
+    <id>http://yoursite.com/2015/07/01/scala-sentences/</id>
     <published>2015-06-30T16:00:00.000Z</published>
-    <updated>2016-12-14T08:36:18.251Z</updated>
+    <updated>2016-12-14T11:11:37.384Z</updated>
     
     <summary type="html">
     
       &lt;p&gt;设计模式在软件编程的各个方面都有应用。MVC与分布式一般算成是架构模式，而写文档注释也有一定的模式可以遵守。另外，我们也可以设计出一些使用的模式，以便在开发软件之后，可以让用户按照指定的模式使用软件。&lt;/p&gt;
-&lt;h2 id=&quot;scala的for语句&quot;&gt;Scala的for语句
+&lt;h2 id=&quot;scala的for语句&quot;&gt;Scala的for语句&lt;/h2&gt;
+&lt;p&gt;在scala当中，for并不是经典的控制流语句而已。在for里面可以加一些过滤器，同时，也可使用yield来生成一个集合。这种控制语句应该是与Map-Reduce相互配合的。而且为了支持新的范式，也需要修改for语句的行为。&lt;/p&gt;
+&lt;p&gt;对于非递归的函数，scala不需要指定返回的类型。这是因为，虽然hindley-Milner算法能够推断出递归函数的返回的类型，但是在面向对象的语言中却并不是总是可以行得通的。所以，在处理递归函数的返回类型上，Scala并没有使用Hindley-Milner类型推断算法。&lt;/p&gt;
     
     </summary>
+    
+      <category term="编程语言" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
     
     
       <category term="scala" scheme="http://yoursite.com/tags/scala/"/>
@@ -367,17 +512,19 @@
   
   <entry>
     <title>Scala编程概要（一）：文档，注释，面向对象</title>
-    <link href="http://yoursite.com/2015/07/01/150701-Scala%E6%9C%89%E5%85%B3%E6%95%99%E7%A8%8B/"/>
-    <id>http://yoursite.com/2015/07/01/150701-Scala有关教程/</id>
+    <link href="http://yoursite.com/2015/07/01/scala-tutorial-intro/"/>
+    <id>http://yoursite.com/2015/07/01/scala-tutorial-intro/</id>
     <published>2015-06-30T16:00:00.000Z</published>
-    <updated>2016-12-14T08:36:18.535Z</updated>
+    <updated>2016-12-14T11:15:35.130Z</updated>
     
     <summary type="html">
     
       &lt;p&gt;虽然每次都是从头开始看Java与Scala的初级的教程，但是每次看的时候重点不一样，对于语言的理解也不一样。这一次的时候，强调的是，我们如何从初学者成为能够熟练运用一门语言的开发者？为了做到这一点，我们需要付出哪些努力？&lt;/p&gt;
-&lt;p&gt;现在的看法是这样的。第一，我们应该按照
+&lt;p&gt;现在的看法是这样的。第一，我们应该按照写书的方式写Scala的程序。所以，如何从应用程序中生成文档，以及介绍这个文档是最基本的。所以，在初学者的第一章的时候就应该学习使用scaladoc来写文档，以便能够注释出来自己所写的东西，表达出来自己所写的东西是什么样的意思。第二，或许是对于某些语言，使用REPL环境。但是学习一个语言可能更关键的是学习它适应的设计模式，与常见的实践，就像写学术文档一样写程序。&lt;/p&gt;
     
     </summary>
+    
+      <category term="编程语言" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
     
     
       <category term="scala" scheme="http://yoursite.com/tags/scala/"/>
@@ -392,23 +539,26 @@
   
   <entry>
     <title>用自举理解人工智能与学术研究</title>
-    <link href="http://yoursite.com/2015/06/29/150629-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%B8%8E%E8%87%AA%E4%B8%BE/"/>
-    <id>http://yoursite.com/2015/06/29/150629-人工智能与自举/</id>
+    <link href="http://yoursite.com/2015/06/29/ai-and-bootstraping/"/>
+    <id>http://yoursite.com/2015/06/29/ai-and-bootstraping/</id>
     <published>2015-06-28T16:00:00.000Z</published>
-    <updated>2016-12-14T08:36:17.983Z</updated>
+    <updated>2016-12-14T11:15:56.908Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;最近人工智能在公众世界中变得很热。在各种技术应用铺天盖地的时候，肯定也有不少人在思考人工智能与人的思维的关系。在这里，我们首先关注的可能是这个很自然的问题：人工智能，或者干脆说智能机器，机器人，会不会取代人类。这里的取代，并不是说能够取代人的平常的工作，而是机器具有自主学习
+      &lt;p&gt;最近人工智能在公众世界中变得很热。在各种技术应用铺天盖地的时候，肯定也有不少人在思考人工智能与人的思维的关系。在这里，我们首先关注的可能是这个很自然的问题：人工智能，或者干脆说智能机器，机器人，会不会取代人类。这里的取代，并不是说能够取代人的平常的工作，而是机器具有自主学习、自主决策的能力。完全不再需要人的干预。&lt;/p&gt;
+&lt;p&gt;本文的标题的前一半，就来尝试这个问题。至于后一半“理解学术研究”，比较具体。因为一直以来，科学研究活动都被视为是具有极高智力挑战的活动。同时，实际中的学术研究还是比较累的。单单做理论的工作，似乎很难合“学术共同体”的口味；而实践的工作，又上不了科学理论的台面。然而，科学活动的量级似乎越来越重。除了少数学科，如纯粹数学，研究方式变化没有那么大之外，几乎所有的科学都面临着数据处理的新的问题。“数据科学”，是否会成为所有的科学研究的基础？花费的代价越来越高的数值计算与模拟，是否越来越占据更大的份量？计算机在科学研究中的地位究竟是怎样的？&lt;/p&gt;
     
     </summary>
     
+      <category term="人工智能" scheme="http://yoursite.com/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+    
+    
+      <category term="人工智能" scheme="http://yoursite.com/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
     
       <category term="自举" scheme="http://yoursite.com/tags/%E8%87%AA%E4%B8%BE/"/>
     
       <category term="bootstrap" scheme="http://yoursite.com/tags/bootstrap/"/>
-    
-      <category term="人工智能" scheme="http://yoursite.com/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
     
       <category term="学术" scheme="http://yoursite.com/tags/%E5%AD%A6%E6%9C%AF/"/>
     
@@ -416,8 +566,8 @@
   
   <entry>
     <title>个人主页项目的设计与管理</title>
-    <link href="http://yoursite.com/2015/06/21/150621-%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5%E9%A1%B9%E7%9B%AE/"/>
-    <id>http://yoursite.com/2015/06/21/150621-个人主页项目/</id>
+    <link href="http://yoursite.com/2015/06/21/%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5%E9%A1%B9%E7%9B%AE/"/>
+    <id>http://yoursite.com/2015/06/21/个人主页项目/</id>
     <published>2015-06-20T16:00:00.000Z</published>
     <updated>2016-12-14T08:52:56.038Z</updated>
     
@@ -438,16 +588,25 @@
   
   <entry>
     <title>Github主页修整记</title>
-    <link href="http://yoursite.com/2015/06/20/150620-%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5%E5%BC%80%E9%80%9A/"/>
-    <id>http://yoursite.com/2015/06/20/150620-个人主页开通/</id>
+    <link href="http://yoursite.com/2015/06/20/%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5%E5%BC%80%E9%80%9A/"/>
+    <id>http://yoursite.com/2015/06/20/个人主页开通/</id>
     <published>2015-06-19T16:00:00.000Z</published>
-    <updated>2016-12-14T08:36:17.403Z</updated>
+    <updated>2016-12-14T11:27:10.196Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;建主页有许多种选择。这些方案可以分成静态主页方案与动态主页方案两大类。动态主页的托管的方式可能复杂一些，需要维护的代价似乎比较高。此外，动态主页里面的内容在转成可打印的版本的时候质量也会缩水。最理想的情况自然是一边能够生成HTML文档，另一方面，不经重新修改，可以转成其它的
+      &lt;p&gt;建主页有许多种选择。这些方案可以分成静态主页方案与动态主页方案两大类。动态主页的托管的方式可能复杂一些，需要维护的代价似乎比较高。此外，动态主页里面的内容在转成可打印的版本的时候质量也会缩水。最理想的情况自然是一边能够生成HTML文档，另一方面，不经重新修改，可以转成其它的格式，特别是LaTeX的格式。&lt;/p&gt;
+&lt;p&gt;但是实际中能像LaTeX那样有表现力，又有丰富宏包支持的格式还真不多。Markdown等都过于简单了。之前的实践中，LaTeX格式与HTML对比中，主要的不一致有：&lt;/p&gt;
+&lt;ol style=&quot;list-style-type: decimal&quot;&gt;
+&lt;li&gt;&lt;p&gt;LaTeX中有wrapfigure、caption宏包可以调整图片，但是在HTML中的调整就得手工编码了。因为实在是没有学习HTML的排版细节问题；此外，LaTeX的表格转成HTML的表格也不太容易，特别是有对齐、指定宽度的表格，换到HTML页面上往往不好看。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;数学公式中，使用MathJax中也只能使用预定义的公式集。但是在编程语言中所用的符号，与在逻辑中所用的符号不同，范畴论的符号，跟在线性代数中也非常不同。在MathJax中能够自定义数学公式命令是必须的，但是又是比较麻烦的。高级的框架，如交换图、amssymb、eulervm宏包提供的符号，似乎也得重新配置。单配置来说并不困难，可是有时候需要变更宏包，这个时候又得手工同步。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
     
     </summary>
+    
+      <category term="出版" scheme="http://yoursite.com/categories/%E5%87%BA%E7%89%88/"/>
+    
+      <category term="博客" scheme="http://yoursite.com/categories/%E5%87%BA%E7%89%88/%E5%8D%9A%E5%AE%A2/"/>
     
     
       <category term="github" scheme="http://yoursite.com/tags/github/"/>
@@ -457,56 +616,6 @@
       <category term="latex" scheme="http://yoursite.com/tags/latex/"/>
     
       <category term="pandoc" scheme="http://yoursite.com/tags/pandoc/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Agda语言介绍</title>
-    <link href="http://yoursite.com/2015/06/08/150608-Agda%E8%AF%AD%E8%A8%80%E4%BB%8B%E7%BB%8D/"/>
-    <id>http://yoursite.com/2015/06/08/150608-Agda语言介绍/</id>
-    <published>2015-06-07T16:00:00.000Z</published>
-    <updated>2016-12-14T08:36:17.111Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Agda语言是使用了依存类型的函数式编程语言。最初发表于2007年，是在Ulf Norell的博士论文里面。目前实践当中，函数式语言中使用依存类型还不多。但是依存类型在可以预见的未来内会继续发展。目前发展依存类型的函数式语言的动力在于形式证明。目前的版本是Agda2，基本上
-    
-    </summary>
-    
-    
-      <category term="函数式" scheme="http://yoursite.com/tags/%E5%87%BD%E6%95%B0%E5%BC%8F/"/>
-    
-      <category term="agda" scheme="http://yoursite.com/tags/agda/"/>
-    
-      <category term="haskell" scheme="http://yoursite.com/tags/haskell/"/>
-    
-      <category term="直觉类型论" scheme="http://yoursite.com/tags/%E7%9B%B4%E8%A7%89%E7%B1%BB%E5%9E%8B%E8%AE%BA/"/>
-    
-      <category term="依存类型" scheme="http://yoursite.com/tags/%E4%BE%9D%E5%AD%98%E7%B1%BB%E5%9E%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Elixir：建立在Erlang虚拟机上的函数式语言</title>
-    <link href="http://yoursite.com/2015/06/06/150606-Elixir%E5%87%BD%E6%95%B0%E5%BC%8F%E8%AF%AD%E8%A8%80/"/>
-    <id>http://yoursite.com/2015/06/06/150606-Elixir函数式语言/</id>
-    <published>2015-06-05T16:00:00.000Z</published>
-    <updated>2016-12-14T08:36:16.499Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Elixir是建立头Elrang虚拟机上的函数式、并发的、通用的编程语言。Elixir是一个BEAM（Erlang虚拟机的名称）上面的一个比较新的编程语言。Elixir的思想是所有的事物都看成是表达式。现代编程语言通常都具有开些诸如泛型编程、函数式编程、面向对象编程，对并发
-    
-    </summary>
-    
-    
-      <category term="elixir" scheme="http://yoursite.com/tags/elixir/"/>
-    
-      <category term="erlang" scheme="http://yoursite.com/tags/erlang/"/>
-    
-      <category term="函数式" scheme="http://yoursite.com/tags/%E5%87%BD%E6%95%B0%E5%BC%8F/"/>
-    
-      <category term="并发" scheme="http://yoursite.com/tags/%E5%B9%B6%E5%8F%91/"/>
     
   </entry>
   

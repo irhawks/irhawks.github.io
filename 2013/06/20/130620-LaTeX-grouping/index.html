@@ -1,0 +1,1201 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans,en,default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="TeX,LaTeX,grouping,编组," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="80x24" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="编组
+编组可以理解成计算机编程中的模块结构。编组发生作用是在编程语言层次上的，也就是每经过一个编组，编译器就回复到编组之前的正常规则。
+ex5.1 得到ff不连在一起的shelfful.
+方法是输入shelf{ful}.也就是在f中间加上一个编组。
+ex5.2 不用转义的空格，怎样在一排中得到三个空格。
+使用{ }{ }{ }吧。或者{ } { }，注意编组后面的空格不会被自动忽略。
+为了使控制序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TeX与LaTeX的编组">
+<meta property="og:url" content="http://yoursite.com/2013/06/20/130620-LaTeX-grouping/index.html">
+<meta property="og:site_name" content="80x24">
+<meta property="og:description" content="编组
+编组可以理解成计算机编程中的模块结构。编组发生作用是在编程语言层次上的，也就是每经过一个编组，编译器就回复到编组之前的正常规则。
+ex5.1 得到ff不连在一起的shelfful.
+方法是输入shelf{ful}.也就是在f中间加上一个编组。
+ex5.2 不用转义的空格，怎样在一排中得到三个空格。
+使用{ }{ }{ }吧。或者{ } { }，注意编组后面的空格不会被自动忽略。
+为了使控制序">
+<meta property="og:updated_time" content="2016-12-14T08:36:10.967Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TeX与LaTeX的编组">
+<meta name="twitter:description" content="编组
+编组可以理解成计算机编程中的模块结构。编组发生作用是在编程语言层次上的，也就是每经过一个编组，编译器就回复到编组之前的正常规则。
+ex5.1 得到ff不连在一起的shelfful.
+方法是输入shelf{ful}.也就是在f中间加上一个编组。
+ex5.2 不用转义的空格，怎样在一排中得到三个空格。
+使用{ }{ }{ }吧。或者{ } { }，注意编组后面的空格不会被自动忽略。
+为了使控制序">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2013/06/20/130620-LaTeX-grouping/"/>
+
+
+
+
+
+  <title> TeX与LaTeX的编组 | 80x24 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?763bee904aa6d81fdf017659d162188f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">80x24</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Keep Stupid, Keep Hungry</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/atom.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            Sitemap
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2013/06/20/130620-LaTeX-grouping/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Istyasna">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="80x24">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="80x24" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                TeX与LaTeX的编组
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2013-06-20T00:00:00+08:00">
+                2013-06-20
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              <span class="post-meta-item-text">更新于</span>
+              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T16:36:10+08:00">
+                2016-12-14
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2013/06/20/130620-LaTeX-grouping/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/06/20/130620-LaTeX-grouping/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="编组">编组</h2>
+<p>编组可以理解成计算机编程中的模块结构。编组发生作用是在编程语言层次上的，也就是每经过一个编组，编译器就回复到编组之前的正常规则。</p>
+<p>ex5.1 得到ff不连在一起的<code>shelfful</code>.</p>
+<p>方法是输入<code>shelf{ful}</code>.也就是在f中间加上一个编组。</p>
+<p>ex5.2 不用转义的空格，怎样在一排中得到三个空格。</p>
+<p>使用<code>{ }{ }{ }</code>吧。或者<code>{ } { }</code>，注意编组后面的空格不会被自动忽略。</p>
+<p>为了使控制序列作用在特定的文本上，我们也使用<code>\centerline{}</code>这样的结构。</p>
+<p>虽然编组的功能很强大，但是也容易使文档变得难读。幸好在普通文稿当中不必使用太多的编组。</p>
+<p>括号的作用有多个，一个是把多个单词看成一个结构，另一种是提供了一个局部模块结构。不应当认为大括号仅有一个作用。</p>
+<p>ex5.3 键入下列内容会得到什么结果?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">\centerline&#123;This information should be &#123;centered&#125;.&#125;</div><div class="line">\centerline So should this.</div></pre></td></tr></table></figure>
+<p>它的结果是，第一条命令产生一个居中的文本块，但是第二行将只有一个单词S。第三行变成了一o开头。</p>
+<p>注意第二行不是一个单词，因为TeX控制系列默认将后面的一个字母而不是单词视为一个单独的参数。</p>
+<p>ex5.5 定义一个控制系列<code>\ital</code>,使得用户键入<code>\ital{text}</code>来代替<code>{\it text\/}</code>.与<code>\it</code>相比它有什么优缺点。</p>
+<p>显然使用<code>\def\ital#1{ {\it #1\/} }</code>它的不足只是放在后面，并且总是有一个斜体校正，它的所有的特点都跟它的封装形式有关。</p>
+<p>TeX的宏定义与m4差不多，过多的括号里面，只有最外层的被去掉，内层的括号得到了保留。</p>
+<p>TeX的参数的处理</p>
+<p>与C语言不同，在编组当中改变即使是全局变量，当走出编组的时候全局变量也会恢复成原来的样子（这有一点像是有硬堆栈变量的计算机）。使用<code>\global</code>命令可以做到这一点。比如将计数器加一的操作，显然通过普通方法是不行的，在块里面需要使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">\global\advance\count0 by 1</div></pre></td></tr></table></figure>
+<p>其中的advance表示对指定的计数器加上特定的值。<code>\count0</code>是TeX内部的一个计数器。</p>
+<p>分组</p>
+<p>另一个分组的命令是<code>\begingroup{GRPNAME}...\endgroup{GRPNAME}</code>.</p>
+<p>这个可以看成是LaTeX环境的基础。如果使组正常工作，那么我们就应当避免Sa,Sb,Ea,Eb这样的情况，方法其实很简单，在Sa的时候定义一个<code>\blockname{}</code>名子与本环境的名子相同，Sb也同样这种做法。这样在Ea的时候，Sb定义的blockname就会消失，在读到Eb的时候检查一下b有没有被定义就可以了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">\def\beginthe#1&#123;\begingroup\def\blockname&#123;#1&#125;&#125;</div><div class="line">\def\endthe#1&#123;\def\test&#123;#1&#125;%</div><div class="line">\ifx\test\blockname\endgroup</div><div class="line">\else\errmessage&#123;You should have said</div><div class="line">\string\endthe&#123;\blockname&#125;&#125;\fi&#125;</div></pre></td></tr></table></figure>
+<p>（具名编组的概念，有些像是Pascal语言的end for语句之类的扩展）。</p>
+
+<p>从外壳中键入tex命令，出现双星号提示符，要求输入文件名，这个时候我们可以代之以输入<code>\relax</code>命令，进入到一个星号的状态。之后就进入排版了。</p>
+<p>在输入完成内容后，键入<code>\end</code>可以结束会话，TeX会把文件输出到当前目录里面。</p>
+<p>在第一篇TeX当中，可能<code>\hskip</code>, <code>\vskip</code> 以及后面的<code>\hrule</code> 我们比较常用吧。</p>
+<p>直接的波浪线表示告诉TeX前后两个文本是连在一起的，不要在此处断行。<code>\vfill</code>表示用空白将本页剩下的部分用空白填满，然后用<code>\eject</code>把它送到输出文件。</p>
+<p>在出现**提示符的时候，我们可以以<code>&amp;</code>开头表示以特定的宏格式处理文件，比如 <code>&amp;plain \input story</code>表示使用plainTeX的格式处理文件。一般来说，还可以在从外壳调用它的时候使用<code>tex &amp;plain story</code>或<code>tex \relax</code>这样的形式直接跳过双星号提示。</p>
+<p><code>\eject</code> 表示本页处理完毕，不代表所有的页都处理完成了。我们仍然需要使用<code>\end</code>来结束文本的输入。</p>
+<p>在TeX中，由<code>\hsize=</code>控制本行的排版宽度(不是页面宽度)。</p>
+<p>如果TeX发出警告，那么每段文本后面最后有一个|表示在输出的时候TeX加了一个黑色的方块。以产生警告作用。</p>
+<p>在输出文件的时候，TeX总会产生log日志。</p>
+<p>TeX通过给定的信息以断词。比如通过<code>\hyphenation{gal-axy}</code>，中间的一个-让TeX知道这是一个可以断词的位置。</p>
+<h2 id="错误信息与处理">错误信息与处理</h2>
+<p>TeX的错误信息是以感叹号!开始的。并提供了错误上下文。上文是读出的内容，下文是要读的内容。并在上文的最左边给出了错误的行号(X.Y中Y表示行号)。</p>
+这个时候可以键入回车，表示试图忽略本次错误，或者输入
+
+<p>在TeX当中，这些命令改变了交互的等级。S,R,Q分别对应于<code>\scrollmode</code>,<code>\nonstopmode</code>,<code>\batchmode</code>.使用<code>\errorstopmode</code>转成正常的模式。这些命令是全局作用的，无论它们出现在哪一个组当中。</p>
+<p>调用宏的时候产生的错误就像编程语言里面函数调用栈的错误一样，我们可以设置<code>\errorcontextlines</code>设置显示出来的调用栈的深度。</p>
+<h2 id="tex的工作原理">TeX的工作原理</h2>
+<p>在TeX中有如下约定，一个回车类似于一个空格，一行中的两个连续空格被视为一个，无论出现在哪一个位置，并且使用一个空行表示一段的结束。</p>
+<p>TeX的字符所属的类</p>
+<p>256个字符被分成16类。数字编号从0到15.TeX在读入文件的时候每次读取一个记号，并对比当前记号所在的类，以决定所产生的行为。这些类及作用为:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">类别</th>
+<th align="left">意义</th>
+<th align="left">默认字符</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">0</td>
+<td align="left">转义符</td>
+<td align="left">反斜杠</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="left">组开始</td>
+<td align="left">{</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="left">组结束</td>
+<td align="left">}</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="left">数学环境</td>
+<td align="left">$</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="left">表格对齐</td>
+<td align="left">&amp;</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="left">换行</td>
+<td align="left"><return></return></td>
+</tr>
+<tr class="odd">
+<td align="left">6</td>
+<td align="left">位置参数</td>
+<td align="left"><code>#</code></td>
+</tr>
+<tr class="even">
+<td align="left">7</td>
+<td align="left">上标</td>
+<td align="left"><code>^</code></td>
+</tr>
+<tr class="odd">
+<td align="left">8</td>
+<td align="left">下标</td>
+<td align="left"><code>_</code></td>
+</tr>
+<tr class="even">
+<td align="left">9</td>
+<td align="left">可忽略字符</td>
+<td align="left"><null></null></td>
+</tr>
+<tr class="odd">
+<td align="left">10</td>
+<td align="left">空格</td>
+<td align="left"><space></space></td>
+</tr>
+<tr class="even">
+<td align="left">11</td>
+<td align="left">字母</td>
+<td align="left">[a-zA-Z]</td>
+</tr>
+<tr class="odd">
+<td align="left">12</td>
+<td align="left">其它字符</td>
+<td align="left">无</td>
+</tr>
+<tr class="even">
+<td align="left">13</td>
+<td align="left">活动符</td>
+<td align="left">~</td>
+</tr>
+<tr class="odd">
+<td align="left">14</td>
+<td align="left">注释符</td>
+<td align="left">%</td>
+</tr>
+<tr class="even">
+<td align="left">15</td>
+<td align="left">无用符</td>
+<td align="left"><delete></delete></td>
+</tr>
+</tbody>
+</table>
+<p>其中每类都可以包含若干个字符。当使用plainTeX格式的时候，$,%,&amp;,#,_要转义使用。此外，一些词在转义时有其它的含义，比如<code>\~</code>得到的是波浪重音。</p>
+<p>在TeX工作的时候源文件中所有的部分被分成一个一个的记号，它们或者是指定类代码中的单个字符，或者是一个控制序列。也就是在读内容的时候，TeX先给字符分类，根据分类的情况作进一步的处理:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">\hskip 36 pt</div><div class="line">\\[1]skip3[12]6[12] [10]p[11]t[11]</div></pre></td></tr></table></figure>
+<p>TeX有一个叫INITEX的版本。这个版本里面气有的字母都被认为是12,除了字母，回车，空格，delete,注释与反斜杠符号之外。</p>
+<p>一个明显的特点是，编组符号是不能使用的。</p>
+<p>使用<code>\catcode</code>SYMBOL=N`来将字符更改到指定的类代码当中。</p>
+<p>catcode的作用域是局部的。使用<code>\string</code>命令可以将控制字符分成单个的对象。使用<code>\csnameXXXX\endcsname</code>可以将一个字符记号列表变成一个单独的控制系列。只要它不与TeX的原始控制序列相冲突。这个时候，控制系列的名子完全来自于后面的字符，比如 <code>\csname TeX\endcsname</code> 我们不能使用<code>\csname\TeX\endcsname</code>这样的格式，因为<code>\TeX</code>在被调用的时候会被宏展开成其它的东西。</p>
+<p><code>\string</code>宏可以看成是读取后面的非空白字符并按照原样显示，它可以用在我们的<code>\message{\stringXXX}</code>命令当中，以便正确显示出向用户提示的信息。</p>
+<p>注: 当<code>\csname</code>用来第一次定义控制系列的时候，那个控制系列在重新被定义之前等价于<code>\relax</code>命令产生的效果。</p>
+<p>使用<code>\let</code>命令可以给一个记号赋值，使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">\ifundefined&#123;TOKEN&#125;&lt;if_true&gt;\else&lt;if_false&gt;\fi</div></pre></td></tr></table></figure>
+<p>可以完成一个复杂的判断逻辑。比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">\ifundefined&#123;TeX&#125;&lt;true_text&gt;\else&lt;false_text&gt;\fi</div></pre></td></tr></table></figure>
+<p>表示在<code>\TeX</code>宏未被定义或者为<code>\relax</code>的时候被展开成<true-text>，否则被展开成<false-text>.</false-text></true-text></p>
+<p><code>\let</code>的语法是<code>\let\TOKEN=\VALUE</code></p>
+<p>除了<code>\string</code>用于得到记号外，还可以使用<code>\numberNUM</code>用于得到一个小数，使用<code>\romannumeralNUMBER</code>得到一个用小写罗马数字表示的数(如<code>\romannumeral24</code>得到xxiv)。并且可以使用<code>\numberREG</code>来得到一个内部寄存器里面的数字。</p>
+<p><code>\uppercase{token_list}</code>,<code>\lowercase{token_list}</code>用于完成记号的转换。</p>
+<p>ex7.8 想一想，<code>\uppercase{a\lowercase{bC}}</code>得到的记号列表是什么</p>
+<p>这可能是TeX语法最为特殊的一点了吧。它的展开不是从内到外逐渐展开的，而是从外到内按照记号逐个分析出来的。发生的过程是，首先<code>\uppercase</code>宏看到了它的一系列参数。这些参数被识别成记号的列表，a, <code>\lowercase</code>, <code>{</code>, b, C, <code>}</code>，各自都是完整的单位。这个时候，每一个列表被分类。被uppercase宏作用，就变成了<code>A\lowercase{BC}</code>。然后继续向前读入字符并排版，转成Abc.</p>
+<p>这个过程可能很特殊吧。仔细想一想，它跟m4宏还是很相像的，不过m4宏把它们都当成字符，而TeX还分类处理这些记号。</p>
+<p>ex7.9 TeX有一个内部整数参数叫做year,它等于任务开始时当前年的数字，看看怎样用<code>\year</code>以及<code>\romannumeral</code>和<code>\uppercase</code>对所有运行在2003的任务给出后面的版权表示。</p>
+<p>根据前面的介绍<code>\uppercase{\romannumeral\year}</code>显然是不行的，因为uppercase在展开的时候，首先得到它的参数，而它的参数还没有被展开，为了解决这个问题，必须使用<code>\expandafter</code>宏，让里面的宏先展开，让uppercase得到宏展开后的参数。</p>
+<p>正确的答案是 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">\copyright\ \uppercase\expandafter&#123;\romannumeral\year&#125;</div></pre></td></tr></table></figure></p>
+<p>TeX的语法的特殊性现在有一点了解了。但是还差很多基础的知识，等看到后面更多的控制系列之后再看它的语法结构吧。</p>
+<h2 id="字符输入">字符输入</h2>
+<p>很少有键盘能够提供256个字符，而且有的字符已经有其它的用处，所以我们使用下面的char命令得到任意的字符。格式是: <code>\char&lt;NUMBER&gt;</code>得到当前字体的相应字符。注意是当前字体中的字符。</p>
+<p>在TeX刚设计的时候，一个字体文件就最多只有256个字符。在TeX内部，字体的代码总是以ASCII格式被调用的。b的内部代码，这样就总是98.</p>
+<p>Knuth喜欢使用斜体表示八进制数，使用打字机字体表示十六进制数。个人的习惯不同吧。我觉得都使用正常字体就行了，Knuth的字体使用风格有些复杂。</p>
+<p>八进制数使用右单引号引导，而十六进制数使用<code>&quot;</code>引导。比如<code>\char'142</code>与<code>\char&quot;62</code>与<code>\char98</code>是等效的。</p>
+<p>定义char还有一个比较方便的方式，这时候不用使用<code>\def&lt;SEQ&gt;{\char&lt;NUM&gt;}</code>这样复杂的形式，而是直接使用<code>\chardef&lt;SEQ&gt;=&lt;NUM&gt;</code>。</p>
+<p>有些人的键盘上直接有<span class="math inline">\(\leq\)</span>，<span class="math inline">\(\geq\)</span>这些字符，它们的生活还真是比较方便啊。</p>
+<p>像回车等换行字符的ASCII可以使用<code>^^M</code>这样的形式来表示。<code>^^</code>后面实际上还可以跟两位十六进制数字，用于表示指字代码的ASCII字符。</p>
+<h3 id="tex系统读入的规则">TeX系统读入的规则</h3>
+<p>TeX的输入是一系列的“行”，当TeX从里面读入文本的时候，它就处于三个状态中的三歧的一个: 新行N,行中间M,跳过空格S.</p>
+<p>在每行的开头它处于状态N,但是大部分的时间它处在状态M,当读入一个控制词或者一个空格之后它进入状态S,这个时候再遇到空格就会被忽略。</p>
+<p>出现在行尾的任何空格都会被删除。当TeX在任意的状态读到一个第零类的字符的时候，它就会搜索这个控制序列的名子。如果行中没有其它的字符，那么定义这个序列的名子为空。如果接下来的一个字符不是属于第11类，那么它读入一个字符作为控制系列的名子。如果是属于第十一类，那么继续读，直到读到一个非第11类的字母为止。作为控制序列的一个记号。在读完记号后进入到处理第十类字符的状态S,如果读的记号为空，那么进入状态M当中。</p>
+<p>TeX在任意状态遇到第7类字符，并且接下来还是一个第7类字符，也就是遇到了<code>^^</code>，如果后面跟一个小于128的字符，那么<code>^^</code>被去掉，并且从c中加上或减去64.于是<code>^^A</code>就被解释成ASCII为1的字符。但是如果后面跟的是0123456789abcdef,那么读取两位字符，然后使用十六进制代码对应的符号替换<code>^^xx</code>.当替换完成后，TeX返回到原来的位置继续开始。</p>
+<p>比如，使用<code>\T</code><sup><sup>65X得到的结果与<code>\TeX</code>结果相同，因为</sup></sup>65代表的就是字母e.</p>
+<p>在上面的状态下，如果遇到的不是三字符或者四字符，采用另外的处理办法。在读入一个<code>^</code>后，下面的字符如果是1,2,3,4,6,8,11,12,13类中的一个字符，或者第七类的字符，但是不能理解成上面的三字符或者四字符，那么它给字符一个类代码并且进入状态M.</p>
+<p>如果遇到的是第5类(行尾字符)，那么它就放弃本行剩下的所有的内容但是如果在状态N的时候遇到了行尾字符，那么行尾字符就被转换到控制系列<code>\par</code>.如果处于状态M,那么行尾字符转换成第10类(空白)记号。如果处于状态S的时候遇到了行尾符，那么行尾的字符就被忽略。(同时转到状态N?)</p>
+<p>如果遇到第9类字符，那么直接忽跳过它，就好像没有它一样。</p>
+<p>遇到第10类字符的处理: N或S时，第10类字符被直接跳过，并且保持当前状态，处在状态M的时候，字符被转换成第10类的记号，并设此记号代码为32.然后进入状态S.空格记号当中，字符代码总是32.</p>
+<p>我们不妨看成这就是TeX程序的词法分析。在词法分析的时候它得到了记号的类型与记号的值。</p>
+<p>如果TeX遇到了注释符，它就不再读入当前行剩下的内容。</p>
+<p>遇到无用符(第15类)的时候，跳过此字符，打印出错误消息，并仍保持当前的状态不发生改变。</p>
+<p>如果当前行没有要读入的内容了，就进入下一行并且进入状态S.但是如果是<code>\input</code>文件结束，或者<code>\input</code>的文件给出了<code>\endinput</code>,那么TeX返回到<code>\input</code>文件读取结束后的状态，就好像是从读完input的内容一样。</p>
+<p>ex8.2 回答下面简短问题，看看你对TeX的读入规则的理解程度: a.第5类和第14类的不同在什么地方 b.第3类和第4类的不同在什么地方 c.第11类和第12类的不同在什么地方 d.活动符后面的空格要忽略掉么 e.当一行以注释符%结尾的时候，在下一行开头的空格被忽略了么? f.一个可被忽略的字符能出现在控制系列的名子中间吗?</p>
+<p>答:a.第5类是换行，第14类是注释，两者都结束了当前行，但是换行会被转成第10类(空白符)的代码或者一个<code>\par</code>控制系列。但是第14类的字符永远不产生任何记号。</p>
+<p>b.第3类是数学类，第四类是表格类。它们产生不同类型的代记号。在后续的处理当中它们是完全不同的。</p>
+<p>c.类似于b.第11类是字母，第12类是其它符号。但是只有第11类的字母有组成较长的控制系列的能力。</p>
+<p>d.不能被忽略掉。活动符是第十三类，读完它后处于状态M,后面的空格不能被忽略。</p>
+<p>e.是的，当注释符里面的内容结束后，TeX进入状态N,任何位于行首的空白字符都会被删除的。</p>
+<p>f.不可以。控制系列是连续读取在第11类中的单词，遇到其它类就是结束对控制系列名字的读取。从而起到了分割的作用。</p>
+<p>ex8.3 再次看看有关<code>\vship</code>的错误信息，当TeX报告说<code>\vship</code>是一个未定义的控制序列的时候，它输出了两行上下文，表明它正在读入文件story的第二行的中间部分，在遇见错误的时候，TeX处于什么状态，它下一个要读入什么字符。</p>
+<p>我们可以按照正确的路向分析。它读入一个控制系列后处于状态S,会忽略掉后面的空白的字符(第10类)，因此它下一个要读取的是非空白字符。</p>
+<p>ex8.4 给定plainTeX格式的类代码后，从输入行<code>$x^2$~  \TeX ^^62^^6</code>得到什么样的记号?</p>
+<p>这得好好分析。首先数学模式正常排版，读完$后进入M状态，活动符是有效的，所以波浪线后面的空格不能被忽略。接下来读<code>\TeX</code>,在读完<code>\TeX</code>之后，进入状态S,因此后面的空格都被忽略，接下来读<code>^^62</code>,得到字母b,再接下来读记号<code>^^6</code>,得到字母v.</p>
+<p>我们完全可以把这种分析过程理解成词法分析，分析之后形成了记号的类型与值的线性序列。</p>
+<p>ex8.5 想想正好有一个三行的输入文件，第一行是Hi!,其它两行都是空的，当TeX读入这个文件的时候，按照plainTeX的类代码将会得到什么记号?</p>
+<p>这个时候处理的方式是，处理成<code>[11]H[11]i[12]![10] [0]\[S]par</code>.空格是第一行的回车引起的。</p>
+<p>据Knuth自己的表述，类代码写成数值格式主要是为了防止人们过度使用<code>\catcode</code>.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/TeX/" rel="tag"># TeX</a>
+          
+            <a href="/tags/LaTeX/" rel="tag"># LaTeX</a>
+          
+            <a href="/tags/grouping/" rel="tag"># grouping</a>
+          
+            <a href="/tags/编组/" rel="tag"># 编组</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/05/07/130507-PythonPlot/" rel="next" title="使用python下面的enthought和matplotlib绘图">
+                <i class="fa fa-chevron-left"></i> 使用python下面的enthought和matplotlib绘图
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/06/20/130620-TeX-Token/" rel="prev" title="LaTeX的编程原理">
+                LaTeX的编程原理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2013/06/20/130620-LaTeX-grouping/"
+           data-title="TeX与LaTeX的编组" data-url="http://yoursite.com/2013/06/20/130620-LaTeX-grouping/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Istyasna" />
+          <p class="site-author-name" itemprop="name">Istyasna</p>
+          <p class="site-description motion-element" itemprop="description">GO FORTH now and create masterpieces of the publishing art!</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">233</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/irhawks" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://coding.aliyun.com/u/irhawks" target="_blank" title="Aliyun">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Aliyun
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="./" title="Title" target="_blank">Title</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hainu.edu.cn" title="Hainan University" target="_blank">Hainan University</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#编组"><span class="nav-number">1.</span> <span class="nav-text">编组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误信息与处理"><span class="nav-number">2.</span> <span class="nav-text">错误信息与处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tex的工作原理"><span class="nav-number">3.</span> <span class="nav-text">TeX的工作原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符输入"><span class="nav-number">4.</span> <span class="nav-text">字符输入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tex系统读入的规则"><span class="nav-number">4.1.</span> <span class="nav-text">TeX系统读入的规则</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Istyasna</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"irhawks"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

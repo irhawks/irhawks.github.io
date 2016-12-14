@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Hexo</title>
-  
+  <title>80x24</title>
+  <subtitle>Keep Stupid, Keep Hungry</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-12-14T07:06:16.675Z</updated>
+  <updated>2016-12-14T08:36:23.455Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
-    <name>John Doe</name>
+    <name>Istyasna</name>
     
   </author>
   
@@ -17,10 +17,10 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://yoursite.com/2016/12/14/hello-world2/"/>
-    <id>http://yoursite.com/2016/12/14/hello-world2/</id>
-    <published>2016-12-14T07:06:16.711Z</published>
-    <updated>2016-12-14T07:06:16.675Z</updated>
+    <link href="http://yoursite.com/2016/12/14/hello-world/"/>
+    <id>http://yoursite.com/2016/12/14/hello-world/</id>
+    <published>2016-12-14T08:36:23.659Z</published>
+    <updated>2016-12-14T08:36:23.455Z</updated>
     
     <summary type="html">
     
@@ -33,10 +33,10 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://yoursite.com/2016/12/14/hello-world/"/>
-    <id>http://yoursite.com/2016/12/14/hello-world/</id>
-    <published>2016-12-14T06:35:06.640Z</published>
-    <updated>2016-12-14T06:35:06.640Z</updated>
+    <link href="http://yoursite.com/2016/12/14/hello-world2/"/>
+    <id>http://yoursite.com/2016/12/14/hello-world2/</id>
+    <published>2016-12-14T08:36:23.331Z</published>
+    <updated>2016-12-14T08:36:23.127Z</updated>
     
     <summary type="html">
     
@@ -44,6 +44,469 @@
     
     </summary>
     
+    
+  </entry>
+  
+  <entry>
+    <title>Solr搜索介绍（继续）</title>
+    <link href="http://yoursite.com/2016/06/03/160603-Solr/"/>
+    <id>http://yoursite.com/2016/06/03/160603-Solr/</id>
+    <published>2016-06-02T16:00:00.000Z</published>
+    <updated>2016-12-14T08:36:22.807Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;solr继续&quot;&gt;Solr继续&lt;/h2&gt;
+&lt;p&gt;Solr 5.0之后就不再以&lt;code&gt;.war&lt;/code&gt;包的格式发布了。而是以一个单独的linux进程发布（daemon）。在其目录下面可以找到&lt;code&gt;init.d&lt;/code&gt;目录中的solr，通过该脚本可
+    
+    </summary>
+    
+    
+      <category term="solr" scheme="http://yoursite.com/tags/solr/"/>
+    
+      <category term="索引" scheme="http://yoursite.com/tags/%E7%B4%A2%E5%BC%95/"/>
+    
+      <category term="爬虫" scheme="http://yoursite.com/tags/%E7%88%AC%E8%99%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Apache Nutch的介绍与基本使用</title>
+    <link href="http://yoursite.com/2016/06/01/160601-Nutch/"/>
+    <id>http://yoursite.com/2016/06/01/160601-Nutch/</id>
+    <published>2016-05-31T16:00:00.000Z</published>
+    <updated>2016-12-14T08:36:22.227Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Nutch本是一个单独的程序，通过程序可以进行全文的挖掘并定制有关的服务。挖掘出来之后还可以使用Solr进行索引。这样就产生了各个页面。但是另外一方面，Java的程序包又都可以通过包的形式调用，因此在Scala当中也可以使用。但是要在Scala当中使用的话，显然是需要读Nu
+    
+    </summary>
+    
+    
+      <category term="solr" scheme="http://yoursite.com/tags/solr/"/>
+    
+      <category term="nutch" scheme="http://yoursite.com/tags/nutch/"/>
+    
+      <category term="hbase" scheme="http://yoursite.com/tags/hbase/"/>
+    
+      <category term="Elastic Search" scheme="http://yoursite.com/tags/Elastic-Search/"/>
+    
+      <category term="Scala" scheme="http://yoursite.com/tags/Scala/"/>
+    
+      <category term="API" scheme="http://yoursite.com/tags/API/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>快速了解Modelica与OpenModelica建模2-ModelicaML与方程</title>
+    <link href="http://yoursite.com/2016/03/13/160313-Modelica%E5%BB%BA%E6%A8%A1-ModelicaML/"/>
+    <id>http://yoursite.com/2016/03/13/160313-Modelica建模-ModelicaML/</id>
+    <published>2016-03-12T16:00:00.000Z</published>
+    <updated>2016-12-14T08:36:21.367Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;modelicaml&quot;&gt;ModelicaML&lt;/h2&gt;
+&lt;p&gt;ModelicaML同样地用于系统建模。不过不是语言的方式，而是首先以UML类似的模型表示出相应关系，然后这种模型被转换成Modelica的代码。转换代码后就可以执行，模拟出结果。ModelicaML是
+    
+    </summary>
+    
+    
+      <category term="建模" scheme="http://yoursite.com/tags/%E5%BB%BA%E6%A8%A1/"/>
+    
+      <category term="Modelica" scheme="http://yoursite.com/tags/Modelica/"/>
+    
+      <category term="OpenModelica" scheme="http://yoursite.com/tags/OpenModelica/"/>
+    
+      <category term="仿真" scheme="http://yoursite.com/tags/%E4%BB%BF%E7%9C%9F/"/>
+    
+      <category term="ModelicaML" scheme="http://yoursite.com/tags/ModelicaML/"/>
+    
+      <category term="DAE" scheme="http://yoursite.com/tags/DAE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>快速了解Modelica与OpenModelica建模1-基本知识</title>
+    <link href="http://yoursite.com/2016/03/11/160311-Modelica%E5%BB%BA%E6%A8%A1%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    <id>http://yoursite.com/2016/03/11/160311-Modelica建模基础知识/</id>
+    <published>2016-03-10T16:00:00.000Z</published>
+    <updated>2016-12-14T08:36:21.083Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Modelica里面倒是有不少的面向对象的建模的工具，也支持PetriNet的描述。而且最近也有相关的论文的发表&lt;span class=&quot;citation&quot;&gt;(Proß et al. 2012)&lt;/span&gt;。OpenModelica上面的PNlib工具包倒好像是不错的。&lt;
+    
+    </summary>
+    
+    
+      <category term="Modelica" scheme="http://yoursite.com/tags/Modelica/"/>
+    
+      <category term="OpenModelica" scheme="http://yoursite.com/tags/OpenModelica/"/>
+    
+      <category term="仿真" scheme="http://yoursite.com/tags/%E4%BB%BF%E7%9C%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>常见的数据结构的抽象</title>
+    <link href="http://yoursite.com/2016/01/15/160115-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%8A%BD%E8%B1%A1/"/>
+    <id>http://yoursite.com/2016/01/15/160115-数据类型抽象/</id>
+    <published>2016-01-14T16:00:00.000Z</published>
+    <updated>2016-12-14T08:52:21.595Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;为了编程的顺利进行，自然有一种控制复杂性的措施。而且复杂性的控制从编程语言一开始的时候就有了，成为所谓的内部模式：内建的数据结构，甚至是语言机制里面的内容。现在我们看一些常见的数据类型。&lt;/p&gt;
+&lt;h3 id=&quot;数组&quot;&gt;数组&lt;/h3&gt;
+&lt;p&gt;按照Wiki的要求，应该按照数据
+    
+    </summary>
+    
+      <category term="计算机科学" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/"/>
+    
+    
+      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="数组" scheme="http://yoursite.com/tags/%E6%95%B0%E7%BB%84/"/>
+    
+      <category term="规约" scheme="http://yoursite.com/tags/%E8%A7%84%E7%BA%A6/"/>
+    
+      <category term="抽象数据类型" scheme="http://yoursite.com/tags/%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
+    
+      <category term="公理化" scheme="http://yoursite.com/tags/%E5%85%AC%E7%90%86%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>信息几何简介</title>
+    <link href="http://yoursite.com/2016/01/06/160106-%E4%BF%A1%E6%81%AF%E5%87%A0%E4%BD%95/"/>
+    <id>http://yoursite.com/2016/01/06/160106-信息几何/</id>
+    <published>2016-01-05T16:00:00.000Z</published>
+    <updated>2016-12-14T08:44:06.447Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;认识信息几何&quot;&gt;认识信息几何&lt;/h2&gt;
+&lt;p&gt;信息几何的方法其实是将统计理论中的参数问题变成额外的一个空间，在这个空间上建立统计函数之间的距离，相当于仍然是使用测度的理论研究问题。这种方法自然对于参数的生成有重要的启示。启示我们为什么要选择这样的参数，这什么参数有
+    
+    </summary>
+    
+    
+      <category term="信息几何" scheme="http://yoursite.com/tags/%E4%BF%A1%E6%81%AF%E5%87%A0%E4%BD%95/"/>
+    
+      <category term="统计" scheme="http://yoursite.com/tags/%E7%BB%9F%E8%AE%A1/"/>
+    
+      <category term="微分流形" scheme="http://yoursite.com/tags/%E5%BE%AE%E5%88%86%E6%B5%81%E5%BD%A2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World from the Hexo</title>
+    <link href="http://yoursite.com/2016/01/01/160101-Hexo%E8%AF%B4%E6%98%8E/"/>
+    <id>http://yoursite.com/2016/01/01/160101-Hexo说明/</id>
+    <published>2015-12-31T16:00:00.000Z</published>
+    <updated>2016-12-14T08:36:20.147Z</updated>
+    
+    <summary type="html">
+    
+      A short description of the blog
+    
+    </summary>
+    
+    
+      <category term="hello" scheme="http://yoursite.com/tags/hello/"/>
+    
+      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+    
+      <category term="blog" scheme="http://yoursite.com/tags/blog/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>守护进程的编写思路（C与Python）</title>
+    <link href="http://yoursite.com/2015/12/09/151209-Daemon-Programming/"/>
+    <id>http://yoursite.com/2015/12/09/151209-Daemon-Programming/</id>
+    <published>2015-12-08T16:00:00.000Z</published>
+    <updated>2016-12-14T08:36:19.855Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;参考&lt;a href=&quot;http://www.netzmafia.de/skripten/unix/linux-daemon-howto.html&quot; class=&quot;uri&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.netzmafia
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
+    
+      <category term="daemon" scheme="http://yoursite.com/tags/daemon/"/>
+    
+      <category term="c" scheme="http://yoursite.com/tags/c/"/>
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="server" scheme="http://yoursite.com/tags/server/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Scheme语言概要</title>
+    <link href="http://yoursite.com/2015/08/31/150831-Scheme%E8%AF%AD%E8%A8%80%E6%A6%82%E8%A6%81/"/>
+    <id>http://yoursite.com/2015/08/31/150831-Scheme语言概要/</id>
+    <published>2015-08-30T16:00:00.000Z</published>
+    <updated>2016-12-14T08:36:19.387Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在人工智能语言中我们应该接触过Scheme。根据介绍，Scheme和CommonLisp是两种主要的Lisp方言之一，也就是说，在讲Lisp语言的时候，我们也包括了讲Lisp或者CommonLisp语言。Scheme语言的地位是由一系列的Lambda论文决定的。见&lt;a hr
+    
+    </summary>
+    
+    
+      <category term="scheme" scheme="http://yoursite.com/tags/scheme/"/>
+    
+      <category term="语法" scheme="http://yoursite.com/tags/%E8%AF%AD%E6%B3%95/"/>
+    
+      <category term="guile" scheme="http://yoursite.com/tags/guile/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Scala编程概要（四）：控制抽象, 集合, 模式匹配, 编译器</title>
+    <link href="http://yoursite.com/2015/07/02/150702-Scala%E7%BC%96%E7%A8%8B%E7%90%86%E8%AE%BA%E8%A7%86%E8%A7%92/"/>
+    <id>http://yoursite.com/2015/07/02/150702-Scala编程理论视角/</id>
+    <published>2015-07-01T16:00:00.000Z</published>
+    <updated>2016-12-14T08:36:18.819Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;scala的控制抽象&quot;&gt;Scala的控制抽象&lt;/h3&gt;
+&lt;p&gt;Haskell有自己的抽制抽象。使用的是单体。但是在Scala中，没有必要做得那么纯函数式。所以为了调用控制流，Scala使用了&lt;code&gt;() =&amp;gt; Unit&lt;/code&gt;类型。比如说，我们要在
+    
+    </summary>
+    
+    
+      <category term="scala" scheme="http://yoursite.com/tags/scala/"/>
+    
+      <category term="控制抽象" scheme="http://yoursite.com/tags/%E6%8E%A7%E5%88%B6%E6%8A%BD%E8%B1%A1/"/>
+    
+      <category term="集合" scheme="http://yoursite.com/tags/%E9%9B%86%E5%90%88/"/>
+    
+      <category term="模式匹配" scheme="http://yoursite.com/tags/%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D/"/>
+    
+      <category term="编译器" scheme="http://yoursite.com/tags/%E7%BC%96%E8%AF%91%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Scala编程概要（三）：进程控制与shell，函数式特性</title>
+    <link href="http://yoursite.com/2015/07/02/150702-%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/"/>
+    <id>http://yoursite.com/2015/07/02/150702-进程控制/</id>
+    <published>2015-07-01T16:00:00.000Z</published>
+    <updated>2016-12-14T08:36:19.099Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;应该说，这种特性是可以让人大吼大叫的。简单的示例如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight scala&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;l
+    
+    </summary>
+    
+    
+      <category term="进程" scheme="http://yoursite.com/tags/%E8%BF%9B%E7%A8%8B/"/>
+    
+      <category term="正则表达式" scheme="http://yoursite.com/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+      <category term="scala" scheme="http://yoursite.com/tags/scala/"/>
+    
+      <category term="shell" scheme="http://yoursite.com/tags/shell/"/>
+    
+      <category term="特质" scheme="http://yoursite.com/tags/%E7%89%B9%E8%B4%A8/"/>
+    
+      <category term="运算符" scheme="http://yoursite.com/tags/%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
+    
+      <category term="高阶函数" scheme="http://yoursite.com/tags/%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/"/>
+    
+      <category term="柯里化" scheme="http://yoursite.com/tags/%E6%9F%AF%E9%87%8C%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Scala编程概要（二）：基本结构，常用模式</title>
+    <link href="http://yoursite.com/2015/07/01/150701-Scala%E5%9F%BA%E6%9C%AC%E8%AF%AD%E5%8F%A5/"/>
+    <id>http://yoursite.com/2015/07/01/150701-Scala基本语句/</id>
+    <published>2015-06-30T16:00:00.000Z</published>
+    <updated>2016-12-14T08:36:18.251Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;设计模式在软件编程的各个方面都有应用。MVC与分布式一般算成是架构模式，而写文档注释也有一定的模式可以遵守。另外，我们也可以设计出一些使用的模式，以便在开发软件之后，可以让用户按照指定的模式使用软件。&lt;/p&gt;
+&lt;h2 id=&quot;scala的for语句&quot;&gt;Scala的for语句
+    
+    </summary>
+    
+    
+      <category term="scala" scheme="http://yoursite.com/tags/scala/"/>
+    
+      <category term="控制语句" scheme="http://yoursite.com/tags/%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/"/>
+    
+      <category term="设计模式" scheme="http://yoursite.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="映射" scheme="http://yoursite.com/tags/%E6%98%A0%E5%B0%84/"/>
+    
+      <category term="类" scheme="http://yoursite.com/tags/%E7%B1%BB/"/>
+    
+      <category term="面向对象" scheme="http://yoursite.com/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
+    
+      <category term="注解" scheme="http://yoursite.com/tags/%E6%B3%A8%E8%A7%A3/"/>
+    
+      <category term="序列化" scheme="http://yoursite.com/tags/%E5%BA%8F%E5%88%97%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Scala编程概要（一）：文档，注释，面向对象</title>
+    <link href="http://yoursite.com/2015/07/01/150701-Scala%E6%9C%89%E5%85%B3%E6%95%99%E7%A8%8B/"/>
+    <id>http://yoursite.com/2015/07/01/150701-Scala有关教程/</id>
+    <published>2015-06-30T16:00:00.000Z</published>
+    <updated>2016-12-14T08:36:18.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;虽然每次都是从头开始看Java与Scala的初级的教程，但是每次看的时候重点不一样，对于语言的理解也不一样。这一次的时候，强调的是，我们如何从初学者成为能够熟练运用一门语言的开发者？为了做到这一点，我们需要付出哪些努力？&lt;/p&gt;
+&lt;p&gt;现在的看法是这样的。第一，我们应该按照
+    
+    </summary>
+    
+    
+      <category term="scala" scheme="http://yoursite.com/tags/scala/"/>
+    
+      <category term="面向对象" scheme="http://yoursite.com/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
+    
+      <category term="文档" scheme="http://yoursite.com/tags/%E6%96%87%E6%A1%A3/"/>
+    
+      <category term="注释" scheme="http://yoursite.com/tags/%E6%B3%A8%E9%87%8A/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用自举理解人工智能与学术研究</title>
+    <link href="http://yoursite.com/2015/06/29/150629-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%B8%8E%E8%87%AA%E4%B8%BE/"/>
+    <id>http://yoursite.com/2015/06/29/150629-人工智能与自举/</id>
+    <published>2015-06-28T16:00:00.000Z</published>
+    <updated>2016-12-14T08:36:17.983Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近人工智能在公众世界中变得很热。在各种技术应用铺天盖地的时候，肯定也有不少人在思考人工智能与人的思维的关系。在这里，我们首先关注的可能是这个很自然的问题：人工智能，或者干脆说智能机器，机器人，会不会取代人类。这里的取代，并不是说能够取代人的平常的工作，而是机器具有自主学习
+    
+    </summary>
+    
+    
+      <category term="自举" scheme="http://yoursite.com/tags/%E8%87%AA%E4%B8%BE/"/>
+    
+      <category term="bootstrap" scheme="http://yoursite.com/tags/bootstrap/"/>
+    
+      <category term="人工智能" scheme="http://yoursite.com/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+    
+      <category term="学术" scheme="http://yoursite.com/tags/%E5%AD%A6%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>个人主页项目的设计与管理</title>
+    <link href="http://yoursite.com/2015/06/21/150621-%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5%E9%A1%B9%E7%9B%AE/"/>
+    <id>http://yoursite.com/2015/06/21/150621-个人主页项目/</id>
+    <published>2015-06-20T16:00:00.000Z</published>
+    <updated>2016-12-14T08:52:56.038Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;参考&lt;a href=&quot;http://web.engr.oregonstate.edu/~walkiner&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Eric Walkingshaw的主页&lt;/a&gt;、&lt;a href=&quot;http://www.skybluet
+    
+    </summary>
+    
+    
+      <category term="个人主页" scheme="http://yoursite.com/tags/%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5/"/>
+    
+      <category term="博客" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+      <category term="git" scheme="http://yoursite.com/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Github主页修整记</title>
+    <link href="http://yoursite.com/2015/06/20/150620-%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5%E5%BC%80%E9%80%9A/"/>
+    <id>http://yoursite.com/2015/06/20/150620-个人主页开通/</id>
+    <published>2015-06-19T16:00:00.000Z</published>
+    <updated>2016-12-14T08:36:17.403Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;建主页有许多种选择。这些方案可以分成静态主页方案与动态主页方案两大类。动态主页的托管的方式可能复杂一些，需要维护的代价似乎比较高。此外，动态主页里面的内容在转成可打印的版本的时候质量也会缩水。最理想的情况自然是一边能够生成HTML文档，另一方面，不经重新修改，可以转成其它的
+    
+    </summary>
+    
+    
+      <category term="github" scheme="http://yoursite.com/tags/github/"/>
+    
+      <category term="主页" scheme="http://yoursite.com/tags/%E4%B8%BB%E9%A1%B5/"/>
+    
+      <category term="latex" scheme="http://yoursite.com/tags/latex/"/>
+    
+      <category term="pandoc" scheme="http://yoursite.com/tags/pandoc/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Agda语言介绍</title>
+    <link href="http://yoursite.com/2015/06/08/150608-Agda%E8%AF%AD%E8%A8%80%E4%BB%8B%E7%BB%8D/"/>
+    <id>http://yoursite.com/2015/06/08/150608-Agda语言介绍/</id>
+    <published>2015-06-07T16:00:00.000Z</published>
+    <updated>2016-12-14T08:36:17.111Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Agda语言是使用了依存类型的函数式编程语言。最初发表于2007年，是在Ulf Norell的博士论文里面。目前实践当中，函数式语言中使用依存类型还不多。但是依存类型在可以预见的未来内会继续发展。目前发展依存类型的函数式语言的动力在于形式证明。目前的版本是Agda2，基本上
+    
+    </summary>
+    
+    
+      <category term="函数式" scheme="http://yoursite.com/tags/%E5%87%BD%E6%95%B0%E5%BC%8F/"/>
+    
+      <category term="agda" scheme="http://yoursite.com/tags/agda/"/>
+    
+      <category term="haskell" scheme="http://yoursite.com/tags/haskell/"/>
+    
+      <category term="直觉类型论" scheme="http://yoursite.com/tags/%E7%9B%B4%E8%A7%89%E7%B1%BB%E5%9E%8B%E8%AE%BA/"/>
+    
+      <category term="依存类型" scheme="http://yoursite.com/tags/%E4%BE%9D%E5%AD%98%E7%B1%BB%E5%9E%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Elixir：建立在Erlang虚拟机上的函数式语言</title>
+    <link href="http://yoursite.com/2015/06/06/150606-Elixir%E5%87%BD%E6%95%B0%E5%BC%8F%E8%AF%AD%E8%A8%80/"/>
+    <id>http://yoursite.com/2015/06/06/150606-Elixir函数式语言/</id>
+    <published>2015-06-05T16:00:00.000Z</published>
+    <updated>2016-12-14T08:36:16.499Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Elixir是建立头Elrang虚拟机上的函数式、并发的、通用的编程语言。Elixir是一个BEAM（Erlang虚拟机的名称）上面的一个比较新的编程语言。Elixir的思想是所有的事物都看成是表达式。现代编程语言通常都具有开些诸如泛型编程、函数式编程、面向对象编程，对并发
+    
+    </summary>
+    
+    
+      <category term="elixir" scheme="http://yoursite.com/tags/elixir/"/>
+    
+      <category term="erlang" scheme="http://yoursite.com/tags/erlang/"/>
+    
+      <category term="函数式" scheme="http://yoursite.com/tags/%E5%87%BD%E6%95%B0%E5%BC%8F/"/>
+    
+      <category term="并发" scheme="http://yoursite.com/tags/%E5%B9%B6%E5%8F%91/"/>
     
   </entry>
   

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="./"/>
-  <updated>2016-12-15T12:01:15.558Z</updated>
+  <updated>2016-12-15T12:33:21.163Z</updated>
   <id>./</id>
   
   <author>
@@ -20,12 +20,17 @@
     <link href=".//blog-pandoc-crossref/"/>
     <id>.//blog-pandoc-crossref/</id>
     <published>2016-12-15T10:36:04.000Z</published>
-    <updated>2016-12-15T12:01:15.558Z</updated>
+    <updated>2016-12-15T12:33:21.163Z</updated>
     
     <summary type="html">
     
       &lt;h2 id=&quot;sec:pandoc-crossref&quot;&gt;pandoc-crossref filter&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;http://hackage.haskell.org/package/pandoc-crossref&quot; id=&quot;link:crossref&quot; 
+&lt;p&gt;&lt;a href=&quot;http://hackage.haskell.org/package/pandoc-crossref&quot; id=&quot;link:crossref&quot;&gt;Pandoc crossref&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Homepage is sec. 1.1.&lt;/p&gt;
+&lt;h3 id=&quot;build-status&quot;&gt;Build status&lt;/h3&gt;
+&lt;p&gt;pandoc-crossref is a pandoc filter for numbering figures, equations, tables and cross-references to them.&lt;/p&gt;
+&lt;p&gt;Input file (like demo.md) can be converted into html, latex, pdf, md or other formats.&lt;/p&gt;
+&lt;p&gt;Optionally, you can use cleveref for latex/pdf output, e.g. cleveref pdf, cleveref latex, and listings package, e.g. listings pdf, listings latex&lt;/p&gt;
     
     </summary>
     

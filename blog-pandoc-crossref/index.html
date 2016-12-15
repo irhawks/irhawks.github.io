@@ -123,9 +123,10 @@ Homepage is sec. 1.1.
 Build status
 pandoc-crossref is a pandoc filter for numbering figures, equations, tables and cross-references to them.
 Input file (like dem">
-<meta property="og:image" content="./image1.png">
-<meta property="og:image" content="./image2.png">
-<meta property="og:updated_time" content="2016-12-15T12:01:15.558Z">
+<meta property="og:image" content="./uploads/images/pic01.jpg">
+<meta property="og:image" content="./uploads/images/pic02.jpg">
+<meta property="og:image" content="./uploads/images/pic03.jpg">
+<meta property="og:updated_time" content="2016-12-15T12:33:21.163Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pandoc's test for pandoc-crossref">
 <meta name="twitter:description" content="pandoc-crossref filter
@@ -134,7 +135,7 @@ Homepage is sec. 1.1.
 Build status
 pandoc-crossref is a pandoc filter for numbering figures, equations, tables and cross-references to them.
 Input file (like dem">
-<meta name="twitter:image" content="./image1.png">
+<meta name="twitter:image" content="./uploads/images/pic01.jpg">
 
 
 
@@ -168,8 +169,10 @@ Input file (like dem">
 
 
 
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+<!-- add highlight.js to render pandoc code blocks -->
+<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>  
+<script>hljs.initHighlightingOnLoad();</script>  
 
   <title> Pandoc's test for pandoc-crossref | 80x24 </title>
 </head>
@@ -402,7 +405,7 @@ Input file (like dem">
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-15T20:01:15+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2016-12-15T20:33:21+08:00">
                 2016-12-15
               </time>
             
@@ -477,12 +480,13 @@ Input file (like dem">
 <p>pandoc-crossref is a pandoc filter for numbering figures, equations, tables and cross-references to them.</p>
 <p>Input file (like demo.md) can be converted into html, latex, pdf, md or other formats.</p>
 <p>Optionally, you can use cleveref for latex/pdf output, e.g. cleveref pdf, cleveref latex, and listings package, e.g. listings pdf, listings latex</p>
+<a id="more"></a>
 <h3 id="pandoc-citeproc-and-pandoc-crossref">pandoc-citeproc and pandoc-crossref</h3>
 <p>Since pandoc-crossref uses the same citation syntax as pandoc-citeproc, you have to run former before latter. For example:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">pandoc</span> -F pandoc-crossref -F pandoc-citeproc file.md -o file.html</code></pre></div>
+<pre class="shell"><code>pandoc -F pandoc-crossref -F pandoc-citeproc file.md -o file.html</code></pre>
 <h3 id="image-labels">Image labels</h3>
 <div class="figure">
-<embed src="file.ext" id="fig:label">
+<img src="/uploads/images/pic01.jpg" alt="Figure 1: Caption" id="fig:label" style="width:80.0%">
 <p class="caption">Figure 1: Caption</p>
 </div>
 <p>See Figure~fig. 1.</p>
@@ -490,19 +494,19 @@ Input file (like dem">
 <p>It’s possible to group figures as subfigures. Basic syntax is as follows:</p>
 <div id="fig:figureRef" class="subfigures">
 <div class="figure">
-<img src="image1.png" alt="a" id="fig:figureRefA">
+<img src="/uploads/images/pic02.jpg" alt="a" id="fig:figureRefA" style="width:40.0%">
 <p class="caption">a</p>
 </div>
 <div class="figure">
-<img src="image2.png" alt="b" id="fig:figureRefB">
+<img src="/uploads/images/pic03.jpg" alt="b" id="fig:figureRefB" style="width:40.0%">
 <p class="caption">b</p>
 </div>
 <p>Figure 2: Figure 1: Caption of figure. a — subfigure 1 caption, b — subfigure 2 caption. a — subfigure 1 caption, b — subfigure 2 caption</p>
 </div>
 <pre><code>&lt;div id=&quot;fig:figureRef&quot;&gt;
-![subfigure 1 caption](image1.png){#fig:figureRefA}
+![subfigure 1 caption](image1.png){#fig:figureRefA width=40%}
 
-![subfigure 2 caption](image2.png){#fig:figureRefB}
+![subfigure 2 caption](image2.png){#fig:figureRefB width=40%}
 
 Caption of figure
 &lt;/div&gt;</code></pre>
@@ -539,7 +543,7 @@ Caption of figure
 </div>
 <p>To label a table, append <code>{ #tbl:label}</code> at the end of table caption (with label being something unique to reference this table by). Caption and label must be separated by at least one space. See Table~tbl. 1.</p>
 <h2 id="code-block-labels">Code Block labels</h2>
-<p>There are a couple options to add code block labels. Those work only if code block id starts with lst:, e.g. <code>{ #lst:label}</code>. lst. <strong>¿lst:label?</strong>.</p>
+<p>There are a couple options to add code block labels. Those work only if code block id starts with lst:, e.g. <code>{ #lst:code}</code>.</p>
 <p>caption attribute will be treated as code block caption. If code block has both id and caption attributes, it will be treated as numbered code block.</p>
 <div id="lst:code" class="listing haskell">
 <p>Listing 1: Listing caption</p>

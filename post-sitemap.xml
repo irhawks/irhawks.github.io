@@ -7,8 +7,24 @@
     </url>
 
     <url>
+        <loc>./library-lapack/</loc>
+        <lastmod>2016-12-15T12:56:17.998Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>./LaTeX-grouping/</loc>
+        <lastmod>2016-12-15T12:55:45.794Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>./blog-pandoc-crossref/</loc>
-        <lastmod>2016-12-15T12:01:15.558Z</lastmod>
+        <lastmod>2016-12-15T12:33:21.163Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -105,14 +121,6 @@
     <url>
         <loc>./Linux-Daemon/</loc>
         <lastmod>2016-12-14T11:25:19.209Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>./library-lapack/</loc>
-        <lastmod>2016-12-14T11:24:45.518Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -465,14 +473,6 @@
     <url>
         <loc>./MathGL/</loc>
         <lastmod>2016-12-14T08:36:13.567Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>./LaTeX-grouping/</loc>
-        <lastmod>2016-12-14T08:36:10.967Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

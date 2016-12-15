@@ -16,27 +16,6 @@
     </url>
 
     <url>
-        <loc>./tags/LaTeX/</loc>
-        <lastmod>2016-12-14T08:36:10.967Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>./tags/grouping/</loc>
-        <lastmod>2016-12-14T08:36:10.967Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>./tags/%E7%BC%96%E7%BB%84/</loc>
-        <lastmod>2016-12-14T08:36:10.967Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>./tags/MathGL/</loc>
         <lastmod>2016-12-14T08:36:13.567Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1031,27 +1010,6 @@
     </url>
 
     <url>
-        <loc>./tags/lapack/</loc>
-        <lastmod>2016-12-14T11:24:45.518Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>./tags/c/</loc>
-        <lastmod>2016-12-14T11:24:45.518Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>./tags/fortran/</loc>
-        <lastmod>2016-12-14T11:24:45.518Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>./tags/linux/</loc>
         <lastmod>2016-12-14T11:25:19.209Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1227,13 +1185,6 @@
     </url>
 
     <url>
-        <loc>./tags/TeX/</loc>
-        <lastmod>2016-12-14T13:48:57.083Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>./tags/%E8%AF%8D%E6%B3%95/</loc>
         <lastmod>2016-12-14T13:48:57.083Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1312,14 +1263,63 @@
 
     <url>
         <loc>./tags/pandoc/</loc>
-        <lastmod>2016-12-15T12:01:15.558Z</lastmod>
+        <lastmod>2016-12-15T12:33:21.163Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>./tags/crossref/</loc>
-        <lastmod>2016-12-15T12:01:15.558Z</lastmod>
+        <lastmod>2016-12-15T12:33:21.163Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./tags/TeX/</loc>
+        <lastmod>2016-12-15T12:55:45.794Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./tags/LaTeX/</loc>
+        <lastmod>2016-12-15T12:55:45.794Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./tags/grouping/</loc>
+        <lastmod>2016-12-15T12:55:45.794Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./tags/%E7%BC%96%E7%BB%84/</loc>
+        <lastmod>2016-12-15T12:55:45.794Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./tags/lapack/</loc>
+        <lastmod>2016-12-15T12:56:17.998Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./tags/c/</loc>
+        <lastmod>2016-12-15T12:56:17.998Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./tags/fortran/</loc>
+        <lastmod>2016-12-15T12:56:17.998Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

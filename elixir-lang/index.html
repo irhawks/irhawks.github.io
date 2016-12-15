@@ -150,8 +150,10 @@
 
 
 
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+<!-- add highlight.js to render pandoc code blocks -->
+<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>  
+<script>hljs.initHighlightingOnLoad();</script>  
 
   <title> Elixir：建立在Erlang虚拟机上的函数式语言 | 80x24 </title>
 </head>
@@ -497,8 +499,8 @@ juju run --all &quot;sudo apt-get install elixir&quot;</code></pre>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/erlang-concurrency-test/" rel="next" title="Erlang编程语言中的并发小测试">
-                <i class="fa fa-chevron-left"></i> Erlang编程语言中的并发小测试
+              <a href="/elastic-search/" rel="next" title="ElasticSearch搜索软件">
+                <i class="fa fa-chevron-left"></i> ElasticSearch搜索软件
               </a>
             
           </div>
@@ -507,8 +509,8 @@ juju run --all &quot;sudo apt-get install elixir&quot;</code></pre>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/agda-lang/" rel="prev" title="Agda语言介绍">
-                Agda语言介绍 <i class="fa fa-chevron-right"></i>
+              <a href="/erlang-concurrency-test/" rel="prev" title="Erlang编程语言中的并发小测试">
+                Erlang编程语言中的并发小测试 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

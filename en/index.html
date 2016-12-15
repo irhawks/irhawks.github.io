@@ -149,8 +149,10 @@
 
 
 
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+<!-- add highlight.js to render pandoc code blocks -->
+<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>  
+<script>hljs.initHighlightingOnLoad();</script>  
 
   <title> 80x24 </title>
 </head>
@@ -388,7 +390,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               <span class="post-meta-item-text">Post modified</span>
-              <time title="Post modified" itemprop="dateModified" datetime="2016-12-15T20:01:15+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2016-12-15T20:33:21+08:00">
                 2016-12-15
               </time>
             
@@ -457,97 +459,20 @@
 
       
         
-          
-            <h2 id="sec:pandoc-crossref">pandoc-crossref filter</h2>
-<p><a href="http://hackage.haskell.org/package/pandoc-crossref" id="link:crossref" target="_blank" rel="external">Pandoc crossref</a></p>
+          <h2 id="sec:pandoc-crossref">pandoc-crossref filter</h2>
+<p><a href="http://hackage.haskell.org/package/pandoc-crossref" id="link:crossref">Pandoc crossref</a></p>
 <p>Homepage is sec. 1.1.</p>
 <h3 id="build-status">Build status</h3>
 <p>pandoc-crossref is a pandoc filter for numbering figures, equations, tables and cross-references to them.</p>
 <p>Input file (like demo.md) can be converted into html, latex, pdf, md or other formats.</p>
 <p>Optionally, you can use cleveref for latex/pdf output, e.g. cleveref pdf, cleveref latex, and listings package, e.g. listings pdf, listings latex</p>
-<h3 id="pandoc-citeproc-and-pandoc-crossref">pandoc-citeproc and pandoc-crossref</h3>
-<p>Since pandoc-crossref uses the same citation syntax as pandoc-citeproc, you have to run former before latter. For example:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">pandoc</span> -F pandoc-crossref -F pandoc-citeproc file.md -o file.html</code></pre></div>
-<h3 id="image-labels">Image labels</h3>
-<div class="figure">
-<embed src="file.ext" id="fig:label">
-<p class="caption">Figure 1: Caption</p>
-</div>
-<p>See Figure~fig. 1.</p>
-<h3 id="subfigures">Subfigures</h3>
-<p>It’s possible to group figures as subfigures. Basic syntax is as follows:</p>
-<div id="fig:figureRef" class="subfigures">
-<div class="figure">
-<img src="image1.png" alt="a" id="fig:figureRefA">
-<p class="caption">a</p>
-</div>
-<div class="figure">
-<img src="image2.png" alt="b" id="fig:figureRefB">
-<p class="caption">b</p>
-</div>
-<p>Figure 2: Figure 1: Caption of figure. a — subfigure 1 caption, b — subfigure 2 caption. a — subfigure 1 caption, b — subfigure 2 caption</p>
-</div>
-<pre><code>&lt;div id=&quot;fig:figureRef&quot;&gt;
-![subfigure 1 caption](image1.png){#fig:figureRefA}
-
-![subfigure 2 caption](image2.png){#fig:figureRefB}
-
-Caption of figure
-&lt;/div&gt;</code></pre>
-<p>References to subfigures will be rendered as figureNumber (subfigureNumber), e.g., in this particular example, <code>[@fig:figureRefA]</code> will produce <code>fig. 1 (a).</code> Fig 1.(a) : fig. 2 (a) .</p>
-<h3 id="equation-labels">Equation labels</h3>
-<p><span id="eq:label"><span class="math display">\[ math \qquad(1)\]</span></span></p>
-<p>To label a display equation, append <code>{ #eq:label}</code> (with label being something unique to reference this equation by) immediately after math block.</p>
-<p>Math block and label can be separated by one or more spaces.</p>
-<p>You can also number all display equations with autoEqnLabels metadata setting (see below). Note, however, that you won’t be able to reference equations without explicit labels. See Equation~eq. 1.</p>
-<h3 id="table-labels">Table labels</h3>
-<div id="tbl:label">
-<table>
-<caption>Table 1: Caption</caption>
-<thead>
-<tr class="header">
-<th align="left">a</th>
-<th align="left">b</th>
-<th align="left">c</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">1</td>
-<td align="left">2</td>
-<td align="left">3</td>
-</tr>
-<tr class="even">
-<td align="left">4</td>
-<td align="left">5</td>
-<td align="left">6</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>To label a table, append <code>{ #tbl:label}</code> at the end of table caption (with label being something unique to reference this table by). Caption and label must be separated by at least one space. See Table~tbl. 1.</p>
-<h2 id="code-block-labels">Code Block labels</h2>
-<p>There are a couple options to add code block labels. Those work only if code block id starts with lst:, e.g. <code>{ #lst:label}</code>. lst. <strong>¿lst:label?</strong>.</p>
-<p>caption attribute will be treated as code block caption. If code block has both id and caption attributes, it will be treated as numbered code block.</p>
-<div id="lst:code" class="listing haskell">
-<p>Listing 1: Listing caption</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">main ::</span> <span class="dt">IO</span> () main <span class="fu">=</span> putStrLn <span class="st">&quot;Hello World!&quot;</span> </code></pre></div>
-</div>
-<p>List Codelst. 1</p>
-<h3 id="table-style-captions">Table-style captions</h3>
-<p>Enabled with codeBlockCaptions metadata option. If code block is immediately adjacent to paragraph, starting with Listing: or :, said paragraph will be treated as code block caption.</p>
-<pre> Listing: Listing caption
-main :: IO ()
-main = putStrLn "Hello World!"
-</pre>
-<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">&lt;pre&gt; Listing: Listing caption
-
-main :: IO ()
-main = putStrLn &quot;Hello World!&quot;
-
-&lt;/pre&gt; </code></pre></div>
-
-          
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog-pandoc-crossref/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

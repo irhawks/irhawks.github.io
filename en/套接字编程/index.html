@@ -156,6 +156,9 @@
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> 套接字的基本概念与编程 | 80x24 </title>
 </head>
 
@@ -466,16 +469,24 @@
 <p>当服务器调用accept的时候，它就会创建一个与原来的命名套接字不同的新的套接字。这个新的套接字只用于同这个客户进行通信。而命名套接字则留下来继续处理来自其它客户的连接。一旦连接建立，我们就可以像底层的文件描述符一样利用套接字实现双向通信。</p>
 <p>第二次创建新的套接字是自己以前没有想到的。现在想来，大概在网络环境下创建套接字的时候，由套接字函数库对于连接进行了封装，以致于在服务器调用accept的时候，只能得到连接到它的套接字，这也就是说，在内核当中已经处理好来自不同IP+PORT的请求。从而自己实现了数据的分流，最后才把数据交到socket函数库。</p>
 <p>创建一个套接字的函数原型是：</p>
-<figure class="highlight plain"><figcaption><span>.c&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#include &lt;sys/types.h&gt;</div><div class="line">#include &lt;sys/socket.h&gt;</div><div class="line">int socket(int domain, int type, int protocol);</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="ot">#include &lt;sys/types.h&gt;</span>
+<span class="ot">#include &lt;sys/socket.h&gt;</span>
+<span class="dt">int</span> socket(<span class="dt">int</span> domain, <span class="dt">int</span> type, <span class="dt">int</span> protocol);</code></pre></div>
 <p>其中domain是套接字的类型，它可以是AF_UNIX,AF_INET,AF_INTE6,AF_IPX,AF_PACKET等等。type则是套接字的封包格式，比如SOCK_STREAM,SOCK_DGRAM,SOCK_RAW等。我们使用的IP中TCP封包格式为AF_INET加SOCK_STREAM.而UNIX套接字则选择AF_UNIX加SOCK_STREAM.最后一个protocol通常取0.而返回的整型值是套接字描述符。</p>
 <p>绑定一个套接字的函数原型是：</p>
-<figure class="highlight plain"><figcaption><span>.c&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#include &lt;sys/types.h&gt;</div><div class="line">#include &lt;sys/socket.h&gt;</div><div class="line">int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="ot">#include &lt;sys/types.h&gt;</span>
+<span class="ot">#include &lt;sys/socket.h&gt;</span>
+<span class="dt">int</span> bind(<span class="dt">int</span> sockfd, <span class="dt">const</span> <span class="kw">struct</span> sockaddr *addr, socklen_t addrlen);</code></pre></div>
 <p>函数的作用是将一个名称与套接字相绑定。之所以要进行绑定，是因为刚开始创建套接字的时候只是指定了在套接字命名空间中注册了这个事物。但是还没有被注册到一个确定的地址。所以我们通过bind函数向该套接字命名。名称由结构体addr指定，后面的addrlen是结构体的长度。在sockaddr当中，包含有关于套接字的一系列说明。</p>
 <p>连接一个套接字的函数原型是：</p>
-<figure class="highlight plain"><figcaption><span>.c&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#include &lt;sys/types.h&gt;</div><div class="line">#include &lt;sys/socket.h&gt;</div><div class="line">int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="ot">#include &lt;sys/types.h&gt;</span>
+<span class="ot">#include &lt;sys/socket.h&gt;</span>
+<span class="dt">int</span> connect(<span class="dt">int</span> sockfd, <span class="dt">const</span> <span class="kw">struct</span> sockaddr *addr, socklen_t addrlen);</code></pre></div>
 <p>其中的各项参数应当与前面所创建的套接字相匹配。返回动作的状态。</p>
 <p>接受一个套接字的函数原型是：</p>
-<figure class="highlight plain"><figcaption><span>.c&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#include &lt;sys/types.h&gt;</div><div class="line">#include &lt;sys/socket.h&gt;</div><div class="line">int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="ot">#include &lt;sys/types.h&gt;</span>
+<span class="ot">#include &lt;sys/socket.h&gt;</span>
+<span class="dt">int</span> accept(<span class="dt">int</span> sockfd, <span class="kw">struct</span> sockaddr *addr, socklen_t *addrlen);</code></pre></div>
 <p>它返回一个新的针对于该客户端的套接字。</p>
 <p>之后对套接字的读写使用read,write或者close调用就可以了。（因为套接字描述符属于文件描述符。）</p>
 
@@ -640,7 +651,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -648,7 +659,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -657,7 +668,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

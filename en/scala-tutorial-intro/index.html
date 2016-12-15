@@ -89,7 +89,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="scala,文档,注释,面向对象," />
+  <meta name="keywords" content="scala,面向对象,文档,注释," />
 
 
 
@@ -152,6 +152,9 @@
 
 
 
+
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
 
   <title> Scala编程概要（一）：文档，注释，面向对象 | 80x24 </title>
 </head>
@@ -453,26 +456,92 @@
 <p>总结：评价与了解一个编程语言，可能不再只是使用简单的类型的静态与动态、函数式编程或者其它的风格。其实，一般而言，评价一个东西，我们可以说一句话，可以说十句话，可以说一百句，可以说成一本书，也可以说成一套全集。关键是看我们描述的细的程度，仅一句话当然可以那么描写。但是要达到比较理想的层次，可能还需要一套详细的评价的方法。更进一步地，我们需要了解一门编程语言的特性可能包括以下的几个方面：最基础的方面，无论是函数式语言还是其它的语言，都要考虑抽象的问题，因为抽象是高级编程语言的共同的特性。这里面的主题就有名子，作用域，数据抽象，控制抽象等。第二步是所谓的编程语言的类型的系统。第三步是编程范式。然后是设计模式。经过这四个步骤，对于一个编程语言的理解或许就比较深了。至于前端的语法的知识，其实是比较形而下学的。</p>
 <h2 id="scala文档风格07-01-2015-084018">Scala文档风格[07-01-2015 08:40:18]</h2>
 <p>在没有考虑编程语言的任何特点的情况下写代码并不好，这个时候我们可以写注释。Scala的第一种的注释风格是这样的：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** This is a brief description of what's being documented.</span></div><div class="line">  *</div><div class="line">  * This is further documentation of what we're documenting.  It should</div><div class="line">  * provide more details as to how this works and what it does. </div><div class="line">  */</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">myMethod</span> </span>= &#123;&#125;</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="co">/** This is a brief description of what&#39;s being documented.</span>
+<span class="co">  *</span>
+<span class="co">  * This is further documentation of what we&#39;re documenting.  It should</span>
+<span class="co">  * provide more details as to how this works and what it does. </span>
+<span class="co">  */</span>
+<span class="kw">def</span> myMethod = {}</code></pre></div>
 <p>明显地，这种方法下，注释的整体就是一段文字，编程语言只知道注释是由几个段落构成的，而没有感知到其它的成份，所以生成的文档也很笨拙。虽然学术级别的写作要求非常高，以致于不可能单独在编程语言中讲到，但是其实注释是一种更深的艺术。只有明确地表达了自己的思维，所做的编程的工作才有意义。</p>
 <p>如果是比较简单的类型，可以使用单行注释，示例如下</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** Does something very simple */</span></div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="co">/** Does something very simple */</span></code></pre></div>
 <p>Scaladoc本身是一个完善的标记的语言。由于注释本身就是介绍文档的。所以，一方面，注释介绍了相应的数据结构的接口特性，另一方面是实现的特性。而且一般在文档当中，要把相应的编程结构的接口特性描述的更清楚一点。特别是把接口列出来。在Scala中，可以使用<code>@return</code>这样的标记来处理返回的值。doc文档的编写规范，可以参考<a href="http://docs.scala-lang.org/style/scaladoc.html" class="uri" target="_blank" rel="external">http://docs.scala-lang.org/style/scaladoc.html</a>。</p>
 <h3 id="使用package的注释">使用package的注释</h3>
 <p>在绝大多数的编程语言中，模块或者包或者库都是比面向对象更为高级的抽象。所以对模块的注释也显得格外地重要。在Scala中，包往往需要比较长的注释。一种方式是放在package的后面。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> parent.<span class="keyword">package</span>.name</div><div class="line"><span class="comment">/** This is the ScalaDoc for the package. */</span></div><div class="line"><span class="keyword">package</span> <span class="class"><span class="keyword">object</span> <span class="title">mypackage</span> </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">package</span> parent.<span class="fu">package</span>.<span class="fu">name</span>
+<span class="co">/** This is the ScalaDoc for the package. */</span>
+<span class="kw">package</span> <span class="kw">object</span> mypackage {
+}</code></pre></div>
 <p>另外一种方式是放在package当中。大块的注释，好像演化的趋势正是文学编程，以及使用markdown或者latex的风格。特别是在一些定理证明语言与Haskell这样的新的语言中，出现的在注释中插入代码的情况更加普遍。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> my.<span class="keyword">package</span></div><div class="line"><span class="comment">/** Provides classes for dealing with complex numbers.  Also provides</span></div><div class="line">  * implicits for converting to and from `Int`.</div><div class="line">  *</div><div class="line">  * ==Overview==</div><div class="line">  * The main class to use is [[my.package.complex.Complex]], as so</div><div class="line">  * &#123; &#123; &#123;</div><div class="line">  * scala&gt; val complex = Complex(4,3)</div><div class="line">  * complex: my.package.complex.Complex = 4 + 3i</div><div class="line">  * &#125; &#125; &#125;</div><div class="line">  *</div><div class="line">  * If you include [[my.package.complex.ComplexConversions]], you can </div><div class="line">  * convert numbers more directly</div><div class="line">  * &#123; &#123; &#123;</div><div class="line">  * scala&gt; import my.package.complex.ComplexConversions._</div><div class="line">  * scala&gt; val complex = 4 + 3.i</div><div class="line">  * complex: my.package.complex.Complex = 4 + 3i</div><div class="line">  * &#125; &#125; &#125; </div><div class="line">  */</div><div class="line"><span class="keyword">package</span> complex &#123;&#125;</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">package</span> my.<span class="fu">package</span>
+<span class="co">/** Provides classes for dealing with complex numbers.  Also provides</span>
+<span class="co">  * implicits for converting to and from `Int`.</span>
+<span class="co">  *</span>
+<span class="co">  * ==Overview==</span>
+<span class="co">  * The main class to use is [[my.package.complex.Complex]], as so</span>
+<span class="co">  * { { {</span>
+<span class="co">  * scala&gt; val complex = Complex(4,3)</span>
+<span class="co">  * complex: my.package.complex.Complex = 4 + 3i</span>
+<span class="co">  * } } }</span>
+<span class="co">  *</span>
+<span class="co">  * If you include [[my.package.complex.ComplexConversions]], you can </span>
+<span class="co">  * convert numbers more directly</span>
+<span class="co">  * { { {</span>
+<span class="co">  * scala&gt; import my.package.complex.ComplexConversions._</span>
+<span class="co">  * scala&gt; val complex = 4 + 3.i</span>
+<span class="co">  * complex: my.package.complex.Complex = 4 + 3i</span>
+<span class="co">  * } } } </span>
+<span class="co">  */</span>
+<span class="kw">package</span> complex {}</code></pre></div>
 <p>类的注释可以参考</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** A person who uses our application.</span></div><div class="line">  *</div><div class="line">  * @constructor create a new person with a name and age.</div><div class="line">  * @param name the person's name</div><div class="line">  * @param age the person's age in years </div><div class="line">  */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>(<span class="params">name: <span class="type">String</span>, age: <span class="type">Int</span></span>) </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="co">/** A person who uses our application.</span>
+<span class="co">  *</span>
+<span class="co">  * @constructor create a new person with a name and age.</span>
+<span class="co">  * </span><span class="kw">@param name </span><span class="co">the person&#39;s name</span>
+<span class="co">  * </span><span class="kw">@param age </span><span class="co">the person&#39;s age in years </span>
+<span class="co">  */</span>
+<span class="kw">class</span> <span class="fu">Person</span>(name: String, age: Int) {
+}</code></pre></div>
 <p>不过，类的注释的内容与类的构造器的内容的注释如何安排其实也不是那么容易的。对象可以参考</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** Factory for [[mypackage.Person]] instances. */</span></div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">Person</span> </span>&#123;</div><div class="line">  <span class="comment">/** Creates a person with a given name and age.</span></div><div class="line">    *</div><div class="line">    * @param name their name</div><div class="line">    * @param age the age of the person to create </div><div class="line">    */</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>(name: <span class="type">String</span>, age: <span class="type">Int</span>) = &#123;&#125;</div><div class="line">  <span class="comment">/** Creates a person with a given name and birthdate</span></div><div class="line">    *</div><div class="line">    * @param name their name</div><div class="line">    * @param birthDate the person's birthdate</div><div class="line">    * @return a new Person instance with the age determined by the </div><div class="line">    *         birthdate and current date. </div><div class="line">    */</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>(name: <span class="type">String</span>, birthDate: java.util.<span class="type">Date</span>) = &#123;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="co">/** Factory for [[mypackage.Person]] instances. */</span>
+<span class="kw">object</span> Person {
+  <span class="co">/** Creates a person with a given name and age.</span>
+<span class="co">    *</span>
+<span class="co">    * </span><span class="kw">@param name </span><span class="co">their name</span>
+<span class="co">    * </span><span class="kw">@param age </span><span class="co">the age of the person to create </span>
+<span class="co">    */</span>
+  <span class="kw">def</span> <span class="fu">apply</span>(name: String, age: Int) = {}
+  <span class="co">/** Creates a person with a given name and birthdate</span>
+<span class="co">    *</span>
+<span class="co">    * </span><span class="kw">@param name </span><span class="co">their name</span>
+<span class="co">    * </span><span class="kw">@param birthDate </span><span class="co">the person&#39;s birthdate</span>
+<span class="co">    * </span><span class="kw">@return </span><span class="co">a new Person instance with the age determined by the </span>
+<span class="co">    *         birthdate and current date. </span>
+<span class="co">    */</span>
+  <span class="kw">def</span> <span class="fu">apply</span>(name: String, birthDate: java.<span class="fu">util</span>.<span class="fu">Date</span>) = {}
+}</code></pre></div>
 <p>Scaladoc的注释规范，可以参考<a href="https://wiki.scala-lang.org/display/SW/Writing+Documentation" target="_blank" rel="external">Scala lang的维基</a>。</p>
 <h2 id="scala的优势在哪里">Scala的优势在哪里</h2>
 <p>首先，创建一个Person类，在Java中，代码是这样的：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String firstName;</div><div class="line">	<span class="keyword">private</span> String lastName;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span>    age;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String firstName, String lastName, <span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">	    <span class="keyword">this</span>.firstName = firstName;</div><div class="line">	    <span class="keyword">this</span>.lastName  = lastName;</div><div class="line">	    <span class="keyword">this</span>.age  = age; &#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setFirstName</span><span class="params">(String firstName)</span> </span>&#123; </div><div class="line">		<span class="keyword">this</span>.firstName = firstName; &#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> String <span class="title">getFirstName</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="keyword">this</span>.firstName; &#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLastName</span><span class="params">(String lastName)</span> </span>&#123; <span class="keyword">this</span>.lastName = lastName; &#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> String <span class="title">getLastName</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="keyword">this</span>.lastName; &#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123; <span class="keyword">this</span>.age = age; &#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="keyword">this</span>.age; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">class</span> Person {
+    <span class="kw">private</span> String firstName;
+    <span class="kw">private</span> String lastName;
+    <span class="kw">private</span> <span class="dt">int</span>    age;
+
+    <span class="kw">public</span> <span class="fu">Person</span>(String firstName, String lastName, <span class="dt">int</span> age) {
+        <span class="kw">this</span>.<span class="fu">firstName</span> = firstName;
+        <span class="kw">this</span>.<span class="fu">lastName</span>  = lastName;
+        <span class="kw">this</span>.<span class="fu">age</span>  = age; }
+    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setFirstName</span>(String firstName) { 
+        <span class="kw">this</span>.<span class="fu">firstName</span> = firstName; }
+    <span class="kw">public</span> <span class="dt">void</span> String <span class="fu">getFirstName</span>() { <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">firstName</span>; }
+    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setLastName</span>(String lastName) { <span class="kw">this</span>.<span class="fu">lastName</span> = lastName; }
+    <span class="kw">public</span> <span class="dt">void</span> String <span class="fu">getLastName</span>() { <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">lastName</span>; }
+    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setAge</span>(<span class="dt">int</span> age) { <span class="kw">this</span>.<span class="fu">age</span> = age; }
+    <span class="kw">public</span> <span class="dt">void</span> <span class="dt">int</span> <span class="fu">getAge</span>() { <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">age</span>; }
+}</code></pre></div>
 <p>但是在Scala中对于简单的getter与setter的支持下，简单的形式就是：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>(<span class="params">var firstName: <span class="type">String</span>, var lastName: <span class="type">String</span>, var age: <span class="type">Int</span></span>)</span></div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">class</span> <span class="fu">Person</span>(<span class="kw">var</span> firstName: String, <span class="kw">var</span> lastName: String, <span class="kw">var</span> age: Int)</code></pre></div>
 <p>当然，这种方法添加的构造函数可以通过直接访问<code>Person.lastName</code>得到，看起来是直接访问了成员，但是其实是访问的构造器。不过，要想在构造器中添加一些日志的功能，还是得另外的配置。</p>
 <p>要注意的是，Scala的类的实现中，不使用静态方法，取而代之的是可以直接定义一个相关的对象，通过这个对象直接产生一个相当于静态成员的东西。</p>
 
@@ -500,11 +569,11 @@
           
             <a href="/tags/scala/" rel="tag"># scala</a>
           
+            <a href="/tags/面向对象/" rel="tag"># 面向对象</a>
+          
             <a href="/tags/文档/" rel="tag"># 文档</a>
           
             <a href="/tags/注释/" rel="tag"># 注释</a>
-          
-            <a href="/tags/面向对象/" rel="tag"># 面向对象</a>
           
         </div>
       
@@ -513,8 +582,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/scala-sentences/" rel="next" title="Scala编程概要（二）：基本结构，常用模式">
-                <i class="fa fa-chevron-left"></i> Scala编程概要（二）：基本结构，常用模式
+              <a href="/ai-and-bootstraping/" rel="next" title="用自举理解人工智能与学术研究">
+                <i class="fa fa-chevron-left"></i> 用自举理解人工智能与学术研究
               </a>
             
           </div>
@@ -523,8 +592,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/scala-process-and-shell/" rel="prev" title="Scala编程概要（三）：进程控制与shell，函数式特性">
-                Scala编程概要（三）：进程控制与shell，函数式特性 <i class="fa fa-chevron-right"></i>
+              <a href="/scala-sentences/" rel="prev" title="Scala编程概要（二）：基本结构，常用模式">
+                Scala编程概要（二）：基本结构，常用模式 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -635,7 +704,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -643,7 +712,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -652,7 +721,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

@@ -153,6 +153,9 @@
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> Linux下的日志记录及其策略 | 80x24 </title>
 </head>
 
@@ -561,15 +564,17 @@
 <p>logrotate用于管理日志文件，它的基本功能也就是作为一个过护进程，定期检测日志文件并对日志文件进行转储的操作。一般情况下在/etc/cron.daily下都可以发现logrotate这一个文件。也就是logrotate的计划任务。</p>
 <p>原则上说logrotate应该在syslog之后讲述。不过我们可以把logrotate仅看成是一个定期分隔文件的程序而不去管它分隔的是怎样的文件类型，这才是它的功能的完整的应用领域。</p>
 <p>前面我们说了logrotate在cron.daily下面定期运行。实际上在crontab中运行它的命令以及参数是</p>
-<figure class="highlight plain"><figcaption><span>.shell&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/logrotate /etc/logrotate.conf 2&gt;&amp;1 | tee $TMPF</div></pre></td></tr></table></figure>
+<pre class="sourceCode shell"><code>/usr/bin/logrotate /etc/logrotate.conf 2&gt;&amp;1 | tee $TMPF</code></pre>
 <p>所以我们知道它的功能是读取logrotate.conf文件并执行。</p>
 <p>在该crontab文件下还执行的功能是，如果logrotate异常退出，就向syslog发送一个logrotate运行失败的cron.warning消息。</p>
 <p>所以接下来就要学习logrotate.conf的配置了。</p>
 <p>logrotate的主配置文件是logrotate.conf,但是在该文件中有一条命令是</p>
-<figure class="highlight plain"><figcaption><span>.shell&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">include /etc/logrotate.d</div></pre></td></tr></table></figure>
+<pre class="sourceCode shell"><code>include /etc/logrotate.d</code></pre>
 <p>所以在目录下才是针对每个程序的配置。主配置文件一般参考logrotate(8)。</p>
 <p>针对某些文件的配置格式为：</p>
-<figure class="highlight plain"><figcaption><span>.shell&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$&#123;path_match&#125; &#123;</div><div class="line">    $&#123;rotate_command_list&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre class="sourceCode shell"><code>${path_match} {
+    ${rotate_command_list}
+}</code></pre>
 <p>表示对某一个配置文件执行哪些操作。</p>
 <p>实在不想再学习logrotate的配置文件了。又得学习一种配置语言。想写的时候参考实时手册页就可以了。</p>
 <h2 id="syslog日志分发程序">syslog日志分发程序</h2>
@@ -584,7 +589,7 @@
 <p>守护进程使用/etc/syslog.conf配置文件。</p>
 <p>其它的syslog程序通常也支持类似于syslog.conf配置文件里的语法。</p>
 <p>配置文件的基本格式是：</p>
-<figure class="highlight plain"><figcaption><span>.shell&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$selector   $action</div></pre></td></tr></table></figure>
+<pre class="sourceCode shell"><code>$selector   $action</code></pre>
 <p>其中<code>$selector</code>的基本格式为<code>$facility.$level</code>.表示的含义是属于这一类别的某个等级的日志将会采取<code>$action</code>所指定的行为处理。<code>$facility</code>与<code>$level</code>都是由syslog规定好了的取值范围。一般情况下，比如cron代表来自cron的日志，daemon代表来自系统守护进程，而kern代表来自内核，local0-7代表来自本地的8种类型，user代表来自用户进程，syslog代表syslog内部消息。级别从低到高依次是debug, info, notice, warning, err, crit, alert, emerg.这些级别的具体含义由用户安排。</p>
 <p>facility支持使用星号通配。</p>
 <p><code>$action</code>可以是一个本地文件名，或者<code>@hostname</code>,或者<code>@ip</code>,或者用户列表，或者<code>fifoname</code>,或者<code>*(代表所有用户)</code>。在<code>$action</code>前面加一个短划线代表写入文件后不执行sync命令。syslog对待一条日志的行为类似于一个匹配器。前面说到<code>$selector</code>的格式。实际上syslogd还支持语法糖的形式，允许一条匹配应用多个规则。分号表示取并区间。</p>
@@ -597,7 +602,7 @@
 <h3 id="syslog应用">syslog应用</h3>
 <p>有许多程序或守护进程使用了syslog系统。并且通过logger命令，一般脚本也可以向syslog发送某些信息。如果要了解可详细的信息，可能需要查找POSIX相关规范。</p>
 <p>logger的通常用法是</p>
-<figure class="highlight plain"><figcaption><span>.shell&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">logger -p $selector &quot;$&#123;messages&#125;&quot;</div></pre></td></tr></table></figure>
+<pre class="sourceCode shell"><code>logger -p $selector &quot;${messages}&quot;</code></pre>
 <p>该命令可以用于调试syslog.方法是先在配置文件中添加一个指令选择器的地址，然后使用logger向该选择器写入指定的信息。</p>
 <p>在应用的时候都忽略了权限的问题。但是我们应该知道让任何人都有发送日志的权利也是不应该的。</p>
 <h2 id="日志分析工具">日志分析工具</h2>
@@ -640,8 +645,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Linux-Daemon/" rel="next" title="linux下的守护进程">
-                <i class="fa fa-chevron-left"></i> linux下的守护进程
+              <a href="/周期性进程与crontab/" rel="next" title="周期性进程与crontab">
+                <i class="fa fa-chevron-left"></i> 周期性进程与crontab
               </a>
             
           </div>
@@ -650,8 +655,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/周期性进程与crontab/" rel="prev" title="周期性进程与crontab">
-                周期性进程与crontab <i class="fa fa-chevron-right"></i>
+              <a href="/service-cups/" rel="prev" title="cups打印服务介绍">
+                cups打印服务介绍 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -762,7 +767,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -770,7 +775,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -779,7 +784,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

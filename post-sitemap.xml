@@ -7,6 +7,38 @@
     </url>
 
     <url>
+        <loc>./blog-pandoc-crossref/</loc>
+        <lastmod>2016-12-15T12:01:15.558Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>./blog-hexo-image-test/</loc>
+        <lastmod>2016-12-15T03:57:04.406Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>./hello-world/</loc>
+        <lastmod>2016-12-15T03:53:40.035Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>./blog-hexo-1/</loc>
+        <lastmod>2016-12-15T03:53:01.363Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>./solr-tutorial/</loc>
         <lastmod>2016-12-14T14:41:20.578Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -105,14 +137,6 @@
     <url>
         <loc>./platform-jdk/</loc>
         <lastmod>2016-12-14T11:23:23.682Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>./blog-hexo-1/</loc>
-        <lastmod>2016-12-14T11:22:49.248Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -353,14 +377,6 @@
     <url>
         <loc>./stochastic-differential-equation-intro/</loc>
         <lastmod>2016-12-14T11:00:03.326Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>./hello-world/</loc>
-        <lastmod>2016-12-14T10:40:49.318Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

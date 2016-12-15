@@ -159,6 +159,9 @@ linux操作系统对进程区分普通进程与实时进">
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> 进程原理二：进程控制块与进程详细介绍 | 80x24 </title>
 </head>
 
@@ -479,7 +482,9 @@ linux操作系统对进程区分普通进程与实时进">
 <p>后面会知道execve()相当于替换掉当前进程的代码段，所以进程号没有改变。</p>
 <p><strong>进程的基本管理</strong></p>
 <p>从当前进程创建一个子进程，有三个选项创建新进程：</p>
-<figure class="highlight plain"><figcaption><span>.c&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pid_t fork(void);</div><div class="line">pid_t vfork(void);</div><div class="line">int clone(int (*fn)(void *arg), void *stack, int flags, void *arg);</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">pid_t fork(<span class="dt">void</span>);
+pid_t vfork(<span class="dt">void</span>);
+<span class="dt">int</span> clone(<span class="dt">int</span> (*fn)(<span class="dt">void</span> *arg), <span class="dt">void</span> *stack, <span class="dt">int</span> flags, <span class="dt">void</span> *arg);</code></pre></div>
 <p>三个函数最终都调用同一个内核函数 <code>do_fork()</code> ：</p>
 <p><code>do_fork(unsigned long clone_flag, unsigned long usp, struct pt_regs);</code></p>
 <p>其中 <code>clone_flag</code> 可以是 <code>CLONE_VM,CLONE_FS,CLONE_FILES</code> , <code>CLONE_SIGHAND,CLONE_PID</code> 以及 <code>CLONE_VFORK</code> 等。分别表示子进程与父进程共享（是共享而不是复制）相应的资源：进程空间，文件系统，打开的文件，子进程终结时向父进程发送SIGCHLD,信号处理函数，进程标识符，父进程在子进程空间被释放时唤醒。</p>
@@ -495,7 +500,10 @@ linux操作系统对进程区分普通进程与实时进">
 <p>不知道是不是所有的数据都被替换了呢？那么除了进程控制块之外所有的数据都要分配，因此开销也是不小的。</p>
 <p>几个exec函数最终都变成调用 <code>do_exec()</code> 。其功能是加载新程序并跳转执行。</p>
 <p>在前面讲了如何使父进程与子进程同时运行。但是有时候父进程还想知道子进程的状态，这时的解决办法是使用wait()或者waitpid()函数。</p>
-<figure class="highlight plain"><figcaption><span>.c&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#include &lt;sys/types.h&gt;</div><div class="line">#include &lt;sys/wait.h&gt;</div><div class="line">pid_t wait(int *status);</div><div class="line">pid_t waitpid(pid_t pid, int *status, int options);</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="ot">#include &lt;sys/types.h&gt;</span>
+<span class="ot">#include &lt;sys/wait.h&gt;</span>
+pid_t wait(<span class="dt">int</span> *status);
+pid_t waitpid(pid_t pid, <span class="dt">int</span> *status, <span class="dt">int</span> options);</code></pre></div>
 <p>编程方法：当不需要得知子进程退出的原因的时候，wait(NULL)即可，否则自己分配一个整型变量的空间。这个整型变量的不同比特位代表不同的含义，使用系统提供的对应的宏可以检查退出状态。</p>
 <p>也许会有这样的疑问，子进程退出不是在系统中就不存在了么，为什么还会存有退出原因呢。这是因为虽然操作系统原理上是这么说，但是子进程PCB的释放是在wait函数中进行的，wait的原理是，等待子进程的结束。一旦子进程处于僵死状态，函数将其彻底销毁后向父进程返回。此时才真正从系统中释放子进程的PID.</p>
 <p>wait()的功能是阻塞父进程直到有一个子进程退出，函数返回其PID.进程退出的原因放在status变量当中。没有子进程时返回-1.</p>
@@ -504,11 +512,16 @@ linux操作系统对进程区分普通进程与实时进">
 <p>waitpid仍然只能等待其子进程pid.</p>
 <p>相对wait,waitpid的优点是可以等待特定子进程退出，可以非阻塞运行，可以支持作业控制。</p>
 <p>进程退出的方法。使进程自动退出的函数是exit()， <code>_exit()</code> 。</p>
-<figure class="highlight plain"><figcaption><span>.c&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">void exit(int status);</div><div class="line">#include &lt;unistd.h&gt;</div><div class="line">void _exit(int status);</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="ot">#include &lt;stdlib.h&gt;</span>
+<span class="dt">void</span> exit(<span class="dt">int</span> status);
+<span class="ot">#include &lt;unistd.h&gt;</span>
+<span class="dt">void</span> _exit(<span class="dt">int</span> status);</code></pre></div>
 <p>两个函数的关系相当于一个是C库函数，一个是系统函数。由于C语言和unix系列的密切关系，不能不讲C库函数的同时讲C库函数所使用的更底层函数。</p>
 <p>两个函数的status用于指示退出状态。最终两个函数都是调用系统的 <code>do_exit()</code> 函数。在退出的进程中， <code>do_exit()</code> 还会使用各种退出函数，与文件系统有关的，与信号量有关的，与文件描述符有关的，与切换进程有关的，等等。</p>
 <p>在linux的标准函数库当中，有一套高级IO使用了主存当中的缓冲区，C语言当中的printf(),fopen(),fread(),fwrite()都是其中的函数。此时使用 <code>_exit()</code> 会导致缓冲区当中的数据丢失，因此需要用exit()函数，它能够对缓冲区里的内容同步。</p>
-<figure class="highlight plain"><figcaption><span>.c&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">printf(&quot;output begin\n&quot;);</div><div class="line">printf(&quot;content in buffer&quot;);</div><div class="line">_exit(0);</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">printf(<span class="st">&quot;output begin</span><span class="ch">\n</span><span class="st">&quot;</span>);
+printf(<span class="st">&quot;content in buffer&quot;</span>);
+_exit(<span class="dv">0</span>);</code></pre></div>
 <p>上面的代码运行时，第二行的printf语句结果并没有显示出来。</p>
 <p><strong>进程的有关编程</strong></p>
 <p>在linux下自己管理创建的进程，一般使用的函数是fork,vfork,exec,wait,waitpid, <code>_exit()</code> 这一类函数。但是在C语言的环境当中，还可以使用更加高级的函数，正如在文件读写当中使用带buffer的读写函数一样。这一类函数比如说有system(),exit().其中前者的功能是将命令传给shell执行，由shell返回</p>
@@ -684,7 +697,7 @@ linux操作系统对进程区分普通进程与实时进">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -692,7 +705,7 @@ linux操作系统对进程区分普通进程与实时进">
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -701,7 +714,7 @@ linux操作系统对进程区分普通进程与实时进">
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

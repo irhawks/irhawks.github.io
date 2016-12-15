@@ -156,6 +156,9 @@
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> Apache Nutch的介绍与基本使用 | 80x24 </title>
 </head>
 
@@ -449,16 +452,34 @@
 <p>首先下载Solr并安装，然后使用java -jar的方式运行起来Solr，得到Solr的管理台界面（为<a href="https://localhost:8983/solr/admin" class="uri" target="_blank" rel="external">https://localhost:8983/solr/admin</a>）。<a href="http://www.lucidimagination.com/Downloads/Lucidworks-for-Solr/Installer" class="uri" target="_blank" rel="external">http://www.lucidimagination.com/Downloads/Lucidworks-for-Solr/Installer</a>。</p>
 <p>然后下载Nutch并安装，设置好<code>JAVA_HOME</code>与<code>NUTCH_JAVA_HOME</code>。<a href="http://zillionics.com/resources/articles/NutchGuideForDummies.htm" class="uri" target="_blank" rel="external">http://zillionics.com/resources/articles/NutchGuideForDummies.htm</a>。</p>
 <p>之后找到一个nutch-site.xml文件，配置如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>http.agent.name<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>nutch-solr-integration<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>generate.max.per.host<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>100<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>plugin.includes<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">value</span>&gt;</span>protocol-http|urlfilter-regex|parse-html|index-(basic|anchor)|query-(basic|site|url)|response-(json|xml)|summary-basic|scoring-opic|urlnormalizer-(pass|regex|basic)<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;?xml</span> version=&quot;1.0&quot;<span class="kw">?&gt;</span>
+<span class="kw">&lt;configuration&gt;</span>
+<span class="kw">&lt;property&gt;</span>
+<span class="kw">&lt;name&gt;</span>http.agent.name<span class="kw">&lt;/name&gt;</span>
+<span class="kw">&lt;value&gt;</span>nutch-solr-integration<span class="kw">&lt;/value&gt;</span>
+<span class="kw">&lt;/property&gt;</span>
+<span class="kw">&lt;property&gt;</span>
+<span class="kw">&lt;name&gt;</span>generate.max.per.host<span class="kw">&lt;/name&gt;</span>
+<span class="kw">&lt;value&gt;</span>100<span class="kw">&lt;/value&gt;</span>
+<span class="kw">&lt;/property&gt;</span>
+<span class="kw">&lt;property&gt;</span>
+<span class="kw">&lt;name&gt;</span>plugin.includes<span class="kw">&lt;/name&gt;</span>
+<span class="kw">&lt;value&gt;</span>protocol-http|urlfilter-regex|parse-html|index-(basic|anchor)|query-(basic|site|url)|response-(json|xml)|summary-basic|scoring-opic|urlnormalizer-(pass|regex|basic)<span class="kw">&lt;/value&gt;</span>
+<span class="kw">&lt;/property&gt;</span>
+<span class="kw">&lt;/configuration&gt;</span></code></pre></div>
 <p>配置好之后运行nutch。除此之外，还要包括有URL的seed.txt文件。弄好之后启动，就开始进入到Nutch的挖掘的模式了。最后我们需要将数据推送到Solr，这需要在启动Nutch的时候进行Solr的地址的配置。</p>
 <p>HBase的JUJU配置脚本可见<a href="https://10.0.8.119/services/?store=~bigdata-dev/trusty/apache-hbase" class="uri" target="_blank" rel="external">https://10.0.8.119/services/?store=~bigdata-dev/trusty/apache-hbase</a>。</p>
 <p>注意在安装Nutch之前要安装无论是单机模式还是集群模式的HBase，而HBase的集群模式又需要单独配ZooKeeper等软件组件。这是比较大的工作了。之后自己可能需要调整一下，或者制作几个镜像文件。</p>
 <p>nutch 2.3是其src镜像文件，但是事先不需要我们编译。解压之后，首先配置<code>conf/nutch-site.xml</code>文档。修改为</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>storage.data.store.class<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>org.apache.gora.hbase.store.HBaseStore<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>Default class for storing data<span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;property&gt;</span>
+  <span class="kw">&lt;name&gt;</span>storage.data.store.class<span class="kw">&lt;/name&gt;</span>
+  <span class="kw">&lt;value&gt;</span>org.apache.gora.hbase.store.HBaseStore<span class="kw">&lt;/value&gt;</span>
+  <span class="kw">&lt;description&gt;</span>Default class for storing data<span class="kw">&lt;/description&gt;</span>
+<span class="kw">&lt;/property&gt;</span></code></pre></div>
 <p>然后修改<code>ivy/ivy.xml</code>文档：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span> <span class="attr">org</span>=<span class="string">"org.apache.gora"</span> <span class="attr">name</span>=<span class="string">"gora-hbase"</span> <span class="attr">rev</span>=<span class="string">"0.3"</span> <span class="attr">conf</span>=<span class="string">"*-&gt;default"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;dependency</span><span class="ot"> org=</span><span class="st">&quot;org.apache.gora&quot;</span><span class="ot"> name=</span><span class="st">&quot;gora-hbase&quot;</span><span class="ot"> rev=</span><span class="st">&quot;0.3&quot;</span><span class="ot"> conf=</span><span class="st">&quot;*-&gt;default&quot;</span> <span class="kw">/&gt;</span></code></pre></div>
 <p>之后再修改<code>conf/gora.properties</code>文档，确保HBaseStore是默认的存储</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gora.datastore.default=org.apache.gora.hbase.store.HBaseStore</div></pre></td></tr></table></figure>
+<pre><code>gora.datastore.default=org.apache.gora.hbase.store.HBaseStore</code></pre>
 <p>之后使用ant编译即可。官方配置教程见<a href="http://wiki.apache.org/nutch/Nutch2Tutorial" class="uri" target="_blank" rel="external">http://wiki.apache.org/nutch/Nutch2Tutorial</a>.</p>
 <p>实际上nutch的存储后端未必是需要HBase，但是Apache Nutch2的官方教程中默认就是使用HBase而不是MongoDB的，因此我们还是不得不配置HBase。而且使用HBase作为存储后端的话，必须在Nutch运行之前先启动HBase。注意几个组件Nutch、Solr、Gora、HBase之间的关系。运行中如果出现HBase找不到，应该参考<a href="http://stackoverflow.com/questions/16401667/java-lang-classnotfoundexception-org-apache-gora-hbase-store-hbasestore" class="uri" target="_blank" rel="external">http://stackoverflow.com/questions/16401667/java-lang-classnotfoundexception-org-apache-gora-hbase-store-hbasestore</a>。在<code>ivy/ivy.xml</code>中添加<code>gora-hbase</code>的依赖。</p>
 <p><a href="https://gist.github.com/xrstf/b48a970098a8e76943b9" class="uri" target="_blank" rel="external">https://gist.github.com/xrstf/b48a970098a8e76943b9</a>上面介绍了一种ElasticSearch + Nutch + HBase的解决方案。</p>
@@ -466,11 +487,14 @@
 <h2 id="nutch的基本使用short-user-guide">Nutch的基本使用（Short User Guide）</h2>
 <p>前面的<code>ant runtime</code>重新编译好之后，在<code>bin</code>目录下就可以找到nutch命令了。</p>
 <p>接下来我们首先新建一个seed.txt文件。比如在<code>urls/seed.txt</code>中存储文件的内容。<code>seed.txt</code>中存放初始URL，比如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://nutch.apache.org/</div></pre></td></tr></table></figure>
+<pre><code>http://nutch.apache.org/</code></pre>
 <p>之后在<code>conf/regex-urlfilter.txt</code>文件中输入如下的内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">+^http://([a-z0-9]*\.)*nutch.apache.org/</div></pre></td></tr></table></figure>
+<pre><code>+^http://([a-z0-9]*\.)*nutch.apache.org/ </code></pre>
 <p>之后就可以使用nutch命令进行挖掘了。注意一个nutch往往代表一个爬虫而已，nutch带有它的庞大的运行时。在<code>conf/nutch-site.xml</code>文件中还可以设置此次爬虫的名子</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>http.agent.name<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>My Nutch Spider<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;property&gt;</span>
+  <span class="kw">&lt;name&gt;</span>http.agent.name<span class="kw">&lt;/name&gt;</span>
+  <span class="kw">&lt;value&gt;</span>My Nutch Spider<span class="kw">&lt;/value&gt;</span>
+<span class="kw">&lt;/property&gt;</span></code></pre></div>
 <p>接下来我们就考虑Solr与Nutch的集成吧。基于Solr实现站内搜索。封装及扩展性较好，提供了较为完备的解决方案，因此在门户社区中采用此方案，后期加入Compass方案。</p>
 <p>由于搜索引擎功能在门户社区中对提高用户体验有着重在门户社区中涉及大量需要搜索引擎的功能需求，目前在实现搜索引擎的方案上有集中方案可供选择：</p>
 <ol style="list-style-type: decimal">
@@ -480,8 +504,8 @@
 <p>Solr是一个基于Lucene的Java搜索引擎服务器。Solr 提供了层面搜索、命中醒目显示并且支持多种输出格式（包括 XML/XSLT 和 JSON 格式）。它易于安装和配置，而且附带了一个基于 HTTP 的管理界面。Solr已经在众多大型的网站中使用，较为成熟和稳定。Solr 包装并扩展了 Lucene，所以Solr的基本上沿用了Lucene的相关术语。更重要的是，Solr 创建的索引与 Lucene 搜索引擎库完全兼容。通过对Solr 进行适当的配置，某些情况下可能需要进行编码，Solr 可以阅读和使用构建到其他 Lucene 应用程序中的索引。此外，很多 Lucene 工具（如Nutch、 Luke）也可以使用Solr 创建的索引。注意solr是可以以.war的形式注入到tomcat的服务器中接受后者的托管的。（不知道现在还行不行）。</p>
 <p>ElasticSearch是与Solr可以相类比的功能，Solr 利用 Zookeeper 进行分布式管理，而 Elasticsearch 自身带有分布式协调管理功能。具体特点见<a href="http://www.cnblogs.com/chowmin/articles/4629220.html" class="uri" target="_blank" rel="external">http://www.cnblogs.com/chowmin/articles/4629220.html</a>。基于Lucene的还有许多产品，包括直接Lucene、Katta、Hadoop contrib/index、Lucanda、HBasene。</p>
 <p>Nutch与Solr的集成的教程可见<a href="http://blog.csdn.net/lzjzy520/article/details/41597089" class="uri" target="_blank" rel="external">http://blog.csdn.net/lzjzy520/article/details/41597089</a>。主要在于将Nutch的<code>conf/schema.xml</code>文件拷贝到Solr的<code>server/solr/collection1/conf</code>目录下面，名子保证是<code>schema.xml</code>。然后在其中的<code>field</code>结点里面添加一行</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">"_version_"</span> <span class="attr">type</span>=<span class="string">"long"</span> <span class="attr">indexed</span>=<span class="string">"true"</span> <span class="attr">stored</span>=<span class="string">"true"</span> <span class="attr">multiValued</span>=<span class="string">"false"</span>/&gt;</span></div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./bin/crawl ~/urls/ TestCrawl http://localhost:8983/solr/ 2</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;field</span><span class="ot"> name=</span><span class="st">&quot;_version_&quot;</span><span class="ot"> type=</span><span class="st">&quot;long&quot;</span><span class="ot"> indexed=</span><span class="st">&quot;true&quot;</span><span class="ot"> stored=</span><span class="st">&quot;true&quot;</span><span class="ot"> multiValued=</span><span class="st">&quot;false&quot;</span><span class="kw">/&gt;</span></code></pre></div>
+<pre class="shell"><code>./bin/crawl ~/urls/ TestCrawl http://localhost:8983/solr/ 2</code></pre>
 <pre><code>～/urls 是存放了种子url的目录
 TestCrawl 是crawlId，这会在HBase中创建一张以crawlId为前缀的表，例如TestCrawl_Webpage。
 http://localhost:8983/solr/ , 这是Solr服务器
@@ -493,7 +517,7 @@ http://localhost:8983/solr/ , 这是Solr服务器
 <p>注：<a href="http://blog.csdn.net/lzx1104/article/details/42029981" class="uri" target="_blank" rel="external">http://blog.csdn.net/lzx1104/article/details/42029981</a>介绍了Solr 4.9以上的managed-solr的功能。如果使用了ManagedIndexSchemaFactory，Solr会从“managedSchemaResourceName”指定的文件名中加载schema，而不是从schema.xml;如果指定的文件（managed-schema）不存在，将会从schema.xml中加载并创建文件，并将schema.xml重命名为<code>schema.xml.bak</code>. 不要编辑managed schema – 外部的修改会被忽略，并被修改schema 的RestAPI调用所覆盖。</p>
 <p><code>mutable = true</code>修改schema 的RestAPI调用被允许，否则会报错。</p>
 <p>注：nutch的crawl命令是一个完整的从索引到爬取的过程命令。比如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">crawl ./urls/ testcrawl http://10.0.8.68:8983/solr/collection1/ 1</div></pre></td></tr></table></figure>
+<pre class="shell"><code>crawl ./urls/ testcrawl http://10.0.8.68:8983/solr/collection1/ 1</code></pre>
 <h3 id="nutch-1.x-命令介绍httpwww.cnblogs.comxia520pip3663506.html">Nutch 1.x 命令介绍：<a href="http://www.cnblogs.com/xia520pi/p/3663506.html" class="uri" target="_blank" rel="external">http://www.cnblogs.com/xia520pi/p/3663506.html</a></h3>
 <ul>
 <li>nutch的readdb命令是“org.apache.nutch.crawl.CrawlDbReader”的别称，返回或者导出Crawl数据库（crawldb）中的信息。</li>
@@ -518,12 +542,57 @@ http://localhost:8983/solr/ , 这是Solr服务器
 <li>solrindex是“org.apache.nutch.indexer.solr.SolrIndexer”的代称，用于对抓取的内容进行索引建立，前提是要有solr环境。</li>
 </ul>
 <p>注意我们使用的crawl命令中的testcrawl就是crawlId，该ID可以用于readdb等命令中，比如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nutch readdb -crawlId testcrawl -stats</div><div class="line">### 如果我们后端使用的HBase，那么就可以从HBase中读到相应crawlId的数据库了。</div></pre></td></tr></table></figure>
+<pre class="shell"><code>nutch readdb -crawlId testcrawl -stats
+### 如果我们后端使用的HBase，那么就可以从HBase中读到相应crawlId的数据库了。</code></pre>
 <p>解决<code>No IndexWriters activated - check your configuration</code>的问题：见<a href="http://stackoverflow.com/questions/17649567/nutch-message-no-indexwriters-activated-while-loading-to-solr/25945844#25945844" class="uri" target="_blank" rel="external">http://stackoverflow.com/questions/17649567/nutch-message-no-indexwriters-activated-while-loading-to-solr/25945844#25945844</a>。</p>
 <p>nutch solrindex -crawlid doubanmovie</p>
 <h3 id="nutch-2.x的命令接口">Nutch 2.x的命令接口</h3>
 <p>Nutch1与Nutch2的接口发生了很大的变化，许多教程解释都已经不能再用了。参考<a href="http://wiki.apache.org/nutch/bin/nutch%20solrindex" target="_blank" rel="external">http://wiki.apache.org/nutch/bin/nutch%20solrindex</a>，来获得详细一点的针对Nutch2的命令的介绍。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="comment">### 我们从DMOZ开放式分类目录添加URL。</span></div><div class="line"><span class="comment">### 首先我们必须下载并且解压缩这个DMOZ所有网页的列表</span></div><div class="line"><span class="comment">### 这是一个200多MB的文件，所以这会消耗几分钟</span></div><div class="line">wget http://rdf.dmoz.org/rdf/content.rdf.u8.gz</div><div class="line">gunzip content.rdf.u8.gz </div><div class="line"></div><div class="line"><span class="comment">### 接下来我们选择这些网页当中随机的一些子集</span></div><div class="line"><span class="comment">### 我们使用随机的子集所以所有在跟着这一个教程做的人就不会伤害到同样的网站</span></div><div class="line"><span class="comment">### DMOZ包含了大约三百万个URL。我们从每5000个URL中选择出一个，因此我们就有大约1000个URL</span></div><div class="line"><span class="comment">### 这里我们从50000个URL中选择出一个，因此总共选择大约100个，可以节省很多时间</span></div><div class="line">nutch org.apache.nutch.tools.DmozParser content.rdf.u8 -subset 5000 &gt; dmoz/seed.txt</div><div class="line"></div><div class="line"><span class="comment">###  最后，我们用这些选出的URL来初始化crawlId（在Nutch 2中改成了crawlId而不是db文件，</span></div><div class="line"><span class="comment">### crawlId存在相应的hbase库当中</span></div><div class="line">nutch inject ./dmoz/ -crawlId dmozcrawl </div><div class="line"></div><div class="line"><span class="comment">###  要获取，我们首先要从数据库里产生一个获取的列表，</span></div><div class="line"><span class="comment">### 生成的任务中，-topN表示选择的URL数</span></div><div class="line"><span class="comment">### -batchId表示我们所生成的这些初始网页的任务名，接下来在fetch等操作的时候可以指定任务名</span></div><div class="line"><span class="comment">### topN是每一级所获取的网页数，限制topN可以减少抓取的数目</span></div><div class="line">nutch generate -crawlId dmozcrawl -topN 100</div><div class="line"></div><div class="line"><span class="comment">### 在以下面的命令在这个分段里进行获取</span></div><div class="line"><span class="comment">### 可以改成前面-batchId指定的参数，以代替fetch</span></div><div class="line">nutch fetch -all -crawlId dmozcrawl -threads 2</div><div class="line"></div><div class="line"><span class="comment">### 获取之后parse有关条目</span></div><div class="line">nutch parse -all -crawlId dmozcrawl</div><div class="line"></div><div class="line"><span class="comment">###  当这一切完成以后，我们就以获取回来的结果更新数据库</span></div><div class="line">nutch updatedb -all -crawlId dmozcrawl</div><div class="line"></div><div class="line"><span class="comment">### 进行索引，在新的nutch里面，已经没有invertindex了，只有index了</span></div><div class="line">nutch index -all -crawlId dmozcrawl</div><div class="line">nutch solrindex http://10.0.8.68:8983/solr/<span class="built_in">test</span>/ -all -crawlId dmozcrawl</div><div class="line">nutch solrindex http://10.0.8.68:8983/solr/collection1/ sec200 -crawlId dmozcrawl</div><div class="line"></div><div class="line"><span class="comment">### 爬完之后，在nutch里面可以进行查询诊断，其中的faq是关键词</span></div><div class="line"><span class="comment">### 该脚本尝试过，不能正常工作</span></div><div class="line">nutch org.apache.nutch.searcher.NutchBean faq</div><div class="line"></div><div class="line"><span class="comment">### 提交之后，我们将可以在solr控制台中看到有关文档的数目。</span></div><div class="line"><span class="comment">### 任何时候都能运行的测试命令</span></div><div class="line">nutch parse http://www.precastdesign.com/</div><div class="line">nutch indexchecker http://www.precastdesign.com/</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">### 我们从DMOZ开放式分类目录添加URL。</span>
+<span class="co">### 首先我们必须下载并且解压缩这个DMOZ所有网页的列表</span>
+<span class="co">### 这是一个200多MB的文件，所以这会消耗几分钟</span>
+<span class="kw">wget</span> http://rdf.dmoz.org/rdf/content.rdf.u8.gz
+<span class="kw">gunzip</span> content.rdf.u8.gz 
+
+<span class="co">### 接下来我们选择这些网页当中随机的一些子集</span>
+<span class="co">### 我们使用随机的子集所以所有在跟着这一个教程做的人就不会伤害到同样的网站</span>
+<span class="co">### DMOZ包含了大约三百万个URL。我们从每5000个URL中选择出一个，因此我们就有大约1000个URL</span>
+<span class="co">### 这里我们从50000个URL中选择出一个，因此总共选择大约100个，可以节省很多时间</span>
+<span class="kw">nutch</span> org.apache.nutch.tools.DmozParser content.rdf.u8 -subset 5000 <span class="kw">&gt;</span> dmoz/seed.txt
+
+<span class="co">###  最后，我们用这些选出的URL来初始化crawlId（在Nutch 2中改成了crawlId而不是db文件，</span>
+<span class="co">### crawlId存在相应的hbase库当中</span>
+<span class="kw">nutch</span> inject ./dmoz/ -crawlId dmozcrawl 
+
+<span class="co">###  要获取，我们首先要从数据库里产生一个获取的列表，</span>
+<span class="co">### 生成的任务中，-topN表示选择的URL数</span>
+<span class="co">### -batchId表示我们所生成的这些初始网页的任务名，接下来在fetch等操作的时候可以指定任务名</span>
+<span class="co">### topN是每一级所获取的网页数，限制topN可以减少抓取的数目</span>
+<span class="kw">nutch</span> generate -crawlId dmozcrawl -topN 100
+
+<span class="co">### 在以下面的命令在这个分段里进行获取</span>
+<span class="co">### 可以改成前面-batchId指定的参数，以代替fetch</span>
+<span class="kw">nutch</span> fetch -all -crawlId dmozcrawl -threads 2
+
+<span class="co">### 获取之后parse有关条目</span>
+<span class="kw">nutch</span> parse -all -crawlId dmozcrawl
+
+<span class="co">###  当这一切完成以后，我们就以获取回来的结果更新数据库</span>
+<span class="kw">nutch</span> updatedb -all -crawlId dmozcrawl
+
+<span class="co">### 进行索引，在新的nutch里面，已经没有invertindex了，只有index了</span>
+<span class="kw">nutch</span> index -all -crawlId dmozcrawl
+<span class="kw">nutch</span> solrindex http://10.0.8.68:8983/solr/test/ -all -crawlId dmozcrawl
+<span class="kw">nutch</span> solrindex http://10.0.8.68:8983/solr/collection1/ sec200 -crawlId dmozcrawl
+
+<span class="co">### 爬完之后，在nutch里面可以进行查询诊断，其中的faq是关键词</span>
+<span class="co">### 该脚本尝试过，不能正常工作</span>
+<span class="kw">nutch</span> org.apache.nutch.searcher.NutchBean faq
+
+<span class="co">### 提交之后，我们将可以在solr控制台中看到有关文档的数目。</span>
+<span class="co">### 任何时候都能运行的测试命令</span>
+<span class="kw">nutch</span> parse http://www.precastdesign.com/
+<span class="kw">nutch</span> indexchecker http://www.precastdesign.com/</code></pre></div>
 <h2 id="nutch加mongodb加elasticsearch的配置">Nutch加MongoDB加ElasticSearch的配置</h2>
 <p>见<a href="http://www.jeepshoe.org/82645084.htm" class="uri" target="_blank" rel="external">http://www.jeepshoe.org/82645084.htm</a>。</p>
 <p>一：nutch2.x与nutch1.x的主要区别：数据访问层的抽象 nutch 2.x—-gora-core-0.3—-gora-hbase—-hbase</p>
@@ -533,7 +602,7 @@ http://localhost:8983/solr/ , 这是Solr服务器
 <p>在配置的时候特别注意Hadoop的版本与HBase的版本的一致性。</p>
 <h3 id="solr的一个错误的处理">Solr的一个错误的处理</h3>
 <p>在使用nutch的时候，提交的的时候出现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Expected content type application/octet-stream but got text/html;charset=iso-8859-1</div></pre></td></tr></table></figure>
+<pre><code>Expected content type application/octet-stream but got text/html;charset=iso-8859-1</code></pre>
 <p><a href="http://stackoverflow.com/questions/24089769/solr-realtime-get-remotesolrexception-expected-mime-type-application-xml-but-go" class="uri" target="_blank" rel="external">http://stackoverflow.com/questions/24089769/solr-realtime-get-remotesolrexception-expected-mime-type-application-xml-but-go</a>上面给出来了一个回答。</p>
 <p>在使用Tomcat部署Solr后，Collection1的地址为：<a href="http://182.92.160.44:8080/solr/#/collection1" class="uri" target="_blank" rel="external">http://182.92.160.44:8080/solr/#/collection1</a>，但使用SolrJ进行索引的时候，应该使用<a href="http://182.92.160.44:8080/solr/collection1" class="uri" target="_blank" rel="external">http://182.92.160.44:8080/solr/collection1</a>，即无中间的#号。</p>
 <p>一个crawl命令可能封装了太多的过程。接下来我们以dmoz为例，一个命令一个命令地执行，看看是什么样的结果。</p>
@@ -705,7 +774,7 @@ http://localhost:8983/solr/ , 这是Solr服务器
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -713,7 +782,7 @@ http://localhost:8983/solr/ , 这是Solr服务器
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -722,7 +791,7 @@ http://localhost:8983/solr/ , 这是Solr服务器
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

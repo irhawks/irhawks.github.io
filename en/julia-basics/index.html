@@ -153,6 +153,9 @@
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> Julia编程语言基础知识 | 80x24 </title>
 </head>
 
@@ -453,9 +456,10 @@
 <p>关于REPL: A read–eval–print loop (REPL), also known as an interactive toplevel or language shell, is a simple, interactive computer programming environment that takes single user inputs (i.e. single expressions), evaluates them, and returns the result to the user; a program written in a REPL environment is executed piecewise. The term is most usually used to refer to programming interfaces similar to the classic Lisp machine interactive environment. Common examples include command line shells and similar environments for programming languages.</p>
 <p>实际上，可以使很多的语言都变成REPL方式工作。参考<a href="http://repl.it/languages" class="uri" target="_blank" rel="external">http://repl.it/languages</a>上面的一个在线的REPL程序，包含了各种程序实现。</p>
 <p>虽然julia命令直接打开一个REPL，但是官方还是推荐使用IJulia（以后会改名为Jupyter）。安装它是非常简单的，打开julia,输入Pkg.add(“IJulia”)即可。然后使用Pkg.update()或者Pkg.build(“IJulia”)可以执行更多的包管理的功能。启动IJulia的时候，可以通过打开julia控制台，然后输入：</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">using</span> IJulia</div><div class="line">notebook()</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">using IJulia
+notebook()</code></pre></div>
 <p>或者使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ipython notebook --profile julia</div></pre></td></tr></table></figure>
+<pre class="shell"><code>ipython notebook --profile julia</code></pre>
 <h2 id="下面还是浏览一下julia的基本的功能">下面还是浏览一下Julia的基本的功能</h2>
 <p>通过说明书<a href="http://docs.julialang.org/en/latest/manual/" class="uri" target="_blank" rel="external">http://docs.julialang.org/en/latest/manual/</a>来看，内容还是比较简单的。但是里面其实不简单。包括了元编程，并行编程等概念。</p>
 <p>下面我们一点点解决相关的问题。</p>
@@ -466,7 +470,8 @@
 <p>Julia当中的变量支持使用unicode的字符，但是变量名不能是保留字。赋值使用一般的等号，字符串字面量当中，Unicode是自然而然的。另外，也可以使用latex风格的变量名称，这其实就是把变量以数学模式开始和结束而已，没有什么好奇怪的。</p>
 <p>Julia的建议的风格是：变量名以小写的字母开始，同时不使用下划线，而使用大写字母使变量显得紧凑。另外，如果是函数，建议最后加一个叹号，表示这个函数是一个改变状态的函数（也称为过程）。这样可以与函数式风格明显地区别开。</p>
 <p>Julia对于常见的类型（整型、无符号整型、长整型、布尔型、字符型、浮点型）都有支持。Julia是动态类型语言，由此它有typeof函数，该函数接受一个变量为参数，然后返回一个类型。我们还可以把类型当成一个值赋给一个变量，这个变量就是一个类型变量了。下面是在Julia当中合法的操作：</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">my_type = typeof(<span class="number">123</span>)</div><div class="line">my_type <span class="type">&lt;:</span> <span class="built_in">Int</span></div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">my_type = typeof(<span class="fl">123</span>)
+my_type &lt;: <span class="dt">Int</span></code></pre></div>
 <p>其中，<code>&lt;:</code>是类的操作符，表示一个子类型。第二条语句运行的结果就是True，因为Int64确实是Int的子类型。另外，整数可以用0x之类的前缀表示，以支持不同进制的字面量输入。另外，使用isa(var, Type)可以判断某个变量是否属于某个类型。</p>
 <p>Julia的类型系统直接暴露于程序员可见的范围。比如，通过typemin(T)、typemax(T)可以得到相关类型的表示范围中的极小值与极大值。这比C实践中的方法方便多了。注意，在Julia当中，实行的是所谓的模态算术。因此typemax(Int64)+1 == typemin(Int64)为真。也就是说，整数的加减是循环的。这种数学的处理，大大方便了对于数值操作的溢出的概念。使用bits函数，可以得到数据的内部字节表示。另外，Julia的浮点数的处理的机制按照IEEE 754规范，因此具有Inf、NaN之类的量。使用eps()函数，可以得到浮点类型的机器的最小精度。</p>
 <p>浮点数与整数的处理，可以参考<a href="http://docs.julialang.org/en/release-0.3/manual/integers-and-floating-point-numbers/" class="uri" target="_blank" rel="external">http://docs.julialang.org/en/release-0.3/manual/integers-and-floating-point-numbers/</a>。个人觉得，这可以作为高级编程语言的进一步的知识，让学习者可以掌握编程语言处理科学数据的规范。</p>
@@ -484,20 +489,35 @@
 <p>Julia中的字符串不想被转义的话，可以在前面添加一个r，与Python类似。Julia的正则表达式与PCRE是兼容的。r代表的实际上是后面的字符是一个正则表达式字符串。比特数组使用b“DATA”这样的字面形式表示。另外，v“0.2”表示一个版本号类型，具有版本号的一些比较运算符，这是为了方便某些操作吧。版本号的比较机制，可以参考<a href="http://docs.julialang.org/en/release-0.3/manual/strings/" class="uri" target="_blank" rel="external">http://docs.julialang.org/en/release-0.3/manual/strings/</a>。</p>
 <h2 id="julia的函数">Julia的函数</h2>
 <p>Julia的函数体可以使用</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> f(x,y)</div><div class="line">	x + y</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia"><span class="kw">function</span> f(x,y)
+    x + y
+<span class="kw">end</span></code></pre></div>
 <p>最后一个表达式的值，默认作为返回的值。另外，也可以使用f(x,y) = x+y来定义一个函数。此时表达式不会被求值。(注意，表达式与表达式被求值是完全不同的概念）。</p>
 <p>此外，函数名也可以作为一个变量被赋值，比如g=f，这时候便可以用g(x,y)来调用f(x,y)。另外，函数求值实际上是调用方法，所以可以使用apply(f,2,3)。(不过，直接使用f.apply(2,3)可能是不被允许的（也许像Python那样处理的吧）。</p>
 <p>因为Julia支持使用Unicode字符，所以有些时候语法会很奇妙，比如可以直接把Unicode字符的求和<code>\sigma</code>当成函数名称。</p>
 <p>函数也可以显式添加return语句。在Julia中，运算符也是函数，所以使用+(1,2,3)以及f = + 也是被允许的。Scala也有这样的特性，但是不知道形式语言理论是怎么说的。</p>
 <p>在Julia中，组成数组与Python中一样方便，a, b就组成了一个数组。所以表达式a,b返回的是两个表达式的和按照顺序组成一个数组。x, y = 1, 2这样的赋值语句，也是被容许的。Julia的函数也支持可选参数，做法与Python类似，此外，如果有可选参数名称，显式指定可选参数的时候，位置可以替换。</p>
 <p>定义函数的时候发生了什么：</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> f (x, y )</div><div class="line"> x + y</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia"><span class="kw">function</span> f (x, y )
+ x + y
+<span class="kw">end</span></code></pre></div>
 <p>实际上，函数的参数是在比x+y高一个作用域的位置，但是低于可见作用域。而且，参数得到值的过程是从左到右按照顺序来的。所以f(x, y = x)不会发生错误，但是f(y, x = y)却会报“变量未定义”的错误。其实我们可以看成是函数的参数是在执行之前被构造出来的过程，在动态语言中，调用f(1)相当于实际执行的是：</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">eval (x = <span class="number">1</span>)</div><div class="line">// 判断出参数有一个，所以</div><div class="line">eval (y = x)</div><div class="line">x = y</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">eval (x = <span class="fl">1</span>)
+// 判断出参数有一个，所以
+eval (y = x)
+x = y</code></pre></div>
 <p>执行中，左边的形参先得到其值，右边的形参稍后。所以，虽然直觉上可能认为函数的形参取得参数是并行的，但是其实并不是这样。</p>
 <h3 id="mapreduce特性">MapReduce特性</h3>
 <p>为了方便书写把一个函数作为参数传递到其它的函数，julia使用do语法，比如</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">map([A, B, C]) <span class="keyword">do</span> x</div><div class="line">    <span class="keyword">if</span> x &lt; <span class="number">0</span> &amp;&amp; iseven(x)</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    <span class="keyword">elseif</span> x == <span class="number">0</span></div><div class="line">        <span class="keyword">return</span> <span class="number">1</span></div><div class="line">    <span class="keyword">else</span></div><div class="line">        <span class="keyword">return</span> x</div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">map([A, B, C]) <span class="kw">do</span> x
+    <span class="kw">if</span> x &lt; <span class="fl">0</span> &amp;&amp; iseven(x)
+        <span class="kw">return</span> <span class="fl">0</span>
+    <span class="kw">elseif</span> x == <span class="fl">0</span>
+        <span class="kw">return</span> <span class="fl">1</span>
+    <span class="kw">else</span>
+        <span class="kw">return</span> x
+    <span class="kw">end</span>
+<span class="kw">end</span></code></pre></div>
 <p>该语句的含义是创建一个以x为参数的匿名函数，后面是该匿名函数的体。最后，do会把这个函数当成是第一个参数传递给map()函数。这与Python语言中的with语句有一些相像。</p>
 <p>Julia的控制流可以使用(sentence; sentence; sentence)表示，小括号可以换成begin .. end。</p>
 
@@ -658,7 +678,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -666,7 +686,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -675,7 +695,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

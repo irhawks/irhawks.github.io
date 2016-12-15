@@ -240,13 +240,6 @@
     </url>
 
     <url>
-        <loc>./tags/Hexo-NexT-Blog/</loc>
-        <lastmod>2016-12-14T10:40:49.318Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>./tags/%E9%9A%8F%E6%9C%BA%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/</loc>
         <lastmod>2016-12-14T11:00:03.326Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -632,6 +625,13 @@
     </url>
 
     <url>
+        <loc>./tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</loc>
+        <lastmod>2016-12-14T11:15:35.130Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>./tags/%E6%96%87%E6%A1%A3/</loc>
         <lastmod>2016-12-14T11:15:35.130Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -640,13 +640,6 @@
 
     <url>
         <loc>./tags/%E6%B3%A8%E9%87%8A/</loc>
-        <lastmod>2016-12-14T11:15:35.130Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>./tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</loc>
         <lastmod>2016-12-14T11:15:35.130Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -961,27 +954,6 @@
     </url>
 
     <url>
-        <loc>./tags/blog/</loc>
-        <lastmod>2016-12-14T11:22:49.248Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>./tags/hello/</loc>
-        <lastmod>2016-12-14T11:22:49.248Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>./tags/hexo/</loc>
-        <lastmod>2016-12-14T11:22:49.248Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>./tags/JDK/</loc>
         <lastmod>2016-12-14T11:23:23.682Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1171,13 +1143,6 @@
     </url>
 
     <url>
-        <loc>./tags/pandoc/</loc>
-        <lastmod>2016-12-14T11:27:10.196Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>./tags/apache/</loc>
         <lastmod>2016-12-14T13:46:41.039Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1299,6 +1264,62 @@
     <url>
         <loc>./tags/%E7%88%AC%E8%99%AB/</loc>
         <lastmod>2016-12-14T14:41:20.578Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./tags/Hexo/</loc>
+        <lastmod>2016-12-15T03:53:40.035Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./tags/NexT/</loc>
+        <lastmod>2016-12-15T03:53:40.035Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./tags/Blog/</loc>
+        <lastmod>2016-12-15T03:53:40.035Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./tags/blog/</loc>
+        <lastmod>2016-12-15T03:57:04.406Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./tags/hello/</loc>
+        <lastmod>2016-12-15T03:57:04.406Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./tags/hexo/</loc>
+        <lastmod>2016-12-15T03:57:04.406Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./tags/pandoc/</loc>
+        <lastmod>2016-12-15T12:01:15.558Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./tags/crossref/</loc>
+        <lastmod>2016-12-15T12:01:15.558Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

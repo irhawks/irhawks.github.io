@@ -153,6 +153,9 @@
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> 人工智能语言介绍 | 80x24 </title>
 </head>
 
@@ -465,14 +468,14 @@
 <p>前面我们讲Prolog用于知识表示的时候，并没有讲到它的数据表示。实际上，以大写字母开头的单词代表变元外，还有数值类型与原子类型(相当于常量)，一个以单引号括起来的字符串也代表一个原子。而需要注意的是，现在Prolog的数值是整数类型。</p>
 <p>除了基本元素还有列表与元组，可以嵌套，而且列表上有合一规则。</p>
 <p>除了这些结构外，Prolog也提供了一组常用的外理数据的谓词。比如<code>append()</code>，<code>length()</code>，<code>member()</code>，列表操纵等。在Prolog语言中，</p>
-<figure class="highlight prolog"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">length([a,b,c], <span class="symbol">Length</span>)</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode prolog"><code class="sourceCode prolog">length([a,b,c]<span class="kw">,</span> <span class="dt">Length</span>)</code></pre></div>
 <p>用于把Length的值赋成列表<span class="math inline">\([a,b,c]\)</span>的长度，而</p>
-<figure class="highlight prolog"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">length([a,b,c],<span class="number">3</span>)</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode prolog"><code class="sourceCode prolog">length([a,b,c]<span class="kw">,</span><span class="dv">3</span>)</code></pre></div>
 <p>用于判断列表的长度是否为3.也就是说，在Prolog中，函数值的接收与对值的判断是同样的一个形式。</p>
 <p>事实与规则在Prolog知识库中出现。而在推理的过程中实现求值。这些功能在前面我们已经用过了。</p>
 <p>最后，在推理的过程中，可以使用trace.跟踪计算的过程。</p>
 <p>在Prolog中，把一个表达式赋给一个变量，可以使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">X is 3+3 **2.</div></pre></td></tr></table></figure>
+<pre><code>X is 3+3 **2.</code></pre>
 <p>这样的形式。注意使用的是is运算符。</p>
 <p>Prolog中，可以使用小数，这个时候，小数视为常项。</p>
 <h2 id="ux4ebaux5de5ux667aux80fdux8bedux8a00ux6982ux8ff0">人工智能语言概述</h2>
@@ -488,10 +491,15 @@
 <p>但是C与Python其中的区别是，在函数式程序设计中，函数是作为一等对象或者一等函数。在一等函数里，我们可以把函数简单地当成数据。一等函数是有值的，就像其它任何数据结构一样。一等函数的一个重要表现是动态函数，也就是在运行期建立。C语言并不支持动态函数。</p>
 <p>现代语言都力求支持多编程范式，因此对它们的分类也就越来越困难了。</p>
 <p>下面是Ruby中一等函数的例子:</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">mul_by</span><span class="params">(factor)</span></span></div><div class="line"><span class="keyword">return</span> Proc.new(<span class="params">|n|</span> n*factor)</div><div class="line"><span class="keyword">end</span></div><div class="line">mul_by_2 = mul_by(<span class="number">2</span>)</div><div class="line">mul_by_2.call(<span class="number">8</span>)</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span class="kw">def</span> mul_by(factor)
+<span class="kw">return</span> <span class="dt">Proc</span>.new(|n| n*factor)
+<span class="kw">end</span>
+mul_by_2 = mul_by(<span class="dv">2</span>)
+mul_by_2.call(<span class="dv">8</span>)</code></pre></div>
 <p>其中<code>mul_by()</code>函数接受<code>factor</code>参数，返回相应的乘积函数，然后用<code>mul_by_2</code>作为一个函数对象，使用它的call方法计算函数值。</p>
 <p>函数式语言中，通常支持函数调用自身。它是函数式语言中典型的实现循环的方法。比如在LISP中的使用递归计算阶乘:</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(<span class="name">defun</span> fact (<span class="name">n</span>) </div><div class="line">(<span class="name">if</span> (<span class="name">=</span> n <span class="number">1</span>) <span class="number">1</span> (<span class="name">*</span> n factor(<span class="name">n-1</span>))))</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode lisp"><code class="sourceCode commonlisp">(<span class="kw">defun</span><span class="fu"> fact </span>(n) 
+(<span class="kw">if</span> (<span class="kw">=</span> n <span class="dv">1</span>) <span class="dv">1</span> (<span class="kw">*</span> n factor(n<span class="dv">-1</span>))))</code></pre></div>
 <p>LISP的特殊性不只是它采用函数式设计，而也是因为它的运算表达式都是前缀形式的表达式。以前以为理解LISP代码与写LISP代码都很难，但是现在觉得括号也没有引起想象中的太大的混淆。</p>
 <p>闭包是函数式程序设计中与一等函数相关的一个很有用的特性。被传递到不同的词汇上下文使用的动态函数(有时是匿名的)被称为闭包。在计算机科学中，闭包（Closure）是词法闭包（Lexical Closure）的简称，是引用了自由变量的函数。这个被引用的自由变量将和这个函数一同存在，即使已经离开了创造它的环境也不例外。所以，有另一种说法认为闭包是由函数和与其相关的引用环境组合而成的实体。</p>
 <p>闭包的特殊性在于它引入了已有函数中的变量，当我们返回一个内部的函数的时候，虽然外函数结束，但是我们不能释放掉此函数里面的参数(因为它被闭包函数使用)，所以需要编程语言进行额外的处理才能支持闭包。</p>
@@ -512,7 +520,8 @@
 <p>LISP表达式采取表的方式表示，是采用前缀表示法。每一个LISP表达式都会返回一个值，而且事实上，一个LISP函数可以返回任意个值。</p>
 <p>LISP中还有提供判断的谓词，比如atom用于返回它的参数是否是一个原子，返回true或者false.</p>
 <p>LISP的赋值也有多种方法，常见的是采用setq方法。用于将一个值赋给一个符号，或者将一系列的值赋值给一系列的符号。比如:</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(<span class="name">setq</span> score-1 <span class="number">95</span> score-2 <span class="number">100</span>)</div><div class="line">(<span class="name">setq</span> thedate '(<span class="string">"April"</span> <span class="number">13</span> <span class="number">1968</span>))</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode lisp"><code class="sourceCode commonlisp">(<span class="kw">setq</span> score<span class="dv">-1</span> <span class="dv">95</span> score<span class="dv">-2</span> <span class="dv">100</span>)
+(<span class="kw">setq</span> thedate &#39;(<span class="st">&quot;April&quot;</span> <span class="dv">13</span> <span class="dv">1968</span>))</code></pre></div>
 <p>其中在表开头前使用单引号，表示不要对此表进行求值后再赋值。LISP语言的另一种赋值方法是let.</p>
 <p>LISP的表处理是其核心的机制。前面已经说过用setq建立一个表(是建立一个表的同时对变量赋值)。</p>
 <p>函数<code>cons</code>用于通过两个参数构千定个表，也就是把第一个参数作为第二个参数(表)的第一个元素。比如<code>(cons 1 ())</code>返回<code>(1)</code>，而<code>(cons 1 cons(2 ()))</code>返回<code>(1,2)</code>。</p>
@@ -522,11 +531,21 @@
 <p>注意LISP可以对任何表求值，只要在解析的时候没有加上单引号。</p>
 <p>将一个程序作为数据的方法是setq,比如<code>(setq expr ‘(\* 5 5))</code>，表示把expr赋成表<code>'(\* 5 5)</code>(未求值)。然后调用<code>(eval expr)</code>来计算expr的值<code>(25)</code>。</p>
 <p>使用print方法输出(此时函数返回被输出的值)，使用if作为条件判断。cond则相当于其它语言里面的case语句。</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">(<span class="name">setq</span> name <span class="string">"Elise."</span>)</div><div class="line">(<span class="name">setq</span> greet</div><div class="line">(<span class="name">cond</span></div><div class="line">    ((<span class="name">equal</span> name <span class="string">"Marc"</span>)   <span class="string">"Hi,Marc."</span>)</div><div class="line">    ((<span class="name">equal</span> name <span class="string">"Megan"</span>)  <span class="string">"Hi,Megan."</span>)</div><div class="line">    ((<span class="name">equal</span> name <span class="string">"Elise"</span>)  <span class="string">"Hi,Elise."</span>)</div><div class="line">    ((<span class="name">equal</span> name <span class="string">"Jill"</span>)   <span class="string">"Hi,Jill."</span>)</div><div class="line">    (<span class="name">t</span> <span class="string">"Hi you."</span>)))</div><div class="line">(<span class="name">print</span> greet)</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode lisp"><code class="sourceCode commonlisp">(<span class="kw">setq</span> name <span class="st">&quot;Elise.&quot;</span>)
+(<span class="kw">setq</span> greet
+(<span class="kw">cond</span>
+    ((<span class="kw">equal</span> name <span class="st">&quot;Marc&quot;</span>)   <span class="st">&quot;Hi,Marc.&quot;</span>)
+    ((<span class="kw">equal</span> name <span class="st">&quot;Megan&quot;</span>)  <span class="st">&quot;Hi,Megan.&quot;</span>)
+    ((<span class="kw">equal</span> name <span class="st">&quot;Elise&quot;</span>)  <span class="st">&quot;Hi,Elise.&quot;</span>)
+    ((<span class="kw">equal</span> name <span class="st">&quot;Jill&quot;</span>)   <span class="st">&quot;Hi,Jill.&quot;</span>)
+    (<span class="kw">t</span> <span class="st">&quot;Hi you.&quot;</span>)))
+(<span class="kw">print</span> greet)</code></pre></div>
 <p>这里，当name等于各个不同值的时候，把greet设置成不同的值。然后使用greet显示出来。最后的t代表true 的意思，相当于case的默认部分。</p>
 <p>LISP每个求值都有返回，返回的都是一个表。</p>
 <p>在LISP中，使用defun宏建立函数。格式是:</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(<span class="name">defun</span> func-name (<span class="name">parameter*</span>)</div><div class="line"><span class="string">"Optional string to describe function"</span></div><div class="line">(<span class="name">body-form</span>))</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode lisp"><code class="sourceCode commonlisp">(<span class="kw">defun</span><span class="fu"> func-name </span>(parameter*)
+<span class="st">&quot;Optional string to describe function&quot;</span>
+(body-form))</code></pre></div>
 <p>在LISP中，各个不同的词法成分完全通过空白字符以及括号分隔，名称都是可以任意取的。</p>
 <p>这里只略微讲它的基本特性。作为编程语言的一面，可以参考LISP的有关书籍。</p>
 <p>一个编译器很简单的语言一般都是好的语言，可以供程序员自由地开发。</p>
@@ -565,7 +584,20 @@
 </dd>
 </dl>
 <p>下面是POPLOG的一个交互式输入示例:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">15:48 kael~$ poplog pop11</div><div class="line">Poplog Version 15.6.4</div><div class="line">setting poplib</div><div class="line">poplib set to /usr/local/poplog/current-poplog/Poplib</div><div class="line"></div><div class="line">Sussex Poplog (Version 15.64 Mon Oct 24 00:15:10 BST 2011)</div><div class="line">Copyright (c) 1982-2009 University of Sussex. All rights reserved.</div><div class="line"></div><div class="line">Setpop</div><div class="line">: dataword(&quot;zoe&quot;)=&gt;</div><div class="line">** word </div><div class="line">: dataword(5)=&gt;</div><div class="line">** integer </div><div class="line">:</div></pre></td></tr></table></figure>
+<pre class="poplog"><code>15:48 kael~$ poplog pop11
+Poplog Version 15.6.4
+setting poplib
+poplib set to /usr/local/poplog/current-poplog/Poplib
+
+Sussex Poplog (Version 15.64 Mon Oct 24 00:15:10 BST 2011)
+Copyright (c) 1982-2009 University of Sussex. All rights reserved.
+
+Setpop
+: dataword(&quot;zoe&quot;)=&gt;
+** word 
+: dataword(5)=&gt;
+** integer 
+: </code></pre>
 <p>抄终端代码实在是太难看了，要多难看有多难看。</p>
 <p>表达式:由于POP-11是一种多范式的语言，我们可以使用多种方式定义表达式并求出其值，像<code>5+7=&gt;;</code>，<code>*(3,4)</code> 这样的形式都是允许的。前缀表示与后缀表示都是可以的。通过两种方式，POP-11同时支持命令式编程与函数式编程。</p>
 <p>变量:在POP-11中使用关键字 <code>vars</code> 声明变量，可以用它一次建立多个变量，如matlab中那样。变量之间用逗号分开，语句结束用分号分开。(用分号结尾的句子可以抑制向终端输出，Sage也有这样的功能)。变量的类型是动态确定的，它可以被赋予任意的值，比如 <code>[a b c] -&gt; x</code> (使用 <code>-&gt;</code> 作为赋值运算符(因为 <code>=</code> 代表的是相等测试(逻辑或算术相等)))。</p>
@@ -575,10 +607,15 @@
 <p>~ POP-11的条件语句采用命令式块结构模型。形如if-then-endif这样的形式，因而不再使用括号块。类似的命令式结构，还有until-do, do-until, repeat, while-do与for等等。不过尽管POP-11支持许多迭代方法，但是事实上，有些仅仅是语法糖(那些语言的附加成份，但是不不扩展该语言的表达能力的语句)。</p>
 <p>POP-11支持maplist()作为其它语言中的map过程。用于将函数应用到一个表。而在POP-11中，过程的定义与块结构语言一样，使用define-endfine的结构，不过POP-11的函数定义是很广的，可以向过程传递多个结果，也可以返回多个结果(就和Python的语法一样)。</p>
 <p>模式匹配:POP-11提供一组完美的模式匹匹功能，用于逻辑程序设计或者自然程序设计过程。POP-11的匹配是通过matches关键字实现的。比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[ [tim 41] [jill 35] [megan 15] ] =&gt; mylist;</div><div class="line">vars age;</div><div class="line">mylist matches [ == [jill ?age] == ] =&gt;</div></pre></td></tr></table></figure>
+<pre class="poplog"><code>[ [tim 41] [jill 35] [megan 15] ] =&gt; mylist;
+vars age;
+mylist matches [ == [jill ?age] == ] =&gt;</code></pre>
 <p>其中matches匹配的是列表中的每一个元素。如果有等于jill的项，那么返回真值，并且将age变量的值赋给符合要求的匹配(使用?代表我们的意愿)。</p>
 <p>其中的==用于表示模式在列表中出现的位置不限。这种模式匹配对于开发自然语言系统来说特别有用，如著名的Eliza程序。 比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[I hate you] -&gt; inp_sentence;</div><div class="line">if inp_sentence matches [I ?verb you == ] then</div><div class="line">[why do you ^verb me] =&gt;</div><div class="line">endif;</div></pre></td></tr></table></figure>
+<pre class="poplog"><code>[I hate you] -&gt; inp_sentence;
+if inp_sentence matches [I ?verb you == ] then
+[why do you ^verb me] =&gt;
+endif;</code></pre>
 <p>它表示在遇到指定的模式的时候，把中间的verb提取出来，然后返回输出。</p>
 <p>也告诉我们，匹配的时候用问号，而引用变量的匹配的时候用<code>^</code>号。</p>
 <p>POP-11内置的输出语句是printf,它的参数的类型是一个串(不是字)。</p>
@@ -749,7 +786,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -757,7 +794,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -766,7 +803,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

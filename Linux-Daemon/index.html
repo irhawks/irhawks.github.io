@@ -162,6 +162,9 @@ unix下的守护进程分为独立守护">
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> linux下的守护进程 | 80x24 </title>
 </head>
 
@@ -460,7 +463,7 @@ unix下的守护进程分为独立守护">
 <p>守护进程按照工作状态分为定时执行的守护进程，与信号守护进程。后者指服务被连接请求信号所触发。</p>
 <p>守护进程所守护的不一定是网络，也可能是本地的某种服务，如打印服务。</p>
 <p>在IP连接上，服务与端口号的对应在/etc/services中写出。每行<code>#</code>之后的内容作为注释，非注释行标明了对应关系，格式是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;ApplicationLayerProtocol&gt; &lt;port/TransmissionLayerProtocol&gt; &lt;introduction&gt;</div></pre></td></tr></table></figure>
+<pre><code>&lt;ApplicationLayerProtocol&gt; &lt;port/TransmissionLayerProtocol&gt; &lt;introduction&gt;</code></pre>
 <p>守护进程一般需要执行档案，配置文件，运行环境这些条件。</p>
 <p>进程运行的PID在<code>/var/run</code>目录下保存。</p>
 <h2 id="开机脚本">开机脚本</h2>
@@ -469,7 +472,10 @@ unix下的守护进程分为独立守护">
 <!-- 所不理解的是，什么放在`/var/lib`下面，什么放在`/var/run`下面。-->
 <p>开机脚本以服务名作为脚本名。规定当什么参数都不加的时候，脚本文件返回所有可用的参数。一般参数会有start,stop,status,restart等。语义和单词意思相同。可以通过直接控制脚本管理服务进程。但是也可以通过service脚本统一进行管理。貌似优势就在于不用输入脚本文件所在的路径。</p>
 <p>被超级守护进程所管的守护进程的配置主要在 <code>/etc/xinetd.d/*</code> 下进行，每一个文件代表一个服务。比如rsync守护过程就是由xinetd来管理的。配置文件作为一个小节出现。格式如下：</p>
-<figure class="highlight plain"><figcaption><span>.c&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">service $&#123;service_name&#125;</div><div class="line">&#123;</div><div class="line">$&#123;configurations&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">service ${service_name}
+{
+${configurations}
+}</code></pre></div>
 <p>其中每一个配置都是一个var=value的形式，之间可以有空格。全局配置文件在xinetd.conf当中，括号开头是defaults.</p>
 <p>其中的等于号可以换成是+=,-=,分别表示加入新参数，减去新参数。</p>
 <p><strong>注：</strong> 如果既有在xinetd当中的配置，又有自己的配置该怎么办？</p>
@@ -552,11 +558,52 @@ unix下的守护进程分为独立守护">
 <h2 id="守护进程概述">守护进程概述</h2>
 <p>在Linux下面没有什么持久运行的程序与一次运行的程序的区别。以前我们总是以为，开机启动的程序和作为守护进程运行的程序是不同的。其实它们的差别也并没有那么大。开机运行的程序如果不停止，那么就作为守护进程一直运行了。在Linux中，/etc/init.d里面是开机运行的程序，但是也可以用于启动守护进程与开机脚本。本质上，它们作为“服务”出现。反映的有start, stop, restart, status等语义即可。</p>
 <p>开机创建虚拟网卡，其实同样是一种服务。这种服务在开机的时候运行，创建出网卡，在关机的时候停止服务。</p>
-<figure class="highlight plain"><figcaption><span>.shell&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">USER=&quot;root&quot;</div><div class="line">TAP_NETWORK=&quot;192.168.0.1&quot;</div><div class="line">TAP_DEV_NUM=0</div><div class="line">DESC=&quot;TAP config&quot;</div><div class="line"></div><div class="line">do_start() &#123;</div><div class="line">if [ ! -x /usr/sbin/tunctl ]; then</div><div class="line">    echo &quot;/usr/sbin/tunctl was NOT found&quot;</div><div class="line">    exit 1</div><div class="line">fi</div><div class="line">tunctl -t tap $TAP_DEV_NUM -u root</div><div class="line">ifconfig tap $TAP_DEV_NUM $&#123;TAP_NETWORK&#125; netmask 255.255.255.0 promisc</div><div class="line">ifconfig tap $TAP_DEV_NUM</div><div class="line">&#125;</div><div class="line"></div><div class="line">do_stop() &#123;</div><div class="line">ifconfig tap $TAP_DEV_NUM down</div><div class="line">&#125;</div><div class="line"></div><div class="line">do_restart() &#123;</div><div class="line">do_stop</div><div class="line">do_start</div><div class="line">&#125;</div><div class="line"></div><div class="line">check_status() &#123;</div><div class="line">ifconfig tap $TAP_DEV_NUM</div><div class="line">&#125;</div><div class="line"></div><div class="line">case $1 in</div><div class="line">start) do_start ;;</div><div class="line">stop) do_stop;;</div><div class="line">restart) do_restart;;</div><div class="line">status)</div><div class="line">    echo &quot;Status of $DESC:&quot;</div><div class="line">    check_status</div><div class="line">    exit &quot;$?&quot;</div><div class="line">    ;;</div><div class="line">*) </div><div class="line">    echo &quot;Usage: $0 &#123;start | stop | restart | status&#125;&quot;</div><div class="line">    exit 1</div><div class="line">esac</div></pre></td></tr></table></figure>
+<pre class="sourceCode shell"><code>USER=&quot;root&quot;
+TAP_NETWORK=&quot;192.168.0.1&quot;
+TAP_DEV_NUM=0
+DESC=&quot;TAP config&quot;
+
+do_start() {
+if [ ! -x /usr/sbin/tunctl ]; then
+    echo &quot;/usr/sbin/tunctl was NOT found&quot;
+    exit 1
+fi
+tunctl -t tap $TAP_DEV_NUM -u root
+ifconfig tap $TAP_DEV_NUM ${TAP_NETWORK} netmask 255.255.255.0 promisc
+ifconfig tap $TAP_DEV_NUM
+}
+
+do_stop() {
+ifconfig tap $TAP_DEV_NUM down
+}
+
+do_restart() {
+do_stop
+do_start
+}
+
+check_status() {
+ifconfig tap $TAP_DEV_NUM
+}
+
+case $1 in
+start) do_start ;;
+stop) do_stop;;
+restart) do_restart;;
+status)
+    echo &quot;Status of $DESC:&quot;
+    check_status
+    exit &quot;$?&quot;
+    ;;
+*) 
+    echo &quot;Usage: $0 {start | stop | restart | status}&quot;
+    exit 1
+esac</code></pre>
 <p>上面就是一个符合chkconfig规范的启动脚本。</p>
 <p>实际中我们可能把创建网桥的工作交给开机脚本，而把配置虚拟接口的网络地址这样的任务交给network子程序。</p>
 <p>然后使用</p>
-<figure class="highlight plain"><figcaption><span>.bash&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">chkconfig --add config_tap</div><div class="line">chkconfig --level 345 config_tap on</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">chkconfig</span> --add config_tap
+<span class="kw">chkconfig</span> --level 345 config_tap on</code></pre></div>
 <p>让它启动。在Debian系的系统上，使用service命令完成这样的工作。</p>
 <p>对于个人用户来说，登录的时候运行某一个程序才是恰当的。因此用户登入之后才需要相应的环境。</p>
 
@@ -607,8 +654,8 @@ unix下的守护进程分为独立守护">
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Linux-Log/" rel="prev" title="Linux下的日志记录及其策略">
-                Linux下的日志记录及其策略 <i class="fa fa-chevron-right"></i>
+              <a href="/周期性进程与crontab/" rel="prev" title="周期性进程与crontab">
+                周期性进程与crontab <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -719,7 +766,7 @@ unix下的守护进程分为独立守护">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -727,7 +774,7 @@ unix下的守护进程分为独立守护">
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -736,7 +783,7 @@ unix下的守护进程分为独立守护">
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

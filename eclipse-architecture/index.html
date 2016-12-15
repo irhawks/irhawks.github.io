@@ -156,6 +156,9 @@
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> Eclipse体系结构与Ecore技术 | 80x24 </title>
 </head>
 
@@ -469,7 +472,9 @@
 <p>了解Eclipse的体系结构对于后面要进行的开发会有一些好处吧。Eclipse的骨架是OSGi体系结构，它是Open Services Gateway Initiative的简称。OSGi技术原是为嵌入式硬件而开发的，使网络上的服务提供者和使用者互相交互。</p>
 <p>在OSGi中，所有被配置的组件都是以插件的方式提供的。SWT和JFace是Eclipse的最基本的用户接口API。在其上提供了基本的UI Workbench。在然后上面就有了更新管理器与帮助系统，它们构成了Eclipse的框架。</p>
 <p>插件为了自身能够对其它插件进行扩展而提供“扩展点”。当要为插件提供增加功能的时候就可以利用这个扩展点。在扩展点的基础上，插件之间可以互相连接。扩展和扩展点之间的连接是在程序执行的时候被建立的，提供扩展点的插件事先并不知道该扩展点在实际运行的时候被展了什么样的行为。使用扩展点的插件需要在其源代码的plugin.xml配置中使用<code>&lt;extension&gt;</code>元素声明该扩展点。基本格式为:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">extension</span> <span class="attr">point</span>=<span class="string">"被使用扩展点的ID"</span>&gt;</span></div><div class="line">    ......</div><div class="line"><span class="tag">&lt;/<span class="name">extension</span>&gt;</span></div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml">    <span class="kw">&lt;extension</span><span class="ot"> point=</span><span class="st">&quot;被使用扩展点的ID&quot;</span><span class="kw">&gt;</span>
+        ......
+    <span class="kw">&lt;/extension&gt;</span></code></pre></div>
 <p>像这样的扩展点和扩展不断地积累，使得Eclipse平台能够实现各种各样的功能。Eclipse平台提供的扩展点许多类，其中有三类比较基础：</p>
 <ul>
 <li>增加菜单项</li>
@@ -479,9 +484,19 @@
 <p>在Eclipse的帮助中有Eclipse提供的所有扩展点的说明，可供编写扩展时参考。我们也可以为自己的插件定义一个扩展点。</p>
 <p>在开发Java的时候，我们已经熟悉了Eclipse窗口由工作台、菜单栏、工具栏、工作台页（也就是包含一个个子窗口的容器）、状态栏构成。其中工作台页又有视图、编辑器等类型的子窗口，通称为透视图(Perspective)。Eclipse工作台即Workbench，它是整个用户接口的总称。</p>
 <p>我们的插件使用org.eclipse.ui.PlatformUI类访问工作台，示例如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//取得工作台</span></div><div class="line">IWorkbench workbench = PlatformUI.getWorkbench();</div><div class="line"><span class="comment">//取得工作台窗口</span></div><div class="line">IWorkbenchWindow window = workbench.getActiveWorkbenchWindow();</div><div class="line"><span class="comment">//取得工作台页面</span></div><div class="line">IWorkbenchPage page = window.getActivePage();</div><div class="line"><span class="comment">//取得当前处于活动状态的编辑器窗口</span></div><div class="line">IEditorPart part = page.getActiveEditor();</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="co">//取得工作台</span>
+IWorkbench workbench = PlatformUI.<span class="fu">getWorkbench</span>();
+<span class="co">//取得工作台窗口</span>
+IWorkbenchWindow window = workbench.<span class="fu">getActiveWorkbenchWindow</span>();
+<span class="co">//取得工作台页面</span>
+IWorkbenchPage page = window.<span class="fu">getActivePage</span>();
+<span class="co">//取得当前处于活动状态的编辑器窗口</span>
+IEditorPart part = page.<span class="fu">getActiveEditor</span>();</code></pre></div>
 <p>在Eclipse启动时，会要求用户配置一个工作空间(workspace)作为开发人员作业的一个区域。它在物理上是一个文件夹。在逻辑上，生成工程、创建文件等操作，一般都会在工作空间中的指定文件夹里面生成实际的文件。Eclipse使用org.eclipse.core.resource在Eclipse启动时，会要求用户配置一个工作空间(workspace)作为开发人员作业的一个区域。它在物理上是一个文件夹。在逻辑上，生成工程、创建文件等操作，一般都会在工作空间中的指定文件夹里面生成实际的文件。Eclipse使用org.eclipse.core.resources包定义的虚拟对象操作工作空间里的资源。如工程是IProject、文件夹是IFolder、文件是IFile。对工作空间的访问就使用org.eclipse.core.resources.ResourcesPlugin。下面的代码给出了访问工作空间的代码示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//取得工作区的root</span></div><div class="line">IWorkspaceRoot wsroot = ResourcesPlugin.getWorkspace().getRoot();</div><div class="line"><span class="comment">//取得项目</span></div><div class="line">IProject[] projects = wsroot.getProjects();</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="co">//取得工作区的root</span>
+IWorkspaceRoot wsroot = ResourcesPlugin.<span class="fu">getWorkspace</span>().<span class="fu">getRoot</span>();
+<span class="co">//取得项目</span>
+IProject[] projects = wsroot.<span class="fu">getProjects</span>();</code></pre></div>
 <p>工作台和资源访问的API是Eclipse提供的API中最基本的，在插件开发时使用频率较高的API。使用PlatformUI作为工作台访问的入口点和使用ResourcesPlugin作为工作区访问的入口点，是无论如何也要记住的。</p>
 <p>插件如何与Eclipse交互全在plugin.xml配置文件当中。<code>&lt;extension&gt;</code>元素有point属性以指定扩展点的位置，里面通常包括将插件的图标放在哪里，以及点击插件的时候要调用的动作。另外，注意Activator类，该类为插件提供了生命周期管理。</p>
 <p>Eclipse中的Compare功能已经可以在Ecore与UML模型之间相互比较了，在Package Explorer中选择多个文件，然后右键找Compare中的Compare as Model，即可以在语法的级别上进行模型的不同的检查。</p>
@@ -490,7 +505,8 @@
 <p>为了支持软件工程以建立大规模的软件系统，传统的编程思想必须发生改变。比如，如果直接访问数据，那么数据读写之后就只是数据的读写，而不会对其它的类产生影响，也不会向软件系统中的其它部分发出通知。这表明，编程方法的好坏是有条件的。在小程序上工作很好的方法，在处理软件系统的问题的时候，就变成非常差的方法了。如果我们坚持不用get/set方法，那么读写数据之后触发其它的动作简直就是不能想象的。</p>
 <h3 id="工厂方法">工厂方法</h3>
 <p>Eclipse中为我们展示了一个基本的例子。一般创建对象的时候，我们总是使用new的方法。但是这种方法，并没有形成创建对象的统一的模式。于是就了有工厂类。该类的功能就是提供创建各种对象的接口，把它们封装起来。比如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">PurchaseOrder aPurchaseOrder = </div><div class="line">	POFactory.eINSTANCE.createPurchaseOrder();</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java">PurchaseOrder aPurchaseOrder = 
+    POFactory.<span class="fu">eINSTANCE</span>.<span class="fu">createPurchaseOrder</span>();</code></pre></div>
 <p>用于创建一个购物单。调用该类的其它方法，可以创建其它的对象。使用这种模式，使得创建一个对象，看起来就像是访问不同的数据库一样。像是所有的数据访问的操作都被这一个对象代理了，于是就实现了所谓的“数据抽象”。相当于在人类社会中，有专门的仓库保管员来给我们做这样的事情，我们只需要发号施令即可（看起来人类总是希望指挥别人）。</p>
 <p>我想EMF框架的最吸引人的地方不是自动地创建代码中的接口和类，而是配置生成器使得可以根据需要生成Factory类、Package类、Adapter类、Switch类等。EMF框架对面向对象的支持程度还有一些局限。比如动态绑定技术，在EMF中好像就没有得到充分的利用。但是我们知道UML是充分利用了这些技术的。</p>
 <p>注：写到这里，我想到了Scala提供强大的面向对象的机制，使编程语言本身再结合面向对象的编程方法，可以写出非常漂亮、功能非常完善的程序的。</p>
@@ -665,7 +681,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -673,7 +689,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -682,7 +698,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

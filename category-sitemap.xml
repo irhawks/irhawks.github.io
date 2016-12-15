@@ -49,20 +49,6 @@
     </url>
 
     <url>
-        <loc>./categories/Publish/</loc>
-        <lastmod>2016-12-14T10:40:49.318Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>./categories/Publish/Blog/</loc>
-        <lastmod>2016-12-14T10:40:49.318Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>./categories/%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1/</loc>
         <lastmod>2016-12-14T11:00:03.326Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -210,13 +196,6 @@
     </url>
 
     <url>
-        <loc>./categories/%E5%87%BA%E7%89%88/%E5%8D%9A%E5%AE%A2/</loc>
-        <lastmod>2016-12-14T13:47:43.137Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>./categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/</loc>
         <lastmod>2016-12-14T13:48:09.818Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -231,13 +210,6 @@
     </url>
 
     <url>
-        <loc>./categories/%E5%87%BA%E7%89%88/</loc>
-        <lastmod>2016-12-14T13:48:57.083Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>./categories/%E5%87%BA%E7%89%88/TeX/</loc>
         <lastmod>2016-12-14T13:48:57.083Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -247,6 +219,41 @@
     <url>
         <loc>./categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/</loc>
         <lastmod>2016-12-14T14:41:20.578Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./categories/Publish/</loc>
+        <lastmod>2016-12-15T03:53:40.035Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./categories/Publish/Blog/</loc>
+        <lastmod>2016-12-15T03:53:40.035Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./categories/%E5%87%BA%E7%89%88/%E5%8D%9A%E5%AE%A2/</loc>
+        <lastmod>2016-12-15T03:57:04.406Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./categories/%E5%87%BA%E7%89%88/</loc>
+        <lastmod>2016-12-15T12:01:15.558Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./categories/%E5%87%BA%E7%89%88/Pandoc/</loc>
+        <lastmod>2016-12-15T12:01:15.558Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

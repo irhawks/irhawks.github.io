@@ -171,6 +171,9 @@
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> 守护进程的编写思路（C与Python） | 80x24 </title>
 </head>
 
@@ -476,14 +479,35 @@
 <p>为了能够写入由daemon所创建的文件，必须保持daemon在创建这些文件的时候有写入的权限。该权限是由umask来控制的，可以保证它们可以正确地读取或写入文件。umask可以在命令行当中运行，但是保险的方法还是通过编程接口。在linux系统中完成切换umask任务的是umask函数。设置umask为0可以对文件有完全的访问权限。</p>
 <p>第三步是打开日志。但是该步骤是可选的。该可选的步骤可以导出许多有用的信息。</p>
 <p>第四步是创建SID结构。目的是让这个进程的父进程去掉，成为一个orphan进程，以便不受到用户会话的影响。方法是创建一个SID。使用setsid函数。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">pid_t</span> pid, sid;</div><div class="line"><span class="comment">/* Fork off the parent process */</span></div><div class="line">pid = fork()</div><div class="line"><span class="keyword">if</span>(pid &lt; <span class="number">0</span>) &#123; <span class="built_in">exit</span>(EXIT_FAILURE); &#125;  <span class="comment">// fork process failed</span></div><div class="line"><span class="keyword">if</span>(pid &gt; <span class="number">0</span>) &#123; <span class="built_in">exit</span>(EXIT_SUCCESS); &#125;  <span class="comment">// succeed and exit parent process</span></div><div class="line"></div><div class="line"><span class="comment">/* Change the file mode mask */</span></div><div class="line">umask(<span class="number">0</span>)</div><div class="line"></div><div class="line"><span class="comment">/* Open any logs here */</span></div><div class="line"></div><div class="line"><span class="comment">/* Create a new SID for the child process */</span></div><div class="line">sid = setsid();</div><div class="line"><span class="keyword">if</span> (sid &lt; <span class="number">0</span>) &#123; <span class="built_in">exit</span>(FAILURE); &#125;  <span class="comment">// don't forget to enable your log</span></div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">pid_t pid, sid;
+<span class="co">/* Fork off the parent process */</span>
+pid = fork()
+<span class="kw">if</span>(pid &lt; <span class="dv">0</span>) { exit(EXIT_FAILURE); }  <span class="co">// fork process failed</span>
+<span class="kw">if</span>(pid &gt; <span class="dv">0</span>) { exit(EXIT_SUCCESS); }  <span class="co">// succeed and exit parent process</span>
+
+<span class="co">/* Change the file mode mask */</span>
+umask(<span class="dv">0</span>)
+
+<span class="co">/* Open any logs here */</span>
+
+<span class="co">/* Create a new SID for the child process */</span>
+sid = setsid();
+<span class="kw">if</span> (sid &lt; <span class="dv">0</span>) { exit(FAILURE); }  <span class="co">// don&#39;t forget to enable your log </span></code></pre></div>
 <p>再一步是改变工作的目录。我们必须保证该目录存在。在按照FHS标准的系统中可以是/tmp的目录，但是保险的方法还是使用根目录作为当前的工作目录。使用chdir函数可以完成这样的任务。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> ( (chdir(<span class="string">"/"</span>)) &lt; <span class="number">0</span> ) &#123; <span class="built_in">exit</span>(EXIT_FAILURE); &#125; <span class="comment">// 失败返回-1</span></div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="kw">if</span> ( (chdir(<span class="st">&quot;/&quot;</span>)) &lt; <span class="dv">0</span> ) { exit(EXIT_FAILURE); } <span class="co">// 失败返回-1</span></code></pre></div>
 <p>关闭标准文件描述符是最后的一步。这是因为守护进程根本就没有标准输入输出可以使用。使用的是close函数。如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">close(STDIN_FILENO);</div><div class="line">close(STDOUT_FILENO);</div><div class="line">close(STDERR_FILENO);</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">close(STDIN_FILENO);
+close(STDOUT_FILENO);
+close(STDERR_FILENO);</code></pre></div>
 <h3 id="守护进程的执行逻辑">守护进程的执行逻辑</h3>
 <p>经过之上的步骤，终于算是符合了daemon的行为规范。接下来就需要写一系列的具体完成daemon的代码了。初始化守护进程中其中的第一步。常见的逻辑是：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* Daemon-specific initialization goes here */</span></div><div class="line"></div><div class="line"><span class="comment">/* The big loop */</span></div><div class="line"><span class="keyword">while</span>(<span class="number">1</span>) &#123; </div><div class="line">    <span class="comment">/* Do your task here */</span></div><div class="line">    sleep(<span class="number">30</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="co">/* Daemon-specific initialization goes here */</span>
+
+<span class="co">/* The big loop */</span>
+<span class="kw">while</span>(<span class="dv">1</span>) { 
+    <span class="co">/* Do your task here */</span>
+    sleep(<span class="dv">30</span>);
+}</code></pre></div>
 <p>也就是说，这个时候守护进程是一个循环的程序。</p>
 <p>注意，日志一般应使用syslog的系统，使用syslog提供的机制。</p>
 <h2 id="使用python写linux的守护进程">使用Python写Linux的守护进程</h2>
@@ -492,16 +516,106 @@
 <p>我们先来看Daemon的原型，用户的守护进程是从这个类继承过来的。</p>
 <p>守护进程类原型有如下的几个重要的例子：</p>
 <p>init函数：该函数表示的是进入守护进程的时候的初始的设置。如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, pidfile, stdin=<span class="string">'/dev/null'</span>, stdout=<span class="string">'/dev/null'</span>, stderr=<span class="string">'/dev/null'</span>)</span>:</span>  </div><div class="line">      self.stdin = stdin  </div><div class="line">      self.stdout = stdout  </div><div class="line">      self.stderr = stderr  </div><div class="line">      self.pidfile = pidfile</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, pidfile, stdin<span class="op">=</span><span class="st">&#39;/dev/null&#39;</span>, stdout<span class="op">=</span><span class="st">&#39;/dev/null&#39;</span>, stderr<span class="op">=</span><span class="st">&#39;/dev/null&#39;</span>):  
+        <span class="va">self</span>.stdin <span class="op">=</span> stdin  
+        <span class="va">self</span>.stdout <span class="op">=</span> stdout  
+        <span class="va">self</span>.stderr <span class="op">=</span> stderr  
+        <span class="va">self</span>.pidfile <span class="op">=</span> pidfile  </code></pre></div>
 <p>daemonize函数，该函数用于执行UNIX的所谓的double-fork方法。该方法可见Stevens’ “Advanced Programming in the UNIX Environment” for details (ISBN 0201563177) <a href="http://www.erlenstar.demon.co.uk/unix/faq_2.html#SEC16" class="uri" target="_blank" rel="external">http://www.erlenstar.demon.co.uk/unix/faq_2.html#SEC16</a>。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">daemonize</span><span class="params">(self)</span>:</span></div><div class="line">    <span class="keyword">try</span>:   </div><div class="line">        pid = os.fork()   </div><div class="line">        <span class="keyword">if</span> pid &gt; <span class="number">0</span>:  </div><div class="line">            <span class="comment"># exit first parent  </span></div><div class="line">            sys.exit(<span class="number">0</span>)   </div><div class="line">    <span class="keyword">except</span> OSError, e:   </div><div class="line">        sys.stderr.write(<span class="string">"fork #1 failed: %d (%s)/n"</span> % (e.errno, e.strerror))  </div><div class="line">        sys.exit(<span class="number">1</span>)  </div><div class="line">  </div><div class="line">    <span class="comment"># decouple from parent environment  </span></div><div class="line">    os.chdir(<span class="string">"/"</span>)   </div><div class="line">    os.setsid()   </div><div class="line">    os.umask(<span class="number">0</span>)   </div><div class="line"></div><div class="line">    <span class="comment"># do second fork  </span></div><div class="line">    <span class="keyword">try</span>:   </div><div class="line">        pid = os.fork()   </div><div class="line">        <span class="keyword">if</span> pid &gt; <span class="number">0</span>:  </div><div class="line">            <span class="comment"># exit from second parent  </span></div><div class="line">            sys.exit(<span class="number">0</span>)   </div><div class="line">    <span class="keyword">except</span> OSError, e:   </div><div class="line">        sys.stderr.write(<span class="string">"fork #2 failed: %d (%s)/n"</span> % (e.errno, e.strerror))  </div><div class="line">        sys.exit(<span class="number">1</span>)   </div><div class="line">  </div><div class="line">    <span class="comment"># redirect standard file descriptors  </span></div><div class="line">    sys.stdout.flush()  </div><div class="line">    sys.stderr.flush()  </div><div class="line">    si = file(self.stdin, <span class="string">'r'</span>)  </div><div class="line">    so = file(self.stdout, <span class="string">'a+'</span>)  </div><div class="line">    se = file(self.stderr, <span class="string">'a+'</span>, <span class="number">0</span>)  </div><div class="line">    os.dup2(si.fileno(), sys.stdin.fileno())  </div><div class="line">    os.dup2(so.fileno(), sys.stdout.fileno())  </div><div class="line">    os.dup2(se.fileno(), sys.stderr.fileno())  </div><div class="line">  </div><div class="line">    <span class="comment"># write pidfile  </span></div><div class="line">    atexit.register(self.delpid)  </div><div class="line">    pid = str(os.getpid())  </div><div class="line">    file(self.pidfile,<span class="string">'w+'</span>).write(<span class="string">"%s/n"</span> % pid)</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> daemonize(<span class="va">self</span>):
+    <span class="cf">try</span>:   
+        pid <span class="op">=</span> os.fork()   
+        <span class="cf">if</span> pid <span class="op">&gt;</span> <span class="dv">0</span>:  
+            <span class="co"># exit first parent  </span>
+            sys.exit(<span class="dv">0</span>)   
+    <span class="cf">except</span> <span class="pp">OSError</span>, e:   
+        sys.stderr.write(<span class="st">&quot;fork #1 failed: </span><span class="sc">%d</span><span class="st"> (</span><span class="sc">%s</span><span class="st">)/n&quot;</span> <span class="op">%</span> (e.errno, e.strerror))  
+        sys.exit(<span class="dv">1</span>)  
+  
+    <span class="co"># decouple from parent environment  </span>
+    os.chdir(<span class="st">&quot;/&quot;</span>)   
+    os.setsid()   
+    os.umask(<span class="dv">0</span>)   
+
+    <span class="co"># do second fork  </span>
+    <span class="cf">try</span>:   
+        pid <span class="op">=</span> os.fork()   
+        <span class="cf">if</span> pid <span class="op">&gt;</span> <span class="dv">0</span>:  
+            <span class="co"># exit from second parent  </span>
+            sys.exit(<span class="dv">0</span>)   
+    <span class="cf">except</span> <span class="pp">OSError</span>, e:   
+        sys.stderr.write(<span class="st">&quot;fork #2 failed: </span><span class="sc">%d</span><span class="st"> (</span><span class="sc">%s</span><span class="st">)/n&quot;</span> <span class="op">%</span> (e.errno, e.strerror))  
+        sys.exit(<span class="dv">1</span>)   
+  
+    <span class="co"># redirect standard file descriptors  </span>
+    sys.stdout.flush()  
+    sys.stderr.flush()  
+    si <span class="op">=</span> <span class="bu">file</span>(<span class="va">self</span>.stdin, <span class="st">&#39;r&#39;</span>)  
+    so <span class="op">=</span> <span class="bu">file</span>(<span class="va">self</span>.stdout, <span class="st">&#39;a+&#39;</span>)  
+    se <span class="op">=</span> <span class="bu">file</span>(<span class="va">self</span>.stderr, <span class="st">&#39;a+&#39;</span>, <span class="dv">0</span>)  
+    os.dup2(si.fileno(), sys.stdin.fileno())  
+    os.dup2(so.fileno(), sys.stdout.fileno())  
+    os.dup2(se.fileno(), sys.stderr.fileno())  
+  
+    <span class="co"># write pidfile  </span>
+    atexit.register(<span class="va">self</span>.delpid)  
+    pid <span class="op">=</span> <span class="bu">str</span>(os.getpid())  
+    <span class="bu">file</span>(<span class="va">self</span>.pidfile,<span class="st">&#39;w+&#39;</span>).write(<span class="st">&quot;</span><span class="sc">%s</span><span class="st">/n&quot;</span> <span class="op">%</span> pid)  </code></pre></div>
 <p>该方法完成的就是之前的C语言的大部分的内容了。</p>
 <p>之后是管理PID文件</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">delpid</span><span class="params">(self)</span>:</span>  </div><div class="line">    os.remove(self.pidfile)</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> delpid(<span class="va">self</span>):  
+    os.remove(<span class="va">self</span>.pidfile)  </code></pre></div>
 <p>开始进程函数start完成开启进程，让进程运行的任务。该函数检查相应的PID文件是否存在，存在表示进程已经在运行，所以就退出</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">start</span><span class="params">(self)</span>:</span>  </div><div class="line">    <span class="string">""" </span></div><div class="line">    Start the daemon </div><div class="line">    """  </div><div class="line">    <span class="comment"># Check for a pidfile to see if the daemon already runs  </span></div><div class="line">    <span class="keyword">try</span>:  </div><div class="line">        pf = file(self.pidfile,<span class="string">'r'</span>)  </div><div class="line">        pid = int(pf.read().strip())  </div><div class="line">        pf.close()  </div><div class="line">    <span class="keyword">except</span> IOError:  </div><div class="line">        pid = <span class="keyword">None</span>  </div><div class="line">  </div><div class="line">    <span class="keyword">if</span> pid:  </div><div class="line">        message = <span class="string">"pidfile %s already exist. Daemon already running?/n"</span>  </div><div class="line">        sys.stderr.write(message % self.pidfile)  </div><div class="line">        sys.exit(<span class="number">1</span>)  </div><div class="line">      </div><div class="line">    <span class="comment"># Start the daemon  </span></div><div class="line">    self.daemonize()  </div><div class="line">    self.run()</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> start(<span class="va">self</span>):  
+    <span class="co">&quot;&quot;&quot; </span>
+<span class="co">    Start the daemon </span>
+<span class="co">    &quot;&quot;&quot;</span>  
+    <span class="co"># Check for a pidfile to see if the daemon already runs  </span>
+    <span class="cf">try</span>:  
+        pf <span class="op">=</span> <span class="bu">file</span>(<span class="va">self</span>.pidfile,<span class="st">&#39;r&#39;</span>)  
+        pid <span class="op">=</span> <span class="bu">int</span>(pf.read().strip())  
+        pf.close()  
+    <span class="cf">except</span> <span class="pp">IOError</span>:  
+        pid <span class="op">=</span> <span class="va">None</span>  
+  
+    <span class="cf">if</span> pid:  
+        message <span class="op">=</span> <span class="st">&quot;pidfile </span><span class="sc">%s</span><span class="st"> already exist. Daemon already running?/n&quot;</span>  
+        sys.stderr.write(message <span class="op">%</span> <span class="va">self</span>.pidfile)  
+        sys.exit(<span class="dv">1</span>)  
+      
+    <span class="co"># Start the daemon  </span>
+    <span class="va">self</span>.daemonize()  
+    <span class="va">self</span>.run()  </code></pre></div>
 <p>停止函数是这样的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">stop</span><span class="params">(self)</span>:</span>  </div><div class="line">    <span class="string">""" </span></div><div class="line">    Stop the daemon </div><div class="line">    """  </div><div class="line">    <span class="comment"># Get the pid from the pidfile  </span></div><div class="line">    <span class="keyword">try</span>:  </div><div class="line">        pf = file(self.pidfile,<span class="string">'r'</span>)  </div><div class="line">        pid = int(pf.read().strip())  </div><div class="line">        pf.close()  </div><div class="line">    <span class="keyword">except</span> IOError:  </div><div class="line">        pid = <span class="keyword">None</span>  </div><div class="line">  </div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> pid:  </div><div class="line">        message = <span class="string">"pidfile %s does not exist. Daemon not running?/n"</span>  </div><div class="line">        sys.stderr.write(message % self.pidfile)  </div><div class="line">        <span class="keyword">return</span> <span class="comment"># not an error in a restart  </span></div><div class="line">    <span class="comment"># Try killing the daemon process      </span></div><div class="line">    <span class="keyword">try</span>:  </div><div class="line">        <span class="keyword">while</span> <span class="number">1</span>:  </div><div class="line">            os.kill(pid, SIGTERM)  </div><div class="line">            time.sleep(<span class="number">0.1</span>)  </div><div class="line">    <span class="keyword">except</span> OSError, err:  </div><div class="line">        err = str(err)  </div><div class="line">        <span class="keyword">if</span> err.find(<span class="string">"No such process"</span>) &gt; <span class="number">0</span>:  </div><div class="line">            <span class="keyword">if</span> os.path.exists(self.pidfile):  </div><div class="line">                os.remove(self.pidfile)  </div><div class="line">        <span class="keyword">else</span>:  </div><div class="line">            <span class="keyword">print</span> str(err)  </div><div class="line">            sys.exit(<span class="number">1</span>)</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> stop(<span class="va">self</span>):  
+    <span class="co">&quot;&quot;&quot; </span>
+<span class="co">    Stop the daemon </span>
+<span class="co">    &quot;&quot;&quot;</span>  
+    <span class="co"># Get the pid from the pidfile  </span>
+    <span class="cf">try</span>:  
+        pf <span class="op">=</span> <span class="bu">file</span>(<span class="va">self</span>.pidfile,<span class="st">&#39;r&#39;</span>)  
+        pid <span class="op">=</span> <span class="bu">int</span>(pf.read().strip())  
+        pf.close()  
+    <span class="cf">except</span> <span class="pp">IOError</span>:  
+        pid <span class="op">=</span> <span class="va">None</span>  
+  
+    <span class="cf">if</span> <span class="op">not</span> pid:  
+        message <span class="op">=</span> <span class="st">&quot;pidfile </span><span class="sc">%s</span><span class="st"> does not exist. Daemon not running?/n&quot;</span>  
+        sys.stderr.write(message <span class="op">%</span> <span class="va">self</span>.pidfile)  
+        <span class="cf">return</span> <span class="co"># not an error in a restart  </span>
+    <span class="co"># Try killing the daemon process      </span>
+    <span class="cf">try</span>:  
+        <span class="cf">while</span> <span class="dv">1</span>:  
+            os.kill(pid, SIGTERM)  
+            time.sleep(<span class="fl">0.1</span>)  
+    <span class="cf">except</span> <span class="pp">OSError</span>, err:  
+        err <span class="op">=</span> <span class="bu">str</span>(err)  
+        <span class="cf">if</span> err.find(<span class="st">&quot;No such process&quot;</span>) <span class="op">&gt;</span> <span class="dv">0</span>:  
+            <span class="cf">if</span> os.path.exists(<span class="va">self</span>.pidfile):  
+                os.remove(<span class="va">self</span>.pidfile)  
+        <span class="cf">else</span>:  
+            <span class="bu">print</span> <span class="bu">str</span>(err)  
+            sys.exit(<span class="dv">1</span>)  </code></pre></div>
 <p>接下来可以类似地定义restart与run函数。在写用户自己的进程的时候，用户需要手动写自己的run函数。重载之后就可以了。注意守护进程是有自己的特定的PID文件的。一般是放在/tmp目录。但是也有一些系统进程。至于在运行的时候切换到其它的进程，则可以通过一些库来完成。</p>
 
       
@@ -665,7 +779,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -673,7 +787,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -682,7 +796,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

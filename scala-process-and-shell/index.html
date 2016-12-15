@@ -108,21 +108,24 @@
 
 
 <meta name="description" content="应该说，这种特性是可以让人大吼大叫的。简单的示例如下：
-12import sys.process._&quot;ls -al ..&quot; !
-之所以可以这样做，是因为sys.process包含一个从字符串到ProcessBuild对象的隐式类型转换。注意后面的!号操作符，以ProcessBuild类型为参数类型，返回的是被执行程序的返回值。如果需要返回的是程序的输出的字符串，可以使用!!代替!号。">
+import sys.process._
+&amp;quot;ls -al ..&amp;quot; !
+之所以可以这样做，是因为sys.process包含一个从字符串到ProcessBuild对象的隐式类型转换。注意后面的!号操作符，以ProcessBuild类型为参数类型，返回的是被执行程序的返回值。如果需要返回的是程序的输出的字符串，可以使用!!代替!">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Scala编程概要（三）：进程控制与shell，函数式特性">
 <meta property="og:url" content="./scala-process-and-shell/index.html">
 <meta property="og:site_name" content="80x24">
 <meta property="og:description" content="应该说，这种特性是可以让人大吼大叫的。简单的示例如下：
-12import sys.process._&quot;ls -al ..&quot; !
-之所以可以这样做，是因为sys.process包含一个从字符串到ProcessBuild对象的隐式类型转换。注意后面的!号操作符，以ProcessBuild类型为参数类型，返回的是被执行程序的返回值。如果需要返回的是程序的输出的字符串，可以使用!!代替!号。">
+import sys.process._
+&amp;quot;ls -al ..&amp;quot; !
+之所以可以这样做，是因为sys.process包含一个从字符串到ProcessBuild对象的隐式类型转换。注意后面的!号操作符，以ProcessBuild类型为参数类型，返回的是被执行程序的返回值。如果需要返回的是程序的输出的字符串，可以使用!!代替!">
 <meta property="og:updated_time" content="2016-12-14T11:14:50.274Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Scala编程概要（三）：进程控制与shell，函数式特性">
 <meta name="twitter:description" content="应该说，这种特性是可以让人大吼大叫的。简单的示例如下：
-12import sys.process._&quot;ls -al ..&quot; !
-之所以可以这样做，是因为sys.process包含一个从字符串到ProcessBuild对象的隐式类型转换。注意后面的!号操作符，以ProcessBuild类型为参数类型，返回的是被执行程序的返回值。如果需要返回的是程序的输出的字符串，可以使用!!代替!号。">
+import sys.process._
+&amp;quot;ls -al ..&amp;quot; !
+之所以可以这样做，是因为sys.process包含一个从字符串到ProcessBuild对象的隐式类型转换。注意后面的!号操作符，以ProcessBuild类型为参数类型，返回的是被执行程序的返回值。如果需要返回的是程序的输出的字符串，可以使用!!代替!">
 
 
 
@@ -155,6 +158,9 @@
 
 
 
+
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
 
   <title> Scala编程概要（三）：进程控制与shell，函数式特性 | 80x24 </title>
 </head>
@@ -456,23 +462,40 @@
 
       
         <p>应该说，这种特性是可以让人大吼大叫的。简单的示例如下：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys.process._</div><div class="line"><span class="string">"ls -al .."</span> !</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">import</span> sys.<span class="fu">process</span>.<span class="fu">_</span>
+<span class="st">&quot;ls -al ..&quot;</span> !</code></pre></div>
 <p>之所以可以这样做，是因为sys.process包含一个从字符串到ProcessBuild对象的隐式类型转换。注意后面的<code>!</code>号操作符，以ProcessBuild类型为参数类型，返回的是被执行程序的返回值。如果需要返回的是程序的输出的字符串，可以使用<code>!!</code>代替<code>!</code>号。</p>
 <a id="more"></a>
 <p>如果需要把程序通过管道，scala支持使用<code>#|</code>运算符。比如：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"ls -al .."</span> #| <span class="string">"grep sec"</span> !</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="st">&quot;ls -al ..&quot;</span> #| <span class="st">&quot;grep sec&quot;</span> !</code></pre></div>
 <p>这样显然具有优势，因为让scala可以编译检查程序的结构。除此之外，scala的运算符还有重定向<code>#&gt;</code>、<code>#&gt;&gt;</code>，<code>#&lt;</code>等。如下面的示例：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys.process._</div><div class="line"><span class="string">"ls -al .."</span> #&gt;&gt; <span class="keyword">new</span> <span class="type">File</span>(<span class="string">"output.txt"</span>) !</div><div class="line"><span class="string">"grep Scala"</span> #&lt; <span class="keyword">new</span> <span class="type">URL</span>(<span class="string">"http://horstmann.com/index.html"</span>)</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">import</span> sys.<span class="fu">process</span>.<span class="fu">_</span>
+<span class="st">&quot;ls -al ..&quot;</span> #&gt;&gt; <span class="kw">new</span> File(<span class="st">&quot;output.txt&quot;</span>) !
+<span class="st">&quot;grep Scala&quot;</span> #&lt; <span class="kw">new</span> URL(<span class="st">&quot;http://horstmann.com/index.html&quot;</span>)</code></pre></div>
 <p>这种特性确实是不错，貌似比Shell还要更强大一些。</p>
 <p>注意<code>!</code>表示返回的结果，是一个整型的值而已。另外，Scala中的流程控制语句有<code>p #&amp;&amp; q</code>表示p成功则执行q，<code>p #|| q</code>表示p不成功则执行q。（一个规则是，相对于原来的shell操作符，我们只需要在前面加上一个<code>#</code>号就是scala脚本的操作符，而且与原来的shell操作符具有相同的优先级。</p>
 <p>至于正规的方法，则是构造相应的Process对象，然后使用<code>!</code>操作符执行它。比如</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> p = <span class="type">Process</span>(cmd, <span class="keyword">new</span> <span class="type">File</span>(dirName), (<span class="string">"LANG"</span>, <span class="string">"en_US"</span>))</div><div class="line"><span class="string">"echo 41"</span> #| p !</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">val</span> p = Process(cmd, <span class="kw">new</span> File(dirName), (<span class="st">&quot;LANG&quot;</span>, <span class="st">&quot;en_US&quot;</span>))
+<span class="st">&quot;echo 41&quot;</span> #| p !</code></pre></div>
 <p>有兴趣的话，可以参考一下。因为scala提供了一个快速构建器<code>fsc</code>，所以shell的执行的速度也不是问题。</p>
 <h2 id="scala中的正则表达式">Scala中的正则表达式</h2>
 <p>正则表达式分析使用<code>scala.util.matching.Regex</code>类。在scala中，可以使用<code>&quot;&quot;&quot;...&quot;&quot;&quot;</code>作为原始的字符串，里面的符号不进行转义（与Python还有一些不同）。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> numPattern = <span class="string">"[0-9]+"</span>.r</div><div class="line"><span class="comment">/* 构造正则表达式对象，使用字符串的.r方法</span></div><div class="line"> * 该方法是在scala.util.matching.Regex中定义</div><div class="line">*/</div><div class="line"><span class="keyword">val</span> wsnumwsPattern = <span class="string">""</span><span class="string">"\s+[0-9]+\s+"</span><span class="string">""</span>.r</div><div class="line"></div><div class="line"><span class="comment">//然后使用findAllIn, findFirstIn等方法来匹配字符串</span></div><div class="line"><span class="keyword">val</span> m1 = wsnumwsPattern.findFirstIn(<span class="string">"99 bottles, 98 bottles"</span>)</div><div class="line"></div><div class="line"><span class="comment">//或者使用replace来替换字符串</span></div><div class="line"><span class="keyword">val</span> m2 = num.replaceFirstIn(<span class="string">"99 bottles, 98 bottles"</span>, <span class="string">"xx"</span>)</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">val</span> numPattern = <span class="st">&quot;[0-9]+&quot;</span>.<span class="fu">r</span>
+<span class="co">/* 构造正则表达式对象，使用字符串的.r方法</span>
+<span class="co"> * 该方法是在scala.util.matching.Regex中定义</span>
+<span class="co">*/</span>
+<span class="kw">val</span> wsnumwsPattern = <span class="st">&quot;&quot;&quot;\s+[0-9]+\s+&quot;&quot;&quot;</span>.<span class="fu">r</span>
+
+<span class="co">//然后使用findAllIn, findFirstIn等方法来匹配字符串</span>
+<span class="kw">val</span> m1 = wsnumwsPattern.<span class="fu">findFirstIn</span>(<span class="st">&quot;99 bottles, 98 bottles&quot;</span>)
+
+<span class="co">//或者使用replace来替换字符串</span>
+<span class="kw">val</span> m2 = num.<span class="fu">replaceFirstIn</span>(<span class="st">&quot;99 bottles, 98 bottles&quot;</span>, <span class="st">&quot;xx&quot;</span>)</code></pre></div>
 <p>为了使正则表达式有提取的功能，可以使用PCRE中的字符串分组。比如</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> numitemPattern = <span class="string">"([0-9]+) ([a-z]+)"</span>.r</div><div class="line"><span class="keyword">val</span> numitemPattern(num, item) = <span class="string">"99 bottles"</span></div><div class="line">num == <span class="string">"99"</span></div><div class="line">item == <span class="string">"bottles"</span></div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">val</span> numitemPattern = <span class="st">&quot;([0-9]+) ([a-z]+)&quot;</span>.<span class="fu">r</span>
+<span class="kw">val</span> <span class="fu">numitemPattern</span>(num, item) = <span class="st">&quot;99 bottles&quot;</span>
+num == <span class="st">&quot;99&quot;</span>
+item == <span class="st">&quot;bottles&quot;</span></code></pre></div>
 <p>这样，编程实践中的系统调用接口、正则表达式，文件IO、XML我们就都已经提到了。</p>
 <h2 id="scala中的特质">Scala中的特质</h2>
 <p>相当于java中的interface，但是进行了一些哲学的修正。比如使用<code>with</code>，表示的含义是“一个类与其它的特质运算，得到新的类，然后由某个类来继承它”。</p>
@@ -501,7 +524,22 @@
 <p>注：Scala的实例类case class自动地生成apply与unapply方法。实际上，Scala的unapply还被用于实现其它的许多的功能。比如说，赋值语句的模式匹配，如<code>val Number(n) = &quot;1729&quot;</code>，可以把整数<code>1729</code>的值赋给<code>n</code>。等等。详细可以参考《快学Scala》当中的第十一章操作符的最后一节。</p>
 <p>注：使用提取符实际上已经可以构造一个表格的DSL，就像LaTeX那样。所以也许我们该来试验一下。比如在表格里面通过运算符重新构造出HTML或者LaTeX格式的表格。</p>
 <p>下面是自己写的一个测试用例，允许用户使用<code>Table() | &quot;abc&quot;</code>这样的形式构造表格。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Table</span>(<span class="params">var elem : <span class="type">String</span></span>) </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">|</span></span>(element : <span class="type">String</span>) = <span class="keyword">new</span> <span class="type">Table</span>(elem + <span class="string">"&amp;"</span> + element)</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">||</span></span>(element: <span class="type">String</span>) = <span class="keyword">new</span> <span class="type">Table</span>(elem + <span class="string">"\n"</span>+element)</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">Table</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>(e:<span class="type">String</span>) = <span class="keyword">new</span> <span class="type">Table</span>(e)</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">unapply</span></span>(input: <span class="type">Table</span>): <span class="type">Option</span>[<span class="type">String</span>] = <span class="type">Some</span>(input.elem)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> t = <span class="type">Table</span>(<span class="string">"abc"</span>) | <span class="string">"String"</span> </div><div class="line">println(t.elem)</div><div class="line"></div><div class="line">t <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> <span class="type">Table</span>(e) =&gt; println(<span class="string">"Succeed: "</span> +e) </div><div class="line">    <span class="keyword">case</span> _ =&gt; println(<span class="string">"failed"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">class</span> <span class="fu">Table</span>(<span class="kw">var</span> elem : String) {
+    <span class="kw">def</span> |(element : String) = <span class="kw">new</span> <span class="fu">Table</span>(elem + <span class="st">&quot;&amp;&quot;</span> + element)
+    <span class="kw">def</span> ||(element: String) = <span class="kw">new</span> <span class="fu">Table</span>(elem + <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>+element)
+}
+<span class="kw">object</span> Table {
+    <span class="kw">def</span> <span class="fu">apply</span>(e:String) = <span class="kw">new</span> <span class="fu">Table</span>(e)
+    <span class="kw">def</span> <span class="fu">unapply</span>(input: Table): Option[String] = Some(input.<span class="fu">elem</span>)
+}
+
+<span class="kw">var</span> t = <span class="fu">Table</span>(<span class="st">&quot;abc&quot;</span>) | <span class="st">&quot;String&quot;</span> 
+<span class="fu">println</span>(t.<span class="fu">elem</span>)
+
+t <span class="kw">match</span> {
+    <span class="kw">case</span> <span class="fu">Table</span>(e) =&gt; <span class="fu">println</span>(<span class="st">&quot;Succeed: &quot;</span> +e) 
+    <span class="kw">case</span> _ =&gt; <span class="fu">println</span>(<span class="st">&quot;failed&quot;</span>)
+}</code></pre></div>
 <p>注意，第一点是把伴生对象中定义apply与unapply方法。第二是unapply的返回类型是<code>Option[TYPE]</code>，而且返回的值要用<code>Some(VALUE)</code>代替。这样才能得到正确的值。自己是尝试写这样的代码，肯定还有一些缺陷。等以后再来写一个完整的表格分析工具。</p>
 <p>总结：本小节尝试的是操作符与模式匹配的构建。</p>
 <h2 id="高阶函数的使用">高阶函数的使用</h2>
@@ -511,13 +549,14 @@
 <p>高阶函数在编程语言中，往往被看成是轻量级的函数。第一个是作用域可以非常局部，比如说，直接在map的参数当中生成，第二是其意义往往只有一次，比如说，让一个数组增加三倍，并不值得先单独写一个乘以3的函数，然后慢慢传过去。</p>
 <p>注意在语法上<code>Array(3,4).map((x:Double) =&gt; 3 * x)</code>的效果，可以用<code>Array(3,4).map{ (x: Double) =&gt; 3 * x}</code>以及<code>Array(3,4) map { (x:Double) =&gt; 3 * x}</code>来代替。至少使用大括号使得层次更加明显。另外，其实这里的<code>(x:Double) =&gt; 3 * x</code>可以换成更简单的<code>3*_</code>这个匿名函数。</p>
 <p>在数值计算中，高阶函数的使用也有一些意义。比如我们有一组函数，需要求出一组函数在某个点处的值。这个时候使用map当然是最直观的。但是使用</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> valueAt = (f: (<span class="type">Double</span>) =&gt; <span class="type">Double</span>, x : <span class="type">Double</span>) =&gt; f(x)</div><div class="line">valueAt(<span class="number">3.0</span>+_, <span class="number">1.0</span>)</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">val</span> valueAt = (f: (Double) =&gt; Double, x : Double) =&gt; <span class="fu">f</span>(x)
+<span class="fu">valueAt</span>(<span class="fl">3.0</span>+_, <span class="fl">1.0</span>)</code></pre></div>
 <p>这样的形式显然更为简单。</p>
 <p>注：上式中我们还了解了多参数的匿名函数的语法，以及把函数作为参数的用法。如果有可能，我们还可以写出<code>f at 1.0</code>这样的中缀的形式。是否是很吸引人呢？</p>
 <h3 id="常见的高阶函数">常见的高阶函数</h3>
 <p>很多的高阶函数都应用的集合类型上面。常见的有map、foreach、filter、reduceLeft等。这里在处理数据的时候我们再来了解。</p>
 <p>《快学Scala》的作者还提到了闭包。不过，闭包是任何的编程语言的结构体的共同的特性。本质是如果变量没有在这个过程体中定义，或者是在调用的上下文中并没有原来的变量的值的时候，在过程体中的变量的值该如何绑定。比如说，定义函数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">scale</span><span class="params">(x)</span> :</span> x*factor</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> scale(x) : x<span class="op">*</span>factor</code></pre></div>
 <p>当中，实际上factor没有出现在函数体中。那么factor一般是一个外部变量。但是关键的是，如果编译器遇到它的时候，在要执行scale的时候，factor该怎样取得值呢？这种问题就是所谓的闭包。</p>
 <p>当然，在scala的匿名函数完成是可以使用闭包的。调用的时候，闭包内的变量被绑定到调用的时候的作用域所确定的同名子的变量。这也是闭包的标准的使用策略。基本上任何语言都是这样。</p>
 <p>闭包应该属于编程理论中的“名子，作用域”中讨论的一个概念。它并非是函数式语言所特有的。但是在函数式语言中，闭包的使用更加重要。</p>
@@ -526,22 +565,33 @@
 <p>非面向对象的语言有自己的方法。比如C语言可以通过指针把函数传递过去。但是考虑到封装的要求，这样也许不是一个好的办法（虽然C语言也支持源文件级别的封装等。</p>
 <p>面向对象的语言的通行的做法，根据《快学Scala》中的介绍，是这样的，为了把一个函数参数传给另外一个函数或者对象，我们得把相关的动作方法放在一个实现某个接口的类当中，然后将该类的一个实例传递给另一个方法。当然，这种方法与函数式语言通用性相比还存在一些缺陷。比如在Java中，类是由编译期确定的，所以我们不能在运行期创建新的函数。仅仅为了封装单个方法而设计的接口我们称为是SAM（single abstract method）类型。（这也是Java程序员的叫法）。</p>
 <p>在事件驱动与GUI上面，比如为了使按钮在被点击的时候递增一个计数器，我们使用：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> counter = <span class="number">0</span></div><div class="line"><span class="keyword">val</span> button = <span class="keyword">new</span> <span class="type">JButton</span>(<span class="string">"Increment"</span>)</div><div class="line">button.addActionListener(<span class="keyword">new</span> <span class="type">ActionListener</span> &#123;</div><div class="line">	<span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">actionPerformed</span></span>(event: <span class="type">ActionEvent</span>)&#123;</div><div class="line">		counter += <span class="number">1</span></div><div class="line">	&#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">var</span> counter = <span class="dv">0</span>
+<span class="kw">val</span> button = <span class="kw">new</span> JButton(<span class="st">&quot;Increment&quot;</span>)
+button.<span class="fu">addActionListener</span>(<span class="kw">new</span> ActionListener {
+    <span class="kw">override</span> <span class="kw">def</span> <span class="fu">actionPerformed</span>(event: ActionEvent){
+        counter += <span class="dv">1</span>
+    }
+})</code></pre></div>
 <p>这当然是一段比较长的代码。而且非常冗余。因为我们只是要让计数器加一这个函数传递过去而已。一个比较合理的做法是这样的：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">button.addActionListener((event : <span class="type">ActionEvent</span>) =&gt; counter +=<span class="number">1</span>)</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala">button.<span class="fu">addActionListener</span>((event : ActionEvent) =&gt; counter +=<span class="dv">1</span>)</code></pre></div>
 <p>我们注意到，面向对象的语言中，很少提到动态创建那些有新的方法的未知的类。动态类型的语言中能够做到这一点，自编译的语言也可以。但是似乎面向对象的实践中从来没有认真考虑过在运行的时候创建具有新的方法与成员的类。</p>
 <p>在上面的转换代码中还应当注意，在函数式语言中添加一个函数是完全没有问题的。但是Scala有自己的情况：要使得代码能够与Java代码互操作。所以，在Scala中，为了启用上面的语法，还是需要提供一个隐式类型转换函数。示例如下：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">implicit</span> <span class="function"><span class="keyword">def</span> <span class="title">makeAction</span></span>(action: (<span class="type">ActionEvent</span>)=&gt; <span class="type">Unit</span>) = </div><div class="line">	<span class="keyword">new</span> <span class="type">ActionListener</span> &#123;</div><div class="line">		<span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">actionPerformed</span></span>(event: <span class="type">ActionEvent</span>) &#123; action(event)</div><div class="line">&#125;</div><div class="line">`</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">implicit</span> <span class="kw">def</span> <span class="fu">makeAction</span>(action: (ActionEvent)=&gt; Unit) = 
+    <span class="kw">new</span> ActionListener {
+        <span class="kw">override</span> <span class="kw">def</span> <span class="fu">actionPerformed</span>(event: ActionEvent) { <span class="fu">action</span>(event)
+}</code></pre></div>
 <p>这样做的实际结果，还是使得在函数式的代码在编译的时候，被转换成一个新的类。（不过，这个类似乎是在可以运行的时候动态创建的）。</p>
 <h3 id="柯里化函数">柯里化函数</h3>
 <p>在Haskell语言中，所有的函数都是自动柯里化的。Scala是函数式的语言，自然应当提供对于柯里化支持。在Scala中，柯里化的函数有自己的定义的语法，比如：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">mul</span></span>(x: <span class="type">Int</span>)(y:<span class="type">Int</span>) = x*y</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">mul</span>(x: Int)(y:Int) = x*y</code></pre></div>
 <p>柯里化函数式多个参量的函数的互换也经常使用（柯里化与反柯里化）。在一些需要传递高阶函数的地方，经常需要从已有的函数构造柯里化函数。如前所说，我们已经使用<code>_</code>来构造柯里化函数了。</p>
 <p>至于Scala中有没有反柯里化，自己现在不太清楚。但是原则上，Scala应该禀承函数式语言的一贯的思维，认为多参数的函数根本不是编程语言中什么根本性的特质。我们完全可以把多参数的函数看成是一个单参数的函数的多次应用，正如我们在数学当中看到的那样。只提供多参数的函数的参数的一部分，是非常自然的数学思维，也应该成为编程的一种思维。</p>
 <p>《快学Scala》中给出了一个常见的编程的实践：我们想测试两个序列在给定的某个对比的条件下是否是相同的。这里使用的是corresponds函数。使用示例是一个判断字符串序列在忽略大小写的意义下是否是等同的。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> a = <span class="type">Array</span>(<span class="string">"hello"</span>, <span class="string">"world"</span>)</div><div class="line"><span class="keyword">val</span> b = <span class="type">Array</span>(<span class="string">"Hello"</span>, <span class="string">"World"</span>)</div><div class="line">a.corresponds(b)(_.equalsIgnoreCase(_))</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">val</span> a = Array(<span class="st">&quot;hello&quot;</span>, <span class="st">&quot;world&quot;</span>)
+<span class="kw">val</span> b = Array(<span class="st">&quot;Hello&quot;</span>, <span class="st">&quot;World&quot;</span>)
+a.<span class="fu">corresponds</span>(b)(_.<span class="fu">equalsIgnoreCase</span>(_))</code></pre></div>
 <p>分析这个编程任务，我们知道，本质上还是两个对象之间的比较，所以应该有一个二元的函数。但是我们又需要在某个标准下面才能得到结果。因此，二元运算不是得到true或者false，而是还得接受一个提供判别标准的函数。所以，corresonds的类型是：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">corresponds</span></span>[<span class="type">B</span>] (that: <span class="type">Seq</span>[<span class="type">B</span>]) (p:(<span class="type">A</span>,<span class="type">B</span>) =&gt; <span class="type">Boolean</span>) : <span class="type">Boolean</span></div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> corresponds[B] (that: Seq[B]) (p:(A,B) =&gt; Boolean) : Boolean</code></pre></div>
 <p>定义了这样的一个柯里化的函数，这种设计既保持了语义的自然，实现起来也比较简洁。但是注意，这里的corresponds是<code>Array[B]</code>类别中预定义的函数，所以使用<code>a op b</code>这样的形式是没有问题的。但是，如果我们想使两个Double型的变量具有<code>a add b</code>这样的调用形式，那么原则上我们要为Double类添加一个<code>add</code>方法，但是这可能又要修改Scala的库，所以可能是不能实现的。（因为要保持这个类，同时又能为类单独添加新的方法，似乎是一种矛盾）</p>
 
       
@@ -589,8 +639,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/scala-tutorial-intro/" rel="next" title="Scala编程概要（一）：文档，注释，面向对象">
-                <i class="fa fa-chevron-left"></i> Scala编程概要（一）：文档，注释，面向对象
+              <a href="/scala-overview-4/" rel="next" title="Scala编程概要（四）：控制抽象, 集合, 模式匹配, 编译器">
+                <i class="fa fa-chevron-left"></i> Scala编程概要（四）：控制抽象, 集合, 模式匹配, 编译器
               </a>
             
           </div>
@@ -599,8 +649,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/scala-overview-4/" rel="prev" title="Scala编程概要（四）：控制抽象, 集合, 模式匹配, 编译器">
-                Scala编程概要（四）：控制抽象, 集合, 模式匹配, 编译器 <i class="fa fa-chevron-right"></i>
+              <a href="/maude-lang/" rel="prev" title="Maude语言">
+                Maude语言 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -711,7 +761,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -719,7 +769,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -728,7 +778,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

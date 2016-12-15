@@ -149,6 +149,9 @@
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> 80x24 </title>
 </head>
 
@@ -331,6 +334,423 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="./blog-pandoc-crossref/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Istyasna">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="80x24">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="80x24" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/blog-pandoc-crossref/" itemprop="url">
+                  Pandoc's test for pandoc-crossref
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-15T18:36:04+08:00">
+                2016-12-15
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              <span class="post-meta-item-text">更新于</span>
+              <time title="更新于" itemprop="dateModified" datetime="2016-12-15T20:01:15+08:00">
+                2016-12-15
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/出版/" itemprop="url" rel="index">
+                    <span itemprop="name">出版</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/出版/Pandoc/" itemprop="url" rel="index">
+                    <span itemprop="name">Pandoc</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/blog-pandoc-crossref/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog-pandoc-crossref/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="sec:pandoc-crossref">pandoc-crossref filter</h2>
+<p><a href="http://hackage.haskell.org/package/pandoc-crossref" id="link:crossref" target="_blank" rel="external">Pandoc crossref</a></p>
+<p>Homepage is sec. 1.1.</p>
+<h3 id="build-status">Build status</h3>
+<p>pandoc-crossref is a pandoc filter for numbering figures, equations, tables and cross-references to them.</p>
+<p>Input file (like demo.md) can be converted into html, latex, pdf, md or other formats.</p>
+<p>Optionally, you can use cleveref for latex/pdf output, e.g. cleveref pdf, cleveref latex, and listings package, e.g. listings pdf, listings latex</p>
+<h3 id="pandoc-citeproc-and-pandoc-crossref">pandoc-citeproc and pandoc-crossref</h3>
+<p>Since pandoc-crossref uses the same citation syntax as pandoc-citeproc, you have to run former before latter. For example:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">pandoc</span> -F pandoc-crossref -F pandoc-citeproc file.md -o file.html</code></pre></div>
+<h3 id="image-labels">Image labels</h3>
+<div class="figure">
+<embed src="file.ext" id="fig:label">
+<p class="caption">Figure 1: Caption</p>
+</div>
+<p>See Figure~fig. 1.</p>
+<h3 id="subfigures">Subfigures</h3>
+<p>It’s possible to group figures as subfigures. Basic syntax is as follows:</p>
+<div id="fig:figureRef" class="subfigures">
+<div class="figure">
+<img src="image1.png" alt="a" id="fig:figureRefA">
+<p class="caption">a</p>
+</div>
+<div class="figure">
+<img src="image2.png" alt="b" id="fig:figureRefB">
+<p class="caption">b</p>
+</div>
+<p>Figure 2: Figure 1: Caption of figure. a — subfigure 1 caption, b — subfigure 2 caption. a — subfigure 1 caption, b — subfigure 2 caption</p>
+</div>
+<pre><code>&lt;div id=&quot;fig:figureRef&quot;&gt;
+![subfigure 1 caption](image1.png){#fig:figureRefA}
+
+![subfigure 2 caption](image2.png){#fig:figureRefB}
+
+Caption of figure
+&lt;/div&gt;</code></pre>
+<p>References to subfigures will be rendered as figureNumber (subfigureNumber), e.g., in this particular example, <code>[@fig:figureRefA]</code> will produce <code>fig. 1 (a).</code> Fig 1.(a) : fig. 2 (a) .</p>
+<h3 id="equation-labels">Equation labels</h3>
+<p><span id="eq:label"><span class="math display">\[ math \qquad(1)\]</span></span></p>
+<p>To label a display equation, append <code>{ #eq:label}</code> (with label being something unique to reference this equation by) immediately after math block.</p>
+<p>Math block and label can be separated by one or more spaces.</p>
+<p>You can also number all display equations with autoEqnLabels metadata setting (see below). Note, however, that you won’t be able to reference equations without explicit labels. See Equation~eq. 1.</p>
+<h3 id="table-labels">Table labels</h3>
+<div id="tbl:label">
+<table>
+<caption>Table 1: Caption</caption>
+<thead>
+<tr class="header">
+<th align="left">a</th>
+<th align="left">b</th>
+<th align="left">c</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">2</td>
+<td align="left">3</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">5</td>
+<td align="left">6</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>To label a table, append <code>{ #tbl:label}</code> at the end of table caption (with label being something unique to reference this table by). Caption and label must be separated by at least one space. See Table~tbl. 1.</p>
+<h2 id="code-block-labels">Code Block labels</h2>
+<p>There are a couple options to add code block labels. Those work only if code block id starts with lst:, e.g. <code>{ #lst:label}</code>. lst. <strong>¿lst:label?</strong>.</p>
+<p>caption attribute will be treated as code block caption. If code block has both id and caption attributes, it will be treated as numbered code block.</p>
+<div id="lst:code" class="listing haskell">
+<p>Listing 1: Listing caption</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">main ::</span> <span class="dt">IO</span> () main <span class="fu">=</span> putStrLn <span class="st">&quot;Hello World!&quot;</span> </code></pre></div>
+</div>
+<p>List Codelst. 1</p>
+<h3 id="table-style-captions">Table-style captions</h3>
+<p>Enabled with codeBlockCaptions metadata option. If code block is immediately adjacent to paragraph, starting with Listing: or :, said paragraph will be treated as code block caption.</p>
+<pre> Listing: Listing caption
+main :: IO ()
+main = putStrLn "Hello World!"
+</pre>
+<div class="sourceCode"><pre class="sourceCode markdown"><code class="sourceCode markdown">&lt;pre&gt; Listing: Listing caption
+
+main :: IO ()
+main = putStrLn &quot;Hello World!&quot;
+
+&lt;/pre&gt; </code></pre></div>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="./blog-hexo-image-test/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Istyasna">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="80x24">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="80x24" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/blog-hexo-image-test/" itemprop="url">
+                  Test the layout of images
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-15T00:00:00+08:00">
+                2016-12-15
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              <span class="post-meta-item-text">更新于</span>
+              <time title="更新于" itemprop="dateModified" datetime="2016-12-15T11:57:04+08:00">
+                2016-12-15
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/出版/" itemprop="url" rel="index">
+                    <span itemprop="name">出版</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/出版/博客/" itemprop="url" rel="index">
+                    <span itemprop="name">博客</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/blog-hexo-image-test/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog-hexo-image-test/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          A short description of the blog
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/blog-hexo-image-test/">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="./hello-world/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -371,8 +791,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-15T08:24:48+08:00">
-                2016-12-15
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-14T00:00:00+08:00">
+                2016-12-14
               </time>
             
 
@@ -385,8 +805,8 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T18:40:49+08:00">
-                2016-12-14
+              <time title="更新于" itemprop="dateModified" datetime="2016-12-15T11:53:40+08:00">
+                2016-12-15
               </time>
             
           </span>
@@ -458,16 +878,16 @@
             <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
 <h2 id="quick-start">Quick Start</h2>
 <h3 id="create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">hexo</span> new <span class="st">&quot;My New Post&quot;</span></code></pre></div>
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
 <h3 id="run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">hexo</span> server</code></pre></div>
 <p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
 <h3 id="generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">hexo</span> generate</code></pre></div>
 <p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
 <h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">hexo</span> deploy</code></pre></div>
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 
           
@@ -812,316 +1232,6 @@ Hexo的Next主题可以识别<! -- more --.>，并且在主页当中展示文章
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="./stochastic-differential-equation-intro/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/stochastic-differential-equation-intro/" itemprop="url">
-                  随机微分方程的一种引入方法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-17T00:00:00+08:00">
-                2016-03-17
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:00:03+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/概率统计/" itemprop="url" rel="index">
-                    <span itemprop="name">概率统计</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/概率统计/随机过程/" itemprop="url" rel="index">
-                    <span itemprop="name">随机过程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/stochastic-differential-equation-intro/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/stochastic-differential-equation-intro/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>我们该怎样引入随机微分方程呢？大概是这样的，首先考虑常的微分方程ODE为<span class="math inline">\(x&#39;=V(x)\)</span>, <span class="math inline">\(x\in \Omega\subseteq\mathbb{R}^n\)</span>，然后此方程刻划物理现象的时候作为物体运动的轨迹，其解<span class="math inline">\(x(t), t\geq 0\)</span>是关于<span class="math inline">\(t\)</span>的光滑的曲线。但是在许多应用中，从实验所观测到的轨迹不如确定性方程所描述的那样光滑。因此有必要改正ODE为SDE。</p>
-<p>也就是变成微分 <span class="math display">\[d X(t) = V(X(t)) d t + G(X(t))\xi(t)\]</span> 的形式。其中的<span class="math inline">\(G(X)\)</span>是<span class="math inline">\(n\times m\)</span>的矩阵。<span class="math inline">\(\xi\)</span>是<span class="math inline">\(m\)</span>维的白噪声。但是问题在于，在数学上如何严格定义白噪音。作为一个随机过程，其解又是什么意思？</p>
-<p>直观的解释是使用连续随机过程来处理随机微分方程。每个<span class="math inline">\(X\)</span>表示是一个随机变量，而<span class="math inline">\(X(t)\)</span>整体表示的是求解一族随机过程本身。因此也就变成了求随机变量分布或者密度与时间的参数的关系。比如线性单自由度体系的运动方程 <span class="math display">\[mX&#39;&#39;(t) + cX&#39;(t) + kX(t) = Y(t), X(0) = X_0, X&#39;(0) = X&#39;_0\]</span> 中，引入<span class="math inline">\(X_1(t) = X(t)\)</span>，就写成使用状态变量描述动态系统的方法。这种方法是系统工程与现代控制理论的重要的手段。在振动工程中有许多方便的应用。</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/stochastic-differential-equation-intro/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="./modelica-modeling-2/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/modelica-modeling-2/" itemprop="url">
-                  快速了解Modelica与OpenModelica建模2-ModelicaML与方程
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-13T00:00:00+08:00">
-                2016-03-13
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:06:20+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/modelica-modeling-2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/modelica-modeling-2/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="modelicaml">ModelicaML</h2>
-<p>ModelicaML同样地用于系统建模。不过不是语言的方式，而是首先以UML类似的模型表示出相应关系，然后这种模型被转换成Modelica的代码。转换代码后就可以执行，模拟出结果。ModelicaML是UML Profile的一个具体的扩展。</p>
-<p>ModelicaML的一个开发的方法是在Papyrus UML环境下进行。在此环境之下，通过Acceleo工具生成Modelica的代码，经过M2T工具生成Modelica的.mo文件，之后可以通过任何一个符合Modelica语言要求的模拟工具中运行出来结果。安装Modelica Development Tool的Eclipse插件之后，新建Papyrus工程，在模型语言（Diagram Language）提供的UML、SysML、ModelicaML、Profile中选择ModelicaML，这样就进入了ModelicaML的建模的环境了。之后我们就可以使用ModelicaML来完成建模了（UML本身可以用于元建模，这个时候，UML规范本身就是元元建模工具了）。</p>
-<p>Modelica使用类UML的图形表示模型。有结构图、需求图、行为图等描述方法。注意到Modelica本身也是一种元模型规范。Modelica中的元素被看成是prototype，所有的类都是继承自该原型。ModelicaML充分利用了Modelica语言的特性，可以在状态图中使用Modelica的谓词语言与条件判断，同时，也增强了UML建模算法的能力（算法流程以及代数方程）。</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/modelica-modeling-2/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1167,7 +1277,7 @@ Hexo的Next主题可以识别<! -- more --.>，并且在主页当中展示文章
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1175,7 +1285,7 @@ Hexo的Next主题可以识别<! -- more --.>，并且在主页当中展示文章
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1184,7 +1294,7 @@ Hexo的Next主题可以识别<! -- more --.>，并且在主页当中展示文章
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

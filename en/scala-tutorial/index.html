@@ -150,6 +150,9 @@
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> Scala语言编程 | 80x24 </title>
 </head>
 
@@ -459,7 +462,11 @@
 <h2 id="单独运行的scala程序">单独运行的Scala程序</h2>
 <p>要使Scala程序能单独运行（在Scala中，指的是可以编译成字节码在Scala虚拟机中执行，并非操作系统直接可认知），程序就要有一个main方法。该方法仅有一个 <code>Array[String]</code> 作为参数，并以 <code>Unit</code>作为返回类型。任何拥有这样签名的main方法的单例对象都可以作为程序的入口。</p>
 <p>单独运行的Scala程序示例</p>
-<figure class="highlight plain"><figcaption><span>.scala&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">object Hello &#123;</div><div class="line">    def main(args: Array[String]) &#123;</div><div class="line">        for (arg &lt;- args) println(&quot;Hello, World!&quot;)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">object</span> Hello {
+    <span class="kw">def</span> <span class="fu">main</span>(args: Array[String]) {
+        <span class="kw">for</span> (arg &lt;- args) <span class="fu">println</span>(<span class="st">&quot;Hello, World!&quot;</span>)
+    }
+}</code></pre></div>
 <p>Scala应用程序源文件一般以 <code>.scala</code> 作为后缀。</p>
 
       
@@ -619,7 +626,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -627,7 +634,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -636,7 +643,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

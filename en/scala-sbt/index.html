@@ -153,6 +153,9 @@
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> 在Debian/Ubuntu系统下面的Java与Scala包 | 80x24 </title>
 </head>
 
@@ -459,24 +462,45 @@
 <p>sbt-native-packager可能的缺点就是它把依赖的jar包都放在程序当中，因此，整个程序显得非常拥挤了。其实按照集群来配置的话，/usr目录是放置软件的，没有必要每个结点机器上都安装一遍，那样也太占空间了。</p>
 <p>我们来看具体的做法。</p>
 <p>生成deb包被看成是构建任务的一部分。所以简化到使用一个plugin的程度。首先，我们指定sbt的版本：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sbt.version = <span class="number">0.13</span><span class="number">.7</span></div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala">sbt.<span class="fu">version</span> = <span class="fl">0.13.7</span></code></pre></div>
 <p>然后，在project/plugins.sbt文件中添加如下的插件：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">addSbtPlugin(<span class="string">"com.typesafe.sbt"</span> % <span class="string">"sbt-native-packager"</span> % <span class="string">"1.0.0"</span>)</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="fu">addSbtPlugin</span>(<span class="st">&quot;com.typesafe.sbt&quot;</span> % <span class="st">&quot;sbt-native-packager&quot;</span> % <span class="st">&quot;1.0.0&quot;</span>)</code></pre></div>
 <p>之后，在build.sbt中启用相应的插件，并指定生成debian包的时候所需要的一些关键字段，比如维护者名称，开发者名称等。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">name :=<span class="string">"example-app"</span></div><div class="line">version := <span class="string">"1.0"</span></div><div class="line"></div><div class="line"><span class="comment">//enablePlugins(DebianPlugin)</span></div><div class="line">enablePlugins(<span class="type">JavaAppPackaging</span>)</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala">name :=<span class="st">&quot;example-app&quot;</span>
+version := <span class="st">&quot;1.0&quot;</span>
+
+<span class="co">//enablePlugins(DebianPlugin)</span>
+<span class="fu">enablePlugins</span>(JavaAppPackaging)</code></pre></div>
 <p>如果只想启用生成Debian包的功能，添加DebianPlugin模块就可以了。注意，这种方便性只能在sbt-native-packager版本不小于1.0，以及sbt版本不低于0.13.5的时候才能使用。</p>
 <p>接下来，我们就要创建自己的应用程序了。比如TestApp.scala。这个文件的路径是src/main/org/scala/TestApp.scala。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">object TestApp extends App &#123;</div><div class="line">  println(&quot;IT LIVES!&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code>object TestApp extends App {
+  println(&quot;IT LIVES!&quot;)
+}</code></pre>
 <p>要构建相应的工具，则使用sbt stage命令。这个时候，在target/universal/stage目录下可以看到bin、lib等目录。缺省情况下，会为JavaApp创建一个shell脚本，以及一个.bat批处理脚本。</p>
 <p>接着，使用sbt universal:packageBin，sbt universal:packageZipTarball可以创建相应的tar包或者zip压缩包。这个包就可以直接发布出去了。</p>
 <h2 id="构建适合于debian的包">构建适合于Debian的包</h2>
 <p>要想构建.deb包，直接的操作很简单，<code>sbt debian:packageBin</code>就是在target目录下生成.deb文件的最终命令。</p>
 <p>然而，在生成.deb包之前，要对一些字段进行配置，如维护者的名称，邮件，软件的描述等。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">packageDescription in Debian := &quot;Example Cli&quot;</div><div class="line"></div><div class="line">maintainer in Debian := &quot;Josh Suereth&quot;</div><div class="line"></div><div class="line">name := &quot;Debian Example&quot;</div><div class="line"></div><div class="line">version := &quot;1.0&quot;</div><div class="line"></div><div class="line">maintainer := &quot;Max Smith &lt;max.smith@yourcompany.io&gt;&quot;</div><div class="line"></div><div class="line">packageSummary := &quot;Hello World Debian Package&quot;</div><div class="line"></div><div class="line">packageDescription := &quot;&quot;&quot;A fun package description of our software,</div><div class="line">  with multiple lines.&quot;&quot;&quot;</div></pre></td></tr></table></figure>
+<pre><code>packageDescription in Debian := &quot;Example Cli&quot;
+
+maintainer in Debian := &quot;Josh Suereth&quot;
+
+name := &quot;Debian Example&quot;
+
+version := &quot;1.0&quot;
+
+maintainer := &quot;Max Smith &lt;max.smith@yourcompany.io&gt;&quot;
+
+packageSummary := &quot;Hello World Debian Package&quot;
+
+packageDescription := &quot;&quot;&quot;A fun package description of our software,
+  with multiple lines.&quot;&quot;&quot;</code></pre>
 <p>整体而言，这些字段不需要怎么理解，只需要自己填上去就可以了。</p>
 <p><code>sbt-native</code>支持<code>debian:package-bin</code>作为构建deb包的命令，<code>debian:lintian</code>作为使用lintian命令检查deb包是否正确的命令，以及<code>debian:gen-changes</code>作为生成.changes文件的命令。</p>
 <p>为了在某种程度上能够保证软件包能够正常工作，在bulid.sbt中添加如下的依赖：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">debianPackageDependencies in <span class="type">Debian</span> ++= <span class="type">Seq</span>(<span class="string">"java2-runtime"</span>, <span class="string">"bash (&gt;= 2.05a-11)"</span>)</div><div class="line"></div><div class="line">debianPackageRecommends in <span class="type">Debian</span> += <span class="string">"git"</span></div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala">debianPackageDependencies in Debian ++= Seq(<span class="st">&quot;java2-runtime&quot;</span>, <span class="st">&quot;bash (&gt;= 2.05a-11)&quot;</span>)
+
+debianPackageRecommends in Debian += <span class="st">&quot;git&quot;</span></code></pre></div>
 <p>如果还想自己编写DEBIAN的preinst、postinst等命令，直接写到src/debian/DEBIAN目录里面就可以了。</p>
 <p>If you use the <code>packageArchetype.java_server</code> there are predefined postinst and preinst files, which start/stop the application on install/remove calls. Existing maintainer scripts will be extended not overridden. 这说明，Sbt对于布署Java服务器也有很好的支持。</p>
 <p>完整的Debian配置文档，参考<a href="http://www.scala-sbt.org/sbt-native-packager/formats/debian.html" class="uri" target="_blank" rel="external">http://www.scala-sbt.org/sbt-native-packager/formats/debian.html</a>。此外，<a href="http://www.scala-sbt.org/sbt-native-packager/gettingstarted.html" class="uri" target="_blank" rel="external">http://www.scala-sbt.org/sbt-native-packager/gettingstarted.html</a>还告诉我们可以使用<code>windows:packageBin</code>生成MSI安装文档。</p>
@@ -485,16 +509,26 @@
 <p>今天就先到这里吧。关于Python的软件包的配置，先放在后面再说。</p>
 <h2 id="sbt配置nexus软件包的方法">Sbt配置nexus软件包的方法</h2>
 <p>类似于在maven中的添加软件版本库，sbt的方法是添加repositories的字段。注意里面的repositories的配置是在用户的.sbt/conf配置的repo.properties文档，内容为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[repositories]</div><div class="line">  local</div><div class="line">  nexus:  http://127.0.0.1:8081/nexus/content/groups/public</div><div class="line">  sonatype-snapshots:</div></pre></td></tr></table></figure>
+<pre class="config"><code>[repositories]
+  local
+  nexus:  http://127.0.0.1:8081/nexus/content/groups/public
+  sonatype-snapshots:</code></pre>
 <p>然后在conf目录中的sbtconfig.txt中添加三行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-Dsbt.global.base=E:/sbt/.sbt</div><div class="line">-Dsbt.ivy.home=E:/sbt/.ivy2</div><div class="line">-Dsbt.repository.config=E:/sbt/conf/repo.properties</div><div class="line">## 可选的选项 -Dsbt.override.build.repos=true</div><div class="line">## 这些选项也可以通过sbt_opts的环境变量进行全局的配置这样sbt执行的时候就不需要访问外网了。</div></pre></td></tr></table></figure>
+<pre class="shell"><code>-Dsbt.global.base=E:/sbt/.sbt
+-Dsbt.ivy.home=E:/sbt/.ivy2
+-Dsbt.repository.config=E:/sbt/conf/repo.properties
+## 可选的选项 -Dsbt.override.build.repos=true
+## 这些选项也可以通过sbt_opts的环境变量进行全局的配置这样sbt执行的时候就不需要访问外网了。</code></pre>
 <p>之后从nexus的私服下载jar包。在nexus里面需要添加typesafe的仓库。<a href="http://repo.typesafe.com/typesafe/ivy-releases" class="uri" target="_blank" rel="external">http://repo.typesafe.com/typesafe/ivy-releases</a>。但是注意一般还是要修改nexus虚拟库中的配置，需要把中央仓库放在最后，而把sbt的仓库放在前面。</p>
 <p>不过nexus的配置也不是一件容易的事情。这些事情可以写成一本书了。比如<a href="http://my.oschina.net/guanzhenxing/blog/209600" class="uri" target="_blank" rel="external">http://my.oschina.net/guanzhenxing/blog/209600</a>中介绍的配置nexus的数据库的原理。</p>
 <p><a href="http://www.tuicool.com/articles/vMnyIb" class="uri" target="_blank" rel="external">http://www.tuicool.com/articles/vMnyIb</a>上面告诉了我们scala的三个主站，分别是</p>
 <p>安装Nexus后默认会有一个Public Repositories组，可以将其作为Maven的镜像组，并添加一些常用的第三方镜像：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cloudera: https://repository.cloudera.com/artifactory/cloudera-repos/</div><div class="line">spring: http://repo.springsource.org/libs-release-remote/</div><div class="line">scala-tools: https://oss.sonatype.org/content/groups/scala-tools/</div></pre></td></tr></table></figure>
+<pre><code>cloudera: https://repository.cloudera.com/artifactory/cloudera-repos/
+spring: http://repo.springsource.org/libs-release-remote/
+scala-tools: https://oss.sonatype.org/content/groups/scala-tools/</code></pre>
 <p>对于Ivy镜像，我们创建一个新的虚拟组：ivy-releases，并添加以下两个镜像：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">type-safe: http://repo.typesafe.com/typesafe/ivy-releases/</div><div class="line">sbt-plugin: http://dl.bintray.com/sbt/sbt-plugin-releases/</div></pre></td></tr></table></figure>
+<pre><code>type-safe: http://repo.typesafe.com/typesafe/ivy-releases/
+sbt-plugin: http://dl.bintray.com/sbt/sbt-plugin-releases/</code></pre>
 <p>另外一种方法是直接去配置<code>~/.m2/settings.xml</code>文档。或者maven目录下面的<code>conf/settings.xml</code>文件。</p>
 
       
@@ -658,7 +692,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -666,7 +700,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -675,7 +709,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

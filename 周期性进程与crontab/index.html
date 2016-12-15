@@ -153,6 +153,9 @@
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> 周期性进程与crontab | 80x24 </title>
 </head>
 
@@ -454,7 +457,7 @@
 <p>cron通过syslog为它的活动做日志。</p>
 <h2 id="crontab文件的格式">crontab文件的格式</h2>
 <p>crontab文件中以<code>#</code>开头的行代表注释。每个非注释行包括6或7个字段，它代表的含义为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">minute hour day month weekday [username] command</div></pre></td></tr></table></figure>
+<pre><code>minute hour day month weekday [username] command</code></pre>
 <p>前六个字段都会用空白分开，但是到了command后，所有空格都算在command里面。用户自己的crontab文件中没有username项。</p>
 <p>日期与时间格式会在很多地方用到，所以得有一个全局的思维才行。一般来说，首等应清楚表示的区间在一天以内还是一个比较长的日期。其次要确定所表示的地区。另外就是从大到小还是从小到大。我们可以这样进行分类：</p>
 <ol style="list-style-type: decimal">
@@ -528,8 +531,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Linux-Log/" rel="next" title="Linux下的日志记录及其策略">
-                <i class="fa fa-chevron-left"></i> Linux下的日志记录及其策略
+              <a href="/Linux-Daemon/" rel="next" title="linux下的守护进程">
+                <i class="fa fa-chevron-left"></i> linux下的守护进程
               </a>
             
           </div>
@@ -538,8 +541,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/service-cups/" rel="prev" title="cups打印服务介绍">
-                cups打印服务介绍 <i class="fa fa-chevron-right"></i>
+              <a href="/Linux-Log/" rel="prev" title="Linux下的日志记录及其策略">
+                Linux下的日志记录及其策略 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -650,7 +653,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -658,7 +661,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -667,7 +670,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

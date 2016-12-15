@@ -149,6 +149,9 @@
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> 80x24 </title>
 </head>
 
@@ -331,6 +334,429 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="./LaTeX-grouping/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Istyasna">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="80x24">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="80x24" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/LaTeX-grouping/" itemprop="url">
+                  TeX与LaTeX的编组
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2013-06-20T00:00:00+08:00">
+                2013-06-20
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              <span class="post-meta-item-text">更新于</span>
+              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T16:36:10+08:00">
+                2016-12-14
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/LaTeX-grouping/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/LaTeX-grouping/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="编组"><a href="#编组" class="headerlink" title="编组"></a>编组</h2><p>编组可以理解成计算机编程中的模块结构。编组发生作用是在编程语言层次上的，也就是每经过一个编组，编译器就回复到编组之前的正常规则。</p>
+<p>ex5.1 得到ff不连在一起的<code>shelfful</code>.</p>
+<p>方法是输入<code>shelf{ful}</code>.也就是在f中间加上一个编组。</p>
+<p>ex5.2 不用转义的空格，怎样在一排中得到三个空格。</p>
+<p>使用<code>{ }{ }{ }</code>吧。或者<code>{ } { }</code>，注意编组后面的空格不会被自动忽略。</p>
+<p>为了使控制序列作用在特定的文本上，我们也使用<code>\centerline{}</code>这样的结构。</p>
+<p>虽然编组的功能很强大，但是也容易使文档变得难读。幸好在普通文稿当中不必使用太多的编组。</p>
+<p>括号的作用有多个，一个是把多个单词看成一个结构，另一种是提供了一个局部模块结构。不应当认为大括号仅有一个作用。</p>
+<p>ex5.3 键入下列内容会得到什么结果? </p>
+<pre><code class="latex">\centerline{This information should be {centered}.}
+\centerline So should this.
+</code></pre>
+<p>它的结果是，第一条命令产生一个居中的文本块，但是第二行将只有一个单词S。第三行变成了一o开头。</p>
+<p>注意第二行不是一个单词，因为TeX控制系列默认将后面的一个字母而不是单词视为一个单独的参数。</p>
+<p>ex5.5 定义一个控制系列<code>\ital</code>,使得用户键入<code>\ital{text}</code>来代替<code>{\it text\/}</code>.与<code>\it</code>相比它有什么优缺点。</p>
+<p>显然使用<code>\def\ital#1{ {\it #1\/} }</code>它的不足只是放在后面，并且总是有一个斜体校正，它的所有的特点都跟它的封装形式有关。</p>
+<p>TeX的宏定义与m4差不多，过多的括号里面，只有最外层的被去掉，内层的括号得到了保留。</p>
+<p>TeX的参数的处理</p>
+<p>与C语言不同，在编组当中改变即使是全局变量，当走出编组的时候全局变量也会恢复成原来的样子（这有一点像是有硬堆栈变量的计算机）。使用<code>\global</code>命令可以做到这一点。比如将计数器加一的操作，显然通过普通方法是不行的，在块里面需要使用</p>
+<pre><code class="latex">\global\advance\count0 by 1
+</code></pre>
+<p>其中的advance表示对指定的计数器加上特定的值。<code>\count0</code>是TeX内部的一个计数器。</p>
+<p>分组</p>
+<p>另一个分组的命令是<code>\begingroup{GRPNAME}...\endgroup{GRPNAME}</code>.</p>
+<p>这个可以看成是LaTeX环境的基础。如果使组正常工作，那么我们就应当避免Sa,Sb,Ea,Eb这样的情况，方法其实很简单，在Sa的时候定义一个<code>\blockname{}</code>名子与本环境的名子相同，Sb也同样这种做法。这样在Ea的时候，Sb定义的blockname就会消失，在读到Eb的时候检查一下b有没有被定义就可以了。</p>
+<pre><code class="latex">\def\beginthe#1{\begingroup\def\blockname{#1}}
+\def\endthe#1{\def\test{#1}%
+\ifx\test\blockname\endgroup
+\else\errmessage{You should have said
+\string\endthe{\blockname}}\fi}
+</code></pre>
+<p>（具名编组的概念，有些像是Pascal语言的end for语句之类的扩展）。</p>
+<p>\section{运行TeX@2013年 06月 20日 星期四 14:27:32 CST}</p>
+<p>从外壳中键入tex命令，出现双星号提示符，要求输入文件名，这个时候我们可以代之以输入<code>\relax</code>命令，进入到一个星号的状态。之后就进入排版了。</p>
+<p>在输入完成内容后，键入<code>\end</code>可以结束会话，TeX会把文件输出到当前目录里面。</p>
+<p>在第一篇TeX当中，可能<code>\hskip</code>, <code>\vskip</code> 以及后面的<code>\hrule</code> 我们比较常用吧。</p>
+<p>直接的波浪线表示告诉TeX前后两个文本是连在一起的，不要在此处断行。<code>\vfill</code>表示用空白将本页剩下的部分用空白填满，然后用<code>\eject</code>把它送到输出文件。</p>
+<p>在出现**提示符的时候，我们可以以<code>&amp;</code>开头表示以特定的宏格式处理文件，比如<br><code>&amp;plain \input story</code>表示使用plainTeX的格式处理文件。一般来说，还可以在从外壳调用它的时候使用<code>tex &amp;plain story</code>或<code>tex \relax</code>这样的形式直接跳过双星号提示。</p>
+<p><code>\eject</code> 表示本页处理完毕，不代表所有的页都处理完成了。我们仍然需要使用<code>\end</code>来结束文本的输入。</p>
+<p>在TeX中，由<code>\hsize=</code>控制本行的排版宽度(不是页面宽度)。</p>
+<p>如果TeX发出警告，那么每段文本后面最后有一个|表示在输出的时候TeX加了一个黑色的方块。以产生警告作用。</p>
+<p>在输出文件的时候，TeX总会产生log日志。</p>
+<p>TeX通过给定的信息以断词。比如通过<code>\hyphenation{gal-axy}</code>，中间的一个-让TeX知道这是一个可以断词的位置。</p>
+<h2 id="错误信息与处理"><a href="#错误信息与处理" class="headerlink" title="错误信息与处理"></a>错误信息与处理</h2><p>TeX的错误信息是以感叹号!开始的。并提供了错误上下文。上文是读出的内容，下文是要读的内容。并在上文的最左边给出了错误的行号(X.Y中Y表示行号)。</p>
+<p>这个时候可以键入回车，表示试图忽略本次错误，或者输入<br>\begin{description}<br>    \item[S] 每次遇到错误后都相当于自动添加一个Enter.<br>    \item[R] 同S,但是会忽略因为文件名而产生的错误<br>    \item[Q] 同R,但是更强大一些，不仅继续执行，而且也不在终端上显示信息<br>    \item[I] 插入一些文本，后面不用空格如<code>I\vskip</code>.<br>    \item[数字] 从接下来的字符与控制系列中删除相应的字节数<br>    \item[H] 请求帮助<br>    \item[X] 当前位置退出<br>    \item[E] 对当前文件重新编辑<br>\end{description}</p>
+<p>在TeX当中，这些命令改变了交互的等级。S,R,Q分别对应于<code>\scrollmode</code>,<code>\nonstopmode</code>,<code>\batchmode</code>.使用<code>\errorstopmode</code>转成正常的模式。这些命令是全局作用的，无论它们出现在哪一个组当中。</p>
+<p>调用宏的时候产生的错误就像编程语言里面函数调用栈的错误一样，我们可以设置<code>\errorcontextlines</code>设置显示出来的调用栈的深度。</p>
+<h2 id="TeX的工作原理"><a href="#TeX的工作原理" class="headerlink" title="TeX的工作原理"></a>TeX的工作原理</h2><p>在TeX中有如下约定，一个回车类似于一个空格，一行中的两个连续空格被视为一个，无论出现在哪一个位置，并且使用一个空行表示一段的结束。</p>
+<p>TeX的字符所属的类</p>
+<p>256个字符被分成16类。数字编号从0到15.TeX在读入文件的时候每次读取一个记号，并对比当前记号所在的类，以决定所产生的行为。这些类及作用为:</p>
+<p>类别 意义       默认字符</p>
+<hr>
+<p>0    转义符     反斜杠<br>1    组开始     {<br>2    组结束     }<br>3    数学环境   \$<br>4    表格对齐   \&amp;<br>5    换行       <return><br>6    位置参数   <code>#</code><br>7    上标       <code>^</code><br>8    下标       <code>_</code><br>9    可忽略字符 <null><br>10   空格       <space><br>11   字母       [a-zA-Z]<br>12   其它字符   无<br>13   活动符     ~<br>14   注释符     %<br>15   无用符     <delete> </delete></space></null></return></p>
+<p>其中每类都可以包含若干个字符。当使用plainTeX格式的时候，\$,\%,\&amp;,#,_要转义使用。此外，一些词在转义时有其它的含义，比如<code>\~</code>得到的是波浪重音。</p>
+<p>在TeX工作的时候源文件中所有的部分被分成一个一个的记号，它们或者是指定类代码中的单个字符，或者是一个控制序列。也就是在读内容的时候，TeX先给字符分类，根据分类的情况作进一步的处理:</p>
+<pre><code class="latex">\hskip 36 pt
+\\[1]skip3[12]6[12] [10]p[11]t[11]
+</code></pre>
+<p>TeX有一个叫INITEX的版本。这个版本里面气有的字母都被认为是12,除了字母，回车，空格，delete,注释与反斜杠符号之外。</p>
+<p>一个明显的特点是，编组符号是不能使用的。</p>
+<p>使用<code>\catcode</code>SYMBOL=N`来将字符更改到指定的类代码当中。</p>
+<p>catcode的作用域是局部的。使用<code>\string</code>命令可以将控制字符分成单个的对象。使用<code>\csnameXXXX\endcsname</code>可以将一个字符记号列表变成一个单独的控制系列。只要它不与TeX的原始控制序列相冲突。这个时候，控制系列的名子完全来自于后面的字符，比如<br><code>\csname TeX\endcsname</code><br>我们不能使用<code>\csname\TeX\endcsname</code>这样的格式，因为<code>\TeX</code>在被调用的时候会被宏展开成其它的东西。</p>
+<p><code>\string</code>宏可以看成是读取后面的非空白字符并按照原样显示，它可以用在我们的<code>\message{\stringXXX}</code>命令当中，以便正确显示出向用户提示的信息。</p>
+<p>注: 当<code>\csname</code>用来第一次定义控制系列的时候，那个控制系列在重新被定义之前等价于<code>\relax</code>命令产生的效果。</p>
+<p>使用<code>\let</code>命令可以给一个记号赋值，使用</p>
+<pre><code class="latex">\ifundefined{TOKEN}&lt;if_true&gt;\else&lt;if_false&gt;\fi
+</code></pre>
+<p>可以完成一个复杂的判断逻辑。比如</p>
+<pre><code class="latex">\ifundefined{TeX}&lt;true_text&gt;\else&lt;false_text&gt;\fi
+</code></pre>
+<p>表示在<code>\TeX</code>宏未被定义或者为<code>\relax</code>的时候被展开成<true-text>，否则被展开成<false-text>.</false-text></true-text></p>
+<p><code>\let</code>的语法是<code>\let\TOKEN=\VALUE</code></p>
+<p>除了<code>\string</code>用于得到记号外，还可以使用<code>\numberNUM</code>用于得到一个小数，使用<code>\romannumeralNUMBER</code>得到一个用小写罗马数字表示的数(如<code>\romannumeral24</code>得到xxiv)。并且可以使用<code>\numberREG</code>来得到一个内部寄存器里面的数字。</p>
+<p><code>\uppercase{token_list}</code>,<code>\lowercase{token_list}</code>用于完成记号的转换。</p>
+<p>ex7.8 想一想，<code>\uppercase{a\lowercase{bC}}</code>得到的记号列表是什么</p>
+<p>这可能是TeX语法最为特殊的一点了吧。它的展开不是从内到外逐渐展开的，而是从外到内按照记号逐个分析出来的。发生的过程是，首先<code>\uppercase</code>宏看到了它的一系列参数。这些参数被识别成记号的列表，a, <code>\lowercase</code>, <code>{</code>, b, C, <code>}</code>，各自都是完整的单位。这个时候，每一个列表被分类。被uppercase宏作用，就变成了<code>A\lowercase{BC}</code>。然后继续向前读入字符并排版，转成Abc.</p>
+<p>这个过程可能很特殊吧。仔细想一想，它跟m4宏还是很相像的，不过m4宏把它们都当成字符，而TeX还分类处理这些记号。</p>
+<p>ex7.9 TeX有一个内部整数参数叫做year,它等于任务开始时当前年的数字，看看怎样用<code>\year</code>以及<code>\romannumeral</code>和<code>\uppercase</code>对所有运行在2003的任务给出后面的版权表示。</p>
+<p>根据前面的介绍<code>\uppercase{\romannumeral\year}</code>显然是不行的，因为uppercase在展开的时候，首先得到它的参数，而它的参数还没有被展开，为了解决这个问题，必须使用<code>\expandafter</code>宏，让里面的宏先展开，让uppercase得到宏展开后的参数。</p>
+<p>正确的答案是</p>
+<pre><code class="latex">\copyright\ \uppercase\expandafter{\romannumeral\year}
+</code></pre>
+<p>TeX的语法的特殊性现在有一点了解了。但是还差很多基础的知识，等看到后面更多的控制系列之后再看它的语法结构吧。</p>
+<h2 id="字符输入"><a href="#字符输入" class="headerlink" title="字符输入"></a>字符输入</h2><p>很少有键盘能够提供256个字符，而且有的字符已经有其它的用处，所以我们使用下面的char命令得到任意的字符。格式是:<br><code>\char&lt;NUMBER&gt;</code>得到当前字体的相应字符。注意是当前字体中的字符。</p>
+<p>在TeX刚设计的时候，一个字体文件就最多只有256个字符。在TeX内部，字体的代码总是以ASCII格式被调用的。b的内部代码，这样就总是98.</p>
+<p>Knuth喜欢使用斜体表示八进制数，使用打字机字体表示十六进制数。个人的习惯不同吧。我觉得都使用正常字体就行了，Knuth的字体使用风格有些复杂。</p>
+<p>八进制数使用右单引号引导，而十六进制数使用<code>&quot;</code>引导。比如<code>\char&#39;142</code>与<code>\char&quot;62</code>与<code>\char98</code>是等效的。</p>
+<p>定义char还有一个比较方便的方式，这时候不用使用<code>\def&lt;SEQ&gt;{\char&lt;NUM&gt;}</code>这样复杂的形式，而是直接使用<code>\chardef&lt;SEQ&gt;=&lt;NUM&gt;</code>。</p>
+<p>有些人的键盘上直接有$\leq$，$\geq$这些字符，它们的生活还真是比较方便啊。</p>
+<p>像回车等换行字符的ASCII可以使用<code>^^M</code>这样的形式来表示。<code>^^</code>后面实际上还可以跟两位十六进制数字，用于表示指字代码的ASCII字符。</p>
+<h3 id="TeX系统读入的规则"><a href="#TeX系统读入的规则" class="headerlink" title="TeX系统读入的规则"></a>TeX系统读入的规则</h3><p>TeX的输入是一系列的”行”，当TeX从里面读入文本的时候，它就处于三个状态中的三歧的一个: 新行N,行中间M,跳过空格S.</p>
+<p>在每行的开头它处于状态N,但是大部分的时间它处在状态M,当读入一个控制词或者一个空格之后它进入状态S,这个时候再遇到空格就会被忽略。</p>
+<p>出现在行尾的任何空格都会被删除。当TeX在任意的状态读到一个第零类的字符的时候，它就会搜索这个控制序列的名子。如果行中没有其它的字符，那么定义这个序列的名子为空。如果接下来的一个字符不是属于第11类，那么它读入一个字符作为控制系列的名子。如果是属于第十一类，那么继续读，直到读到一个非第11类的字母为止。作为控制序列的一个记号。在读完记号后进入到处理第十类字符的状态S,如果读的记号为空，那么进入状态M当中。</p>
+<p>TeX在任意状态遇到第7类字符，并且接下来还是一个第7类字符，也就是遇到了<code>^^</code>，如果后面跟一个小于128的字符，那么<code>^^</code>被去掉，并且从c中加上或减去64.于是<code>^^A</code>就被解释成ASCII为1的字符。但是如果后面跟的是0123456789abcdef,那么读取两位字符，然后使用十六进制代码对应的符号替换<code>^^xx</code>.当替换完成后，TeX返回到原来的位置继续开始。</p>
+<p>比如，使用<code>\T</code>^^65X得到的结果与<code>\TeX</code>结果相同，因为^^65代表的就是字母e.</p>
+<p>在上面的状态下，如果遇到的不是三字符或者四字符，采用另外的处理办法。在读入一个<code>^</code>后，下面的字符如果是1,2,3,4,6,8,11,12,13类中的一个字符，或者第七类的字符，但是不能理解成上面的三字符或者四字符，那么它给字符一个类代码并且进入状态M.</p>
+<p>如果遇到的是第5类(行尾字符)，那么它就放弃本行剩下的所有的内容但是如果在状态N的时候遇到了行尾字符，那么行尾字符就被转换到控制系列<code>\par</code>.如果处于状态M,那么行尾字符转换成第10类(空白)记号。如果处于状态S的时候遇到了行尾符，那么行尾的字符就被忽略。(同时转到状态N?)</p>
+<p>如果遇到第9类字符，那么直接忽跳过它，就好像没有它一样。</p>
+<p>遇到第10类字符的处理: N或S时，第10类字符被直接跳过，并且保持当前状态，处在状态M的时候，字符被转换成第10类的记号，并设此记号代码为32.然后进入状态S.空格记号当中，字符代码总是32.</p>
+<p>我们不妨看成这就是TeX程序的词法分析。在词法分析的时候它得到了记号的类型与记号的值。</p>
+<p>如果TeX遇到了注释符，它就不再读入当前行剩下的内容。</p>
+<p>遇到无用符(第15类)的时候，跳过此字符，打印出错误消息，并仍保持当前的状态不发生改变。</p>
+<p>如果当前行没有要读入的内容了，就进入下一行并且进入状态S.但是如果是<code>\input</code>文件结束，或者<code>\input</code>的文件给出了<code>\endinput</code>,那么TeX返回到<code>\input</code>文件读取结束后的状态，就好像是从读完input的内容一样。</p>
+<p>ex8.2 回答下面简短问题，看看你对TeX的读入规则的理解程度:<br>a.第5类和第14类的不同在什么地方<br>b.第3类和第4类的不同在什么地方<br>c.第11类和第12类的不同在什么地方<br>d.活动符后面的空格要忽略掉么<br>e.当一行以注释符\%结尾的时候，在下一行开头的空格被忽略了么?<br>f.一个可被忽略的字符能出现在控制系列的名子中间吗?</p>
+<p>答:a.第5类是换行，第14类是注释，两者都结束了当前行，但是换行会被转成第10类(空白符)的代码或者一个<code>\par</code>控制系列。但是第14类的字符永远不产生任何记号。</p>
+<p>b.第3类是数学类，第四类是表格类。它们产生不同类型的代记号。在后续的处理当中它们是完全不同的。</p>
+<p>c.类似于b.第11类是字母，第12类是其它符号。但是只有第11类的字母有组成较长的控制系列的能力。</p>
+<p>d.不能被忽略掉。活动符是第十三类，读完它后处于状态M,后面的空格不能被忽略。</p>
+<p>e.是的，当注释符里面的内容结束后，TeX进入状态N,任何位于行首的空白字符都会被删除的。</p>
+<p>f.不可以。控制系列是连续读取在第11类中的单词，遇到其它类就是结束对控制系列名字的读取。从而起到了分割的作用。</p>
+<p>ex8.3 再次看看有关<code>\vship</code>的错误信息，当TeX报告说<code>\vship</code>是一个未定义的控制序列的时候，它输出了两行上下文，表明它正在读入文件story的第二行的中间部分，在遇见错误的时候，TeX处于什么状态，它下一个要读入什么字符。</p>
+<p>我们可以按照正确的路向分析。它读入一个控制系列后处于状态S,会忽略掉后面的空白的字符(第10类)，因此它下一个要读取的是非空白字符。</p>
+<p>ex8.4 给定plainTeX格式的类代码后，从输入行<code>$x^2$~  \TeX ^^62^^6</code>得到什么样的记号?</p>
+<p>这得好好分析。首先数学模式正常排版，读完\$后进入M状态，活动符是有效的，所以波浪线后面的空格不能被忽略。接下来读<code>\TeX</code>,在读完<code>\TeX</code>之后，进入状态S,因此后面的空格都被忽略，接下来读<code>^^62</code>,得到字母b,再接下来读记号<code>^^6</code>,得到字母v.</p>
+<p>我们完全可以把这种分析过程理解成词法分析，分析之后形成了记号的类型与值的线性序列。</p>
+<p>ex8.5 想想正好有一个三行的输入文件，第一行是Hi!,其它两行都是空的，当TeX读入这个文件的时候，按照plainTeX的类代码将会得到什么记号?</p>
+<p>这个时候处理的方式是，处理成<code>[11]H[11]i[12]![10] [0]\[S]par</code>.空格是第一行的回车引起的。</p>
+<p>据Knuth自己的表述，类代码写成数值格式主要是为了防止人们过度使用<code>\catcode</code>.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="./tex-tokens/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Istyasna">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="80x24">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="80x24" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/tex-tokens/" itemprop="url">
+                  LaTeX的编程原理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2013-06-20T00:00:00+08:00">
+                2013-06-20
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              <span class="post-meta-item-text">更新于</span>
+              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T21:48:57+08:00">
+                2016-12-14
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/出版/" itemprop="url" rel="index">
+                    <span itemprop="name">出版</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/出版/TeX/" itemprop="url" rel="index">
+                    <span itemprop="name">TeX</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/tex-tokens/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/tex-tokens/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <!-- 这部分是关于\TeX{}的输入与词法的。但是在texbook这本书中也介绍了不少的关于控制系列，以及中英文的括号的输入的问题。比如左单引号，双引号该怎样断开。因此有少数部分是关于正字法（比如英语与中文的标点符号约定）。有时间的话应该将这部分内容独立出来，放到语言与字体，或者放到正文内容排版规则当中。-->
+<h2 id="第二节-书籍排版与普通排版">第二节 书籍排版与普通排版</h2>
+<p>%%% 这部分实际上是介绍tex的输入与词法规则，算是编程基础</p>
+<p>当使用计算机排版，我们首先要知道传统排版与使用计算机输入字符的区别。本来计算机上面的字符并不是专门为了排版而设计的。为了使用现有的计算机键盘输入TeX的源文件，我们需要对原来的键盘符号进行一个重新定义。</p>
+<h3 id="单引号双引号">单引号，双引号</h3>
+<p>键盘上，左单引号与右单引号是区分开来的。一个是好像重音符号的东西，另一个就是普通的单号号。但是直接键入的时候，TeX将这个符号理解成左单引号。显然我们不能使用ASCII上的双引号排版双此号，因为那样无法区分左右。所以两个连在一起的左单引号代表左双引号，而两个连在一起的右单引号代表右双引号。</p>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/tex-tokens/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="./PythonPlot/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -442,7 +868,8 @@
 <li>检查要安装的模块所需的依赖关系是否满足。我们可以视为当前系统上面是否有相应的头文件与库文件。但是C语言里面还没有见到过。我们就把模块想象成C语言里的动态链接库吧，它不仅是需要一个编译器，还需要其它的库。我们知道C语言里面单独发布一个动态链接库版本是不可想象的。伴随一个动态函数库发布的通常还有其它的依赖的关件。不过造成这一现象可能更多是策略的原因吧。</li>
 </ol>
 <p>对于matplotlib来说，检查的主要是numpy模块。要在动态语言里面检查模块是否被安装了，可以在执行解释器的时候导入该库，然后调用该库的 <code>__version__</code> 函数。因为在Python里面，一个模块可以通过一个对象的方法进行访问。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy</div><div class="line"><span class="keyword">print</span> numpy.__version__</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> numpy
+<span class="bu">print</span> numpy.__version__</code></pre></div>
 <p>模块与函数库的区别还在于，函数库是脱离编译器运行的。但是模块却是在解释器下源代码被解释器执行的。</p>
 <p>在Python里面，对象占据着重要的地位。在导入模块的同时，不如就视为创建了一个模块访问对象。我们通过它访问到模块里面的各种数据结构，还可以通过里面的函数定义一个其它的对象。在Python里面不用声明变量类型。这是很有用的，因为模块里面对象的类型可能是非常长的一个名子。</p>
 <p>在WINDOWS下面使用一个安装好的exe文件就可以了。</p>
@@ -453,7 +880,7 @@
 <li>编译模块</li>
 </ol>
 <p>matplotlib里面实际上提供了一个Makefile文件。但是make help并没有显示出结果，也就不敢随便用它。按照上面的说明，编译的时候执行命令:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python setup.py build</div></pre></td></tr></table></figure>
+<pre class="shell"><code>python setup.py build</code></pre>
 <p>这是很简单的。因为我们还在没有configure的时候就已经编译出来了，到最后我们应该把文件安装到哪个位置呢。C语言的库来说并不成问题，一来有configure的prefix指出目标目录，并且unix系统搜索C库的位置我们也是知道的。但是Python就不同了。我们可能安装的并不是标准位置。但是先不管它。</p>
 <ol start="3" style="list-style-type: decimal">
 <li>安装模块</li>
@@ -471,9 +898,9 @@
 <p>注：unix下面的应用程序都可以这么来看。一个应用程序的目录总是符合unix下面目录的规范的，库安装到 <code>$PREFIX</code> 的lib/下面，诸如这些规定。对于Python来说也是不例外的。因此对于matplotlib包来说，它不必什么都看Python安装在哪里。它可以认为它就是一个库，因此它的库与模块就安装在 <code>$PREFIX/lib/python</code> 下面，它的文档就安装在 <code>/share/doc/$LIBNAME</code> 下面。</p>
 <h3 id="关于ipython交互式解释器">关于IPython交互式解释器</h3>
 <p>matplotlib的pylab在运行show()时有时会不出现结果，那是因为我们当前可能并未关联到图形库。要想显示图片通常在shell里执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ipython -pylab=qt</div></pre></td></tr></table></figure>
+<pre class="shell"><code>ipython -pylab=qt</code></pre>
 <p>之后，使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">run $script_name</div></pre></td></tr></table></figure>
+<pre><code>run $script_name</code></pre>
 <p>然后输出Python相应的代码进行。</p>
 <p>使用IPython也算是能够提高工作的效率吧。不过也许只有在IPython里面才可以直接使用run命令了。这对于执行脚本是很有好处的。</p>
 <p>在使用pylab的时候，绘图的后端决定了图片在哪里被显示。在ipython里面可以使用debug命令进入调试。</p>
@@ -488,11 +915,11 @@
 <p>其实ipython的错误提示是我见过的最好最详细的提示了。中间有高亮又有各个源代码文件出错的行号。不过相比之下，python里的错误输出可能是最难读的了。可能是堆栈太多的时候必须有一定的提取文件中关键错误的方法吧。</p>
 <p>ipython调试的时候显示的高亮什么的特性在Sagemath里也得到了应用。</p>
 <p>matplotlib绘图的时候有一种基本的方法就是使用</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</code></pre></div>
 <p>这样可以直接使用pyplot模块提供的绘图函数功能。</p>
 <p>把模块导入成对象，可以这么理解，导入一个对象相当于找到一个能够在运行期间为我们干活的人。这个人可以做相应的输出，我们可以调用它里面的相应方法，或者根据它的功能创建一个工作对象。</p>
 <p>另一个则是使用matplotlib的pylab模块。其中包括了许多NumPy与pyplot模块里面的绘图函数，可以方便快捷地进行计算与绘图。pylab可以直接通过</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pylab <span class="keyword">as</span> pl</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> pylab <span class="im">as</span> pl</code></pre></div>
 <p>进行。</p>
 <p>书里面实际上介绍了三种绘图的方法。有pyplot,pylab,这样直接调用模块的方法，也可以是调用pyplot里面的绘图API进行绘图。</p>
 <h2 id="pyplot的面向对象的绘图方法与机制">pyplot的面向对象的绘图方法与机制</h2>
@@ -508,7 +935,8 @@
 <p>使用plt.gca()得到当前的子图。而使用plt.subplot()函数可以创建子图(实际上是在当前的Figure对象里面创建子图)。subplot的函数调用是subplot(Rows, Cols, Index)。该调用的含义是假设当前Figure对象被分成Rows*Cols的网格。使用编号为Index的区域绘制子图。Index的编号是从左到右，从上到下，编号从1开始。</p>
 <p>如果Figure对象判断不同的subplot的区域有重叠，前面的被重叠的子图将会被清除掉以绘制新的子图。否则就继续添加新的图表。</p>
 <p>函数subplot()返回它创建的Axes对象。调用gca(Object)可以使这个Axes()对象成为当前的对象。如果子图已经存在，subplot并不会将先前的子图覆盖，而是返回符合那个标号的子图。比如下面的代码:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">plt.subplot(<span class="number">111</span>)</div><div class="line">plt.subplot(<span class="number">111</span>)</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">plt.subplot(<span class="dv">111</span>)
+plt.subplot(<span class="dv">111</span>)</code></pre></div>
 <p>第二个语句并不会清除掉第一条语句里的subplot,而是返回第一条子图创建的对象。</p>
 <p>当Figure与Axes对象都决定好之后，真正的绘图就开始了。</p>
 <h3 id="绘图的时候坐标系的选择">绘图的时候坐标系的选择</h3>
@@ -521,7 +949,7 @@
 <p>在实际绘图时，一旦终端被确定了，绘图程序的窗口坐标系也就相当于是确定的。于是根据这种关系，一个图表被显示到桌面上，或者是输出到一个文件当中。而单以纯数据表示而论，在运行的时候，所有的图形的位置在图表坐标系里面的安排都是固定的了。</p>
 <p>不同坐标之间的变换都同样地依赖于本对象的二维仿射变换矩阵的定义。</p>
 <p>假设ax是一个Axes对象。那么它有一个transData用于决定从数据坐标系到窗口坐标系的变换。函数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ax.transData.transform((<span class="number">3</span>, <span class="number">5</span>))</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">ax.transData.transform((<span class="dv">3</span>, <span class="dv">5</span>))</code></pre></div>
 <p>将返回点(3,5)在变成窗口坐标系后所在的位置。 注: 返回类型是一个ndarray对象。而且这个函数也可以一次调用返回多个点在窗口坐标系里面的位置。</p>
 <p>下面我们以Figure下在的tranFigure变换为例了解Python的实现。</p>
 <p>在交互式命令行下直接输入f.transFigure()将可以看到它里面的一些对象。其中第一项里面的Bbox描述了这个Figure的物理大小信息。比如<span class="math inline">\([0,0]--[8,4\)</span>，单位是英寸。而在Affine2D里面的就是那个变换矩阵了。经过分析不难发现，对角线上的第一个元素就是所谓的X方向分辨率，第二个元素就是Y方向分辨率。我们也可以通过直接查看 <code>f.transFigure._boxout._transform</code> 得到真正的变换矩阵。</p>
@@ -535,7 +963,9 @@
 <p>如何调用label,line,axis等对象这里就不说了，因为它们是一些很繁锁的东西。</p>
 <p><strong>matplotlib绘图的背后原理</strong></p>
 <p>matplotlib的绘图的三个层次(这种三层次模型也可以用在其它的语言里面)是:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">backend_bases.FigureCanvas</div><div class="line">backend_bases.Renderer</div><div class="line">artist.Artist</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">backend_bases.FigureCanvas
+backend_bases.Renderer
+artist.Artist</code></pre></div>
 <p>Renderer与Canvas知道如何处理底层的绘制操作，比如在QT界面上绘图或者使用PostScript在PDF文件里面作图。Artist对象处理所有的高层的结构，如图表，文字与曲线等绘图元素的绘制与布局。通常我们只是与Artist对象打交道，而不需要关心底层是如何实现绘图的细节的。</p>
 <p>Artist对象有简单类型与容器类型两种。有点像是GUI里面的Component.简单类型的Artist对象是标准绘图元件，如Line2D, Rectangle, Text, AxesImage等。但是容器类型则包括了其它的简单对象，如Axis, Axes, Figure等。我们不如把Artist看成是一个桌面绘图管理器。那么以前所学过的Metapost语言便就是用于产生这些复杂对象的绘图原语言。它们能够在更底层的意义上提供编程方法，因而更容易绘制出来其它的对象。</p>
 <p>Asymptote与Artist相比，多的只是一种灵活的方式。Artist虽然也是用编程语言实现，但是封装的内容与对象比较繁杂，底层不够清晰。而Asy使用清晰的底层数据结构，让我们可以自由地决定插值等操作。</p>
@@ -549,7 +979,7 @@
 <p>matplot工作是类似一个应用程序。检查配置文件的顺序是，当前配置文件，用户家目录下的配置文件，应用程序里面的配置文件。配置文件实际上是一系列的变量与值。在依次读取这些配置文件的过程中，如果前面的配置文件已经设定了这个值了，那么后面配置文件里面的值就不再生效。于是配置文件的优先级是当前目录最高的。</p>
 <p>配置文件的读取也有一些规律。Bash从/etc里面读取配置，最终也是用户目录里面的配置脚本生效的。不如引入配置文件优先级这个概念。一个应用程序在工作的时候，假设从一列可选的列表里读取每一个配置文件。高优先级的配置文件是说，如果配置项目出现在某一个配置文件里面，而其它配置文件里面有相同的配置项目的时候，前者会对程序起到真正的作用。于是Bash里的配置文件中，系统目录是第一读取的，并具有最低的优先级。matplotlib里面，系统目录是最后读取的，具有最低的优先级。世界真是奇妙。</p>
 <p>matplot配置文件可以通过 <code>matplot.get_config_dir</code> 得到当前生效的路径，使用 <code>matplotlib.matplotlib_fname()</code> 得到最优先的那个配置文件。 而 <code>matplotlib.rc_params()</code> 用于读取配置文件里的每一项(默认是返回当前使用的配置文件里面的项目)， matplotlib使用rcParams变量保存当前的配置。如果要修改，可以直接令</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">matplotlib.rcParams[$hash_key] = $value</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">matplotlib.rcParams[$hash_key] <span class="op">=</span> $value</code></pre></div>
 <p>以让参数成为当前绘图参数。</p>
 <p>matplotlib.rc()函数接受一些参数设置并将它写入rcParams变量。如果要恢复默认的配置文件里面的内容，可能需要rcdefaults()选项。</p>
 <p>显然matplotlib是不支持直接从matplotlib里面直接修改配置文件里的内容的。因为这些配置文件可能权限比较高，或者干脆就是系统目录下的配置文件，不允许用户修改。</p>
@@ -587,20 +1017,40 @@
 <p>首先是matplotlib的配置问题。这是一个.matplotlibrc文件决定的。配置的方法可以参考matplotlib的官方网站<a href="http://matplotlib.org/users/customizing.html" class="uri" target="_blank" rel="external">http://matplotlib.org/users/customizing.html</a>。在实际中我们用到的更多的是对于图形的大小的控制。因为我们要输出文件放入到文章当中。其中的选项figure.figsize, figure.dpi, savefig.dpi, savefig.format是在matplotlibrc里面应该指定的。不然每次输出的时候都可能要设置一下，太麻烦了。</p>
 <h4 id="折线图">折线图</h4>
 <p>Matplotlib最简单的方法应该是用折线顺次连接起来 <span class="math inline">\(y\)</span> 轴上的数据了。这个时候 <span class="math inline">\(x\)</span> 轴对应的坐标就是元素在列表中出现的次序。代码与效果分别如下:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># Plot a list of numbers with pyplot</span></div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> re</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line">plt.plot([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>])</div><div class="line">plt.ylabel(<span class="string">'some numbers'</span>)</div><div class="line">plt.savefig(<span class="string">'../img/'</span>+re.sub(<span class="string">'.py$'</span>,<span class="string">'.pdf'</span>,sys.argv[<span class="number">0</span>]))</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">#!/usr/bin/env python</span>
+<span class="co"># Plot a list of numbers with pyplot</span>
+<span class="im">import</span> sys
+<span class="im">import</span> re
+<span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
+plt.plot([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>])
+plt.ylabel(<span class="st">&#39;some numbers&#39;</span>)
+plt.savefig(<span class="st">&#39;../img/&#39;</span><span class="op">+</span>re.sub(<span class="st">&#39;.py$&#39;</span>,<span class="st">&#39;.pdf&#39;</span>,sys.argv[<span class="dv">0</span>]))</code></pre></div>
 <div class="figure">
 <img src="/img/python-plots/729_01.png" alt="image">
 <p class="caption">image</p>
 </div>
 <h4 id="散点图">散点图</h4>
 <p>散点图只不过使用了两个数组。另外，还可以接受点的形状作为第三个可选的参数。使用axis选项可以设置坐标轴的显示范围。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="keyword">import</span> sys; <span class="keyword">import</span> re</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line">plt.plot([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],[<span class="number">1</span>,<span class="number">4</span>,<span class="number">9</span>,<span class="number">16</span>],<span class="string">'ro'</span>)</div><div class="line">plt.axis([<span class="number">0</span>,<span class="number">6</span>,<span class="number">0</span>,<span class="number">20</span>])</div><div class="line">plt.savefig(<span class="string">'../img/'</span>+re.sub(<span class="string">'.py$'</span>,<span class="string">'.pdf'</span>,sys.argv[<span class="number">0</span>]))</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">#!/usr/bin/env python</span>
+<span class="im">import</span> sys<span class="op">;</span> <span class="im">import</span> re
+<span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
+plt.plot([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>],[<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">9</span>,<span class="dv">16</span>],<span class="st">&#39;ro&#39;</span>)
+plt.axis([<span class="dv">0</span>,<span class="dv">6</span>,<span class="dv">0</span>,<span class="dv">20</span>])
+plt.savefig(<span class="st">&#39;../img/&#39;</span><span class="op">+</span>re.sub(<span class="st">&#39;.py$&#39;</span>,<span class="st">&#39;.pdf&#39;</span>,sys.argv[<span class="dv">0</span>]))</code></pre></div>
 <div class="figure">
 <img src="/img/python-plots/729_02.png" alt="image">
 <p class="caption">image</p>
 </div>
 <p>代码中的<code>ro</code>代表使用红色圆点来表示。与MATLAB有几分相似。其它的选项还有，<code>r--</code> 代表红色虚线，<code>bs</code> 代表蓝色方块，而<code>g^</code>代表绿色三角形。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> re</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"><span class="comment"># every sampled time at 200 ms intervals</span></div><div class="line">t = np.arange(<span class="number">0.</span>, <span class="number">5.</span>, <span class="number">0.2</span>)</div><div class="line"><span class="comment"># red dashes, blue squares and green triangles</span></div><div class="line">plt.plot(t,t,<span class="string">'r--'</span>, t,t**<span class="number">2</span>,<span class="string">'bs'</span>, t,t**<span class="number">3</span>,<span class="string">'g^'</span>)</div><div class="line">plt.savefig(<span class="string">'../img/'</span>+re.sub(<span class="string">'.py$'</span>,<span class="string">'.pdf'</span>,sys.argv[<span class="number">0</span>]))</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> sys
+<span class="im">import</span> re
+<span class="im">import</span> numpy <span class="im">as</span> np
+<span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
+<span class="co"># every sampled time at 200 ms intervals</span>
+t <span class="op">=</span> np.arange(<span class="dv">0</span>., <span class="dv">5</span>., <span class="fl">0.2</span>)
+<span class="co"># red dashes, blue squares and green triangles</span>
+plt.plot(t,t,<span class="st">&#39;r--&#39;</span>, t,t<span class="op">**</span><span class="dv">2</span>,<span class="st">&#39;bs&#39;</span>, t,t<span class="op">**</span><span class="dv">3</span>,<span class="st">&#39;g^&#39;</span>)
+plt.savefig(<span class="st">&#39;../img/&#39;</span><span class="op">+</span>re.sub(<span class="st">&#39;.py$&#39;</span>,<span class="st">&#39;.pdf&#39;</span>,sys.argv[<span class="dv">0</span>]))</code></pre></div>
 <div class="figure">
 <img src="/img/python-plots/729_03.png" alt="image">
 <p class="caption">image</p>
@@ -761,7 +1211,7 @@
 <h3 id="jdk-7">JDK 7</h3>
 <p>Debian, Ubuntu, etc.</p>
 <p>On the command line, type:</p>
-<figure class="highlight plain"><figcaption><span>.bash&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install openjdk-7-jre</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install openjdk-7-jre</code></pre></div>
 <p>The openjdk-7-jre package contains just the Java Runtime Environment. If you want to develop Java programs then install the openjdk-7-jdk package.</p>
           <!--noindex-->
           <div class="post-more-link text-center">
@@ -1030,349 +1480,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="./套接字编程/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/套接字编程/" itemprop="url">
-                  套接字的基本概念与编程
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2013-03-30T00:00:00+08:00">
-                2013-03-30
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T16:50:05+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机网络</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/编程/" itemprop="url" rel="index">
-                    <span itemprop="name">编程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/套接字编程/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/套接字编程/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>笔记说明： 本笔记属于linux程序设计第四版。第15章关于套接字的内容。貌似之前对于TCP的工作方式有些误解。现在了解了套接字之后才开始明白自己错在哪里了。</p>
-<p>套接字是一种通信机制。在这种机制下面C/S系统的开发工作即可以在本地单位工作，也可以跨网络进行。</p>
-<p>这个定义并不确切的原因是我从Windows下面开始接触。把UNIX套接字与网络套接字放在一起的做法还是觉得难以接受。毕竟在用途上相差太多了。但是我想事物自有它存在的道理吧。虽然我们都想给用的十分普遍的事物起一个恰当的名称，但是很多时候是不能如愿的。套接字服务就是这样。我们不知道它们可以用到哪些方面，只是觉得它是一种通信方法，至于为什么要这么设计，就不清楚了。</p>
-<h3 id="套接字的创建过程">套接字的创建过程</h3>
-<p>首先服务器使用系统调用socket来创建一个套接字。它是一个系统分配给该服务器进程的一个类似于文件描述符的资源，它不能与其他进程共享。</p>
-<p>在实现当中由于都是文件，所以套接字实际上相当于创建一个特殊文件并打开它，这与虚拟设备文件从创建到使用是一个道理。</p>
-<p>其中，本地套接字是linux文件系统当中的文件名。一般放在/tmp目录下面。对于网络套接字，则是与客户连接的特定网络有关的服务标识符（端口号或者访问点）。这个标识符允许我们进入针对特殊端口号的连接转到正确的服务器进程。</p>
-<p>系统调用bind用于给套接字命名。然后服务器进程就开始等待客户连接这个命名的套接字。系统调用listen的作用是创建一个队列并将其用于存放来自客户的进入连接。服务器通过accept系统调用来接受客户连接。</p>
-<p>当服务器调用accept的时候，它就会创建一个与原来的命名套接字不同的新的套接字。这个新的套接字只用于同这个客户进行通信。而命名套接字则留下来继续处理来自其它客户的连接。一旦连接建立，我们就可以像底层的文件描述符一样利用套接字实现双向通信。</p>
-<p>第二次创建新的套接字是自己以前没有想到的。现在想来，大概在网络环境下创建套接字的时候，由套接字函数库对于连接进行了封装，以致于在服务器调用accept的时候，只能得到连接到它的套接字，这也就是说，在内核当中已经处理好来自不同IP+PORT的请求。从而自己实现了数据的分流，最后才把数据交到socket函数库。</p>
-<p>创建一个套接字的函数原型是：</p>
-<figure class="highlight plain"><figcaption><span>.c&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#include &lt;sys/types.h&gt;</div><div class="line">#include &lt;sys/socket.h&gt;</div><div class="line">int socket(int domain, int type, int protocol);</div></pre></td></tr></table></figure>
-<p>其中domain是套接字的类型，它可以是AF_UNIX,AF_INET,AF_INTE6,AF_IPX,AF_PACKET等等。type则是套接字的封包格式，比如SOCK_STREAM,SOCK_DGRAM,SOCK_RAW等。我们使用的IP中TCP封包格式为AF_INET加SOCK_STREAM.而UNIX套接字则选择AF_UNIX加SOCK_STREAM.最后一个protocol通常取0.而返回的整型值是套接字描述符。</p>
-<p>绑定一个套接字的函数原型是：</p>
-<figure class="highlight plain"><figcaption><span>.c&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#include &lt;sys/types.h&gt;</div><div class="line">#include &lt;sys/socket.h&gt;</div><div class="line">int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);</div></pre></td></tr></table></figure>
-<p>函数的作用是将一个名称与套接字相绑定。之所以要进行绑定，是因为刚开始创建套接字的时候只是指定了在套接字命名空间中注册了这个事物。但是还没有被注册到一个确定的地址。所以我们通过bind函数向该套接字命名。名称由结构体addr指定，后面的addrlen是结构体的长度。在sockaddr当中，包含有关于套接字的一系列说明。</p>
-<p>连接一个套接字的函数原型是：</p>
-<figure class="highlight plain"><figcaption><span>.c&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#include &lt;sys/types.h&gt;</div><div class="line">#include &lt;sys/socket.h&gt;</div><div class="line">int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);</div></pre></td></tr></table></figure>
-<p>其中的各项参数应当与前面所创建的套接字相匹配。返回动作的状态。</p>
-<p>接受一个套接字的函数原型是：</p>
-<figure class="highlight plain"><figcaption><span>.c&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#include &lt;sys/types.h&gt;</div><div class="line">#include &lt;sys/socket.h&gt;</div><div class="line">int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);</div></pre></td></tr></table></figure>
-<p>它返回一个新的针对于该客户端的套接字。</p>
-<p>之后对套接字的读写使用read,write或者close调用就可以了。（因为套接字描述符属于文件描述符。）</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="./library-lapack/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/library-lapack/" itemprop="url">
-                  Lapack矩阵运算库
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2013-03-18T00:00:00+08:00">
-                2013-03-18
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:24:45+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/科学计算/" itemprop="url" rel="index">
-                    <span itemprop="name">科学计算</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/library-lapack/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/library-lapack/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>所打印的《the lapacke interface to lapack》原来来自于大二时候学习使用LAPACK软件包，但是FORTRAN语言本身又比较复杂，因而寻找一个外在的接口函数库而找到的。不过事实上它没有发挥过什么作用，仅仅被看过一遍就被遗忘在角落里面了。现在为了把无用的东西都扔掉，整理一本笔记。</p>
-<p>lapack原来是用FORTRAN语言写成的，后来C语言得到了广泛的应用，所以创建了面向C语言的接口，尽管可能完全重写更有可能得到更高的效率。于是到现在我们就得为了使用lapack而学习如何使用接口。</p>
-<p>面向C语言的接口还分成两个层次。对于开发者来说，两个层次的最重要的区别是内存管理是否需要手工进行，对于调用者来说，则转化成命名的前缀与后缀的问题。其实较低级的程序员一直都很难避免陷于各种移植，各种前缀当中。</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/library-lapack/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1418,7 +1525,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1426,7 +1533,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1435,7 +1542,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -162,6 +162,9 @@
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> 进程原理三：线程原理与编程、调度器 | 80x24 </title>
 </head>
 
@@ -494,13 +497,32 @@
 <p>一个系统中线程的数量参考：linuxThread线程库中线程数是在编译时就指定的，而NPTL支持动态的线程数，在一个IA-32系统上可达两百万个。关于线程的速度，则是如果使用NPTL,启动100000个进程只需2秒，而不使用NPTL需要15min.</p>
 <h3 id="posix线程库中创建线程的方法以c语言为例">POSIX线程库中创建线程的方法，以C语言为例</h3>
 <p>创建一个线程的函数原型是：</p>
-<figure class="highlight plain"><figcaption><span>.c&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">int pthread_create(pthread_t *thread, pthread_attr_t *attr,</div><div class="line">void *(*start_routine)(void *), void *arg);</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">int</span> pthread_create(pthread_t *thread, pthread_attr_t *attr,
+<span class="dt">void</span> *(*start_routine)(<span class="dt">void</span> *), <span class="dt">void</span> *arg);</code></pre></div>
 <p>终止当前线程的函数原型是：</p>
-<figure class="highlight plain"><figcaption><span>.c&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int pthread_exit(void *retval);</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">int</span> pthread_exit(<span class="dt">void</span> *retval);</code></pre></div>
 <p>看起来 <code>pthread_create</code> 函数使用了一大堆的指针，其实却很简单，返回值是否为零代表成功或者失败。第一个参数相当于线程控制块，第二个是线程的属性，第三个是线程的入口函数，第四个是需要传递给该函数的参数。</p>
 <p>UNIX函数的惯例是调用失败时返回-1,比如对于前面到的fork函数。0代表对函数来说有特殊含义的一个量，-1才代表一个调用错误，函数内部的代码无法完成所称的工作。</p>
 <p>函数要写成 <code>void *function(void *arg)</code> 的形式，以便正确地进行转换。下面是一个例子。可以和fork()相对比。</p>
-<figure class="highlight plain"><figcaption><span>.c&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">#include &lt;pthread.h&gt;</div><div class="line">#include &lt;errno.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line">int main()&#123;</div><div class="line">int ret;</div><div class="line">pthread_t mythread;</div><div class="line">ret = pthread_create(&amp;mythread, NULL, myThread, NULL);</div><div class="line">if (ret != 0)&#123;</div><div class="line">    printf(&quot;Cannot create thread (%s)\n&quot;, strerror(errno));</div><div class="line">    exit(-1);</div><div class="line">&#125;</div><div class="line">return 0;</div><div class="line">&#125;</div><div class="line">void *myThread(void *arg)&#123;</div><div class="line">printf(&quot;Thread is running.\n&quot;);</div><div class="line">pthread_exit(arg);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="ot">#include &lt;stdio.h&gt;</span>
+<span class="ot">#include &lt;stdlib.h&gt;</span>
+<span class="ot">#include &lt;pthread.h&gt;</span>
+<span class="ot">#include &lt;errno.h&gt;</span>
+<span class="ot">#include &lt;string.h&gt;</span>
+<span class="dt">int</span> main(){
+<span class="dt">int</span> ret;
+pthread_t mythread;
+ret = pthread_create(&amp;mythread, NULL, myThread, NULL);
+<span class="kw">if</span> (ret != <span class="dv">0</span>){
+    printf(<span class="st">&quot;Cannot create thread (%s)</span><span class="ch">\n</span><span class="st">&quot;</span>, strerror(errno));
+    exit(-<span class="dv">1</span>);
+}
+<span class="kw">return</span> <span class="dv">0</span>;
+}
+<span class="dt">void</span> *myThread(<span class="dt">void</span> *arg){
+printf(<span class="st">&quot;Thread is running.</span><span class="ch">\n</span><span class="st">&quot;</span>);
+pthread_exit(arg);
+}</code></pre></div>
 <p>以上代码的重要之处如下：</p>
 <ol style="list-style-type: decimal">
 <li>返回值0代表线程正常创建了；</li>
@@ -508,15 +530,16 @@
 <li>线程函数中退出不能使用exit()，而是用 <code>pthread_exit()</code> 并且参数中的数返回的是函数的退出代码。关键是这个退出号不能是一个局部变量，因为退出函数时候变量会被销毁导致错误号无法正常传出去。使用arg作为返回时的位置，是一个避免在主线程中重新定义一个变量的技巧。</li>
 <li>编译时，首先需要定义宏 <code>_REENTRANT</code> ,在有的系统上（不常见）还要定义 <code>_POSIX_C_SOURCE</code> 宏。如果系统默入不是用NPTL实现的，编译选项为：</li>
 </ol>
-<figure class="highlight plain"><figcaption><span>.shell&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cc -D _REENTRANT -I/usr/include/nptl thread1.c -o thread1 </div><div class="line">-L/usr/lib/nptl -lpthread</div></pre></td></tr></table></figure>
+<pre class="sourceCode shell"><code>cc -D _REENTRANT -I/usr/include/nptl thread1.c -o thread1 
+-L/usr/lib/nptl -lpthread</code></pre>
 <p>如果默认已经是用NPTL实现的，就使用</p>
-<figure class="highlight plain"><figcaption><span>.shell&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cc -D_REENTRANT thread1.c -o thread1 -lpthread</div></pre></td></tr></table></figure>
+<pre class="sourceCode shell"><code>cc -D_REENTRANT thread1.c -o thread1 -lpthread</code></pre>
 <ol start="5" style="list-style-type: decimal">
 <li>因此我们在编程上也知道了，函数使用exit()退出，return退出，还是代码执行完毕后自动退出，是有区别的。</li>
 </ol>
 <h3 id="posix线程的基本函数">POSIX线程的基本函数</h3>
 <p>父线程使用下面的函数等待子线程的终止，原型如下：</p>
-<figure class="highlight plain"><figcaption><span>.c&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int pthread_join(pthread_t thread, void ** status);</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">int</span> pthread_join(pthread_t thread, <span class="dt">void</span> ** status);</code></pre></div>
 <p>第一个参数标明要等待的子线程.线程的资源在父线程调用 <code>pthread_join</code>之后释放,相当于在进程当中子进程的资源在父进程调用wait()之后释放.</p>
 <p><code>pthread_self()</code> 函数返回当前线程的标识.</p>
 <p><strong>内核线程</strong></p>
@@ -720,7 +743,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -728,7 +751,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -737,7 +760,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

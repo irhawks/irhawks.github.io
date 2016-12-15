@@ -159,6 +159,9 @@ awk基础
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> Awk工具与编程语言 | 80x24 </title>
 </head>
 
@@ -466,9 +469,9 @@ awk基础
 <a id="more"></a>
 <p>让我们忽略掉awk的语法形式，单纯地考虑，如果是我们，将会怎样处理文本，特别是在C语言的框架下编写这样的程序。将能设想到，基本的方法，还是通过传递变量。也就是至多每读取一行，就自动将参数匹配到指定的位置。因此整个awk程序，首先看成是一个函数。宿主环境代理地读取目标文本，并在每次调用函数的时候得到参数。文本处理的思想，也就只能如此了。</p>
 <p>另外，我们看到，awk在文本处理上做得更深一步。它本身是一个编译型的语言。也就是说，在文本没有读取之前，宿主环境先进行语法等方面的检查，通过之后才开始处理程序。这一点与 <code>make</code> 程序相似。因此，首先应当考虑到awk是如何检查脚本的，再考虑脚本如何执行文件。命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">awk -f AWK脚本.awk 数据文件</div></pre></td></tr></table></figure>
+<pre class="shell"><code>awk -f AWK脚本.awk 数据文件</code></pre>
 <p>可以与</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python py脚本.py 参数</div></pre></td></tr></table></figure>
+<pre class="shell"><code>python py脚本.py 参数</code></pre>
 <p>相类比。</p>
 <p>通常调用awk的时候，AWK脚本可以是即时编辑的，也就是脚本的内容直接出现在命令行的第一个参数中。把这个功能看成是一个语法糖，也许就顺畅多了。</p>
 <p>awk程序的执行流程是：</p>
@@ -520,12 +523,15 @@ awk基础
 <p>awk处理数据的时候，自动从数据文件中每次读取一行记录，然后将记录切分成若干个字段，程序可使用<code>$1</code>、<code>$2</code>等直接取得字段中的内容。若要简单打印出相应字段，使用<code>print $1, $2</code>这样的语句即可。</p>
 <p>此外，awk还提供 <code>printf()</code> 指令，它的使用方式与C语言更相近，用于格式化字符串。</p>
 <p>比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">awk &apos;</div><div class="line">&#123; printf(&quot;%d times %d is %d.\n&quot;, $1, $2 ,$1 * $2) &#125;</div><div class="line">&apos;</div><div class="line">234234234 234234234</div></pre></td></tr></table></figure>
+<pre class="shell"><code>awk &#39;
+{ printf(&quot;%d times %d is %d.\n&quot;, $1, $2 ,$1 * $2) }
+&#39;
+234234234 234234234</code></pre>
 <p>将显示出两个字段的乘积。从上面的例子我们也看出，awk的整型运算功能是非常强大的，可以进行非常大的整数之间的运算。可以认为具有无限的精度。</p>
 <p>作为一个领域专用的语言，在变量的使用上，要尽可能足够简单。所以awk的变量，不需要宣告就能够使用，类型是自动确定。并且，awk提供的“字典”(有人称为数组)类型，也可以自动使用。引用字典不存在的键值的时候，该键值会自动被创建。</p>
 <h3 id="awk与shell指令">awk与shell指令</h3>
 <p>在awk中使用shell指令是比较方便的。其思想是让字符串通过管道运算符|与awk内置的函数运算。字符串被当成指令执行，执行后的输出的结果，被当成内置函数的运算符。比如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;who&quot; \| getline</div></pre></td></tr></table></figure>
+<pre class="shell"><code>&quot;who&quot; \| getline</code></pre>
 <p><code>getline</code> 是awk的输入指令。当 <code>Pattern</code> 为 <code>BEGIN</code> 或 <code>END</code> 的时候， <code>getline</code> 默认从 <code>stdin</code> 读取数据，否则从awk正处理的数据文件上读取数据。 若是后者，将会使数据文件中的两行当成一个记录来处理。</p>
 <p>使用getline之后，变量 <code>$0</code> , <code>$1</code> 等的内容会被刷新。</p>
 <p>在awk中，输出文件则使用重定向运算符 <code>&gt;</code> 或 <code>&gt;&gt;</code> 。它可以用在任意 <code>Action</code> 之后。重定向运算符可以理解成一个普通的 <code>Action</code> 与一个字符串运算，而字符串被解释成文件的路径。</p>
@@ -699,7 +705,7 @@ awk基础
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -707,7 +713,7 @@ awk基础
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -716,7 +722,7 @@ awk基础
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

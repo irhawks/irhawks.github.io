@@ -150,6 +150,9 @@
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> Scheme语言概要 | 80x24 </title>
 </head>
 
@@ -477,35 +480,59 @@
 <p>在语法上，换行符并不会影响表达式的解析。这主要是为了编程的考虑。</p>
 <h3 id="变量绑定定义过程">变量、绑定、定义、过程</h3>
 <p>let用于声明一个局部的变量的过程。如</p>
-<figure class="highlight scheme"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(<span class="name"><span class="builtin-name">let</span></span> ( (<span class="name">x</span> <span class="number">23</span>) (<span class="name">y</span> <span class="number">42</span>) ) (<span class="name"><span class="builtin-name">+</span></span> x y))</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme">(<span class="kw">let</span> ( (x <span class="dv">23</span>) (y <span class="dv">42</span>) ) (<span class="kw">+</span> x y))</code></pre></div>
 <p>上面的表达式中，let的第一个参数是对于符号的定义的列表，第二项是相应的表达式。结果是按照赋的值求解第二个表达式。注意这里的变量是局部定义的。</p>
 <p>如果要让变量的定义超过当前的作用域，需要使用define。define是一个定义而不是一个表达式，因为它不返回任何的值，并且只能在程序的顶层出现。</p>
-<figure class="highlight scheme"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(<span class="name"><span class="builtin-name">define</span></span> x <span class="number">23</span>)</div><div class="line">(<span class="name"><span class="builtin-name">define</span></span> y <span class="number">42</span>)</div><div class="line">(<span class="name"><span class="builtin-name">+</span></span> x y)</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme">(<span class="kw">define</span><span class="fu"> x </span><span class="dv">23</span>)
+(<span class="kw">define</span><span class="fu"> y </span><span class="dv">42</span>)
+(<span class="kw">+</span> x y)</code></pre></div>
 <p>在一个嵌套的环境中内层的符号与哪个值绑定当然是按照最邻近的原则。另外，按照词法作用域的准则。求值的结果是依赖于定义的环境而不是被调用的环境。</p>
 <p>过程也使用define来定义。</p>
-<figure class="highlight scheme"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">f</span> x)</div><div class="line">    (<span class="name"><span class="builtin-name">+</span></span> x <span class="number">42</span>))</div><div class="line">(<span class="name">f</span> <span class="number">23</span>)</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme">(<span class="kw">define</span><span class="fu"> </span>(f x)
+    (<span class="kw">+</span> x <span class="dv">42</span>))
+(f <span class="dv">23</span>)</code></pre></div>
 <p>在定义的时候，函数及其参数作为第二个参数，而后面定义的是函数的体。过程是与特定的对象有关的表达式的抽象。由于后面的体可以看成是一个宏体，所以我们可以非常方便地定义高阶函数：</p>
-<figure class="highlight scheme"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">apply_binop</span> binop first second)</div><div class="line">    (<span class="name">binop</span> first second))</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme">(<span class="kw">define</span><span class="fu"> </span>(apply_binop binop first second)
+    (binop first second))</code></pre></div>
 <p>Scheme中虽然广泛采用了模式匹配。但是有些情况下的模式匹配仍然是会失败的，比如如下的代码：</p>
-<figure class="highlight scheme"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(<span class="name"><span class="builtin-name">*</span></span> 失败的代码*)</div><div class="line">(<span class="name"><span class="builtin-name">define</span></span> (<span class="name">apply_binop</span> binop (<span class="name">first</span> second))</div><div class="line">    (<span class="name">binop</span> first second))</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme">(* 失败的代码*)
+(<span class="kw">define</span><span class="fu"> </span>(apply_binop binop (first second))
+    (binop first second))</code></pre></div>
 <p>lambda表达式用于创建新的过程，过程中还可以包含闭包</p>
-<figure class="highlight scheme"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">((<span class="name"><span class="builtin-name">lambda</span></span> (x) (<span class="name"><span class="builtin-name">+</span></span> x <span class="number">42</span>)) <span class="number">23</span>)</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme">((<span class="kw">lambda</span> (x) (<span class="kw">+</span> x <span class="dv">42</span>)) <span class="dv">23</span>)</code></pre></div>
 <p>上面的表达式都是过程调用，但是let与lambda开头的却不是过程调用。这是因为let与lambda并不是函数名称，而是Scheme语言的关键字。define也同样是如此。关键字后面跟的参数遵守怎样的规则是Scheme语言定义的。</p>
 <h3 id="宏与模式匹配">宏与模式匹配</h3>
 <p>在Scheme中，宏是声明具有特定的模式的参数的方法。借助于宏我们可以实现与lambda、define一样的效果。定义宏使用的是define-syntax语句。</p>
-<figure class="highlight scheme"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">(<span class="name"><span class="builtin-name">define-syntax</span></span> def</div><div class="line">    (<span class="name"><span class="builtin-name">syntax-rules</span></span> ()</div><div class="line">        ((<span class="name">def</span> f (<span class="name">p</span> ...) body)</div><div class="line">            (<span class="name"><span class="builtin-name">define</span></span> (<span class="name">f</span> p ...)</div><div class="line">                body))))</div><div class="line"></div><div class="line">(<span class="name">def</span> f (<span class="name">x</span>) (<span class="name"><span class="builtin-name">+</span></span> x <span class="number">42</span>))</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme">(<span class="kw">define-syntax</span><span class="fu"> def</span>
+    (<span class="kw">syntax-rules</span> ()
+        ((def f (p ...) body)
+            (<span class="kw">define</span><span class="fu"> </span>(f p ...)
+                body))))
+
+(def f (x) (<span class="kw">+</span> x <span class="dv">42</span>))</code></pre></div>
 <p>上面的语法将使def成为一个具有和define相同的效果的关键字。上面的语句的理解方式是，define-syntex定义了一个语法糖def，这个语法糖的使用规则由syntax-rules语句来声明。syntex-rules指出，这个语法糖模式匹配<code>(def f (p ...) body)</code>。匹配到这个语法的时候，执行的动作是上面的define。</p>
 <h3 id="引用与阻止求值">1.10引用与阻止求值</h3>
 <p>在介绍这一节的时候，感觉使用<code>'</code>表示阻止求值这种理解方式非常怪异。显得没有必要。但是其实把Scheme当成是一种自然语言就好了。这里的阻止求值其实就相当于自然语言中的引号。我们参考Quasi-quotation就知道了。既然它们是引号，自然里面的东西就不会再发生改变了。</p>
-<figure class="highlight scheme"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">'23</span></div><div class="line">(<span class="name"><span class="builtin-name">quote</span></span> <span class="number">23</span>)</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme">&#39;<span class="dv">23</span>
+(quote <span class="dv">23</span>)</code></pre></div>
 <p>在通常语言里，括号里面的东西就是字符串。但是在Scheme中，括号里面的东西仍然是保持Scheme语言里面的结构的。所以虽然说是一种引用，但是括号里面的东西不是一堆字符串，而是Scheme中的语法结构。</p>
 <h3 id="库机制与顶层调用">1.12库机制与顶层调用</h3>
 <p>Scheme中的库使用library关键字。库里面的内容可以主动导出与主动导入。</p>
-<figure class="highlight scheme"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(<span class="name">library</span> (<span class="name">hello</span>)</div><div class="line">    (<span class="name">export</span> hello-world)</div><div class="line">    (<span class="name"><span class="builtin-name">import</span></span> (<span class="name">rnrs</span> base) (<span class="name">rnrs</span> io simple))</div><div class="line">    (<span class="name"><span class="builtin-name">define</span></span> (<span class="name">hello-world</span>)</div><div class="line">        (<span class="name"><span class="builtin-name">display</span></span> <span class="string">"Hello World"</span>)</div><div class="line">        (<span class="name"><span class="builtin-name">newline</span></span>)))</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme">(library (hello)
+    (export hello-world)
+    (import (rnrs base) (rnrs io simple))
+    (<span class="kw">define</span><span class="fu"> </span>(hello-world)
+        (<span class="kw">display</span> <span class="st">&quot;Hello World&quot;</span>)
+        (<span class="kw">newline</span>)))</code></pre></div>
 <p>Scheme的顶层程序第一行可以加一个Shell命令。以<code>#!</code>开头。</p>
 <h2 id="scheme中的词法">Scheme中的词法</h2>
 <p>在Scheme中语法定义是非常简单的。大约只有一页多。如</p>
-<figure class="highlight scheme"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(<span class="name"><span class="builtin-name">define</span></span> 加 +)</div><div class="line">(<span class="name">加</span> <span class="number">1</span> <span class="number">2</span>)</div><div class="line">(<span class="name"><span class="builtin-name">define</span></span> 真 <span class="literal">#t</span>)</div><div class="line">(<span class="name"><span class="builtin-name">define</span></span> 假 <span class="literal">#f</span>)</div><div class="line">(<span class="name"><span class="builtin-name">define</span></span> 非 not)</div><div class="line">(<span class="name">非</span> 真)</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme">(<span class="kw">define</span><span class="fu"> </span>加 <span class="kw">+</span>)
+(加 <span class="dv">1</span> <span class="dv">2</span>)
+(<span class="kw">define</span><span class="fu"> </span>真 <span class="dv">#t</span>)
+(<span class="kw">define</span><span class="fu"> </span>假 <span class="dv">#f</span>)
+(<span class="kw">define</span><span class="fu"> </span>非 <span class="kw">not</span>)
+(非 真)</code></pre></div>
 <p>这样可以把scheme真接改造成一个中文编程环境。我们需要注意的，是Scheme中的quote与quasi-quote的机制。因为这一机制在其它的语言中很少见（或者说不常见）。</p>
 
       
@@ -665,7 +692,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -673,7 +700,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -682,7 +709,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

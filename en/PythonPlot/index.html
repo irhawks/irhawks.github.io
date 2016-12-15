@@ -163,6 +163,9 @@
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> 使用python下面的enthought和matplotlib绘图 | 80x24 </title>
 </head>
 
@@ -449,7 +452,8 @@
 <li>检查要安装的模块所需的依赖关系是否满足。我们可以视为当前系统上面是否有相应的头文件与库文件。但是C语言里面还没有见到过。我们就把模块想象成C语言里的动态链接库吧，它不仅是需要一个编译器，还需要其它的库。我们知道C语言里面单独发布一个动态链接库版本是不可想象的。伴随一个动态函数库发布的通常还有其它的依赖的关件。不过造成这一现象可能更多是策略的原因吧。</li>
 </ol>
 <p>对于matplotlib来说，检查的主要是numpy模块。要在动态语言里面检查模块是否被安装了，可以在执行解释器的时候导入该库，然后调用该库的 <code>__version__</code> 函数。因为在Python里面，一个模块可以通过一个对象的方法进行访问。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy</div><div class="line"><span class="keyword">print</span> numpy.__version__</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> numpy
+<span class="bu">print</span> numpy.__version__</code></pre></div>
 <p>模块与函数库的区别还在于，函数库是脱离编译器运行的。但是模块却是在解释器下源代码被解释器执行的。</p>
 <p>在Python里面，对象占据着重要的地位。在导入模块的同时，不如就视为创建了一个模块访问对象。我们通过它访问到模块里面的各种数据结构，还可以通过里面的函数定义一个其它的对象。在Python里面不用声明变量类型。这是很有用的，因为模块里面对象的类型可能是非常长的一个名子。</p>
 <p>在WINDOWS下面使用一个安装好的exe文件就可以了。</p>
@@ -460,7 +464,7 @@
 <li>编译模块</li>
 </ol>
 <p>matplotlib里面实际上提供了一个Makefile文件。但是make help并没有显示出结果，也就不敢随便用它。按照上面的说明，编译的时候执行命令:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python setup.py build</div></pre></td></tr></table></figure>
+<pre class="shell"><code>python setup.py build</code></pre>
 <p>这是很简单的。因为我们还在没有configure的时候就已经编译出来了，到最后我们应该把文件安装到哪个位置呢。C语言的库来说并不成问题，一来有configure的prefix指出目标目录，并且unix系统搜索C库的位置我们也是知道的。但是Python就不同了。我们可能安装的并不是标准位置。但是先不管它。</p>
 <ol start="3" style="list-style-type: decimal">
 <li>安装模块</li>
@@ -478,9 +482,9 @@
 <p>注：unix下面的应用程序都可以这么来看。一个应用程序的目录总是符合unix下面目录的规范的，库安装到 <code>$PREFIX</code> 的lib/下面，诸如这些规定。对于Python来说也是不例外的。因此对于matplotlib包来说，它不必什么都看Python安装在哪里。它可以认为它就是一个库，因此它的库与模块就安装在 <code>$PREFIX/lib/python</code> 下面，它的文档就安装在 <code>/share/doc/$LIBNAME</code> 下面。</p>
 <h3 id="关于ipython交互式解释器">关于IPython交互式解释器</h3>
 <p>matplotlib的pylab在运行show()时有时会不出现结果，那是因为我们当前可能并未关联到图形库。要想显示图片通常在shell里执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ipython -pylab=qt</div></pre></td></tr></table></figure>
+<pre class="shell"><code>ipython -pylab=qt</code></pre>
 <p>之后，使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">run $script_name</div></pre></td></tr></table></figure>
+<pre><code>run $script_name</code></pre>
 <p>然后输出Python相应的代码进行。</p>
 <p>使用IPython也算是能够提高工作的效率吧。不过也许只有在IPython里面才可以直接使用run命令了。这对于执行脚本是很有好处的。</p>
 <p>在使用pylab的时候，绘图的后端决定了图片在哪里被显示。在ipython里面可以使用debug命令进入调试。</p>
@@ -495,11 +499,11 @@
 <p>其实ipython的错误提示是我见过的最好最详细的提示了。中间有高亮又有各个源代码文件出错的行号。不过相比之下，python里的错误输出可能是最难读的了。可能是堆栈太多的时候必须有一定的提取文件中关键错误的方法吧。</p>
 <p>ipython调试的时候显示的高亮什么的特性在Sagemath里也得到了应用。</p>
 <p>matplotlib绘图的时候有一种基本的方法就是使用</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</code></pre></div>
 <p>这样可以直接使用pyplot模块提供的绘图函数功能。</p>
 <p>把模块导入成对象，可以这么理解，导入一个对象相当于找到一个能够在运行期间为我们干活的人。这个人可以做相应的输出，我们可以调用它里面的相应方法，或者根据它的功能创建一个工作对象。</p>
 <p>另一个则是使用matplotlib的pylab模块。其中包括了许多NumPy与pyplot模块里面的绘图函数，可以方便快捷地进行计算与绘图。pylab可以直接通过</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pylab <span class="keyword">as</span> pl</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> pylab <span class="im">as</span> pl</code></pre></div>
 <p>进行。</p>
 <p>书里面实际上介绍了三种绘图的方法。有pyplot,pylab,这样直接调用模块的方法，也可以是调用pyplot里面的绘图API进行绘图。</p>
 <h2 id="pyplot的面向对象的绘图方法与机制">pyplot的面向对象的绘图方法与机制</h2>
@@ -515,7 +519,8 @@
 <p>使用plt.gca()得到当前的子图。而使用plt.subplot()函数可以创建子图(实际上是在当前的Figure对象里面创建子图)。subplot的函数调用是subplot(Rows, Cols, Index)。该调用的含义是假设当前Figure对象被分成Rows*Cols的网格。使用编号为Index的区域绘制子图。Index的编号是从左到右，从上到下，编号从1开始。</p>
 <p>如果Figure对象判断不同的subplot的区域有重叠，前面的被重叠的子图将会被清除掉以绘制新的子图。否则就继续添加新的图表。</p>
 <p>函数subplot()返回它创建的Axes对象。调用gca(Object)可以使这个Axes()对象成为当前的对象。如果子图已经存在，subplot并不会将先前的子图覆盖，而是返回符合那个标号的子图。比如下面的代码:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">plt.subplot(<span class="number">111</span>)</div><div class="line">plt.subplot(<span class="number">111</span>)</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">plt.subplot(<span class="dv">111</span>)
+plt.subplot(<span class="dv">111</span>)</code></pre></div>
 <p>第二个语句并不会清除掉第一条语句里的subplot,而是返回第一条子图创建的对象。</p>
 <p>当Figure与Axes对象都决定好之后，真正的绘图就开始了。</p>
 <h3 id="绘图的时候坐标系的选择">绘图的时候坐标系的选择</h3>
@@ -528,7 +533,7 @@
 <p>在实际绘图时，一旦终端被确定了，绘图程序的窗口坐标系也就相当于是确定的。于是根据这种关系，一个图表被显示到桌面上，或者是输出到一个文件当中。而单以纯数据表示而论，在运行的时候，所有的图形的位置在图表坐标系里面的安排都是固定的了。</p>
 <p>不同坐标之间的变换都同样地依赖于本对象的二维仿射变换矩阵的定义。</p>
 <p>假设ax是一个Axes对象。那么它有一个transData用于决定从数据坐标系到窗口坐标系的变换。函数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ax.transData.transform((<span class="number">3</span>, <span class="number">5</span>))</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">ax.transData.transform((<span class="dv">3</span>, <span class="dv">5</span>))</code></pre></div>
 <p>将返回点(3,5)在变成窗口坐标系后所在的位置。 注: 返回类型是一个ndarray对象。而且这个函数也可以一次调用返回多个点在窗口坐标系里面的位置。</p>
 <p>下面我们以Figure下在的tranFigure变换为例了解Python的实现。</p>
 <p>在交互式命令行下直接输入f.transFigure()将可以看到它里面的一些对象。其中第一项里面的Bbox描述了这个Figure的物理大小信息。比如<span class="math inline">\([0,0]--[8,4\)</span>，单位是英寸。而在Affine2D里面的就是那个变换矩阵了。经过分析不难发现，对角线上的第一个元素就是所谓的X方向分辨率，第二个元素就是Y方向分辨率。我们也可以通过直接查看 <code>f.transFigure._boxout._transform</code> 得到真正的变换矩阵。</p>
@@ -542,7 +547,9 @@
 <p>如何调用label,line,axis等对象这里就不说了，因为它们是一些很繁锁的东西。</p>
 <p><strong>matplotlib绘图的背后原理</strong></p>
 <p>matplotlib的绘图的三个层次(这种三层次模型也可以用在其它的语言里面)是:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">backend_bases.FigureCanvas</div><div class="line">backend_bases.Renderer</div><div class="line">artist.Artist</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">backend_bases.FigureCanvas
+backend_bases.Renderer
+artist.Artist</code></pre></div>
 <p>Renderer与Canvas知道如何处理底层的绘制操作，比如在QT界面上绘图或者使用PostScript在PDF文件里面作图。Artist对象处理所有的高层的结构，如图表，文字与曲线等绘图元素的绘制与布局。通常我们只是与Artist对象打交道，而不需要关心底层是如何实现绘图的细节的。</p>
 <p>Artist对象有简单类型与容器类型两种。有点像是GUI里面的Component.简单类型的Artist对象是标准绘图元件，如Line2D, Rectangle, Text, AxesImage等。但是容器类型则包括了其它的简单对象，如Axis, Axes, Figure等。我们不如把Artist看成是一个桌面绘图管理器。那么以前所学过的Metapost语言便就是用于产生这些复杂对象的绘图原语言。它们能够在更底层的意义上提供编程方法，因而更容易绘制出来其它的对象。</p>
 <p>Asymptote与Artist相比，多的只是一种灵活的方式。Artist虽然也是用编程语言实现，但是封装的内容与对象比较繁杂，底层不够清晰。而Asy使用清晰的底层数据结构，让我们可以自由地决定插值等操作。</p>
@@ -556,7 +563,7 @@
 <p>matplot工作是类似一个应用程序。检查配置文件的顺序是，当前配置文件，用户家目录下的配置文件，应用程序里面的配置文件。配置文件实际上是一系列的变量与值。在依次读取这些配置文件的过程中，如果前面的配置文件已经设定了这个值了，那么后面配置文件里面的值就不再生效。于是配置文件的优先级是当前目录最高的。</p>
 <p>配置文件的读取也有一些规律。Bash从/etc里面读取配置，最终也是用户目录里面的配置脚本生效的。不如引入配置文件优先级这个概念。一个应用程序在工作的时候，假设从一列可选的列表里读取每一个配置文件。高优先级的配置文件是说，如果配置项目出现在某一个配置文件里面，而其它配置文件里面有相同的配置项目的时候，前者会对程序起到真正的作用。于是Bash里的配置文件中，系统目录是第一读取的，并具有最低的优先级。matplotlib里面，系统目录是最后读取的，具有最低的优先级。世界真是奇妙。</p>
 <p>matplot配置文件可以通过 <code>matplot.get_config_dir</code> 得到当前生效的路径，使用 <code>matplotlib.matplotlib_fname()</code> 得到最优先的那个配置文件。 而 <code>matplotlib.rc_params()</code> 用于读取配置文件里的每一项(默认是返回当前使用的配置文件里面的项目)， matplotlib使用rcParams变量保存当前的配置。如果要修改，可以直接令</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">matplotlib.rcParams[$hash_key] = $value</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">matplotlib.rcParams[$hash_key] <span class="op">=</span> $value</code></pre></div>
 <p>以让参数成为当前绘图参数。</p>
 <p>matplotlib.rc()函数接受一些参数设置并将它写入rcParams变量。如果要恢复默认的配置文件里面的内容，可能需要rcdefaults()选项。</p>
 <p>显然matplotlib是不支持直接从matplotlib里面直接修改配置文件里的内容的。因为这些配置文件可能权限比较高，或者干脆就是系统目录下的配置文件，不允许用户修改。</p>
@@ -594,20 +601,40 @@
 <p>首先是matplotlib的配置问题。这是一个.matplotlibrc文件决定的。配置的方法可以参考matplotlib的官方网站<a href="http://matplotlib.org/users/customizing.html" class="uri" target="_blank" rel="external">http://matplotlib.org/users/customizing.html</a>。在实际中我们用到的更多的是对于图形的大小的控制。因为我们要输出文件放入到文章当中。其中的选项figure.figsize, figure.dpi, savefig.dpi, savefig.format是在matplotlibrc里面应该指定的。不然每次输出的时候都可能要设置一下，太麻烦了。</p>
 <h4 id="折线图">折线图</h4>
 <p>Matplotlib最简单的方法应该是用折线顺次连接起来 <span class="math inline">\(y\)</span> 轴上的数据了。这个时候 <span class="math inline">\(x\)</span> 轴对应的坐标就是元素在列表中出现的次序。代码与效果分别如下:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># Plot a list of numbers with pyplot</span></div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> re</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line">plt.plot([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>])</div><div class="line">plt.ylabel(<span class="string">'some numbers'</span>)</div><div class="line">plt.savefig(<span class="string">'../img/'</span>+re.sub(<span class="string">'.py$'</span>,<span class="string">'.pdf'</span>,sys.argv[<span class="number">0</span>]))</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">#!/usr/bin/env python</span>
+<span class="co"># Plot a list of numbers with pyplot</span>
+<span class="im">import</span> sys
+<span class="im">import</span> re
+<span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
+plt.plot([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>])
+plt.ylabel(<span class="st">&#39;some numbers&#39;</span>)
+plt.savefig(<span class="st">&#39;../img/&#39;</span><span class="op">+</span>re.sub(<span class="st">&#39;.py$&#39;</span>,<span class="st">&#39;.pdf&#39;</span>,sys.argv[<span class="dv">0</span>]))</code></pre></div>
 <div class="figure">
 <img src="/img/python-plots/729_01.png" alt="image">
 <p class="caption">image</p>
 </div>
 <h4 id="散点图">散点图</h4>
 <p>散点图只不过使用了两个数组。另外，还可以接受点的形状作为第三个可选的参数。使用axis选项可以设置坐标轴的显示范围。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="keyword">import</span> sys; <span class="keyword">import</span> re</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line">plt.plot([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],[<span class="number">1</span>,<span class="number">4</span>,<span class="number">9</span>,<span class="number">16</span>],<span class="string">'ro'</span>)</div><div class="line">plt.axis([<span class="number">0</span>,<span class="number">6</span>,<span class="number">0</span>,<span class="number">20</span>])</div><div class="line">plt.savefig(<span class="string">'../img/'</span>+re.sub(<span class="string">'.py$'</span>,<span class="string">'.pdf'</span>,sys.argv[<span class="number">0</span>]))</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">#!/usr/bin/env python</span>
+<span class="im">import</span> sys<span class="op">;</span> <span class="im">import</span> re
+<span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
+plt.plot([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>],[<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">9</span>,<span class="dv">16</span>],<span class="st">&#39;ro&#39;</span>)
+plt.axis([<span class="dv">0</span>,<span class="dv">6</span>,<span class="dv">0</span>,<span class="dv">20</span>])
+plt.savefig(<span class="st">&#39;../img/&#39;</span><span class="op">+</span>re.sub(<span class="st">&#39;.py$&#39;</span>,<span class="st">&#39;.pdf&#39;</span>,sys.argv[<span class="dv">0</span>]))</code></pre></div>
 <div class="figure">
 <img src="/img/python-plots/729_02.png" alt="image">
 <p class="caption">image</p>
 </div>
 <p>代码中的<code>ro</code>代表使用红色圆点来表示。与MATLAB有几分相似。其它的选项还有，<code>r--</code> 代表红色虚线，<code>bs</code> 代表蓝色方块，而<code>g^</code>代表绿色三角形。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> re</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"><span class="comment"># every sampled time at 200 ms intervals</span></div><div class="line">t = np.arange(<span class="number">0.</span>, <span class="number">5.</span>, <span class="number">0.2</span>)</div><div class="line"><span class="comment"># red dashes, blue squares and green triangles</span></div><div class="line">plt.plot(t,t,<span class="string">'r--'</span>, t,t**<span class="number">2</span>,<span class="string">'bs'</span>, t,t**<span class="number">3</span>,<span class="string">'g^'</span>)</div><div class="line">plt.savefig(<span class="string">'../img/'</span>+re.sub(<span class="string">'.py$'</span>,<span class="string">'.pdf'</span>,sys.argv[<span class="number">0</span>]))</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> sys
+<span class="im">import</span> re
+<span class="im">import</span> numpy <span class="im">as</span> np
+<span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
+<span class="co"># every sampled time at 200 ms intervals</span>
+t <span class="op">=</span> np.arange(<span class="dv">0</span>., <span class="dv">5</span>., <span class="fl">0.2</span>)
+<span class="co"># red dashes, blue squares and green triangles</span>
+plt.plot(t,t,<span class="st">&#39;r--&#39;</span>, t,t<span class="op">**</span><span class="dv">2</span>,<span class="st">&#39;bs&#39;</span>, t,t<span class="op">**</span><span class="dv">3</span>,<span class="st">&#39;g^&#39;</span>)
+plt.savefig(<span class="st">&#39;../img/&#39;</span><span class="op">+</span>re.sub(<span class="st">&#39;.py$&#39;</span>,<span class="st">&#39;.pdf&#39;</span>,sys.argv[<span class="dv">0</span>]))</code></pre></div>
 <div class="figure">
 <img src="/img/python-plots/729_03.png" alt="image">
 <p class="caption">image</p>
@@ -772,7 +799,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -780,7 +807,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -789,7 +816,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

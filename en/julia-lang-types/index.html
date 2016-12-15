@@ -153,6 +153,9 @@
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> Julia类型系统与并发 | 80x24 </title>
 </head>
 
@@ -453,15 +456,24 @@
 <p>另外，具体类型可能是指的在程序运行期间会占据值的那些类型。比如具体的无符号短整型数据。比如bitstype 16 Float16 &lt;: FloatingPoint就定义了一个具体的“比特类型”。</p>
 <p>具体类型与抽象类型的区别可能在于，具体类型是负责实际的操作的，而抽象类型则提供的仅仅是检查操作合法性的功能。也就是抽象类型可以看成是纯粹的逻辑检查，但是具体类型则同时是与内存分配相绑定的。</p>
 <p>Julia的类型可以进行组合，就像是结构体那样（其实语法与C的结构体类似）。</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Foo</div><div class="line">bar</div><div class="line">baz<span class="type">::</span><span class="built_in">Int</span></div><div class="line">qux<span class="type">::</span><span class="built_in">Float64</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia"><span class="kw">type</span> Foo
+bar
+baz::<span class="dt">Int</span>
+qux::<span class="dt">Float64</span>
+<span class="kw">end</span></code></pre></div>
 <p>可以使用构造函数来产生新类，以及给某个类型的变量新的值。（不使用new方法）。</p>
 <p>另外，如果定义的一个类型完全没有任何的成员，比如</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> NoField</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia"><span class="kw">type</span> NoField
+<span class="kw">end</span></code></pre></div>
 <p>那么，这个类型就对应着一个单件（singleton）。使用is(NoFields(), NoFields())得到的结果就是true(is用于判断两个对象是否是同一个对象）。</p>
 <p>如果需要不可变类型，那么就在类型声明中，用immutable关键字代替type。看起来，不可变类型的每一次求值的时候都需要新的内存空间。但是其实问题没有这么简单。实现不可变类型的开销，可能并不比可变类型高多少。在Julia当中，可变类型是按照引用传递的，而不可变类型中通过copy来赋值的。这意味着把变量赋给一个可变类型的时候，并不会创建一个新的对象。</p>
 <p>抽象类型、比特类型、组合类型是Julia的三种基本类型。此外，Julia还支持元组类型，也就是用(Int, String)来当成新的类型。这种类型之间也是可以比较的。另外，类型还可以合并起来，比如IntOrString = Union(Int, String)，表示这个东西为一个整数或者字符型。</p>
 <p>为了支持泛型编程，Julia还有含参类型。含参类型有一个类型参数。比如</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">type</span> Point&#123;T&#125;</div><div class="line">x<span class="type">::</span>T</div><div class="line">y<span class="type">::</span>T</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">
+<span class="kw">type</span> Point{T}
+x::T
+y::T
+<span class="kw">end</span></code></pre></div>
 <p>使用 <code>Point{Float64}</code> 可以构造出一个类。它就好像是Point这个类具有一个类型参数，当类型参数给出来的时候，Point类就调用它的构造函数，然后生成一个新的类型一样。注意Point是抽象类型，但是构造出来的是具体类型。</p>
 <p>In other words, in the parlance of type theory, Julia’s type parameters are invariant, rather than being covariant (or even contravariant). This is for practical reasons: while any instance of Point{Float64} may conceptually be like an instance of Point{Real} as well, the two types have different representations in memory:</p>
 <p>这真的应该参考类型理论了。</p>
@@ -469,16 +481,21 @@
 <p>The choice of which method to execute when a function is applied is called dispatch. Julia allows the dispatch process to choose which of a function’s methods to call based on the number of arguments given, and on the types of all of the function’s arguments. This is different than traditional object-oriented languages, where dispatch occurs based only on the first argument, which often has a special argument syntax, and is sometimes implied rather than explicitly written as an argument. [1] Using all of a function’s arguments to choose which method should be invoked, rather than just the first, is known as multiple dispatch. Multiple dispatch is particularly useful for mathematical code, where it makes little sense to artificially deem the operations to “belong” to one argument more than any of the others: does the addition operation in x + y belong to x any more than it does to y? The implementation of a mathematical operator generally depends on the types of all of its arguments. Even beyond mathematical operations, however, multiple dispatch ends up being a powerful and convenient paradigm for structuring and organizing programs.</p>
 <p>里面提出一个不依赖于算术优先级文法的概念，比如x+y为什么调用的是x的方法而不是调用的y的方法？这个问题的提出的情景是这样的，对于一般的函数而言，可能应用的方法是很简单的，很确定，因为f(x,y)很容易确定是哪个函数。但是如果函数采用的是中缀的形式，那么问题就出现了。在出现中缀的地方，可能dispatch的意义更大。对于a f b这样形式的函数，我们知道f是一个纯粹的标签而已，但是这个方法是独立的方法，还是a的一个方法，或者b的方法。在多种可能的情况下，dispatch就显得必要了。</p>
 <p>还有，如果参数允许多种类型的话，那么实际上函数代码中的行为也是不确定的。</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> f(a,b)</div><div class="line"> a +b </div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia"><span class="kw">function</span> f(a,b)
+ a +b 
+<span class="kw">end</span></code></pre></div>
 <p>对于这种情况，如果a是整数，那么+调用的是整型的+方法；但是a也可以是浮点类型，这样的话，就要调用不同的方法了。如果把+看成是一个方法的话，那么，确实+绑定的是哪一个方法是不确定的。但是在C++当中就没有这样的问题。</p>
 <p>利用methods(f)可以查看当前的名子有多少种定义。比如+号，有92种定义。</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">table = methods(+)</div><div class="line">length(table)</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">table = methods(+)
+length(table)</code></pre></div>
 <p>multiple Dispatch（多重分派）机制可以产生神奇的效果，比如</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">same_type&#123;T&#125;(x<span class="type">::</span>T, y<span class="type">::</span>T) = <span class="literal">true</span></div><div class="line">same_type(x,y) = <span class="literal">false</span></div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">same_type{T}(x::T, y::T) = true
+same_type(x,y) = false</code></pre></div>
 <p>上面的代码实际上是两个函数的定义，但是前一个定义的优先级更高，所以使用这种方法，可以实现一个判断两个变量的类型是否相等的函数。但是实际的执行是这样的：如果两个类型相同，调用的是第一个定义的方法；如果是其它情况，就匹配到后一个方法。结果，这样就可以调用same_type了。但是定义的方式确实是很特殊的。从中我们可以很明显地看到，同一个函数，可以绑定到不同的方法，而且是在运行期间决定的。</p>
 <p>判断是否是同一个函数有一些不同的标准。如果仅仅看名称，就是Julia这里的。但是数学上，也许更习惯把函数的参数类型也当成函数的一部分，那时候就有不同的处理的方式。不过在动态类型的语言中，区分“函数”与“方法”确实是有必要的。</p>
 <p>具有可选参数的函数，实际上在定义的时候同时产生了几种不同的方法。</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">f(a=<span class="number">1</span>,b=<span class="number">2</span>) = a + b</div><div class="line">methods(f)</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">f(a=<span class="fl">1</span>,b=<span class="fl">2</span>) = a + b
+methods(f)</code></pre></div>
 <p>将会查看到f有三个方法绑定。（这种情况下，似乎只要定义函数的时候使用了模式匹配，并且分成了多个句子，似乎都可以看成是多分派的语言了）。</p>
 <h2 id="构造函数">构造函数</h2>
 <p>在Julia当中，构造子被理解成创建新的对象的函数。这与面向对象语言有一些不同（面向对象倾向于把构造函数理解成类的初始化的过程）。不过，在函数式与面向对象的结合中，把构造子理解成创建新对象的函数确实是更好一些。</p>
@@ -497,7 +514,9 @@
 <h2 id="julia的异步与并行支持">Julia的异步与并行支持</h2>
 <p>按理说这应该是重点所在，但是现在还不容易理解它们。Julia使用Task的概念来描述一个异步过程。</p>
 <p>运行julia -p n可以开启一个<code>n</code>个工作进程的程序。使用remotecall()可以调用另外线程的程序，借此可以实现并行编程的功能。</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//julia -p <span class="number">4</span></div><div class="line">r = remotecall(<span class="number">2</span>, rand, <span class="number">2</span>,<span class="number">2</span>)</div><div class="line">fetch(r)</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">//julia -p <span class="fl">4</span>
+r = remotecall(<span class="fl">2</span>, rand, <span class="fl">2</span>,<span class="fl">2</span>)
+fetch(r)</code></pre></div>
 <p>The first argument to remotecall() is the index of the process that will do the work. Most parallel programming in Julia does not reference specific processes or the number of processes available, but remotecall() is considered a low-level interface providing finer control. The second argument to remotecall() is the function to call, and the remaining arguments will be passed to this function. As you can see, in the first line we asked process 2 to construct a 2-by-2 random matrix, and in the second line we asked it to add 1 to it. The result of both calculations is available in the two remote references, r and s. The <code>@spawnat</code> macro evaluates the expression in the second argument on the process specified by the first argument.</p>
 <p>通过并行编程的方法也是使用装饰器。它可以把Julia的模块分散到多个工作进程中。</p>
 <p>个人认为，在并行计算的情况下，如何保证机器不会运行在内存不够而经常使用交换空间，以及让机器随时能够保持响应是关键的。因为在并行计算的时候，总是要消耗很多的资源。但是确定资源是否够用也很重要。如果不够用，那就只能进入死机状态了。</p>
@@ -678,7 +697,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -686,7 +705,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -695,7 +714,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

@@ -156,6 +156,9 @@
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> 密码学原理与开源工具(日期未定) | 80x24 </title>
 </head>
 
@@ -477,32 +480,38 @@
 <h3 id="对称加密算法">对称加密算法</h3>
 <p>对称加密算法的基本流程是, 在一定的对称加密算法的支持下, 输入密码, 指定输入文件, 然后得到一个输出文件. 将输出发送到另外一台机器上, 在另外一台机器上应用相同配置即可解密出文件.</p>
 <p>OpenSSL提供的主要的工具是 <code>enc</code> 命令. enc -e用于加密, enc -d用于解密. 执行命令</p>
-<figure class="highlight plain"><figcaption><span>.bash&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl enc -des -e -a &lt; source.txt &gt; source.txt.des</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">openssl</span> enc -des -e -a <span class="kw">&lt;</span> source.txt <span class="kw">&gt;</span> source.txt.des</code></pre></div>
 <p>进入对话框, 输入密码之后就可以生成加密后的文件了, 再使用</p>
-<figure class="highlight plain"><figcaption><span>.bash&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl enc -des -d -a &lt; source.txt.des &gt; source.txt</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">openssl</span> enc -des -d -a <span class="kw">&lt;</span> source.txt.des <span class="kw">&gt;</span> source.txt</code></pre></div>
 <p>就可以恢复想要的 <code>source.txt</code> 文件.</p>
 <p>对称加密之间的不同, 主要在于所选用的对称加密算法, 比如 <code>-des</code> . 使用对称加密的时候, 其实也应当注意, 一个长度较少的密码, 是容易被攻破的, 因此不妨选用更长位数的密码. 这样, OpenSSL可以使用 <code>-k</code> , <code>-kfile</code> 选项从命令行选项, 或者从文件中得到密码. 不用在线输入.</p>
 <h3 id="非对称加密算法">非对称加密算法</h3>
 <p>非对称加密算法的应用范围更广. 而且也有助于产生更长的密码. 非对称加密的原理已经介绍过了. 因此在本地产生钥匙对是最基础的. 对应OpenSSL命令为:</p>
-<figure class="highlight plain"><figcaption><span>.bash&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl genrsa 1024 &gt; hawk.key</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">openssl</span> genrsa 1024 <span class="kw">&gt;</span> hawk.key</code></pre></div>
 <p>产生ASCII编码的RSA钥匙对. 可以用</p>
-<figure class="highlight plain"><figcaption><span>.bash&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl rsa -noout -text &lt; hawk.pem</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">openssl</span> rsa -noout -text <span class="kw">&lt;</span> hawk.pem</code></pre></div>
 <p>查看包含在 <code>hawk.pem</code> 当中的公钥与私钥的值.</p>
 <p>为了更安全起见, <code>genrsa</code> 还支持将生成的钥匙对使用对称加密算法加密, 比如加上 <code>-des</code> 选项后, 以后要再想用这个钥匙对, 必须输入一个密码才行.</p>
 <p>不管怎么说, 第一步产生钥匙对的工作总算是完成了. 此时用</p>
-<figure class="highlight plain"><figcaption><span>.bash&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl rsa -pubout &lt;hawk.key &gt;hawk_pub.pem</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">openssl</span> rsa -pubout <span class="kw">&lt;</span>hawk.key <span class="kw">&gt;</span>hawk_pub.pem</code></pre></div>
 <p>可以仅导出RSA中的公钥的那个部分, 直接引用 <code>hawk_pub.pem</code> 以发布公钥. 对于DSA, 需要在生成密码的时候提供一个参数. 因此过程是</p>
-<figure class="highlight plain"><figcaption><span>.bash&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">openssl dsaparam 1024 &gt; dsaparam.pem</div><div class="line">openssl gendsa -des3 &lt;deaparam.pem &gt;private.pem ## 生成密钥</div><div class="line">openssl dsa -pubout &lt;private.pem &gt;public.pem  ## 导出公钥</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">openssl</span> dsaparam 1024 <span class="kw">&gt;</span> dsaparam.pem
+<span class="kw">openssl</span> gendsa -des3 <span class="kw">&lt;</span>deaparam.pem <span class="kw">&gt;</span>private.pem <span class="co">## 生成密钥</span>
+<span class="kw">openssl</span> dsa -pubout <span class="kw">&lt;</span>private.pem <span class="kw">&gt;</span>public.pem  <span class="co">## 导出公钥</span></code></pre></div>
 <p>这要比RSA方式复杂一步.</p>
 <p>产生了钥匙对, 便可以分别使用私钥与公钥对文件签名与验证了. 比如</p>
-<figure class="highlight plain"><figcaption><span>.bash&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">## signature</div><div class="line">openssl dgst -sha1 -sign private.pem &lt;file.txt &gt;file.txt.sgn </div><div class="line"></div><div class="line">## verify</div><div class="line">openssl dgst -sha1 -sign public.pem &lt;file.txt.sgn &gt;file.txt</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">## signature</span>
+<span class="kw">openssl</span> dgst -sha1 -sign private.pem <span class="kw">&lt;</span>file.txt <span class="kw">&gt;</span>file.txt.sgn 
+
+<span class="co">## verify</span>
+<span class="kw">openssl</span> dgst -sha1 -sign public.pem <span class="kw">&lt;</span>file.txt.sgn <span class="kw">&gt;</span>file.txt</code></pre></div>
 <p>不过我们不一定是对整个文件加密, 而是更有可能是对文件的摘要加密.</p>
 <p>注意, 这是对文件签名与验证. 前提是接收方有正确的公钥. 如果一开始得到的是窃取者的公钥, 那么窃取者就能伪造发送方与接收方通信.</p>
 <h3 id="信息摘要算法">信息摘要算法</h3>
 <p>信息摘要算法对于验证文件有时是非常有效的. 对于较弱的验证, 比如看从网上下载的一个文件与服务器一样与否, 可以用|openssl sha1 file.txt|得到SHA1值, 然后与服务品的上对比.</p>
 <p>信息摘要算法的另一个应用是保存用户的密码, 前提是保存用户密码的地方, 其它人不能任意修改相应的摘要. 在用摘要算法保存密码的时候, 还可以加上一些噪声, 防止被用常用词摘要表的方法攻破.</p>
 <p>密码管理是 <code>passwd</code> 命令, 它可以以UNIX标准的方式加上一个密码, 以及加上一些噪声. 在服务器存储密码的时候特别有用, 比如</p>
-<figure class="highlight plain"><figcaption><span>.bash&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl passwd -1 -salt</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">openssl</span> passwd -1 -salt </code></pre></div>
 <p>分别以password为输入文件, 和以使用摘要算法后的密码为输出文件.</p>
 <p>OpenSSL还有其它的许多功能. 有用到的时候可以参考其手册.</p>
 <h2 id="gnupg工具">GnuPG工具</h2>
@@ -512,33 +521,44 @@
 <p>GnuPG的基础命令有|gpg –gen-key|与|gpg -k/-K|, 分别用于生成钥匙与查看本机的所有的钥匙. GnuPG管理它们的时候, 对钥匙文件使用 <code>Key_ID</code> 标识. 也就是说, 使用哪个文件, 通过 <code>Key_ID</code> 来指定.</p>
 <h3 id="导出公钥">导出公钥</h3>
 <p>示例命令:</p>
-<figure class="highlight plain"><figcaption><span>.bash&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gpg --export --armor Key_ID &gt; Key_ID_pub.pem</div><div class="line">gpg --export Key_ID &gt; Key_ID.gpg</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">gpg</span> --export --armor Key_ID <span class="kw">&gt;</span> Key_ID_pub.pem
+<span class="kw">gpg</span> --export Key_ID <span class="kw">&gt;</span> Key_ID.gpg</code></pre></div>
 <p>分别表示导出ASCII格式与二进制格式的公钥. 同时, 导入另人的公钥, 使用</p>
-<figure class="highlight plain"><figcaption><span>.bash&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gpg --import Key_ID_pub.pem</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">gpg</span> --import Key_ID_pub.pem</code></pre></div>
 <p>公钥总是要发布出来才有意义, GnuPG提供的命令可以直接将公钥发布到网上, 以及从网上的服务器上下载公钥. 这里有一个可用的公钥服务器 <code>keys.gnupg.net</code> .</p>
-<figure class="highlight plain"><figcaption><span>.bash&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gpg --keyserver keys.gnupg.net --send Key_ID</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">gpg</span> --keyserver keys.gnupg.net --send Key_ID</code></pre></div>
 <p>从服务器上下载相应的公钥, 则可以调用</p>
-<figure class="highlight plain"><figcaption><span>.bash&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gpg --keyserver keys.gnupg.net --recv-keys Key_ID</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">gpg</span> --keyserver keys.gnupg.net --recv-keys Key_ID</code></pre></div>
 <p>其实使用默认服务品的话, 可以不用指定 <code>keyserver</code> 的, 默认服务器可以在.gunpg/gpg.conf文件中配置.</p>
 <h3 id="钥匙管理">钥匙管理</h3>
 <p>按照GnuPG的基本的意思, 应该是把公钥导出, 在本地有一个私钥就行了. 但是有时候, 因为重装系统等原因, 可能需要导出以迁移私钥. 方法是:</p>
-<figure class="highlight plain"><figcaption><span>.bash&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gpg --export-secret-keys --armor Key_ID &gt; Key_ID.pem</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">gpg</span> --export-secret-keys --armor Key_ID <span class="kw">&gt;</span> Key_ID.pem</code></pre></div>
 <p>直于在另一台机器上导入私钥, 则是同样的道理.</p>
 <p>从上面的流程, 我们可以看出, 一个完整的 <code>Key_ID</code> 文件中, 不仅有公钥与私钥, 还有用户相关的信息, 以及加密私钥的密码, 只有提供了密码, 才能从 <code>Key_ID</code> 中提取重要数据. 因此一个 <code>Key_ID</code> 可以用于多种用途, 非对称加密, 签名均可.</p>
 <h3 id="吊销证书">吊销证书</h3>
 <p>该功能可以看成是 <code>Key_ID</code> 机制的扩展. 当一个符合要求的证书因为某种原因, 状态发生变化的时候, 可以根据吊销证书被取消. 当然, 创建吊销证书的, 必须是发布机构, 也就是知道私钥与密码的那个人. 产生相应 <code>Key_ID</code> 的吊销证书后, 在相应的时机, 导入此证书, 便可以使相应 <code>Key_ID</code> 的证书失效.</p>
-<figure class="highlight plain"><figcaption><span>.bash&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gpg --gen-revoke Key_ID &gt; Key_ID.rvk.pem</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">gpg</span> --gen-revoke Key_ID <span class="kw">&gt;</span> Key_ID.rvk.pem</code></pre></div>
 <p>导入吊销证书的方法, 与导入一个公钥使用相同的命令.</p>
 <h3 id="对称加密">对称加密</h3>
 <p>默认GnuPG使用的是非对称加密的方法. 所以要想使用对称加密, 虽然原则上与OpenSSL相同, 但是参数形式要稍微长一些, 或者难记一些.</p>
-<figure class="highlight plain"><figcaption><span>.bash&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">## 对称加密并生成filename.asc文档. 不带armor, 生成gpg二进制格式.</div><div class="line">gpg --armor -c filename</div><div class="line">## -c 等同于命令 --symmetric</div><div class="line"></div><div class="line">## 对称解密时输入相应的密码即可</div><div class="line">gpg --armor -d filename.asc</div><div class="line">## -d 等同于 --decrypt 选项</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">## 对称加密并生成filename.asc文档. 不带armor, 生成gpg二进制格式.</span>
+<span class="kw">gpg</span> --armor -c filename
+<span class="co">## -c 等同于命令 --symmetric</span>
+
+<span class="co">## 对称解密时输入相应的密码即可</span>
+<span class="kw">gpg</span> --armor -d filename.asc
+<span class="co">## -d 等同于 --decrypt 选项</span></code></pre></div>
 <h3 id="非对称加密">非对称加密</h3>
 <p>既然在 <code>.pem</code> 文件中, 所有的要素都准备了, 那么非对称加密也就不困难了. 使用</p>
-<figure class="highlight plain"><figcaption><span>.bash&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gpg --armor -r Key_ID -e filename</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">gpg</span> --armor -r Key_ID -e filename</code></pre></div>
 <p>解密的时候, 与对称加密的时候相同. 只不过解密的时候, 需要存有私钥的<code>Key_ID</code>文件.</p>
 <h3 id="数字签名">数字签名</h3>
 <p>对文件进行数字签名也是很简单的, 示例如下:</p>
-<figure class="highlight plain"><figcaption><span>.bash&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">## 对文件签名, 并且将文件签到输入文件中</div><div class="line">gpg --sign filename -o filename.gpg</div><div class="line"></div><div class="line">## 生成文件与HASH分开的签名</div><div class="line">gpg --detach-sig filename -o filename.sig</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">## 对文件签名, 并且将文件签到输入文件中</span>
+<span class="kw">gpg</span> --sign filename -o filename.gpg
+
+<span class="co">## 生成文件与HASH分开的签名</span>
+<span class="kw">gpg</span> --detach-sig filename -o filename.sig</code></pre></div>
 <p>也可以通过类似 <code>--armor</code> 的选项, 导出ASCII格式的签名的文件, 这样更易于在互联网上传播( <code>--clearsign</code> 选项).</p>
 <p>至于验证签名, 则可以使用 <code>--verify</code> 选项.</p>
 <p>GnuPG还有其它很多用法, 比如在一个公钥上签上自己的名. 这里就不多讲了.</p>
@@ -702,7 +722,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -710,7 +730,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -719,7 +739,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

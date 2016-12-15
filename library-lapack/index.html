@@ -153,6 +153,9 @@ lapack原来是用FORTRAN语言写成的，后来C语言得到了广泛的应用
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> Lapack矩阵运算库 | 80x24 </title>
 </head>
 
@@ -462,7 +465,9 @@ lapack原来是用FORTRAN语言写成的，后来C语言得到了广泛的应用
 <h3 id="lapacke调用示例">LAPACKE调用示例</h3>
 <p>函数调用的方法是首先使用相应的类型声明整型，然后声明使用的相关的矩阵。注意在LAPACKE当中需要使用一维数组按照行主或者列主的方式存储相应的矩阵，而不是使用指向指针的指针。</p>
 <p>计算列主矩阵的每行元素有lda个的元素的QR分解可以参考下面的例子：</p>
-<figure class="highlight plain"><figcaption><span>.c&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">lapack_int m, n, lda, info;</div><div class="line">double *a, *tau;</div><div class="line">info = LAPACKE_deqrf(LAPACK_COL_MAJOR, m, n, a, lda, tau);</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">lapack_int m, n, lda, info;
+<span class="dt">double</span> *a, *tau;
+info = LAPACKE_deqrf(LAPACK_COL_MAJOR, m, n, a, lda, tau);</code></pre></div>
 <p>其中各个元素的含义是矩阵A的行数是m,列数是n.行列式中的每一个元素是lda个（真不知道设计leading dimission有什么作用）。</p>
 <p>当使用中层接口的时候，我们要使用存在于LAPACKE内部的内存分配与释放函数了。它们分别是 <code>LAPACKE_malloc</code> 与 <code>LAPACKE_free</code>。不过在这种情况下我们也不用自己 调用内存分配函数，这些分配与释放会由相应带work后缀的元素自己使用。</p>
 <p>其实我们应该记住LAPACKE中不使用C语言提供的多维数组就行了。</p>
@@ -624,7 +629,7 @@ lapack原来是用FORTRAN语言写成的，后来C语言得到了广泛的应用
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -632,7 +637,7 @@ lapack原来是用FORTRAN语言写成的，后来C语言得到了广泛的应用
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -641,7 +646,7 @@ lapack原来是用FORTRAN语言写成的，后来C语言得到了广泛的应用
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

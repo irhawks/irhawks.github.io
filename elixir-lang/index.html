@@ -150,6 +150,9 @@
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> Elixir：建立在Erlang虚拟机上的函数式语言 | 80x24 </title>
 </head>
 
@@ -441,17 +444,20 @@
         <p>Elixir是建立头Elrang虚拟机上的函数式、并发的、通用的编程语言。Elixir是一个BEAM（Erlang虚拟机的名称）上面的一个比较新的编程语言。Elixir的思想是所有的事物都看成是表达式。现代编程语言通常都具有开些诸如泛型编程、函数式编程、面向对象编程，对并发、并行、异步、非阻塞都有很好的支持，支持多态特性。在函数式编程方面上也支持模式匹配。类型系统当然更为严谨。此外，模式匹配、惰性求值、unicode支持、多态、文档注释甚至文学编程特性、高阶函数也往往都具备。</p>
 <p>Elixir的REPL环境是iex命令。Elixir的语言的扩展名是exs。</p>
 <p>Erlang的虚拟机的配置是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">erl -name node06@10.0.0.151 --cookie a</div></pre></td></tr></table></figure>
+<pre class="shell"><code>erl -name node06@10.0.0.151 --cookie a</code></pre>
 <a id="more"></a>
 <p>同样地，自己希望在Elixir中也可以采用集群的方式管理和安装。比如如下的代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">juju run --all &quot;wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb &amp;&amp; sudo dpkg -i erlang-solutions_1.0_all.deb&quot;</div><div class="line">juju run --all &quot;sudo apt-get update&quot;</div><div class="line">juju run --all &quot;sudo apt-get install elixir&quot;</div></pre></td></tr></table></figure>
+<pre class="shell"><code>juju run --all &quot;wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb &amp;&amp; sudo dpkg -i erlang-solutions_1.0_all.deb&quot;
+juju run --all &quot;sudo apt-get update&quot;
+juju run --all &quot;sudo apt-get install elixir&quot;</code></pre>
 <p>这样就安装好了Elixir环境。然后就是配置程序语言了。不知道与Erlang同样基于BEAM虚拟机，是否可以同时启动Erlang环境与Elixir环境。结果是，确实是这样，如果一个Erlang虚拟机启动了，Elixir也能够连接到Erlang结点。</p>
 <p>Erlang的各个结点加入之后，使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iex --name elixir@node01.107.maas</div></pre></td></tr></table></figure>
+<pre class="shell"><code>iex --name elixir@node01.107.maas</code></pre>
 <p>来创建一个Elixir结点，然后使用</p>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Node.connect <span class="symbol">:<span class="string">'node06@node06.</span></span></div><div class="line">Node.list</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span class="dt">Node</span>.connect :<span class="st">&#39;node06@node06.</span>
+<span class="st">Node.list</span></code></pre></div>
 <p>如果要开启多个结点，可以使用这样的模式：</p>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">juju run --all <span class="string">'iex --name elixir@$(hostname).107.maas --detached'</span></div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode elixir"><code class="sourceCode elixir">juju run --all <span class="st">&#39;iex --name elixir@$(hostname).107.maas --detached&#39;</span></code></pre></div>
 <p>来查看Erlang/Elixir已经接受的虚拟机的结点。但是需要注意的是，虽然它们共用同一个结点，但是Elixir的程序的代码与Erlang的程序的代码却是不通用的。也就是说，iex能够发现Erlang的结点，但是在Erlang的结点上spawn程序会造成问题。因此，elixir只能在elixir的结点上分配程序。</p>
 
       
@@ -491,8 +497,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/elastic-search/" rel="next" title="ElasticSearch搜索软件">
-                <i class="fa fa-chevron-left"></i> ElasticSearch搜索软件
+              <a href="/erlang-concurrency-test/" rel="next" title="Erlang编程语言中的并发小测试">
+                <i class="fa fa-chevron-left"></i> Erlang编程语言中的并发小测试
               </a>
             
           </div>
@@ -501,8 +507,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/erlang-concurrency-test/" rel="prev" title="Erlang编程语言中的并发小测试">
-                Erlang编程语言中的并发小测试 <i class="fa fa-chevron-right"></i>
+              <a href="/agda-lang/" rel="prev" title="Agda语言介绍">
+                Agda语言介绍 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -604,7 +610,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -612,7 +618,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -621,7 +627,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

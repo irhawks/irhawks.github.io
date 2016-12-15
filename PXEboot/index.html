@@ -153,6 +153,9 @@ shutdown实际上是调用init 0, init 0会cl">
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> 命令行下面的关机，PXE远程启动 | 80x24 </title>
 </head>
 
@@ -430,16 +433,44 @@ shutdown实际上是调用init 0, init 0会cl">
 <p>不同计算机支持的远程启动协议是各种各样的，在Intel的机器上，使用的是所谓的PXE(Preboot Execution Enviroment)技术。PXE协议是根据服务器端收到的工作站的MAC地址，使用DHCP服务给这个MAC地址指定一个IP。在PXE中，待启动的机器常称为工作站。PXE工作的大致过程是，工作站开机后，PXE BootROM(网卡上的自启芯片)获得控制权之前先做自我测试，然后以广播形式发出一个请求FIND帧。服务器若收到工作站的要求，就会发出DHCP回应。内容包括用户端的IP地址、预设通讯通道、开机映象文件等。工作站收到后回应相应的帧请求传送所需文件。之后将会有多次协商过程，以决定启动参数。之后BootROM由TFTP通讯协议从服务器下载开机映象文件。这个映象档就是软盘映象文件（系统映象文件）。工作站使用TFTP接收启动文件后，将控制权转交启动块，引导操作系统映象，完成自启动过程。</p>
 <p>配置过程中，针对DHCP、TFTP、NFS进行相应的配置。DHCP用于将引导模块交给工作站，TFTP用于传送操作系统映象，而NFS用于加载开机启动时所需的各个文件。</p>
 <p>TFTP的配置可由xinetd决定。而DHCP中的一些选项是与TFTP启动配合的。所以在正常配置好DHCP服务器之后，由next-server选项指定TFTP服务器的地址，由filename选项指定TFTP服务器文件的路径。这是因为，根据DHCP协议的规范，next-server就是TFTP服务器的地址。</p>
-<figure class="highlight plain"><figcaption><span>.c&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">## 目标机器的DHCP配置项</div><div class="line">host target &#123;</div><div class="line">## 目标机器所匹配的MAC地址</div><div class="line">hardware ethernet 00:13:21:1F:F1:82;</div><div class="line">## 目标机器分配到的IP地址</div><div class="line">fixed-address 192.168.0.10;</div><div class="line">## 目标机器所使用的网关地址</div><div class="line">option routers 192.168.0.254;</div><div class="line">## 目标机器所用的DNS</div><div class="line">option domain-name-servers 208.67.222.222,208.67.220.220;</div><div class="line">## 指定TFTP服务器的地址。如果TFTP与DHCP服务器是一个IP，则可以忽略</div><div class="line">next-server 192.168.0.2;</div><div class="line">## 指定开机文档在TFTP服务器上的路径</div><div class="line">filename &quot;/ubuntu-installer/i386/pxelinux.0&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="er">## 目标机器的DHCP配置项</span>
+host target {
+<span class="er">## 目标机器所匹配的MAC地址</span>
+hardware ethernet <span class="dv">00</span>:<span class="dv">13</span>:<span class="dv">21</span>:1F:F1:<span class="dv">82</span>;
+<span class="er">## 目标机器分配到的IP地址</span>
+fixed-address <span class="fl">192.168.0.10</span>;
+<span class="er">## 目标机器所使用的网关地址</span>
+option routers <span class="fl">192.168.0.254</span>;
+<span class="er">## 目标机器所用的DNS</span>
+option domain-name-servers <span class="fl">208.67.222.222</span>,<span class="fl">208.67.220.220</span>;
+<span class="er">## 指定TFTP服务器的地址。如果TFTP与DHCP服务器是一个IP，则可以忽略</span>
+next-server <span class="fl">192.168.0.2</span>;
+<span class="er">## 指定开机文档在TFTP服务器上的路径</span>
+filename <span class="st">&quot;/ubuntu-installer/i386/pxelinux.0&quot;</span>;
+}</code></pre></div>
 <p>然后可以开启TFTP服务，并且操作系统映象也可以放在TFTP服务器上。对于Ubuntu来说，可以将光盘中的/install/netboot/ubuntu-installer/目录复制到TFTP目录下面。之后，打开客户机的电源，BIOS中选择从网络启动即可。</p>
 <p>上面的DHCP配置中仅有被启动的工作站的配置节，而正常的DHCP应当有针对子网的配置。dhcpd.conf文件的其他部分可参考示例文件：</p>
-<figure class="highlight plain"><figcaption><span>.c&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">ddns-update-style none;</div><div class="line">ignore client-updates;</div><div class="line">allow booting;</div><div class="line">allow bootp;</div><div class="line"></div><div class="line">subnet 192.168.5.0 netmask 255.255.255.0 &#123;</div><div class="line">option routers 192.168.5.1;</div><div class="line">option subnet-mask 255.255.255.0;</div><div class="line">option domain-name-servers 202.112.128.50;</div><div class="line">range dynamic-bootp 192.168.5.33 192.168.5.38;</div><div class="line">default-lease-time 21600;</div><div class="line">max-lease-time 43200;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">ddns-update-style none;
+ignore client-updates;
+allow booting;
+allow bootp;
+
+subnet <span class="fl">192.168.5.0</span> netmask <span class="fl">255.255.255.0</span> {
+option routers <span class="fl">192.168.5.1</span>;
+option subnet-mask <span class="fl">255.255.255.0</span>;
+option domain-name-servers <span class="fl">202.112.128.50</span>;
+range dynamic-bootp <span class="fl">192.168.5.33</span> <span class="fl">192.168.5.38</span>;
+<span class="kw">default</span>-lease-time <span class="dv">21600</span>;
+max-lease-time <span class="dv">43200</span>;
+}</code></pre></div>
 <p>我们知道，本地启动的时候，有GRUB和LINUX系统映象两个文件。前面的pxelinux.0就相当于GRUB、整个光盘就相当于开机系统。linux发行版光盘的<code>install/netboot</code>目录中有pxelinux.0文件及相应的配置选项，使用的时候，该文件夹的内容全部拷贝到TFTP根目录下面。</p>
 <p>Ubuntu一系的软件，光盘映象基本上都放在HTTP服务器上。也就是操作系统映象自TFTP传到工作站并运行的时候，Ubuntu自动从本网络的一台HTTP服务器上查找安装所需文档。此时，我们可以选择将整个光盘映象挂载至HTTP服务器的 <code>/ubuntu</code>目录下面。工作站的PXELINUX启动的时候，会向我们询问操作系统映象的地址。</p>
 <p>如果合适，我们也可以将安装好的系统分发给其它的工作站，而不用远程安装系统。</p>
 <h2 id="实战">实战</h2>
 <p>首先安装Ubuntu上所需要的各种软件，然后将Ubuntu14.04的映象下载过来。</p>
-<figure class="highlight plain"><figcaption><span>.bash&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">apt-get install nfs-common nfs-kernel-server</div><div class="line">apt-get install tftpd-hpa tftp-hpa</div><div class="line">apt-get install isc-dhcp-server</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">apt-get</span> install nfs-common nfs-kernel-server
+<span class="kw">apt-get</span> install tftpd-hpa tftp-hpa
+<span class="kw">apt-get</span> install isc-dhcp-server</code></pre></div>
 <p>DHCP服务的端口号是TCP67，而TFTP服务的端口号是UDP59，可以通过netstat命令查看相关的设置。</p>
 <p>tftp-hpa使用的配置文件是 <code>/etc/default/tftpd-hpa</code> ，可以根据需要，将TFTP的服务器目录改变到其它的位置。不过，配置的时候，注意权限问题。</p>
 <p>isc-dhcp-server使用的配置文件是 <code>/etc/dhcp/dhcpd.conf</code> 。配置的时候按照格式。</p>
@@ -450,7 +481,10 @@ shutdown实际上是调用init 0, init 0会cl">
 <p>其实使用TFTP服务全部依赖于所谓的PXELINUX启动程序。该程序与SYSLINUX、EXTLINUX同属于一个发行版。PXELINUX的pxelinux.0文件所在的TFTP的根目录，其实就相当于本地启动的时候的boot分区而已。</p>
 <p>下载PXELINUX程序之后，将 <code>/usr/lib/syslinux/pxelinux.0</code> 文件复制在TFTP根目录下面。然后在TFTP根目录下建立pxelinux.cfg目录。在目录中建立default文件。其实，PXELINUX的解释是， <code>pxelinux.cfg</code>目录代表了对不同的客户机的启动选项的配置，以便支持不同的系统。而只有一个<code>default</code>文件的时候，相当于局域网中只有一个主机。</p>
 <p>下面是PXELINUX的配置文件的一个示例写法：</p>
-<figure class="highlight plain"><figcaption><span>.shell&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">DEFAULT ubuntu</div><div class="line">LABEL ubuntu</div><div class="line">kernel linux</div><div class="line">append initrd=initrd.nfs root=/dev/nfs nfsroot=192.168.1.88:/home/cache/netboot/root ip=dhcp rw</div></pre></td></tr></table></figure>
+<pre class="sourceCode shell"><code>DEFAULT ubuntu
+LABEL ubuntu
+kernel linux
+append initrd=initrd.nfs root=/dev/nfs nfsroot=192.168.1.88:/home/cache/netboot/root ip=dhcp rw</code></pre>
 <p>kernel与append命令所需的linux与initrd文件，都是以TFTP根目录为根所得到的文件路径。因此内核linux与initrd文件要与pxelinux.0一起放在TFTP根目录下。</p>
 <p>任何linux内核均支持root=这样的参数，大部分也支持nfsroot选项。如果把nfsroot都指定了，那么工作站将以nfsroot所指的位置作为根系统。然后，找到根系统后，我们就可以从根文件系统的 <code>/etc/fstab</code>中加载其它的NFS挂载选项。通过不同的组合，可以实现无盘工作站或者有盘工作站。</p>
 <p>如果理解了内核的root=选项，以及联想到OpenSUSE安装光盘具有指定光盘位置的选项，那么远程安装系统就不是什么困难的事情了。</p>
@@ -460,9 +494,27 @@ shutdown实际上是调用init 0, init 0会cl">
 <p>linux的ethtool工具可以用于修改网卡上WOL的状态，决定从网络唤醒是否启用。使用 <code>ethtool -s eth0 wol g</code> 就可以启用网卡的网络唤醒功能。 <code>wol d</code>表示禁用。</p>
 <p>linux的 <code>wakeonlan</code>工具是唤醒网卡的终端。它接受MAC地址作为参数，唤醒局域网中具有此MAC的机器。</p>
 <p>完成PXE启动的时候，导出NFSROOT目录，配置为</p>
-<figure class="highlight plain"><figcaption><span>.c&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">/etc/exports: the access control list for filesystems which may be exported</div><div class="line">    to NFS clients.  See exports(5).</div><div class="line"></div><div class="line">Example for NFSv2 and NFSv3:</div><div class="line">/srv/homes       hostname1(rw,sync,no_subtree_check) hostname2(ro,sync,no_subtree_check)</div><div class="line"></div><div class="line">Example for NFSv4:</div><div class="line">/srv/nfs4        gss/krb5i(rw,sync,fsid=0,crossmnt,no_subtree_check)</div><div class="line">/srv/nfs4/homes  gss/krb5i(rw,sync,no_subtree_check)</div><div class="line"></div><div class="line">/srv/www    *(ro)</div><div class="line">/srv/tftpboot/ *(no_subtree_check,rw,no_root_squash,async)</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">/etc/exports: the access control list <span class="kw">for</span> filesystems which may be exported
+    to NFS clients.  See exports(<span class="dv">5</span>).
+
+Example <span class="kw">for</span> NFSv2 and NFSv3:
+/srv/homes       hostname1(rw,sync,no_subtree_check) hostname2(ro,sync,no_subtree_check)
+
+Example <span class="kw">for</span> NFSv4:
+/srv/nfs4        gss/krb5i(rw,sync,fsid=<span class="dv">0</span>,crossmnt,no_subtree_check)
+/srv/nfs4/homes  gss/krb5i(rw,sync,no_subtree_check)
+
+/srv/www    *(ro)
+/srv/tftpboot/ *(no_subtree_check,rw,no_root_squash,async)</code></pre></div>
 <p>然后在启动文件 <code>pxelinux.cfg/default</code> 中配置启动选项为:</p>
-<figure class="highlight plain"><figcaption><span>.shell&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># D-I config version 2.0</div><div class="line">prompt 0</div><div class="line">timeout 100</div><div class="line"></div><div class="line">DEFAULT ubuntu</div><div class="line">LABEL ubuntu</div><div class="line">KERNEL ../ubuntu/casper/vmlinuz.efi</div><div class="line">APPEND initrd=../ubuntu/casper/initrd.lz boot=casper netboot=nfs root=/dev/nfs nfsroot=10.10.10.1:/srv/tftpboot/ubuntu ip=dhcp</div></pre></td></tr></table></figure>
+<pre class="sourceCode shell"><code># D-I config version 2.0
+prompt 0
+timeout 100
+
+DEFAULT ubuntu
+LABEL ubuntu
+KERNEL ../ubuntu/casper/vmlinuz.efi
+APPEND initrd=../ubuntu/casper/initrd.lz boot=casper netboot=nfs root=/dev/nfs nfsroot=10.10.10.1:/srv/tftpboot/ubuntu ip=dhcp</code></pre>
 <p>其中 <code>/srv/tftpboot/ubuntu</code> 相当于光盘的根目录，里面有linux安装光盘里面的所有的文件。这种方式只需要NFS就可以，不用HTTP服务，因此是一种比较好的解决的办法。</p>
 <p>剩下的就是 <code>wakonlan</code> 的测试了。这也应该是不成为问题的。只需要将网卡配置好就可以了。</p>
 
@@ -625,7 +677,7 @@ shutdown实际上是调用init 0, init 0会cl">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -633,7 +685,7 @@ shutdown实际上是调用init 0, init 0会cl">
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -642,7 +694,7 @@ shutdown实际上是调用init 0, init 0会cl">
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

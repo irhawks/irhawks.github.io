@@ -150,6 +150,9 @@
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> Erlang编程语言中的并发小测试 | 80x24 </title>
 </head>
 
@@ -447,21 +450,27 @@
 <p>Erlang的设计中采纳了一些Prolog与Smalltalk中的东西。个人感觉，在处理并发问题的时候，还是不得不接触Erlang，就像在函数式语言中不能离开Haskell一样。</p>
 <h2 id="erlang的并发测试环境设计">Erlang的并发测试环境设计</h2>
 <p>Erlang在安装好之后应该进行分布式集群的创建的工作。每个结点上可以开启一个。安装完Erlang之后，首先应该配置Cookie，因为同一个集群当中的Erlang，应当有相同的Cookie。以juju为例，在所有的结点中执行如下的操作：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">## Install Erlang packages</div><div class="line">juju run --all &quot;sudo apt-get install -y erlang-base&quot;</div><div class="line">juju run --all &quot;echo just_for_test &gt; .erlang.cookie&quot;</div><div class="line">juju run --all &quot;chmod 400 ~/.erlang.cookie&quot;</div></pre></td></tr></table></figure>
+<pre class="shell"><code>## Install Erlang packages
+juju run --all &quot;sudo apt-get install -y erlang-base&quot;
+juju run --all &quot;echo just_for_test &gt; .erlang.cookie&quot;
+juju run --all &quot;chmod 400 ~/.erlang.cookie&quot;</code></pre>
 <p>上面的代码在每台机器上安装Erlang环境的同时，把各台机器上的Erlang Cookie都设置为<code>just_for_test</code>（以便它们都位于同一个群组中。然后正确设置cookie的权限。</p>
 <p>接下来，我们要在每台机器上运行epmd进程，它负责映射符号名到机器地址。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">juju run --all &quot;epmd -daemon&quot;</div></pre></td></tr></table></figure>
+<pre class="shelll"><code>juju run --all &quot;epmd -daemon&quot;</code></pre>
 <p><a href="http://gashero.yeax.com/?p=67" class="uri" target="_blank" rel="external">http://gashero.yeax.com/?p=67</a>中讲到了Erlang在单机环境中的应用和配置。</p>
 <p>Elixir的连接与Erlang类似，但是还是有一些不同。</p>
 <p>开启结点的话，可以使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">juju run --all &apos;erl -name $(hostname)@$(hostname).107.maas -detached&apos;</div></pre></td></tr></table></figure>
+<pre class="shell"><code>juju run --all &#39;erl -name $(hostname)@$(hostname).107.maas -detached&#39;</code></pre>
 <p>运行成功之后，可以在同一个网络中登录其中的一个结点并进行测试：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">erl -name test@node01.107.maas &lt;&lt;EOF</div><div class="line">net_adm:ping(&apos;node06@node06.107.maas&apos;).</div><div class="line">nodes().</div><div class="line">EOF</div></pre></td></tr></table></figure>
+<pre class="shell"><code>erl -name test@node01.107.maas &lt;&lt;EOF
+net_adm:ping(&#39;node06@node06.107.maas&#39;).
+nodes().
+EOF</code></pre>
 <p>经过ping之后，应该能够发现原来的结点。（实际上是这样的连接建立之后，整个Erlang上面的结点能够互相发现。不一会儿，结点就会加入Full Mesh的Erlang结点网络）这样一个Erlang分布式环境就搭建成功了。但是应该说，在这个平台上实现分布式的Erlang程序还是不够的。因为故障容错等都还需要额外的努力。需要一些特别的机制。</p>
 <p>在配置过程中，注意有相同的Cookie才能加入同一个Erlang群组。通过</p>
-<figure class="highlight erlang"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpc:call('node01@node01.<span class="number">107</span>.maas',erlang,now,[]).</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode erlang"><code class="sourceCode erlang"><span class="fu">rpc:call(</span><span class="ch">&#39;node01@node01.107.maas&#39;</span><span class="fu">,</span><span class="ch">erlang</span><span class="fu">,now,[]).</span></code></pre></div>
 <p>可以测试在指定的结点上执行代码。其中，Erlang的结点之间自动连接是默认的选项，当然可以在启动Erlang的时候使用相关的选项禁止自动连接。手动连接使用net_kernel，示例如下：</p>
-<figure class="highlight erlang"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">net_kernel:connect_node('node01@node01.<span class="number">107</span>.maas').</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode erlang"><code class="sourceCode erlang"><span class="fu">net_kernel:connect_node(</span><span class="ch">&#39;node01@node01.107.maas&#39;</span><span class="fu">).</span></code></pre></div>
 <h2 id="erlang的编译工具rebar06-12-2015-220911">Erlang的编译工具Rebar[06-12-2015 22:09:11]</h2>
 <p>Rebar是Erlang的编译工具，相当于sbt。见<a href="https://github.com/rebar/rebar" class="uri" target="_blank" rel="external">https://github.com/rebar/rebar</a>。不过，rebar主要用于Erlang下面的OTP应用。中文也有一些参考的资料。</p>
 <!--今天解决的问题有三个，第一个是iot-framework-engine，第二个是iot-framework-gui，第三个是cavin-base。希望可以利用好这些工具。-->
@@ -502,8 +511,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/elixir-lang/" rel="next" title="Elixir：建立在Erlang虚拟机上的函数式语言">
-                <i class="fa fa-chevron-left"></i> Elixir：建立在Erlang虚拟机上的函数式语言
+              <a href="/elastic-search/" rel="next" title="ElasticSearch搜索软件">
+                <i class="fa fa-chevron-left"></i> ElasticSearch搜索软件
               </a>
             
           </div>
@@ -512,8 +521,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/agda-lang/" rel="prev" title="Agda语言介绍">
-                Agda语言介绍 <i class="fa fa-chevron-right"></i>
+              <a href="/elixir-lang/" rel="prev" title="Elixir：建立在Erlang虚拟机上的函数式语言">
+                Elixir：建立在Erlang虚拟机上的函数式语言 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -624,7 +633,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -632,7 +641,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -641,7 +650,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

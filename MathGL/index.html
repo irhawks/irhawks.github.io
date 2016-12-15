@@ -153,6 +153,9 @@ MathGL在Ubuntu下的安装是一件简单的事，安装mathgl关键字开头�
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> MathGL绘图工具 | 80x24 </title>
 </head>
 
@@ -429,21 +432,59 @@ MathGL在Ubuntu下的安装是一件简单的事，安装mathgl关键字开头�
 <p>MathGL有很多优点。如脚本化的绘图语言、C++的执行效率、多语言接口、支持输出多种图形格式、内建多种绘图方法、支持MPI等编程接口、与C++等宿主语言的数据结构融合。这些使它成为很有吸引力的一个绘图库。</p>
 <h2 id="mathgl基础操作">MathGL基础操作</h2>
 <p>首先我们介绍在MathGL在C++下的使用。像C++这类接口，一般要安装lib*这样的软件包，而不只mathgl软件包一个，这样g++在编译的时候，才可能与正确的库文件链接。这是一个需要注意的地方。如果下面的MathGL C++程序出错，根据编译器反馈的错误信息，我们应当能够发现错误、纠正错误。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mgl2/mgl.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></div><div class="line">&#123;</div><div class="line">    mglGraph graph;</div><div class="line">    graph.FPlot(<span class="string">"sin(pi*x)"</span>);</div><div class="line">    graph.WriteFrame(<span class="string">"test.png"</span>);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;mgl2/mgl.h&gt;</span>
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>* argv[])
+{
+    mglGraph graph;
+    graph.FPlot(<span class="st">&quot;sin(pi*x)&quot;</span>);
+    graph.WriteFrame(<span class="st">&quot;test.png&quot;</span>);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
 <p>编译、运行<code>mathgl1.cpp</code>，查看图片所使用的Bash命令建议为:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">g++ -lmgl mathgl1.cpp -o mathgl1</div><div class="line">./mathgl1</div><div class="line">eog sample.png</div></pre></td></tr></table></figure>
+<pre class="shell"><code>g++ -lmgl mathgl1.cpp -o mathgl1
+./mathgl1
+eog sample.png</code></pre>
 <p>注：如果使用了其它的绘图接口，可能需要使用 <code>-lmgl-wnd</code> 等库。</p>
 <p>MathGL的绘图画布中使用帧、子图等概念，因此一个 <code>mglGraph</code>对象可以创造出多个子图的组合，以及多个帧的组合。后者使MathGL有制作动画的能力。</p>
 <p>使用MGL脚本的时候，MathGL中有 <code>mglconv</code> 工具和 <code>mglview</code>工具可以使用。它们 是运行MGL脚本的宿主环境。</p>
 <p>MathGL库支持的输出方式，包括向图形终端输出，此方式下可以完成一些交互式的动作；直接写入到点阵或者矢量图形格式，此方式下直接运行MathGL的C++程序以得到结果。</p>
 <h2 id="窗口绘图glut绘图与输出到文件">窗口绘图、GLUT绘图与输出到文件</h2>
 <p>绘图到一个单独的窗口，或者使用GLUT库输出，道理是一样的。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">#include &lt;mgl2/mgl.h&gt;</div><div class="line">#include &lt;mgl2/window.h&gt;</div><div class="line"></div><div class="line">int do_draw(mglGraph *graph)</div><div class="line">&#123;</div><div class="line">    graph-&gt;Rotate(60,40);</div><div class="line">    graph-&gt;Box();</div><div class="line">    return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(int argc, char* argv[])</div><div class="line">&#123;</div><div class="line">    mglWindow window(do_draw, "MathGL Window example');</div><div class="line">    int status = window.Run();</div><div class="line">    return status;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;mgl2/mgl.h&gt;</span>
+<span class="ot">#include &lt;mgl2/window.h&gt;</span>
+
+<span class="dt">int</span> do_draw(mglGraph *graph)
+{
+    graph-&gt;Rotate(<span class="dv">60</span>,<span class="dv">40</span>);
+    graph-&gt;Box();
+    <span class="kw">return</span> <span class="dv">0</span>;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>* argv[])
+{
+    mglWindow window(do_draw, <span class="st">&quot;MathGL Window example&#39;);</span>
+    <span class="dt">int</span> status = window.Run();
+    <span class="kw">return</span> status;
+}</code></pre></div>
 <p>原理就是如此了，不过在Ubuntu上有些错误，可能是安装MathGL的问题。</p>
 <p>使用GLUT作为后端的时候，更为简单，因为不用WX组件了。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mgl2/mgl.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mgl2/glut.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">do_draw</span><span class="params">(mglGraph *graph)</span></span></div><div class="line">&#123;</div><div class="line">    graph-&gt;Rotate(<span class="number">60</span>,<span class="number">40</span>);</div><div class="line">    graph-&gt;Box();</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></div><div class="line">&#123;</div><div class="line">    <span class="function">mglGLUT <span class="title">window</span><span class="params">(do_draw, <span class="string">"MathGL Window example"</span>)</span></span>;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;mgl2/mgl.h&gt;</span>
+<span class="ot">#include &lt;mgl2/glut.h&gt;</span>
+
+<span class="dt">int</span> do_draw(mglGraph *graph)
+{
+    graph-&gt;Rotate(<span class="dv">60</span>,<span class="dv">40</span>);
+    graph-&gt;Box();
+    <span class="kw">return</span> <span class="dv">0</span>;
+}
+
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>* argv[])
+{
+    mglGLUT window(do_draw, <span class="st">&quot;MathGL Window example&quot;</span>);
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
 <p>在编译的时候，调用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">g++ mglut.cpp -o mglut -lmgl -lmgl-glut</div></pre></td></tr></table></figure>
+<pre class="shell"><code>g++ mglut.cpp -o mglut -lmgl -lmgl-glut</code></pre>
 <p>如果将 <code>-lmgl</code> 选项放在 <code>mglut.cpp</code>的前面，似乎总会出现连接错误。这个问题 目前还不知道是怎么样的一回事。</p>
 <p>在GLUT界面中，使用aswd按键旋转图形，使用r与f切换透明(transparency)与光照(lighting)状态。按键x可以退出窗口。</p>
 <p>说明：以后我们的绘图的时候，就使用上面的代码所提供的方法，把绘图的代码都放在 <code>do\_draw()</code> 函数里面，然后由 <code>mglGLUT</code>对象调用。这样可以使我们更 专心于图形的绘制。</p>
@@ -453,11 +494,48 @@ MathGL在Ubuntu下的安装是一件简单的事，安装mathgl关键字开头�
 <p>MathGL也支持在Qt绘图画布中绘图，图形作为Qt窗口的一部分。但是那并非MathGL绘图语言的核心。现在不讲，或许以后结合PyQt库使用MathGL的时候这个功能我们会用到。</p>
 <h2 id="mathgl对子图绘制的支持">MathGL对子图绘制的支持</h2>
 <p>MathGL采用“选中-绘制”的方法支持子图的绘制，也就是一个<code>mglGraph</code> 对象使用 <code>SubPlot()</code>方法选中一块子图区域，之后还是使用 <code>mglGraph</code> 对象的<code>Title()</code>等函数来操作绘图，此时图形会自动绘制在当前的子图上。在绘制子图的时候，另一种编程实现是“切换-绘制”的方法。该方法是调用当前绘图对象的方法产生一个子图对象，通过操作子图对象的方法在子图上绘图。Asymptote与Mathplotlib等都是采用这种方法。MathGL是前一种方法，因此要与后一种实现方式区分开。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">do_draw</span><span class="params">(mglGraph *g)</span></span></div><div class="line">&#123;</div><div class="line">    g-&gt;SubPlot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">0</span>); g-&gt;Box();</div><div class="line">    g-&gt;Puts(mglPoint(<span class="number">-1</span>,<span class="number">1</span>,<span class="number">1</span>),:<span class="string">"Just box"</span>, <span class="string">":L"</span>);</div><div class="line">    g-&gt;InPlot(<span class="number">0.2</span>,<span class="number">0.5</span>,<span class="number">0.7</span>,<span class="number">1</span>,<span class="literal">false</span>);</div><div class="line">    g-&gt;Box();</div><div class="line">    g-&gt;Puts(mglPoint(<span class="number">0</span>,<span class="number">1.2</span>), <span class="string">"InPlot Example"</span>);</div><div class="line"></div><div class="line">    g-&gt;SubPlot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>);</div><div class="line">    g-&gt;Title(<span class="string">"Rotate only"</span>);</div><div class="line">    g-&gt;Rotate(<span class="number">50</span>,<span class="number">60</span>);</div><div class="line">    g-&gt;Box();</div><div class="line"></div><div class="line">    g-&gt;SubPlot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>);</div><div class="line">    g-&gt;Title(<span class="string">"Rotate and Aspect"</span>);</div><div class="line">    g-&gt;Rotate(<span class="number">50</span>,<span class="number">60</span>);</div><div class="line">    g-&gt;Aspect(<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>);</div><div class="line">    g-&gt;Box();</div><div class="line"></div><div class="line">    g-&gt;SubPlot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>);</div><div class="line">    g-&gt;Title(<span class="string">"Aspect in other direction"</span>);</div><div class="line">    g-&gt;Rotate(<span class="number">50</span>,<span class="number">60</span>);</div><div class="line">    g-&gt;Aspect(<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>);</div><div class="line">    g-&gt;Box();</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> do_draw(mglGraph *g)
+{
+    g-&gt;SubPlot(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>); g-&gt;Box();
+    g-&gt;Puts(mglPoint(<span class="dv">-1</span>,<span class="dv">1</span>,<span class="dv">1</span>),:<span class="st">&quot;Just box&quot;</span>, <span class="st">&quot;:L&quot;</span>);
+    g-&gt;InPlot(<span class="fl">0.2</span>,<span class="fl">0.5</span>,<span class="fl">0.7</span>,<span class="dv">1</span>,<span class="kw">false</span>);
+    g-&gt;Box();
+    g-&gt;Puts(mglPoint(<span class="dv">0</span>,<span class="fl">1.2</span>), <span class="st">&quot;InPlot Example&quot;</span>);
+
+    g-&gt;SubPlot(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">1</span>);
+    g-&gt;Title(<span class="st">&quot;Rotate only&quot;</span>);
+    g-&gt;Rotate(<span class="dv">50</span>,<span class="dv">60</span>);
+    g-&gt;Box();
+
+    g-&gt;SubPlot(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>);
+    g-&gt;Title(<span class="st">&quot;Rotate and Aspect&quot;</span>);
+    g-&gt;Rotate(<span class="dv">50</span>,<span class="dv">60</span>);
+    g-&gt;Aspect(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>);
+    g-&gt;Box();
+
+    g-&gt;SubPlot(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>);
+    g-&gt;Title(<span class="st">&quot;Aspect in other direction&quot;</span>);
+    g-&gt;Rotate(<span class="dv">50</span>,<span class="dv">60</span>);
+    g-&gt;Aspect(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>);
+    g-&gt;Box();
+
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
 <p>更复杂的子图绘制方式，可以参考 <code>MultiPlot()</code> 、<code>StickPlot()</code> 等函数。</p>
 <p>剩下的就是具体各种图形的绘制了。</p>
 <h3 id="使用mathgl绘制动画示例">使用MathGL绘制动画示例</h3>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">do_draw</span><span class="params">(mglGraph *gr)</span></span></div><div class="line">&#123;</div><div class="line">    gr-&gt;NewFrame();</div><div class="line">    gr-&gt;Rotate(<span class="number">60</span>,<span class="number">40</span>);</div><div class="line">    gr-&gt;Box();</div><div class="line">    gr-&gt;EndFrame();</div><div class="line">    gr-&gt;NewFrame();</div><div class="line">    gr-&gt;Box();</div><div class="line">    gr-&gt;Axis(<span class="string">"xy"</span>);</div><div class="line">    gr-&gt;EndFrame();</div><div class="line">    <span class="keyword">return</span> gr-&gt;GetNumFrame();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> do_draw(mglGraph *gr)
+{
+    gr-&gt;NewFrame();
+    gr-&gt;Rotate(<span class="dv">60</span>,<span class="dv">40</span>);
+    gr-&gt;Box();
+    gr-&gt;EndFrame();
+    gr-&gt;NewFrame();
+    gr-&gt;Box();
+    gr-&gt;Axis(<span class="st">&quot;xy&quot;</span>);
+    gr-&gt;EndFrame();
+    <span class="kw">return</span> gr-&gt;GetNumFrame();
+}</code></pre></div>
 <h2 id="使用mgl脚本语言">使用MGL脚本语言</h2>
 <p>MGL脚本语言其实是很方便的一个东西。该语言每一行都代表一个命令，类似于tcl脚本，而且连注释的格式都是与tcl语言相同的：从<code>#</code>开始直到行尾。另一方面，MGL脚本按行分析语句，语句的第一个单词代表一个命令，像Bash中那样。而MGL脚本中的字符串用成对的单引号括起来，如果需要跨行，则使用反斜杠加换行表示将本行与下一行联系在一起。</p>
 <p>MGL脚本中的命令都来自 <code>mglGraph</code>的成员函数，因此只要我们了解了MathGL面向C++的库的用法，自然就知道如何写MGL脚本文件。</p>
@@ -624,7 +702,7 @@ MathGL在Ubuntu下的安装是一件简单的事，安装mathgl关键字开头�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -632,7 +710,7 @@ MathGL在Ubuntu下的安装是一件简单的事，安装mathgl关键字开头�
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -641,7 +719,7 @@ MathGL在Ubuntu下的安装是一件简单的事，安装mathgl关键字开头�
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

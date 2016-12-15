@@ -156,6 +156,9 @@ Solr 5.0之后就不再以.war包的格式发布了。而是以一个单独的li
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> Solr搜索介绍（继续） | 80x24 </title>
 </head>
 
@@ -474,9 +477,9 @@ Hexo的Next主题可以识别<! -- more --.>，并且在主页当中展示文章
 <!-- 从上面的结果来看，自己好像明白了为什么学习某些问题的时候需要很长的时间。因为要一步一步来做的话，配置Solr就需要有几十篇博客的内容，结果也就是一份书的程度了，这样单一个Solr就要搞定几个星期，这还是比较快的人，如果中间遇到什么意外，可能就需要更长的时间。这个时候自己算是明白为什么效率可以那么低了。 -->
 <p><a href="http://iamyida.iteye.com/category/338597" class="uri" target="_blank" rel="external">http://iamyida.iteye.com/category/338597</a>里面介绍，创建collection的方式是这样的，先决条件是我们在<code>server/solr</code>目录下面有一个<code>solr.xml</code>文件，以后我们就把<code>server/solr</code>目录简称为<code>solr</code>目录了。之后我们创建一个<code>collection1</code>这样的文件夹，进一步在文件夹里面创建一个<code>conf</code>文件夹。进一步地，将<code>server/solr/configsets/basic_configs/conf/solrconfig.xml</code>文件复制到<code>server/solr/collection1/conf</code>目录下面。</p>
 <p>然后在Solr的管理控制台中选择添加core，里面指定名称，solr的路径，dataDir、config、schema.xml等文件。自己遇到的一个问题是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Error CREATEing SolrCore &apos;collection1&apos;: Unable to create core [collection1] Caused by: Unknown parameters: &#123;enablePositionIncrements=true&#125;</div></pre></td></tr></table></figure>
+<pre><code>Error CREATEing SolrCore &#39;collection1&#39;: Unable to create core [collection1] Caused by: Unknown parameters: {enablePositionIncrements=true}</code></pre>
 <p>浏览器的方式创建core，形如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://localhost:8080/solr/admin/cores?action=CREATE&amp;name=core2&amp;instanceDir=/opt/solr/core2&amp;config=solrconfig.xml&amp;schema=schema.xml&amp;dataDir=data</div></pre></td></tr></table></figure>
+<pre><code>http://localhost:8080/solr/admin/cores?action=CREATE&amp;name=core2&amp;instanceDir=/opt/solr/core2&amp;config=solrconfig.xml&amp;schema=schema.xml&amp;dataDir=data</code></pre>
 <ul>
 <li>name：就是你的core名称，</li>
 <li>instanceDir就是你的core根目录，举个例子，linux下可能是/opt/solr/core2,windows下可能是C:/solr/core2</li>
@@ -644,7 +647,7 @@ Hexo的Next主题可以识别<! -- more --.>，并且在主页当中展示文章
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -652,7 +655,7 @@ Hexo的Next主题可以识别<! -- more --.>，并且在主页当中展示文章
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -661,7 +664,7 @@ Hexo的Next主题可以识别<! -- more --.>，并且在主页当中展示文章
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

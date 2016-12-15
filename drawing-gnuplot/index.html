@@ -156,6 +156,9 @@ gnuplot有一个优点，就是它可输出成TeX的源代码的格式。第一�
 
 
 
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
   <title> Gnuplot绘图 | 80x24 </title>
 </head>
 
@@ -459,13 +462,17 @@ gnuplot有一个优点，就是它可输出成TeX的源代码的格式。第一�
 <p>MetaPost的问题是，Metapost与XeTeX不太兼容。使用中文的时候又不方便了。所以我们还是使用其它的方法。</p>
 <p>gnuplot有一个优点，就是它可输出成TeX的源代码的格式。第一种是LaTeX自带的picture环境，在里面直接绘图。第二种是tikz环境。无论哪一种环境，排版的工作都是连同文字一起的。所以正文是什么格式，其它文章也可以是这样的格式。</p>
 <p>如果将gnuplot的输出改成picture环境，那么在每个gnuplot文件前面添加如下的行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">set terminal latex    ## 也可以是emtex环境。</div><div class="line">set output &quot;pic.tex&quot;  ## 生成的.tex文件。</div></pre></td></tr></table></figure>
+<pre class="gnuplot"><code>set terminal latex    ## 也可以是emtex环境。
+set output &quot;pic.tex&quot;  ## 生成的.tex文件。</code></pre>
 <p>然后使用<code>\input{pic.tex}</code>将生成的文件嵌入到文本中，注意段落的安排，以及将图表排版有适当的空格。</p>
 <a id="more"></a>
 <p>如果将gnuplot的输出改成tikzpicture环境，那么在每个gnuplot文件前添加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">set terminal tikz     ## 也可以是 set terminal lua tikz。</div><div class="line">## 还可以在 tikz 后添加额外选项，如 fontscale 0.9 , latex, tex, context。</div><div class="line">set output &quot;pic.tex&quot;</div></pre></td></tr></table></figure>
+<pre class="gnuplot"><code>set terminal tikz     ## 也可以是 set terminal lua tikz。
+## 还可以在 tikz 后添加额外选项，如 fontscale 0.9 , latex, tex, context。
+set output &quot;pic.tex&quot;</code></pre>
 <p>同样使用<code>\input{pic.tex}</code>将生成的文件嵌入到文本中。不过tikz图像 也可以在 <code>plain TeX</code> 环境下使用，因此使用这种方法，支持在tex或者xetex环境中插入图片，并不局限于latex或者xelatex。如果是在LaTeX环境中使用，则需要使用如下的宏包：</p>
-<figure class="highlight tex"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">\<span class="name">usepackage</span><span class="string">&#123;tikz&#125;</span></span></div><div class="line"><span class="tag">\<span class="name">usepackage</span><span class="string">&#123;gnuplot-lua-tikz&#125;</span></span></div></pre></td></tr></table></figure>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex">\usepackage{tikz}
+\usepackage{gnuplot-lua-tikz}</code></pre></div>
 <p>如果是plain TeX，则使用<code>\input gnuplot-lua-tikz.tex</code>命令。这样一来，gnuplot就非常能够满足我们的需要了。所以我们学习绘图也就从 它开始讲起。</p>
 <h2 id="gnuplot绘图基础">Gnuplot绘图基础</h2>
 <p>Gnuplot是一个交互式的绘图语言。绘出的图形展示在一个设备上。所以我们在绘图脚本中需要指定绘图的终端类型，以及输出的文件。默认情况下，Gnuplot是将图形输出到显示器。我们也可以更改成其它类型。前面我们就已经介绍了如何将图形导出成 <code>.tex</code> 格式。实际上，Gnuplot支持几乎所有的图片格式与文档格式，完整的支持可以参考Gnuplot官方文档的 <code>Terminal Types</code>一节。</p>
@@ -492,7 +499,9 @@ gnuplot有一个优点，就是它可输出成TeX的源代码的格式。第一�
 <p>使用之后，除了命令行不太方便外，其它地方还很方便。至少可以直接整合到LaTeX里面，这样就使排版的效果大大增强了。</p>
 <p>GNUplot的用法其实很简单，其设置是样式、选项与绘图的综合。绘图语法中需要指定数据源以及绘图的样式即可。坐标轴也各自有自己设置的办法。</p>
 <p>对GNUPLOT有疑问的话，可以直接使用help语句，此时在对话界面中会显示出来相应的帮助。另外，gnuplot的一个简单的例子如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">set terminal png size 1000,400  </div><div class="line">set output &quot;./sin.png&quot;  </div><div class="line">plot sin(x)</div></pre></td></tr></table></figure>
+<pre class="gnuplot"><code>set terminal png size 1000,400  
+set output &quot;./sin.png&quot;  
+plot sin(x)  </code></pre>
 <p>gnuplot的命令有两类，一类是修改状态，一种是绘图指令。set方法都是修改状态。使用plot, replot, multiplot来绘图。</p>
 <p>gnuplot对于数据中的时间项有很好的支持，可以直接将文本中某些数据项设置成时间的格式。这一功能对于日志分析与统计报表极为有用。</p>
 <p>上面列举了许多极有有趣的例子。</p>
@@ -658,7 +667,7 @@ gnuplot有一个优点，就是它可输出成TeX的源代码的格式。第一�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -666,7 +675,7 @@ gnuplot有一个优点，就是它可输出成TeX的源代码的格式。第一�
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -675,7 +684,7 @@ gnuplot有一个优点，就是它可输出成TeX的源代码的格式。第一�
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

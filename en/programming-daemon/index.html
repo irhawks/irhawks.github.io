@@ -1,0 +1,1082 @@
+<!doctype html>
+
+
+
+  
+
+
+<!--
+<html class="theme-next mist use-motion" lang="zh-Hans,en">
+-->
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="linux,daemon,python,c,server," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="80x24" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="参考http://www.netzmafia.de/skripten/unix/linux-daemon-howto.html。上面提到Linux守护进程应该做的基本的事情，守护进程主要包括了
+
+从主程序中创建子进程
+改变文件的umask任务
+打开日志文件以记录日志
+创建会话ID
+将工作目录移动到一个安全的位置
+关闭标准的文件描述符（守护进程不存在标准输入与输出的问题）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="守护进程的编写思路（C与Python）">
+<meta property="og:url" content="./en//programming-daemon/index.html">
+<meta property="og:site_name" content="80x24">
+<meta property="og:description" content="参考http://www.netzmafia.de/skripten/unix/linux-daemon-howto.html。上面提到Linux守护进程应该做的基本的事情，守护进程主要包括了
+
+从主程序中创建子进程
+改变文件的umask任务
+打开日志文件以记录日志
+创建会话ID
+将工作目录移动到一个安全的位置
+关闭标准的文件描述符（守护进程不存在标准输入与输出的问题）">
+<meta property="og:updated_time" content="2016-12-14T11:18:28.344Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="守护进程的编写思路（C与Python）">
+<meta name="twitter:description" content="参考http://www.netzmafia.de/skripten/unix/linux-daemon-howto.html。上面提到Linux守护进程应该做的基本的事情，守护进程主要包括了
+
+从主程序中创建子进程
+改变文件的umask任务
+打开日志文件以记录日志
+创建会话ID
+将工作目录移动到一个安全的位置
+关闭标准的文件描述符（守护进程不存在标准输入与输出的问题）">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="./en//programming-daemon/"/>
+
+
+
+
+
+  <title> 守护进程的编写思路（C与Python） | 80x24 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?763bee904aa6d81fdf017659d162188f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">80x24</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Keep Stupid, Keep Hungry</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-atom">
+          <a href="/atom.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-rss"></i> <br />
+            
+            Atom
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+          <li class="menu-item"><a href="//programming-daemon/">简体中文</a></li>
+          
+          <li class="menu-item"><a href="/en//programming-daemon/">English (US)</a></li>
+          
+
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="./en/programming-daemon/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Istyasna">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="80x24">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="80x24" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                守护进程的编写思路（C与Python）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-09T00:00:00+08:00">
+                2015-12-09
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              <span class="post-meta-item-text">Post modified</span>
+              <time title="Post modified" itemprop="dateModified" datetime="2016-12-14T19:18:28+08:00">
+                2016-12-14
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/en/programming-daemon/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="en//programming-daemon/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>参考<a href="http://www.netzmafia.de/skripten/unix/linux-daemon-howto.html" class="uri" target="_blank" rel="external">http://www.netzmafia.de/skripten/unix/linux-daemon-howto.html</a>。上面提到Linux守护进程应该做的基本的事情，守护进程主要包括了</p>
+<ul>
+<li>从主程序中创建子进程</li>
+<li>改变文件的umask任务</li>
+<li>打开日志文件以记录日志</li>
+<li>创建会话ID</li>
+<li>将工作目录移动到一个安全的位置</li>
+<li>关闭标准的文件描述符（守护进程不存在标准输入与输出的问题）</li>
+</ul>
+<a id="more"></a>
+<p>显然这是针对具体情况的需求建模的一部分。因为守护进程总是从系统中由一个脚本调用或者用户手动启动的。在启动的时候，守护进程和系统中其它的进程一样被对待。但是守护进程的目标要使得它能够独立于会话而存在。具体代码的执行还是由子进程完成的。在Linux当中，这是通过fork函数完成的。在守护进程的编写中，很大一部分代码全部是处理控制流的，特别是异常处理，这没有什么可问的：事实就是如此，我们也不得不面对。当然要接受这样的现实并写出大量异常处理的代码。编程的最本质的困难可能还是在于对于控制流的掌握把，至于具体的算法则是理论上的另外一方面的问题了。</p>
+<p>进程成功创建子进程之后，父进程应该及时终止退出，然后由子进程执行任务。显然，这个时候子进程是沿着父进程的当前控制流继续执行的。接下来就是子进程的任务。</p>
+<!-- more -->
+<h2 id="改变文件的掩码">改变文件的掩码</h2>
+<p>为了能够写入由daemon所创建的文件，必须保持daemon在创建这些文件的时候有写入的权限。该权限是由umask来控制的，可以保证它们可以正确地读取或写入文件。umask可以在命令行当中运行，但是保险的方法还是通过编程接口。在linux系统中完成切换umask任务的是umask函数。设置umask为0可以对文件有完全的访问权限。</p>
+<p>第三步是打开日志。但是该步骤是可选的。该可选的步骤可以导出许多有用的信息。</p>
+<p>第四步是创建SID结构。目的是让这个进程的父进程去掉，成为一个orphan进程，以便不受到用户会话的影响。方法是创建一个SID。使用setsid函数。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">pid_t</span> pid, sid;</div><div class="line"><span class="comment">/* Fork off the parent process */</span></div><div class="line">pid = fork()</div><div class="line"><span class="keyword">if</span>(pid &lt; <span class="number">0</span>) &#123; <span class="built_in">exit</span>(EXIT_FAILURE); &#125;  <span class="comment">// fork process failed</span></div><div class="line"><span class="keyword">if</span>(pid &gt; <span class="number">0</span>) &#123; <span class="built_in">exit</span>(EXIT_SUCCESS); &#125;  <span class="comment">// succeed and exit parent process</span></div><div class="line"></div><div class="line"><span class="comment">/* Change the file mode mask */</span></div><div class="line">umask(<span class="number">0</span>)</div><div class="line"></div><div class="line"><span class="comment">/* Open any logs here */</span></div><div class="line"></div><div class="line"><span class="comment">/* Create a new SID for the child process */</span></div><div class="line">sid = setsid();</div><div class="line"><span class="keyword">if</span> (sid &lt; <span class="number">0</span>) &#123; <span class="built_in">exit</span>(FAILURE); &#125;  <span class="comment">// don't forget to enable your log</span></div></pre></td></tr></table></figure>
+<p>再一步是改变工作的目录。我们必须保证该目录存在。在按照FHS标准的系统中可以是/tmp的目录，但是保险的方法还是使用根目录作为当前的工作目录。使用chdir函数可以完成这样的任务。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> ( (chdir(<span class="string">"/"</span>)) &lt; <span class="number">0</span> ) &#123; <span class="built_in">exit</span>(EXIT_FAILURE); &#125; <span class="comment">// 失败返回-1</span></div></pre></td></tr></table></figure>
+<p>关闭标准文件描述符是最后的一步。这是因为守护进程根本就没有标准输入输出可以使用。使用的是close函数。如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">close(STDIN_FILENO);</div><div class="line">close(STDOUT_FILENO);</div><div class="line">close(STDERR_FILENO);</div></pre></td></tr></table></figure>
+<h3 id="守护进程的执行逻辑">守护进程的执行逻辑</h3>
+<p>经过之上的步骤，终于算是符合了daemon的行为规范。接下来就需要写一系列的具体完成daemon的代码了。初始化守护进程中其中的第一步。常见的逻辑是：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* Daemon-specific initialization goes here */</span></div><div class="line"></div><div class="line"><span class="comment">/* The big loop */</span></div><div class="line"><span class="keyword">while</span>(<span class="number">1</span>) &#123; </div><div class="line">    <span class="comment">/* Do your task here */</span></div><div class="line">    sleep(<span class="number">30</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>也就是说，这个时候守护进程是一个循环的程序。</p>
+<p>注意，日志一般应使用syslog的系统，使用syslog提供的机制。</p>
+<h2 id="使用python写linux的守护进程">使用Python写Linux的守护进程</h2>
+<p>现在更多地是使用脚本语言和面向对象的技术来完成基本任务的编写。所以接下来我们选择一个使用Python来写守护进程的一个脚本。参考<a href="http://blog.csdn.net/LikeHighTime/article/details/4602456%7D。原贴%3Chttp://www.jejik.com/articles/2007/02/a_simple_unix_linux_daemon_in_python/" class="uri" target="_blank" rel="external">http://blog.csdn.net/LikeHighTime/article/details/4602456}。原贴&lt;http://www.jejik.com/articles/2007/02/a_simple_unix_linux_daemon_in_python/</a>。</p>
+<p>其头部的关键是使用signal的库导入一些信号，并使用一些系统的头文件。之后则是创建一个Daemon的类。在该类中的初始化函数，daemonize化函数支撑函数的运行。</p>
+<p>我们先来看Daemon的原型，用户的守护进程是从这个类继承过来的。</p>
+<p>守护进程类原型有如下的几个重要的例子：</p>
+<p>init函数：该函数表示的是进入守护进程的时候的初始的设置。如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, pidfile, stdin=<span class="string">'/dev/null'</span>, stdout=<span class="string">'/dev/null'</span>, stderr=<span class="string">'/dev/null'</span>)</span>:</span>  </div><div class="line">      self.stdin = stdin  </div><div class="line">      self.stdout = stdout  </div><div class="line">      self.stderr = stderr  </div><div class="line">      self.pidfile = pidfile</div></pre></td></tr></table></figure>
+<p>daemonize函数，该函数用于执行UNIX的所谓的double-fork方法。该方法可见Stevens’ “Advanced Programming in the UNIX Environment” for details (ISBN 0201563177) <a href="http://www.erlenstar.demon.co.uk/unix/faq_2.html#SEC16" class="uri" target="_blank" rel="external">http://www.erlenstar.demon.co.uk/unix/faq_2.html#SEC16</a>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">daemonize</span><span class="params">(self)</span>:</span></div><div class="line">    <span class="keyword">try</span>:   </div><div class="line">        pid = os.fork()   </div><div class="line">        <span class="keyword">if</span> pid &gt; <span class="number">0</span>:  </div><div class="line">            <span class="comment"># exit first parent  </span></div><div class="line">            sys.exit(<span class="number">0</span>)   </div><div class="line">    <span class="keyword">except</span> OSError, e:   </div><div class="line">        sys.stderr.write(<span class="string">"fork #1 failed: %d (%s)/n"</span> % (e.errno, e.strerror))  </div><div class="line">        sys.exit(<span class="number">1</span>)  </div><div class="line">  </div><div class="line">    <span class="comment"># decouple from parent environment  </span></div><div class="line">    os.chdir(<span class="string">"/"</span>)   </div><div class="line">    os.setsid()   </div><div class="line">    os.umask(<span class="number">0</span>)   </div><div class="line"></div><div class="line">    <span class="comment"># do second fork  </span></div><div class="line">    <span class="keyword">try</span>:   </div><div class="line">        pid = os.fork()   </div><div class="line">        <span class="keyword">if</span> pid &gt; <span class="number">0</span>:  </div><div class="line">            <span class="comment"># exit from second parent  </span></div><div class="line">            sys.exit(<span class="number">0</span>)   </div><div class="line">    <span class="keyword">except</span> OSError, e:   </div><div class="line">        sys.stderr.write(<span class="string">"fork #2 failed: %d (%s)/n"</span> % (e.errno, e.strerror))  </div><div class="line">        sys.exit(<span class="number">1</span>)   </div><div class="line">  </div><div class="line">    <span class="comment"># redirect standard file descriptors  </span></div><div class="line">    sys.stdout.flush()  </div><div class="line">    sys.stderr.flush()  </div><div class="line">    si = file(self.stdin, <span class="string">'r'</span>)  </div><div class="line">    so = file(self.stdout, <span class="string">'a+'</span>)  </div><div class="line">    se = file(self.stderr, <span class="string">'a+'</span>, <span class="number">0</span>)  </div><div class="line">    os.dup2(si.fileno(), sys.stdin.fileno())  </div><div class="line">    os.dup2(so.fileno(), sys.stdout.fileno())  </div><div class="line">    os.dup2(se.fileno(), sys.stderr.fileno())  </div><div class="line">  </div><div class="line">    <span class="comment"># write pidfile  </span></div><div class="line">    atexit.register(self.delpid)  </div><div class="line">    pid = str(os.getpid())  </div><div class="line">    file(self.pidfile,<span class="string">'w+'</span>).write(<span class="string">"%s/n"</span> % pid)</div></pre></td></tr></table></figure>
+<p>该方法完成的就是之前的C语言的大部分的内容了。</p>
+<p>之后是管理PID文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">delpid</span><span class="params">(self)</span>:</span>  </div><div class="line">    os.remove(self.pidfile)</div></pre></td></tr></table></figure>
+<p>开始进程函数start完成开启进程，让进程运行的任务。该函数检查相应的PID文件是否存在，存在表示进程已经在运行，所以就退出</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">start</span><span class="params">(self)</span>:</span>  </div><div class="line">    <span class="string">""" </span></div><div class="line">    Start the daemon </div><div class="line">    """  </div><div class="line">    <span class="comment"># Check for a pidfile to see if the daemon already runs  </span></div><div class="line">    <span class="keyword">try</span>:  </div><div class="line">        pf = file(self.pidfile,<span class="string">'r'</span>)  </div><div class="line">        pid = int(pf.read().strip())  </div><div class="line">        pf.close()  </div><div class="line">    <span class="keyword">except</span> IOError:  </div><div class="line">        pid = <span class="keyword">None</span>  </div><div class="line">  </div><div class="line">    <span class="keyword">if</span> pid:  </div><div class="line">        message = <span class="string">"pidfile %s already exist. Daemon already running?/n"</span>  </div><div class="line">        sys.stderr.write(message % self.pidfile)  </div><div class="line">        sys.exit(<span class="number">1</span>)  </div><div class="line">      </div><div class="line">    <span class="comment"># Start the daemon  </span></div><div class="line">    self.daemonize()  </div><div class="line">    self.run()</div></pre></td></tr></table></figure>
+<p>停止函数是这样的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">stop</span><span class="params">(self)</span>:</span>  </div><div class="line">    <span class="string">""" </span></div><div class="line">    Stop the daemon </div><div class="line">    """  </div><div class="line">    <span class="comment"># Get the pid from the pidfile  </span></div><div class="line">    <span class="keyword">try</span>:  </div><div class="line">        pf = file(self.pidfile,<span class="string">'r'</span>)  </div><div class="line">        pid = int(pf.read().strip())  </div><div class="line">        pf.close()  </div><div class="line">    <span class="keyword">except</span> IOError:  </div><div class="line">        pid = <span class="keyword">None</span>  </div><div class="line">  </div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> pid:  </div><div class="line">        message = <span class="string">"pidfile %s does not exist. Daemon not running?/n"</span>  </div><div class="line">        sys.stderr.write(message % self.pidfile)  </div><div class="line">        <span class="keyword">return</span> <span class="comment"># not an error in a restart  </span></div><div class="line">    <span class="comment"># Try killing the daemon process      </span></div><div class="line">    <span class="keyword">try</span>:  </div><div class="line">        <span class="keyword">while</span> <span class="number">1</span>:  </div><div class="line">            os.kill(pid, SIGTERM)  </div><div class="line">            time.sleep(<span class="number">0.1</span>)  </div><div class="line">    <span class="keyword">except</span> OSError, err:  </div><div class="line">        err = str(err)  </div><div class="line">        <span class="keyword">if</span> err.find(<span class="string">"No such process"</span>) &gt; <span class="number">0</span>:  </div><div class="line">            <span class="keyword">if</span> os.path.exists(self.pidfile):  </div><div class="line">                os.remove(self.pidfile)  </div><div class="line">        <span class="keyword">else</span>:  </div><div class="line">            <span class="keyword">print</span> str(err)  </div><div class="line">            sys.exit(<span class="number">1</span>)</div></pre></td></tr></table></figure>
+<p>接下来可以类似地定义restart与run函数。在写用户自己的进程的时候，用户需要手动写自己的run函数。重载之后就可以了。注意守护进程是有自己的特定的PID文件的。一般是放在/tmp目录。但是也有一些系统进程。至于在运行的时候切换到其它的进程，则可以通过一些库来完成。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+            <a href="/tags/daemon/" rel="tag"># daemon</a>
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/c/" rel="tag"># c</a>
+          
+            <a href="/tags/server/" rel="tag"># server</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/scheme-lang/" rel="next" title="Scheme语言概要">
+                <i class="fa fa-chevron-left"></i> Scheme语言概要
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog-hexo-1/" rel="prev" title="Hello World from the Hexo">
+                Hello World from the Hexo <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="en//programming-daemon/"
+           data-title="守护进程的编写思路（C与Python）" data-url=".//programming-daemon/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Istyasna" />
+          <p class="site-author-name" itemprop="name">Istyasna</p>
+          <p class="site-description motion-element" itemprop="description">GO FORTH now and create masterpieces of the publishing art!</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/irhawks" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://coding.aliyun.com/u/irhawks" target="_blank" title="Aliyun">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Aliyun
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="./" title="Title" target="_blank">Title</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hainu.edu.cn" title="Hainan University" target="_blank">Hainan University</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#改变文件的掩码"><span class="nav-number">1.</span> <span class="nav-text">改变文件的掩码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#守护进程的执行逻辑"><span class="nav-number">1.1.</span> <span class="nav-text">守护进程的执行逻辑</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用python写linux的守护进程"><span class="nav-number">2.</span> <span class="nav-text">使用Python写Linux的守护进程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Istyasna</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+<!-- I manually add this to enable bootstrap style dropdown menu -->
+<script type="text/javascript" src="/js/src/bootstrap/dropdown.js"></script>
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"irhawks"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

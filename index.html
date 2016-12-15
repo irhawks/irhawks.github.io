@@ -5,7 +5,10 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans,en,default">
+<!--
+<html class="theme-next mist use-motion" lang="zh-Hans,en">
+-->
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -107,7 +110,7 @@
 <meta name="description" content="GO FORTH now and create masterpieces of the publishing art!">
 <meta property="og:type" content="website">
 <meta property="og:title" content="80x24">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="./index.html">
 <meta property="og:site_name" content="80x24">
 <meta property="og:description" content="GO FORTH now and create masterpieces of the publishing art!">
 <meta name="twitter:card" content="summary">
@@ -140,7 +143,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="./"/>
 
 
 
@@ -261,12 +264,12 @@
         </li>
       
         
-        <li class="menu-item menu-item-sitemap">
+        <li class="menu-item menu-item-atom">
           <a href="/atom.xml" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-rss"></i> <br />
             
-            Sitemap
+            Atom订阅
           </a>
         </li>
       
@@ -283,6 +286,11 @@
           </a>
         </li>
       
+          <li class="menu-item"><a href="/index.html">简体中文</a></li>
+          
+          <li class="menu-item"><a href="/en/index.html">English (US)</a></li>
+          
+
     </ul>
   
 
@@ -299,6 +307,7 @@
 
     </div>
   
+
 </nav>
 
 
@@ -322,7 +331,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/15/hello-world/">
+  <link itemprop="mainEntityOfPage" href="./hello-world/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Istyasna">
@@ -347,7 +356,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/12/15/hello-world/" itemprop="url">
+                <a class="post-title-link" href="/hello-world/" itemprop="url">
                   Hello world from Hexo with NexT theme
                 </a>
               
@@ -417,8 +426,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/12/15/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/15/hello-world/" itemprop="commentCount"></span>
+                <a href="/hello-world/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/hello-world/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -447,13 +456,18 @@
         
           
             <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<h2 id="quick-start">Quick Start</h2>
+<h3 id="create-a-new-post">Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<h3 id="run-server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<h3 id="generate-static-files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 
           
@@ -493,7 +507,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/06/03/Solr/">
+  <link itemprop="mainEntityOfPage" href="./solr-tutorial/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Istyasna">
@@ -518,7 +532,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/06/03/Solr/" itemprop="url">
+                <a class="post-title-link" href="/solr-tutorial/" itemprop="url">
                   Solr搜索介绍（继续）
                 </a>
               
@@ -547,20 +561,38 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T18:40:49+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T22:41:20+08:00">
                 2016-12-14
               </time>
             
           </span>
 
           
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/06/03/Solr/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/03/Solr/" itemprop="commentCount"></span>
+                <a href="/solr-tutorial/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/solr-tutorial/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -593,11 +625,11 @@
 <p>快速开始教程参考<a href="http://lucene.apache.org/solr/quickstart.html" class="uri">http://lucene.apache.org/solr/quickstart.html</a>。Lucene/Solr的架构见<a href="http://www.solr.cc/blog/?p=167" class="uri">http://www.solr.cc/blog/?p=167</a>。</p>
 <p>要使用快速开始，就不能够使用linux daemon的方式直接启动Solr，必须能够加载example里面的collection名称（core名称）。启动的时候，命令改成<code>bin/solr start -e cloud -noprompt</code>，其中的<code>-e</code>选项后面跟例子名称，比如<code>cloud</code>。在这种方式之下启动，我们可以看到管理台界面的各个collection了。然后就可以使用post工具提交待索引的文档（XML、JSON等格式了）。<a href="http://blog.csdn.net/near1024/article/details/44105935" class="uri">http://blog.csdn.net/near1024/article/details/44105935</a>上面列出了PDF、CSV、XML、JSON、PPT等格式。</p>
 <p>之后我们登录控制台，在控制台当中找到getting started的collection，在collection里面选择query，查询一个词，比如<code>2006</code>，在右边就可以返回结果了。<a href="https://lucene.apache.org/solr/quickstart.html" class="uri">https://lucene.apache.org/solr/quickstart.html</a>上面的教程我们可以完全参考，以尝试如何进行POST，QUERY等操作。里面还介绍了如何通过HTTP来进行查询与得到查询结果。还可以找到Solr的各种高级搜索的表达式。详细参考<a href="https://cwiki.apache.org/confluence/display/solr/Apache+Solr+Reference+Guide">Solr Reference Guide</a>。Solr的集群，则应该参考Admin Guide。</p>
-<!-- Hexo的Next主题可以识别<!-- more -- -->
-<p>，并且在主页当中展示文章的时候自动断行–&gt;
+<!-- 
+Hexo的Next主题可以识别<! -- more --.>，并且在主页当中展示文章的时候自动断行 -->
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/03/Solr/#more" rel="contents">
+            <a class="btn" href="/solr-tutorial/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -638,7 +670,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/06/01/apache-nutch/">
+  <link itemprop="mainEntityOfPage" href="./apache-nutch/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Istyasna">
@@ -663,7 +695,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/06/01/apache-nutch/" itemprop="url">
+                <a class="post-title-link" href="/apache-nutch/" itemprop="url">
                   Apache Nutch的介绍与基本使用
                 </a>
               
@@ -704,8 +736,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/06/01/apache-nutch/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/01/apache-nutch/" itemprop="commentCount"></span>
+                <a href="/apache-nutch/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/apache-nutch/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -748,7 +780,7 @@
 <p>Nutch的创始人是Doug Cutting，他同时也是Lucene、Hadoop和Avro开源项目的创始人。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/01/apache-nutch/#more" rel="contents">
+            <a class="btn" href="/apache-nutch/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -789,7 +821,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/17/stochastic-differential-equation-intro/">
+  <link itemprop="mainEntityOfPage" href="./stochastic-differential-equation-intro/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Istyasna">
@@ -814,7 +846,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/03/17/stochastic-differential-equation-intro/" itemprop="url">
+                <a class="post-title-link" href="/stochastic-differential-equation-intro/" itemprop="url">
                   随机微分方程的一种引入方法
                 </a>
               
@@ -884,8 +916,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/03/17/stochastic-differential-equation-intro/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/17/stochastic-differential-equation-intro/" itemprop="commentCount"></span>
+                <a href="/stochastic-differential-equation-intro/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/stochastic-differential-equation-intro/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -912,12 +944,12 @@
 
       
         
-          <p>我们该怎样引入随机微分方程呢？大概是这样的，首先考虑常的微分方程ODE为$x’=V(x)$, $x\in \Omega\subseteq\mathbb{R}^n$，然后此方程刻划物理现象的时候作为物体运动的轨迹，其解$x(t), t\geq 0$是关于$t$的光滑的曲线。但是在许多应用中，从实验所观测到的轨迹不如确定性方程所描述的那样光滑。因此有必要改正ODE为SDE。</p>
-<p>也就是变成微分<br>$$d X(t) = V(X(t)) d t + G(X(t))\xi(t)$$<br>的形式。其中的$G(X)$是$n\times m$的矩阵。$\xi$是$m$维的白噪声。但是问题在于，在数学上如何严格定义白噪音。作为一个随机过程，其解又是什么意思？</p>
-<p>直观的解释是使用连续随机过程来处理随机微分方程。每个$X$表示是一个随机变量，而$X(t)$整体表示的是求解一族随机过程本身。因此也就变成了求随机变量分布或者密度与时间的参数的关系。比如线性单自由度体系的运动方程<br>$$mX’’(t) + cX’(t) + kX(t) = Y(t), X(0) = X_0, X’(0) = X’_0$$<br>中，引入$X_1(t) = X(t)$，就写成使用状态变量描述动态系统的方法。这种方法是系统工程与现代控制理论的重要的手段。在振动工程中有许多方便的应用。</p>
+          <p>我们该怎样引入随机微分方程呢？大概是这样的，首先考虑常的微分方程ODE为<span class="math inline">\(x&#39;=V(x)\)</span>, <span class="math inline">\(x\in \Omega\subseteq\mathbb{R}^n\)</span>，然后此方程刻划物理现象的时候作为物体运动的轨迹，其解<span class="math inline">\(x(t), t\geq 0\)</span>是关于<span class="math inline">\(t\)</span>的光滑的曲线。但是在许多应用中，从实验所观测到的轨迹不如确定性方程所描述的那样光滑。因此有必要改正ODE为SDE。</p>
+<p>也就是变成微分 <span class="math display">\[d X(t) = V(X(t)) d t + G(X(t))\xi(t)\]</span> 的形式。其中的<span class="math inline">\(G(X)\)</span>是<span class="math inline">\(n\times m\)</span>的矩阵。<span class="math inline">\(\xi\)</span>是<span class="math inline">\(m\)</span>维的白噪声。但是问题在于，在数学上如何严格定义白噪音。作为一个随机过程，其解又是什么意思？</p>
+<p>直观的解释是使用连续随机过程来处理随机微分方程。每个<span class="math inline">\(X\)</span>表示是一个随机变量，而<span class="math inline">\(X(t)\)</span>整体表示的是求解一族随机过程本身。因此也就变成了求随机变量分布或者密度与时间的参数的关系。比如线性单自由度体系的运动方程 <span class="math display">\[mX&#39;&#39;(t) + cX&#39;(t) + kX(t) = Y(t), X(0) = X_0, X&#39;(0) = X&#39;_0\]</span> 中，引入<span class="math inline">\(X_1(t) = X(t)\)</span>，就写成使用状态变量描述动态系统的方法。这种方法是系统工程与现代控制理论的重要的手段。在振动工程中有许多方便的应用。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/17/stochastic-differential-equation-intro/#more" rel="contents">
+            <a class="btn" href="/stochastic-differential-equation-intro/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -958,7 +990,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/13/modelica-modeling-2/">
+  <link itemprop="mainEntityOfPage" href="./modelica-modeling-2/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Istyasna">
@@ -983,7 +1015,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/03/13/modelica-modeling-2/" itemprop="url">
+                <a class="post-title-link" href="/modelica-modeling-2/" itemprop="url">
                   快速了解Modelica与OpenModelica建模2-ModelicaML与方程
                 </a>
               
@@ -1024,8 +1056,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/03/13/modelica-modeling-2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/13/modelica-modeling-2/" itemprop="commentCount"></span>
+                <a href="/modelica-modeling-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/modelica-modeling-2/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1058,2425 +1090,7 @@
 <p>Modelica使用类UML的图形表示模型。有结构图、需求图、行为图等描述方法。注意到Modelica本身也是一种元模型规范。Modelica中的元素被看成是prototype，所有的类都是继承自该原型。ModelicaML充分利用了Modelica语言的特性，可以在状态图中使用Modelica的谓词语言与条件判断，同时，也增强了UML建模算法的能力（算法流程以及代数方程）。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/13/modelica-modeling-2/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/11/modelica-basics/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/11/modelica-basics/" itemprop="url">
-                  快速了解Modelica与OpenModelica建模1-基本知识
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-11T00:00:00+08:00">
-                2016-03-11
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:06:52+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/仿真/" itemprop="url" rel="index">
-                    <span itemprop="name">仿真</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/03/11/modelica-basics/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/11/modelica-basics/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Modelica里面倒是有不少的面向对象的建模的工具，也支持PetriNet的描述。而且最近也有相关的论文的发表<span class="citation">(Proß et al. 2012)</span>。OpenModelica上面的PNlib工具包倒好像是不错的。</p>
-<p>OpenModelica是其一个实现。OpenModelica环境由若干个子系统构顶成。包括文本模型与图形模型编辑器、编译器调试器与执行环境、笔记本、优化器以及Eclipse插件。其中的编译子系统用于将Modelica语言编译成C代码。面向Eclipse的插件被称为MDT。最基本的方式自然是安装之后点击OMShell进入文本编辑环境。里面输入Modelica的代码。OMShell命令会打开一个新的窗格，使用OMShell-terminal命令可以直接在Linux终端中进入OpenModelica的环境。这时进入的就是交互式模式。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">model A Integer t= 1.5; end A;</div><div class="line">instantiateModel(A);</div><div class="line">model C</div><div class="line">Integer a;</div><div class="line">Real b;</div><div class="line">equation</div><div class="line">    der(a) = b;</div><div class="line">    der(b) = 12.0;</div><div class="line">end C</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/11/modelica-basics/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/15/datatype-abstraction/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/15/datatype-abstraction/" itemprop="url">
-                  常见的数据结构的抽象
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-15T00:00:00+08:00">
-                2016-01-15
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:04:04+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机科学/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/01/15/datatype-abstraction/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/15/datatype-abstraction/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>为了编程的顺利进行，自然有一种控制复杂性的措施。而且复杂性的控制从编程语言一开始的时候就有了，成为所谓的内部模式：内建的数据结构，甚至是语言机制里面的内容。现在我们看一些常见的数据类型。</p>
-<h3 id="数组">数组</h3>
-<p>按照Wiki的要求，应该按照数据结构和数据类型两个不同的角度讲数组array。作为数据结构的数组是由一系列元素（值或者变量）构成的，每个元素数数组由键或者索引来标识。按照要求，数组里的元素的存储应该可以按照数学公式来计算，也就是说，数组的标识不能是简单的字符串，而要使用一个域，特别是使用整数来标识。</p>
-<p>数组在历史上出现得是非常早的，经常作为列表list以及字符串string的实现。在现代计算机当中，内存通常都是按照一维数组的方式来计算的。而现代计算机中的优化，特别是向量处理机，都是针对数组的操作而优化的。（数据结构就是数据结构，跟它们使用硬件或者软件实现并没有关系）。</p>
-<p>数组的一个大优势在于所使用的下标可以在运行时候被计算出来。但是需要注意的是，在底层数据结构也可能非常复杂。数组可能用哈希表、链表、查找树等结构实现。总而言之，底层数据结构与顶层数据结构有很大的不同。1945年John von Neumann写了第一个数组排序的算法。</p>
-<p>作为抽象数据类型的列表，包含的操作有：</p>
-<ol style="list-style-type: decimal">
-<li>创建一个空表；</li>
-<li>测试当前列表是否为空；</li>
-<li>添加一个元素到列表的第一个位置；</li>
-<li>添加一个元素到列表的最后位置；</li>
-<li>得到列表的第一个元素；</li>
-<li>引用列表中除了第一个元素之外的其它元素。</li>
-</ol>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/15/datatype-abstraction/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/13/wikipedia-transition-system/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/13/wikipedia-transition-system/" itemprop="url">
-                  维基上定义的传递系统
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-13T00:00:00+08:00">
-                2016-01-13
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:07:27+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机科学/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机科学/计算模型/" itemprop="url" rel="index">
-                    <span itemprop="name">计算模型</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/01/13/wikipedia-transition-system/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/13/wikipedia-transition-system/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>众所周知的是传递系统只是从系统转换的观点来看问题，其理论的根据跟抽象重写系统是一样的，但是可能说明的角度不一样吧。传递系统分成两类，带标签的和不带标签的系统。传递系统在应用于模型检查的时候经常使用带标签的形式。</p>
-<p>Action Language是专门描述状态传递系统STS（state transition systems）的语言。经常用于形式化地创建一系列的模型。PDDL是著名的一种Action Language。</p>
-<p>状态转移系统往往显得太过抽象。感觉好像跟动力系统理论和自动机理论都有一些差别。或许它们是研究离散状态的一种抽象理论吧。状态转移系统自然是关联着状态及其转移的。但是动力系统呢？</p>
-<p>目前，我们似乎可以这样关联状态转移与动力系统理论。所谓的系统，我们关注的还是系统的演化的特性，也就是系统的存在及其演化。那么，自然中心的问题是，系统是怎样随时间变化的？因而，首先的问题就是所谓的对于状态的定义。在动力系统中，状态是由一个实参量标识的，它可以对时间演化可微。而在状态转移系统中，状态是一种不同的数学结构，比如说，状态是一个有穷序列，而时间也是离散的。那么，基于这种认识，似乎结合起来看，所谓的系统理论，就是某个数学结构上面的参数的理论。就像是微分几何中，每一点附上一个特定的数学结构一样，系统理论是演化过程中的每一时间点附上一个状态–似乎系统理论研究的情况，都是底空间是低维的情况。</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/13/wikipedia-transition-system/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/06/information-geometry/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/06/information-geometry/" itemprop="url">
-                  信息几何简介
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-06T00:00:00+08:00">
-                2016-01-06
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:13:56+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数学/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数学/几何/" itemprop="url" rel="index">
-                    <span itemprop="name">几何</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/01/06/information-geometry/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/06/information-geometry/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="认识信息几何">认识信息几何</h2>
-<p>信息几何的方法其实是将统计理论中的参数问题变成额外的一个空间，在这个空间上建立统计函数之间的距离，相当于仍然是使用测度的理论研究问题。这种方法自然对于参数的生成有重要的启示。启示我们为什么要选择这样的参数，这什么参数有这些形态。在扩大的空间当中，自然而然地可以非常方便地研究统计系统的重多的要素。在机器学习中也有更多的应用。</p>
-<p>然而单纯起来看，并非信息是几何的，而是因为分布函数之间的距离就是可以度量的。这样的话，未必形成微分流形，甚至是更一般的内容也可以，比如离散分布与离散参数的问题。总而言之，关键在于考察“所有可能的参数所形成的空间”，而不是“某个参数下的分布”所起的作用吧。</p>
-<p>信息几何有几种经典的方法。第一是基于流形上的Riemann度量的方法，第二种是基于<span class="math inline">\(\alpha\)</span>联络与对偶几何的方法。还可以是基于曲率度量的方法，或者基于信息散度(divergence)的方法。散度在信息什么几何中充当距离函数，用来度量两个点之间的分离度或者差异，但散度不是严格意义上的距离函数。</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/06/information-geometry/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/01/blog-hexo-1/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/01/blog-hexo-1/" itemprop="url">
-                  Hello World from the Hexo
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-01T00:00:00+08:00">
-                2016-01-01
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:22:49+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/出版/" itemprop="url" rel="index">
-                    <span itemprop="name">出版</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/出版/博客/" itemprop="url" rel="index">
-                    <span itemprop="name">博客</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/01/01/blog-hexo-1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/01/blog-hexo-1/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          A short description of the blog
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/01/blog-hexo-1/">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/12/09/programming-daemon/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/09/programming-daemon/" itemprop="url">
-                  守护进程的编写思路（C与Python）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-09T00:00:00+08:00">
-                2015-12-09
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:18:28+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/操作系统/" itemprop="url" rel="index">
-                    <span itemprop="name">操作系统</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2015/12/09/programming-daemon/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/09/programming-daemon/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>参考<a href="http://www.netzmafia.de/skripten/unix/linux-daemon-howto.html" class="uri">http://www.netzmafia.de/skripten/unix/linux-daemon-howto.html</a>。上面提到Linux守护进程应该做的基本的事情，守护进程主要包括了</p>
-<ul>
-<li>从主程序中创建子进程</li>
-<li>改变文件的umask任务</li>
-<li>打开日志文件以记录日志</li>
-<li>创建会话ID</li>
-<li>将工作目录移动到一个安全的位置</li>
-<li>关闭标准的文件描述符（守护进程不存在标准输入与输出的问题）</li>
-</ul>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/09/programming-daemon/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/08/31/scheme-lang/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/08/31/scheme-lang/" itemprop="url">
-                  Scheme语言概要
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-08-31T00:00:00+08:00">
-                2015-08-31
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:08:10+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机科学/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机科学/编程语言/" itemprop="url" rel="index">
-                    <span itemprop="name">编程语言</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2015/08/31/scheme-lang/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/31/scheme-lang/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>在人工智能语言中我们应该接触过Scheme。根据介绍，Scheme和CommonLisp是两种主要的Lisp方言之一，也就是说，在讲Lisp语言的时候，我们也包括了讲Lisp或者CommonLisp语言。Scheme语言的地位是由一系列的Lambda论文决定的。见<a href="https://en.wikipedia.org/wiki/History_of_the_Scheme_programming_language#The_Lambda_Papers" class="uri">https://en.wikipedia.org/wiki/History_of_the_Scheme_programming_language#The_Lambda_Papers</a>。Scheme的后缀扩展名是.scm或者.ss。Scheme是动态强类型的语言，具有词法作用域，当然是函数式语言。此外，Scheme的特点是它是第一个实现了头等延续的语言（这里的延续指的是计算机程序的控制状态，头等延续指的是可以创建，保存、赋值程序的状态给一个变量，并根据需要恢复程序的运行上下文）。对于延续的介绍可见<a href="https://en.wikipedia.org/wiki/Continuation" class="uri">https://en.wikipedia.org/wiki/Continuation</a>。</p>
-<p>Scheme对于CommonLisp的设计产生了重要的影响。Scheme的开发其实是基于实现当时的Actor并发模型的思想。Scheme的最新标准是R7RS，制定于2013年。</p>
-<p>描述Scheme的最佳的方式或许是这样的。首先，Scheme的语法风格来自于简洁的S-表达式。然后数据结构是基于表处理的，刚开始的时候我们会看到很多的表处理的模式（如果有可能的话，我们也可以在其它的编程语言中模仿它），这种表处理的模式导致了我们很容易在运行的时候动态地创建Scheme代码。另外就是，它支持头等函数。虽然声称Lisp是函数式语言，但是其实Lisp的基本思想其实并不是高阶函数，而是所谓的抽象重写系统。另外的特点，就是对于<span class="math inline">\(\lambda\)</span>-演算和词法作用域的支持了。</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/31/scheme-lang/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/07/22/maude-lang/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/07/22/maude-lang/" itemprop="url">
-                  Maude语言
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-07-22T00:00:00+08:00">
-                2015-07-22
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:08:38+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程语言/" itemprop="url" rel="index">
-                    <span itemprop="name">编程语言</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2015/07/22/maude-lang/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/22/maude-lang/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Maude是一个使用重写逻辑的语言，由SRI开发。Maude的Rewritting Logic是对Equational Logic的一个扩展。Maude非常强调元编程的概念。Maude也可以看成是一种逻辑编程语言、Logic Programming Language、Extensible syntax Programming Language、Term-rewriting programming Language。</p>
-<p>Maude语言和Mathematica是类似的，但是也许比Mathematica在语言的表现力方面上更强大。本身的计算也是基于模式的匹配，当然是非常自然的。这种项重写跟Mathematica的原理是类似的。</p>
-<p>高级的编程语言大概都能应用于软件规约，以及逻辑编程语言也可以。Maude有一系列的模型检查的库，这可能是它具有优越性的地方<a href="http://maude.cs.illinois.edu/w/index.php?title=Maude_Tools" class="uri">http://maude.cs.illinois.edu/w/index.php?title=Maude_Tools</a>。</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/22/maude-lang/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/07/02/scala-process-and-shell/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/07/02/scala-process-and-shell/" itemprop="url">
-                  Scala编程概要（三）：进程控制与shell，函数式特性
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-07-02T00:00:00+08:00">
-                2015-07-02
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:14:50+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程语言/" itemprop="url" rel="index">
-                    <span itemprop="name">编程语言</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程语言/Scala/" itemprop="url" rel="index">
-                    <span itemprop="name">Scala</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2015/07/02/scala-process-and-shell/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/02/scala-process-and-shell/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>应该说，这种特性是可以让人大吼大叫的。简单的示例如下：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys.process._</div><div class="line"><span class="string">"ls -al .."</span> !</div></pre></td></tr></table></figure>
-<p>之所以可以这样做，是因为sys.process包含一个从字符串到ProcessBuild对象的隐式类型转换。注意后面的<code>!</code>号操作符，以ProcessBuild类型为参数类型，返回的是被执行程序的返回值。如果需要返回的是程序的输出的字符串，可以使用<code>!!</code>代替<code>!</code>号。</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/02/scala-process-and-shell/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/07/02/scala-overview-4/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/07/02/scala-overview-4/" itemprop="url">
-                  Scala编程概要（四）：控制抽象, 集合, 模式匹配, 编译器
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-07-02T00:00:00+08:00">
-                2015-07-02
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:09:01+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2015/07/02/scala-overview-4/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/02/scala-overview-4/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="scala的控制抽象">Scala的控制抽象</h3>
-<p>Haskell有自己的抽制抽象。使用的是单体。但是在Scala中，没有必要做得那么纯函数式。所以为了调用控制流，Scala使用了<code>() =&gt; Unit</code>类型。比如说，我们要在某个线程当中创建一个过程：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">runInThread() &#123; () =&gt; println(<span class="string">"Hi"</span>); <span class="type">Thread</span>.sleep(<span class="number">1000</span>); println(<span class="string">"Bye"</span>) &#125;</div></pre></td></tr></table></figure>
-<p>其中定义的runInThead函数是：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">runInThread</span></span>( block : () =&gt; <span class="type">Unit</span>) &#123;</div><div class="line">	<span class="keyword">new</span> <span class="type">Thread</span> &#123;</div><div class="line">		<span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">run</span></span>() &#123; block() &#125;</div><div class="line">	&#125;.start()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/02/scala-overview-4/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/07/01/scala-sentences/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/07/01/scala-sentences/" itemprop="url">
-                  Scala编程概要（二）：基本结构，常用模式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-07-01T00:00:00+08:00">
-                2015-07-01
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:11:37+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程语言/" itemprop="url" rel="index">
-                    <span itemprop="name">编程语言</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2015/07/01/scala-sentences/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/01/scala-sentences/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>设计模式在软件编程的各个方面都有应用。MVC与分布式一般算成是架构模式，而写文档注释也有一定的模式可以遵守。另外，我们也可以设计出一些使用的模式，以便在开发软件之后，可以让用户按照指定的模式使用软件。</p>
-<h2 id="scala的for语句">Scala的for语句</h2>
-<p>在scala当中，for并不是经典的控制流语句而已。在for里面可以加一些过滤器，同时，也可使用yield来生成一个集合。这种控制语句应该是与Map-Reduce相互配合的。而且为了支持新的范式，也需要修改for语句的行为。</p>
-<p>对于非递归的函数，scala不需要指定返回的类型。这是因为，虽然hindley-Milner算法能够推断出递归函数的返回的类型，但是在面向对象的语言中却并不是总是可以行得通的。所以，在处理递归函数的返回类型上，Scala并没有使用Hindley-Milner类型推断算法。</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/01/scala-sentences/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/07/01/scala-tutorial-intro/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/07/01/scala-tutorial-intro/" itemprop="url">
-                  Scala编程概要（一）：文档，注释，面向对象
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-07-01T00:00:00+08:00">
-                2015-07-01
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:15:35+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程语言/" itemprop="url" rel="index">
-                    <span itemprop="name">编程语言</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2015/07/01/scala-tutorial-intro/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/01/scala-tutorial-intro/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>虽然每次都是从头开始看Java与Scala的初级的教程，但是每次看的时候重点不一样，对于语言的理解也不一样。这一次的时候，强调的是，我们如何从初学者成为能够熟练运用一门语言的开发者？为了做到这一点，我们需要付出哪些努力？</p>
-<p>现在的看法是这样的。第一，我们应该按照写书的方式写Scala的程序。所以，如何从应用程序中生成文档，以及介绍这个文档是最基本的。所以，在初学者的第一章的时候就应该学习使用scaladoc来写文档，以便能够注释出来自己所写的东西，表达出来自己所写的东西是什么样的意思。第二，或许是对于某些语言，使用REPL环境。但是学习一个语言可能更关键的是学习它适应的设计模式，与常见的实践，就像写学术文档一样写程序。</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/01/scala-tutorial-intro/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/06/29/ai-and-bootstraping/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/06/29/ai-and-bootstraping/" itemprop="url">
-                  用自举理解人工智能与学术研究
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-29T00:00:00+08:00">
-                2015-06-29
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:15:56+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/人工智能/" itemprop="url" rel="index">
-                    <span itemprop="name">人工智能</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2015/06/29/ai-and-bootstraping/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/29/ai-and-bootstraping/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>最近人工智能在公众世界中变得很热。在各种技术应用铺天盖地的时候，肯定也有不少人在思考人工智能与人的思维的关系。在这里，我们首先关注的可能是这个很自然的问题：人工智能，或者干脆说智能机器，机器人，会不会取代人类。这里的取代，并不是说能够取代人的平常的工作，而是机器具有自主学习、自主决策的能力。完全不再需要人的干预。</p>
-<p>本文的标题的前一半，就来尝试这个问题。至于后一半“理解学术研究”，比较具体。因为一直以来，科学研究活动都被视为是具有极高智力挑战的活动。同时，实际中的学术研究还是比较累的。单单做理论的工作，似乎很难合“学术共同体”的口味；而实践的工作，又上不了科学理论的台面。然而，科学活动的量级似乎越来越重。除了少数学科，如纯粹数学，研究方式变化没有那么大之外，几乎所有的科学都面临着数据处理的新的问题。“数据科学”，是否会成为所有的科学研究的基础？花费的代价越来越高的数值计算与模拟，是否越来越占据更大的份量？计算机在科学研究中的地位究竟是怎样的？</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/06/29/ai-and-bootstraping/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/06/21/个人主页项目/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/06/21/个人主页项目/" itemprop="url">
-                  个人主页项目的设计与管理
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-21T00:00:00+08:00">
-                2015-06-21
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T16:52:56+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2015/06/21/个人主页项目/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/21/个人主页项目/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>参考<a href="http://web.engr.oregonstate.edu/~walkiner" target="_blank" rel="external">Eric Walkingshaw的主页</a>、<a href="http://www.skybluetrades.net" target="_blank" rel="external">Ian Ross的主页</a>以及<a href="http://yannesposito.com/" target="_blank" rel="external">yogsototh的支持多语言的主页</a>的设计以决定该怎样布局个人的主页。</p>
-<p>Hakyll下面的个人主页项目，似乎有把个人主页分成程序和资源两个部分的倾向。进一步地，site.hs，以及编译器属于程序，CSS、Markdown与HTML模板属于“资源”。那么我们会问，制作一个个人主页必须学会编程，特别是Haskell编程么？似乎前台的工作就已经足够让人烦了：个人主页中的CSS、HTML页面布局的设计就变得非常麻烦。鉴于所使用的后台对于个人主页没有任何直接的影响，我们不妨把构建网站的程序从网站代码当中分离出来。</p>
-<p>理想中的工作流的情况应该是这样的：先由用户组织好自己的网站的目录（特别是Markdown目录、CSS、HTML模块这些主要的页面的文件。由于这些文件需要编译，所以应该由一个项目发布程序，功能类似于site.hs。但是项目发布程序原则上是一个DSL，而不应该是Haskell代码。即使是Haskell代码，因为发布之前的网站相当于“源代码”，所以也可以像Makefile那样使用本地的应用程序生成。</p>
-<p>注：写到这里，已经不能把握最佳实践。恐怕自己的重点该放在理解Pandoc格式并写出几个过滤器来了。有足够的知识基础后再来整Hakyll网站。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/06/20/个人主页开通/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/06/20/个人主页开通/" itemprop="url">
-                  Github主页修整记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-20T00:00:00+08:00">
-                2015-06-20
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:27:10+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/出版/" itemprop="url" rel="index">
-                    <span itemprop="name">出版</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/出版/博客/" itemprop="url" rel="index">
-                    <span itemprop="name">博客</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2015/06/20/个人主页开通/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/20/个人主页开通/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>建主页有许多种选择。这些方案可以分成静态主页方案与动态主页方案两大类。动态主页的托管的方式可能复杂一些，需要维护的代价似乎比较高。此外，动态主页里面的内容在转成可打印的版本的时候质量也会缩水。最理想的情况自然是一边能够生成HTML文档，另一方面，不经重新修改，可以转成其它的格式，特别是LaTeX的格式。</p>
-<p>但是实际中能像LaTeX那样有表现力，又有丰富宏包支持的格式还真不多。Markdown等都过于简单了。之前的实践中，LaTeX格式与HTML对比中，主要的不一致有：</p>
-<ol style="list-style-type: decimal">
-<li><p>LaTeX中有wrapfigure、caption宏包可以调整图片，但是在HTML中的调整就得手工编码了。因为实在是没有学习HTML的排版细节问题；此外，LaTeX的表格转成HTML的表格也不太容易，特别是有对齐、指定宽度的表格，换到HTML页面上往往不好看。</p></li>
-<li><p>数学公式中，使用MathJax中也只能使用预定义的公式集。但是在编程语言中所用的符号，与在逻辑中所用的符号不同，范畴论的符号，跟在线性代数中也非常不同。在MathJax中能够自定义数学公式命令是必须的，但是又是比较麻烦的。高级的框架，如交换图、amssymb、eulervm宏包提供的符号，似乎也得重新配置。单配置来说并不困难，可是有时候需要变更宏包，这个时候又得手工同步。</p></li>
-</ol>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/06/20/个人主页开通/#more" rel="contents">
+            <a class="btn" href="/modelica-modeling-2/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -3512,7 +1126,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -3561,7 +1175,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">35</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -3570,7 +1184,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">198</span>
+                <span class="site-state-item-count">196</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -3750,6 +1364,9 @@
 
   <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
 
+
+<!-- I manually add this to enable bootstrap style dropdown menu -->
+<script type="text/javascript" src="/js/src/bootstrap/dropdown.js"></script>
 
 
   

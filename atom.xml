@@ -4,9 +4,9 @@
   <subtitle>Keep Stupid, Keep Hungry</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="./"/>
   <updated>2016-12-14T10:40:49.318Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>./</id>
   
   <author>
     <name>Istyasna</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>Hello world from Hexo with NexT theme</title>
-    <link href="http://yoursite.com/2016/12/15/hello-world/"/>
-    <id>http://yoursite.com/2016/12/15/hello-world/</id>
+    <link href=".//hello-world/"/>
+    <id>.//hello-world/</id>
     <published>2016-12-15T00:24:48.000Z</published>
     <updated>2016-12-14T10:40:49.318Z</updated>
     
@@ -28,21 +28,21 @@
     
     </summary>
     
-      <category term="Publish" scheme="http://yoursite.com/categories/Publish/"/>
+      <category term="Publish" scheme="./categories/Publish/"/>
     
-      <category term="Blog" scheme="http://yoursite.com/categories/Publish/Blog/"/>
+      <category term="Blog" scheme="./categories/Publish/Blog/"/>
     
     
-      <category term="Hexo, NexT, Blog" scheme="http://yoursite.com/tags/Hexo-NexT-Blog/"/>
+      <category term="Hexo, NexT, Blog" scheme="./tags/Hexo-NexT-Blog/"/>
     
   </entry>
   
   <entry>
     <title>Solr搜索介绍（继续）</title>
-    <link href="http://yoursite.com/2016/06/03/Solr/"/>
-    <id>http://yoursite.com/2016/06/03/Solr/</id>
+    <link href=".//solr-tutorial/"/>
+    <id>.//solr-tutorial/</id>
     <published>2016-06-02T16:00:00.000Z</published>
-    <updated>2016-12-14T10:40:49.318Z</updated>
+    <updated>2016-12-14T14:41:20.578Z</updated>
     
     <summary type="html">
     
@@ -52,24 +52,26 @@
 &lt;p&gt;快速开始教程参考&lt;a href=&quot;http://lucene.apache.org/solr/quickstart.html&quot; class=&quot;uri&quot;&gt;http://lucene.apache.org/solr/quickstart.html&lt;/a&gt;。Lucene/Solr的架构见&lt;a href=&quot;http://www.solr.cc/blog/?p=167&quot; class=&quot;uri&quot;&gt;http://www.solr.cc/blog/?p=167&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;要使用快速开始，就不能够使用linux daemon的方式直接启动Solr，必须能够加载example里面的collection名称（core名称）。启动的时候，命令改成&lt;code&gt;bin/solr start -e cloud -noprompt&lt;/code&gt;，其中的&lt;code&gt;-e&lt;/code&gt;选项后面跟例子名称，比如&lt;code&gt;cloud&lt;/code&gt;。在这种方式之下启动，我们可以看到管理台界面的各个collection了。然后就可以使用post工具提交待索引的文档（XML、JSON等格式了）。&lt;a href=&quot;http://blog.csdn.net/near1024/article/details/44105935&quot; class=&quot;uri&quot;&gt;http://blog.csdn.net/near1024/article/details/44105935&lt;/a&gt;上面列出了PDF、CSV、XML、JSON、PPT等格式。&lt;/p&gt;
 &lt;p&gt;之后我们登录控制台，在控制台当中找到getting started的collection，在collection里面选择query，查询一个词，比如&lt;code&gt;2006&lt;/code&gt;，在右边就可以返回结果了。&lt;a href=&quot;https://lucene.apache.org/solr/quickstart.html&quot; class=&quot;uri&quot;&gt;https://lucene.apache.org/solr/quickstart.html&lt;/a&gt;上面的教程我们可以完全参考，以尝试如何进行POST，QUERY等操作。里面还介绍了如何通过HTTP来进行查询与得到查询结果。还可以找到Solr的各种高级搜索的表达式。详细参考&lt;a href=&quot;https://cwiki.apache.org/confluence/display/solr/Apache+Solr+Reference+Guide&quot;&gt;Solr Reference Guide&lt;/a&gt;。Solr的集群，则应该参考Admin Guide。&lt;/p&gt;
-&lt;!-- Hexo的Next主题可以识别&lt;!-- more -- --&gt;
-&lt;p&gt;，并且在主页当中展示文章的时候自动断行–&amp;gt;
+&lt;!-- 
+Hexo的Next主题可以识别&lt;! -- more --.&gt;，并且在主页当中展示文章的时候自动断行 --&gt;
     
     </summary>
     
+      <category term="计算机" scheme="./categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
     
-      <category term="solr" scheme="http://yoursite.com/tags/solr/"/>
     
-      <category term="索引" scheme="http://yoursite.com/tags/%E7%B4%A2%E5%BC%95/"/>
+      <category term="solr" scheme="./tags/solr/"/>
     
-      <category term="爬虫" scheme="http://yoursite.com/tags/%E7%88%AC%E8%99%AB/"/>
+      <category term="索引" scheme="./tags/%E7%B4%A2%E5%BC%95/"/>
+    
+      <category term="爬虫" scheme="./tags/%E7%88%AC%E8%99%AB/"/>
     
   </entry>
   
   <entry>
     <title>Apache Nutch的介绍与基本使用</title>
-    <link href="http://yoursite.com/2016/06/01/apache-nutch/"/>
-    <id>http://yoursite.com/2016/06/01/apache-nutch/</id>
+    <link href=".//apache-nutch/"/>
+    <id>.//apache-nutch/</id>
     <published>2016-05-31T16:00:00.000Z</published>
     <updated>2016-12-14T11:02:43.873Z</updated>
     
@@ -93,50 +95,50 @@
     </summary>
     
     
-      <category term="solr" scheme="http://yoursite.com/tags/solr/"/>
+      <category term="nutch" scheme="./tags/nutch/"/>
     
-      <category term="nutch" scheme="http://yoursite.com/tags/nutch/"/>
+      <category term="solr" scheme="./tags/solr/"/>
     
-      <category term="hbase" scheme="http://yoursite.com/tags/hbase/"/>
+      <category term="hbase" scheme="./tags/hbase/"/>
     
-      <category term="Elastic Search" scheme="http://yoursite.com/tags/Elastic-Search/"/>
+      <category term="Elastic Search" scheme="./tags/Elastic-Search/"/>
     
-      <category term="Scala" scheme="http://yoursite.com/tags/Scala/"/>
+      <category term="Scala" scheme="./tags/Scala/"/>
     
-      <category term="API" scheme="http://yoursite.com/tags/API/"/>
+      <category term="API" scheme="./tags/API/"/>
     
   </entry>
   
   <entry>
     <title>随机微分方程的一种引入方法</title>
-    <link href="http://yoursite.com/2016/03/17/stochastic-differential-equation-intro/"/>
-    <id>http://yoursite.com/2016/03/17/stochastic-differential-equation-intro/</id>
+    <link href=".//stochastic-differential-equation-intro/"/>
+    <id>.//stochastic-differential-equation-intro/</id>
     <published>2016-03-16T16:00:00.000Z</published>
     <updated>2016-12-14T11:00:03.326Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;我们该怎样引入随机微分方程呢？大概是这样的，首先考虑常的微分方程ODE为$x’=V(x)$, $x\in \Omega\subseteq\mathbb{R}^n$，然后此方程刻划物理现象的时候作为物体运动的轨迹，其解$x(t), t\geq 0$是关于$t$的光滑的曲线。但是在许多应用中，从实验所观测到的轨迹不如确定性方程所描述的那样光滑。因此有必要改正ODE为SDE。&lt;/p&gt;
-&lt;p&gt;也就是变成微分&lt;br&gt;$$d X(t) = V(X(t)) d t + G(X(t))\xi(t)$$&lt;br&gt;的形式。其中的$G(X)$是$n\times m$的矩阵。$\xi$是$m$维的白噪声。但是问题在于，在数学上如何严格定义白噪音。作为一个随机过程，其解又是什么意思？&lt;/p&gt;
-&lt;p&gt;直观的解释是使用连续随机过程来处理随机微分方程。每个$X$表示是一个随机变量，而$X(t)$整体表示的是求解一族随机过程本身。因此也就变成了求随机变量分布或者密度与时间的参数的关系。比如线性单自由度体系的运动方程&lt;br&gt;$$mX’’(t) + cX’(t) + kX(t) = Y(t), X(0) = X_0, X’(0) = X’_0$$&lt;br&gt;中，引入$X_1(t) = X(t)$，就写成使用状态变量描述动态系统的方法。这种方法是系统工程与现代控制理论的重要的手段。在振动工程中有许多方便的应用。&lt;/p&gt;
+      &lt;p&gt;我们该怎样引入随机微分方程呢？大概是这样的，首先考虑常的微分方程ODE为&lt;span class=&quot;math inline&quot;&gt;\(x&amp;#39;=V(x)\)&lt;/span&gt;, &lt;span class=&quot;math inline&quot;&gt;\(x\in \Omega\subseteq\mathbb{R}^n\)&lt;/span&gt;，然后此方程刻划物理现象的时候作为物体运动的轨迹，其解&lt;span class=&quot;math inline&quot;&gt;\(x(t), t\geq 0\)&lt;/span&gt;是关于&lt;span class=&quot;math inline&quot;&gt;\(t\)&lt;/span&gt;的光滑的曲线。但是在许多应用中，从实验所观测到的轨迹不如确定性方程所描述的那样光滑。因此有必要改正ODE为SDE。&lt;/p&gt;
+&lt;p&gt;也就是变成微分 &lt;span class=&quot;math display&quot;&gt;\[d X(t) = V(X(t)) d t + G(X(t))\xi(t)\]&lt;/span&gt; 的形式。其中的&lt;span class=&quot;math inline&quot;&gt;\(G(X)\)&lt;/span&gt;是&lt;span class=&quot;math inline&quot;&gt;\(n\times m\)&lt;/span&gt;的矩阵。&lt;span class=&quot;math inline&quot;&gt;\(\xi\)&lt;/span&gt;是&lt;span class=&quot;math inline&quot;&gt;\(m\)&lt;/span&gt;维的白噪声。但是问题在于，在数学上如何严格定义白噪音。作为一个随机过程，其解又是什么意思？&lt;/p&gt;
+&lt;p&gt;直观的解释是使用连续随机过程来处理随机微分方程。每个&lt;span class=&quot;math inline&quot;&gt;\(X\)&lt;/span&gt;表示是一个随机变量，而&lt;span class=&quot;math inline&quot;&gt;\(X(t)\)&lt;/span&gt;整体表示的是求解一族随机过程本身。因此也就变成了求随机变量分布或者密度与时间的参数的关系。比如线性单自由度体系的运动方程 &lt;span class=&quot;math display&quot;&gt;\[mX&amp;#39;&amp;#39;(t) + cX&amp;#39;(t) + kX(t) = Y(t), X(0) = X_0, X&amp;#39;(0) = X&amp;#39;_0\]&lt;/span&gt; 中，引入&lt;span class=&quot;math inline&quot;&gt;\(X_1(t) = X(t)\)&lt;/span&gt;，就写成使用状态变量描述动态系统的方法。这种方法是系统工程与现代控制理论的重要的手段。在振动工程中有许多方便的应用。&lt;/p&gt;
     
     </summary>
     
-      <category term="概率统计" scheme="http://yoursite.com/categories/%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1/"/>
+      <category term="概率统计" scheme="./categories/%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1/"/>
     
-      <category term="随机过程" scheme="http://yoursite.com/categories/%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1/%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B/"/>
+      <category term="随机过程" scheme="./categories/%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1/%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B/"/>
     
     
-      <category term="随机微分方程" scheme="http://yoursite.com/tags/%E9%9A%8F%E6%9C%BA%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/"/>
+      <category term="随机微分方程" scheme="./tags/%E9%9A%8F%E6%9C%BA%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/"/>
     
-      <category term="随机过程" scheme="http://yoursite.com/tags/%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B/"/>
+      <category term="随机过程" scheme="./tags/%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B/"/>
     
   </entry>
   
   <entry>
     <title>快速了解Modelica与OpenModelica建模2-ModelicaML与方程</title>
-    <link href="http://yoursite.com/2016/03/13/modelica-modeling-2/"/>
-    <id>http://yoursite.com/2016/03/13/modelica-modeling-2/</id>
+    <link href=".//modelica-modeling-2/"/>
+    <id>.//modelica-modeling-2/</id>
     <published>2016-03-12T16:00:00.000Z</published>
     <updated>2016-12-14T11:06:20.712Z</updated>
     
@@ -150,24 +152,24 @@
     </summary>
     
     
-      <category term="建模" scheme="http://yoursite.com/tags/%E5%BB%BA%E6%A8%A1/"/>
+      <category term="建模" scheme="./tags/%E5%BB%BA%E6%A8%A1/"/>
     
-      <category term="Modelica" scheme="http://yoursite.com/tags/Modelica/"/>
+      <category term="Modelica" scheme="./tags/Modelica/"/>
     
-      <category term="OpenModelica" scheme="http://yoursite.com/tags/OpenModelica/"/>
+      <category term="OpenModelica" scheme="./tags/OpenModelica/"/>
     
-      <category term="仿真" scheme="http://yoursite.com/tags/%E4%BB%BF%E7%9C%9F/"/>
+      <category term="仿真" scheme="./tags/%E4%BB%BF%E7%9C%9F/"/>
     
-      <category term="ModelicaML" scheme="http://yoursite.com/tags/ModelicaML/"/>
+      <category term="ModelicaML" scheme="./tags/ModelicaML/"/>
     
-      <category term="DAE" scheme="http://yoursite.com/tags/DAE/"/>
+      <category term="DAE" scheme="./tags/DAE/"/>
     
   </entry>
   
   <entry>
     <title>快速了解Modelica与OpenModelica建模1-基本知识</title>
-    <link href="http://yoursite.com/2016/03/11/modelica-basics/"/>
-    <id>http://yoursite.com/2016/03/11/modelica-basics/</id>
+    <link href=".//modelica-basics/"/>
+    <id>.//modelica-basics/</id>
     <published>2016-03-10T16:00:00.000Z</published>
     <updated>2016-12-14T11:06:52.664Z</updated>
     
@@ -179,21 +181,21 @@
     
     </summary>
     
-      <category term="仿真" scheme="http://yoursite.com/categories/%E4%BB%BF%E7%9C%9F/"/>
+      <category term="仿真" scheme="./categories/%E4%BB%BF%E7%9C%9F/"/>
     
     
-      <category term="Modelica" scheme="http://yoursite.com/tags/Modelica/"/>
+      <category term="Modelica" scheme="./tags/Modelica/"/>
     
-      <category term="OpenModelica" scheme="http://yoursite.com/tags/OpenModelica/"/>
+      <category term="OpenModelica" scheme="./tags/OpenModelica/"/>
     
-      <category term="仿真" scheme="http://yoursite.com/tags/%E4%BB%BF%E7%9C%9F/"/>
+      <category term="仿真" scheme="./tags/%E4%BB%BF%E7%9C%9F/"/>
     
   </entry>
   
   <entry>
     <title>常见的数据结构的抽象</title>
-    <link href="http://yoursite.com/2016/01/15/datatype-abstraction/"/>
-    <id>http://yoursite.com/2016/01/15/datatype-abstraction/</id>
+    <link href=".//datatype-abstraction/"/>
+    <id>.//datatype-abstraction/</id>
     <published>2016-01-14T16:00:00.000Z</published>
     <updated>2016-12-14T11:04:04.007Z</updated>
     
@@ -216,25 +218,25 @@
     
     </summary>
     
-      <category term="计算机科学" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/"/>
+      <category term="计算机科学" scheme="./categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/"/>
     
     
-      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+      <category term="数据结构" scheme="./tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-      <category term="数组" scheme="http://yoursite.com/tags/%E6%95%B0%E7%BB%84/"/>
+      <category term="数组" scheme="./tags/%E6%95%B0%E7%BB%84/"/>
     
-      <category term="规约" scheme="http://yoursite.com/tags/%E8%A7%84%E7%BA%A6/"/>
+      <category term="规约" scheme="./tags/%E8%A7%84%E7%BA%A6/"/>
     
-      <category term="抽象数据类型" scheme="http://yoursite.com/tags/%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
+      <category term="抽象数据类型" scheme="./tags/%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
     
-      <category term="公理化" scheme="http://yoursite.com/tags/%E5%85%AC%E7%90%86%E5%8C%96/"/>
+      <category term="公理化" scheme="./tags/%E5%85%AC%E7%90%86%E5%8C%96/"/>
     
   </entry>
   
   <entry>
     <title>维基上定义的传递系统</title>
-    <link href="http://yoursite.com/2016/01/13/wikipedia-transition-system/"/>
-    <id>http://yoursite.com/2016/01/13/wikipedia-transition-system/</id>
+    <link href=".//wikipedia-transition-system/"/>
+    <id>.//wikipedia-transition-system/</id>
     <published>2016-01-12T16:00:00.000Z</published>
     <updated>2016-12-14T11:07:27.273Z</updated>
     
@@ -247,23 +249,23 @@
     
     </summary>
     
-      <category term="计算机科学" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/"/>
+      <category term="计算机科学" scheme="./categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/"/>
     
-      <category term="计算模型" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%9E%8B/"/>
+      <category term="计算模型" scheme="./categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%9E%8B/"/>
     
     
-      <category term="STS" scheme="http://yoursite.com/tags/STS/"/>
+      <category term="STS" scheme="./tags/STS/"/>
     
-      <category term="状态传递系统" scheme="http://yoursite.com/tags/%E7%8A%B6%E6%80%81%E4%BC%A0%E9%80%92%E7%B3%BB%E7%BB%9F/"/>
+      <category term="状态传递系统" scheme="./tags/%E7%8A%B6%E6%80%81%E4%BC%A0%E9%80%92%E7%B3%BB%E7%BB%9F/"/>
     
-      <category term="LTS" scheme="http://yoursite.com/tags/LTS/"/>
+      <category term="LTS" scheme="./tags/LTS/"/>
     
   </entry>
   
   <entry>
     <title>信息几何简介</title>
-    <link href="http://yoursite.com/2016/01/06/information-geometry/"/>
-    <id>http://yoursite.com/2016/01/06/information-geometry/</id>
+    <link href=".//information-geometry/"/>
+    <id>.//information-geometry/</id>
     <published>2016-01-05T16:00:00.000Z</published>
     <updated>2016-12-14T11:13:56.024Z</updated>
     
@@ -276,23 +278,23 @@
     
     </summary>
     
-      <category term="数学" scheme="http://yoursite.com/categories/%E6%95%B0%E5%AD%A6/"/>
+      <category term="数学" scheme="./categories/%E6%95%B0%E5%AD%A6/"/>
     
-      <category term="几何" scheme="http://yoursite.com/categories/%E6%95%B0%E5%AD%A6/%E5%87%A0%E4%BD%95/"/>
+      <category term="几何" scheme="./categories/%E6%95%B0%E5%AD%A6/%E5%87%A0%E4%BD%95/"/>
     
     
-      <category term="信息几何" scheme="http://yoursite.com/tags/%E4%BF%A1%E6%81%AF%E5%87%A0%E4%BD%95/"/>
+      <category term="信息几何" scheme="./tags/%E4%BF%A1%E6%81%AF%E5%87%A0%E4%BD%95/"/>
     
-      <category term="统计" scheme="http://yoursite.com/tags/%E7%BB%9F%E8%AE%A1/"/>
+      <category term="统计" scheme="./tags/%E7%BB%9F%E8%AE%A1/"/>
     
-      <category term="微分流形" scheme="http://yoursite.com/tags/%E5%BE%AE%E5%88%86%E6%B5%81%E5%BD%A2/"/>
+      <category term="微分流形" scheme="./tags/%E5%BE%AE%E5%88%86%E6%B5%81%E5%BD%A2/"/>
     
   </entry>
   
   <entry>
     <title>Hello World from the Hexo</title>
-    <link href="http://yoursite.com/2016/01/01/blog-hexo-1/"/>
-    <id>http://yoursite.com/2016/01/01/blog-hexo-1/</id>
+    <link href=".//blog-hexo-1/"/>
+    <id>.//blog-hexo-1/</id>
     <published>2015-12-31T16:00:00.000Z</published>
     <updated>2016-12-14T11:22:49.248Z</updated>
     
@@ -302,23 +304,23 @@
     
     </summary>
     
-      <category term="出版" scheme="http://yoursite.com/categories/%E5%87%BA%E7%89%88/"/>
+      <category term="出版" scheme="./categories/%E5%87%BA%E7%89%88/"/>
     
-      <category term="博客" scheme="http://yoursite.com/categories/%E5%87%BA%E7%89%88/%E5%8D%9A%E5%AE%A2/"/>
+      <category term="博客" scheme="./categories/%E5%87%BA%E7%89%88/%E5%8D%9A%E5%AE%A2/"/>
     
     
-      <category term="hello" scheme="http://yoursite.com/tags/hello/"/>
+      <category term="blog" scheme="./tags/blog/"/>
     
-      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+      <category term="hello" scheme="./tags/hello/"/>
     
-      <category term="blog" scheme="http://yoursite.com/tags/blog/"/>
+      <category term="hexo" scheme="./tags/hexo/"/>
     
   </entry>
   
   <entry>
     <title>守护进程的编写思路（C与Python）</title>
-    <link href="http://yoursite.com/2015/12/09/programming-daemon/"/>
-    <id>http://yoursite.com/2015/12/09/programming-daemon/</id>
+    <link href=".//programming-daemon/"/>
+    <id>.//programming-daemon/</id>
     <published>2015-12-08T16:00:00.000Z</published>
     <updated>2016-12-14T11:18:28.344Z</updated>
     
@@ -336,25 +338,25 @@
     
     </summary>
     
-      <category term="操作系统" scheme="http://yoursite.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+      <category term="操作系统" scheme="./categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
     
-      <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
+      <category term="linux" scheme="./tags/linux/"/>
     
-      <category term="daemon" scheme="http://yoursite.com/tags/daemon/"/>
+      <category term="daemon" scheme="./tags/daemon/"/>
     
-      <category term="c" scheme="http://yoursite.com/tags/c/"/>
+      <category term="python" scheme="./tags/python/"/>
     
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+      <category term="c" scheme="./tags/c/"/>
     
-      <category term="server" scheme="http://yoursite.com/tags/server/"/>
+      <category term="server" scheme="./tags/server/"/>
     
   </entry>
   
   <entry>
     <title>Scheme语言概要</title>
-    <link href="http://yoursite.com/2015/08/31/scheme-lang/"/>
-    <id>http://yoursite.com/2015/08/31/scheme-lang/</id>
+    <link href=".//scheme-lang/"/>
+    <id>.//scheme-lang/</id>
     <published>2015-08-30T16:00:00.000Z</published>
     <updated>2016-12-14T11:08:10.697Z</updated>
     
@@ -366,23 +368,23 @@
     
     </summary>
     
-      <category term="计算机科学" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/"/>
+      <category term="计算机科学" scheme="./categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/"/>
     
-      <category term="编程语言" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+      <category term="编程语言" scheme="./categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
     
     
-      <category term="scheme" scheme="http://yoursite.com/tags/scheme/"/>
+      <category term="语法" scheme="./tags/%E8%AF%AD%E6%B3%95/"/>
     
-      <category term="语法" scheme="http://yoursite.com/tags/%E8%AF%AD%E6%B3%95/"/>
+      <category term="scheme" scheme="./tags/scheme/"/>
     
-      <category term="guile" scheme="http://yoursite.com/tags/guile/"/>
+      <category term="guile" scheme="./tags/guile/"/>
     
   </entry>
   
   <entry>
     <title>Maude语言</title>
-    <link href="http://yoursite.com/2015/07/22/maude-lang/"/>
-    <id>http://yoursite.com/2015/07/22/maude-lang/</id>
+    <link href=".//maude-lang/"/>
+    <id>.//maude-lang/</id>
     <published>2015-07-21T16:00:00.000Z</published>
     <updated>2016-12-14T11:08:38.764Z</updated>
     
@@ -394,59 +396,21 @@
     
     </summary>
     
-      <category term="编程语言" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+      <category term="编程语言" scheme="./categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
     
     
-      <category term="maude" scheme="http://yoursite.com/tags/maude/"/>
+      <category term="maude" scheme="./tags/maude/"/>
     
-      <category term="重写逻辑" scheme="http://yoursite.com/tags/%E9%87%8D%E5%86%99%E9%80%BB%E8%BE%91/"/>
+      <category term="重写逻辑" scheme="./tags/%E9%87%8D%E5%86%99%E9%80%BB%E8%BE%91/"/>
     
-      <category term="rewriting logic" scheme="http://yoursite.com/tags/rewriting-logic/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Scala编程概要（三）：进程控制与shell，函数式特性</title>
-    <link href="http://yoursite.com/2015/07/02/scala-process-and-shell/"/>
-    <id>http://yoursite.com/2015/07/02/scala-process-and-shell/</id>
-    <published>2015-07-01T16:00:00.000Z</published>
-    <updated>2016-12-14T11:14:50.274Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;应该说，这种特性是可以让人大吼大叫的。简单的示例如下：&lt;/p&gt;
-&lt;figure class=&quot;highlight scala&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; sys.process._&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;ls -al ..&quot;&lt;/span&gt; !&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;之所以可以这样做，是因为sys.process包含一个从字符串到ProcessBuild对象的隐式类型转换。注意后面的&lt;code&gt;!&lt;/code&gt;号操作符，以ProcessBuild类型为参数类型，返回的是被执行程序的返回值。如果需要返回的是程序的输出的字符串，可以使用&lt;code&gt;!!&lt;/code&gt;代替&lt;code&gt;!&lt;/code&gt;号。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="编程语言" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
-    
-      <category term="Scala" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Scala/"/>
-    
-    
-      <category term="进程" scheme="http://yoursite.com/tags/%E8%BF%9B%E7%A8%8B/"/>
-    
-      <category term="正则表达式" scheme="http://yoursite.com/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
-    
-      <category term="scala" scheme="http://yoursite.com/tags/scala/"/>
-    
-      <category term="shell" scheme="http://yoursite.com/tags/shell/"/>
-    
-      <category term="特质" scheme="http://yoursite.com/tags/%E7%89%B9%E8%B4%A8/"/>
-    
-      <category term="运算符" scheme="http://yoursite.com/tags/%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
-    
-      <category term="高阶函数" scheme="http://yoursite.com/tags/%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/"/>
-    
-      <category term="柯里化" scheme="http://yoursite.com/tags/%E6%9F%AF%E9%87%8C%E5%8C%96/"/>
+      <category term="rewriting logic" scheme="./tags/rewriting-logic/"/>
     
   </entry>
   
   <entry>
     <title>Scala编程概要（四）：控制抽象, 集合, 模式匹配, 编译器</title>
-    <link href="http://yoursite.com/2015/07/02/scala-overview-4/"/>
-    <id>http://yoursite.com/2015/07/02/scala-overview-4/</id>
+    <link href=".//scala-overview-4/"/>
+    <id>.//scala-overview-4/</id>
     <published>2015-07-01T16:00:00.000Z</published>
     <updated>2016-12-14T11:09:01.020Z</updated>
     
@@ -461,22 +425,87 @@
     </summary>
     
     
-      <category term="scala" scheme="http://yoursite.com/tags/scala/"/>
+      <category term="scala" scheme="./tags/scala/"/>
     
-      <category term="控制抽象" scheme="http://yoursite.com/tags/%E6%8E%A7%E5%88%B6%E6%8A%BD%E8%B1%A1/"/>
+      <category term="控制抽象" scheme="./tags/%E6%8E%A7%E5%88%B6%E6%8A%BD%E8%B1%A1/"/>
     
-      <category term="集合" scheme="http://yoursite.com/tags/%E9%9B%86%E5%90%88/"/>
+      <category term="集合" scheme="./tags/%E9%9B%86%E5%90%88/"/>
     
-      <category term="模式匹配" scheme="http://yoursite.com/tags/%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D/"/>
+      <category term="模式匹配" scheme="./tags/%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D/"/>
     
-      <category term="编译器" scheme="http://yoursite.com/tags/%E7%BC%96%E8%AF%91%E5%99%A8/"/>
+      <category term="编译器" scheme="./tags/%E7%BC%96%E8%AF%91%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Scala编程概要（三）：进程控制与shell，函数式特性</title>
+    <link href=".//scala-process-and-shell/"/>
+    <id>.//scala-process-and-shell/</id>
+    <published>2015-07-01T16:00:00.000Z</published>
+    <updated>2016-12-14T11:14:50.274Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;应该说，这种特性是可以让人大吼大叫的。简单的示例如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight scala&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; sys.process._&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;ls -al ..&quot;&lt;/span&gt; !&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;之所以可以这样做，是因为sys.process包含一个从字符串到ProcessBuild对象的隐式类型转换。注意后面的&lt;code&gt;!&lt;/code&gt;号操作符，以ProcessBuild类型为参数类型，返回的是被执行程序的返回值。如果需要返回的是程序的输出的字符串，可以使用&lt;code&gt;!!&lt;/code&gt;代替&lt;code&gt;!&lt;/code&gt;号。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="编程语言" scheme="./categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="Scala" scheme="./categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Scala/"/>
+    
+    
+      <category term="正则表达式" scheme="./tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+      <category term="scala" scheme="./tags/scala/"/>
+    
+      <category term="进程" scheme="./tags/%E8%BF%9B%E7%A8%8B/"/>
+    
+      <category term="shell" scheme="./tags/shell/"/>
+    
+      <category term="特质" scheme="./tags/%E7%89%B9%E8%B4%A8/"/>
+    
+      <category term="运算符" scheme="./tags/%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
+    
+      <category term="高阶函数" scheme="./tags/%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/"/>
+    
+      <category term="柯里化" scheme="./tags/%E6%9F%AF%E9%87%8C%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Scala编程概要（一）：文档，注释，面向对象</title>
+    <link href=".//scala-tutorial-intro/"/>
+    <id>.//scala-tutorial-intro/</id>
+    <published>2015-06-30T16:00:00.000Z</published>
+    <updated>2016-12-14T11:15:35.130Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;虽然每次都是从头开始看Java与Scala的初级的教程，但是每次看的时候重点不一样，对于语言的理解也不一样。这一次的时候，强调的是，我们如何从初学者成为能够熟练运用一门语言的开发者？为了做到这一点，我们需要付出哪些努力？&lt;/p&gt;
+&lt;p&gt;现在的看法是这样的。第一，我们应该按照写书的方式写Scala的程序。所以，如何从应用程序中生成文档，以及介绍这个文档是最基本的。所以，在初学者的第一章的时候就应该学习使用scaladoc来写文档，以便能够注释出来自己所写的东西，表达出来自己所写的东西是什么样的意思。第二，或许是对于某些语言，使用REPL环境。但是学习一个语言可能更关键的是学习它适应的设计模式，与常见的实践，就像写学术文档一样写程序。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="编程语言" scheme="./categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+    
+      <category term="scala" scheme="./tags/scala/"/>
+    
+      <category term="文档" scheme="./tags/%E6%96%87%E6%A1%A3/"/>
+    
+      <category term="注释" scheme="./tags/%E6%B3%A8%E9%87%8A/"/>
+    
+      <category term="面向对象" scheme="./tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
     
   </entry>
   
   <entry>
     <title>Scala编程概要（二）：基本结构，常用模式</title>
-    <link href="http://yoursite.com/2015/07/01/scala-sentences/"/>
-    <id>http://yoursite.com/2015/07/01/scala-sentences/</id>
+    <link href=".//scala-sentences/"/>
+    <id>.//scala-sentences/</id>
     <published>2015-06-30T16:00:00.000Z</published>
     <updated>2016-12-14T11:11:37.384Z</updated>
     
@@ -489,58 +518,31 @@
     
     </summary>
     
-      <category term="编程语言" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+      <category term="编程语言" scheme="./categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
     
     
-      <category term="scala" scheme="http://yoursite.com/tags/scala/"/>
+      <category term="scala" scheme="./tags/scala/"/>
     
-      <category term="控制语句" scheme="http://yoursite.com/tags/%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/"/>
+      <category term="面向对象" scheme="./tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
     
-      <category term="设计模式" scheme="http://yoursite.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+      <category term="控制语句" scheme="./tags/%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/"/>
     
-      <category term="映射" scheme="http://yoursite.com/tags/%E6%98%A0%E5%B0%84/"/>
+      <category term="设计模式" scheme="./tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
-      <category term="类" scheme="http://yoursite.com/tags/%E7%B1%BB/"/>
+      <category term="映射" scheme="./tags/%E6%98%A0%E5%B0%84/"/>
     
-      <category term="面向对象" scheme="http://yoursite.com/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
+      <category term="类" scheme="./tags/%E7%B1%BB/"/>
     
-      <category term="注解" scheme="http://yoursite.com/tags/%E6%B3%A8%E8%A7%A3/"/>
+      <category term="注解" scheme="./tags/%E6%B3%A8%E8%A7%A3/"/>
     
-      <category term="序列化" scheme="http://yoursite.com/tags/%E5%BA%8F%E5%88%97%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Scala编程概要（一）：文档，注释，面向对象</title>
-    <link href="http://yoursite.com/2015/07/01/scala-tutorial-intro/"/>
-    <id>http://yoursite.com/2015/07/01/scala-tutorial-intro/</id>
-    <published>2015-06-30T16:00:00.000Z</published>
-    <updated>2016-12-14T11:15:35.130Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;虽然每次都是从头开始看Java与Scala的初级的教程，但是每次看的时候重点不一样，对于语言的理解也不一样。这一次的时候，强调的是，我们如何从初学者成为能够熟练运用一门语言的开发者？为了做到这一点，我们需要付出哪些努力？&lt;/p&gt;
-&lt;p&gt;现在的看法是这样的。第一，我们应该按照写书的方式写Scala的程序。所以，如何从应用程序中生成文档，以及介绍这个文档是最基本的。所以，在初学者的第一章的时候就应该学习使用scaladoc来写文档，以便能够注释出来自己所写的东西，表达出来自己所写的东西是什么样的意思。第二，或许是对于某些语言，使用REPL环境。但是学习一个语言可能更关键的是学习它适应的设计模式，与常见的实践，就像写学术文档一样写程序。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="编程语言" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
-    
-    
-      <category term="scala" scheme="http://yoursite.com/tags/scala/"/>
-    
-      <category term="面向对象" scheme="http://yoursite.com/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
-    
-      <category term="文档" scheme="http://yoursite.com/tags/%E6%96%87%E6%A1%A3/"/>
-    
-      <category term="注释" scheme="http://yoursite.com/tags/%E6%B3%A8%E9%87%8A/"/>
+      <category term="序列化" scheme="./tags/%E5%BA%8F%E5%88%97%E5%8C%96/"/>
     
   </entry>
   
   <entry>
     <title>用自举理解人工智能与学术研究</title>
-    <link href="http://yoursite.com/2015/06/29/ai-and-bootstraping/"/>
-    <id>http://yoursite.com/2015/06/29/ai-and-bootstraping/</id>
+    <link href=".//ai-and-bootstraping/"/>
+    <id>.//ai-and-bootstraping/</id>
     <published>2015-06-28T16:00:00.000Z</published>
     <updated>2016-12-14T11:15:56.908Z</updated>
     
@@ -551,45 +553,48 @@
     
     </summary>
     
-      <category term="人工智能" scheme="http://yoursite.com/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+      <category term="人工智能" scheme="./categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
     
     
-      <category term="人工智能" scheme="http://yoursite.com/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+      <category term="自举" scheme="./tags/%E8%87%AA%E4%B8%BE/"/>
     
-      <category term="自举" scheme="http://yoursite.com/tags/%E8%87%AA%E4%B8%BE/"/>
+      <category term="bootstrap" scheme="./tags/bootstrap/"/>
     
-      <category term="bootstrap" scheme="http://yoursite.com/tags/bootstrap/"/>
+      <category term="人工智能" scheme="./tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
     
-      <category term="学术" scheme="http://yoursite.com/tags/%E5%AD%A6%E6%9C%AF/"/>
+      <category term="学术" scheme="./tags/%E5%AD%A6%E6%9C%AF/"/>
     
   </entry>
   
   <entry>
     <title>个人主页项目的设计与管理</title>
-    <link href="http://yoursite.com/2015/06/21/%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5%E9%A1%B9%E7%9B%AE/"/>
-    <id>http://yoursite.com/2015/06/21/个人主页项目/</id>
+    <link href=".//blog-solutions/"/>
+    <id>.//blog-solutions/</id>
     <published>2015-06-20T16:00:00.000Z</published>
-    <updated>2016-12-14T08:52:56.038Z</updated>
+    <updated>2016-12-14T13:47:43.137Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;参考&lt;a href=&quot;http://web.engr.oregonstate.edu/~walkiner&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Eric Walkingshaw的主页&lt;/a&gt;、&lt;a href=&quot;http://www.skybluet
+      &lt;p&gt;参考&lt;a href=&quot;http://web.engr.oregonstate.edu/~walkiner&quot;&gt;Eric Walkingshaw的主页&lt;/a&gt;、&lt;a href=&quot;http://www.skybluetrades.net&quot;&gt;Ian Ross的主页&lt;/a&gt;以及&lt;a href=&quot;http://yannesposito.com/&quot;&gt;yogsototh的支持多语言的主页&lt;/a&gt;的设计以决定该怎样布局个人的主页。&lt;/p&gt;
+&lt;p&gt;Hakyll下面的个人主页项目，似乎有把个人主页分成程序和资源两个部分的倾向。进一步地，site.hs，以及编译器属于程序，CSS、Markdown与HTML模板属于“资源”。那么我们会问，制作一个个人主页必须学会编程，特别是Haskell编程么？似乎前台的工作就已经足够让人烦了：个人主页中的CSS、HTML页面布局的设计就变得非常麻烦。鉴于所使用的后台对于个人主页没有任何直接的影响，我们不妨把构建网站的程序从网站代码当中分离出来。&lt;/p&gt;
     
     </summary>
     
+      <category term="出版" scheme="./categories/%E5%87%BA%E7%89%88/"/>
     
-      <category term="个人主页" scheme="http://yoursite.com/tags/%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5/"/>
+      <category term="博客" scheme="./categories/%E5%87%BA%E7%89%88/%E5%8D%9A%E5%AE%A2/"/>
     
-      <category term="博客" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2/"/>
     
-      <category term="git" scheme="http://yoursite.com/tags/git/"/>
+      <category term="git" scheme="./tags/git/"/>
+    
+      <category term="hakyll" scheme="./tags/hakyll/"/>
     
   </entry>
   
   <entry>
     <title>Github主页修整记</title>
-    <link href="http://yoursite.com/2015/06/20/%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5%E5%BC%80%E9%80%9A/"/>
-    <id>http://yoursite.com/2015/06/20/个人主页开通/</id>
+    <link href=".//blog-github-modify/"/>
+    <id>.//blog-github-modify/</id>
     <published>2015-06-19T16:00:00.000Z</published>
     <updated>2016-12-14T11:27:10.196Z</updated>
     
@@ -604,18 +609,18 @@
     
     </summary>
     
-      <category term="出版" scheme="http://yoursite.com/categories/%E5%87%BA%E7%89%88/"/>
+      <category term="出版" scheme="./categories/%E5%87%BA%E7%89%88/"/>
     
-      <category term="博客" scheme="http://yoursite.com/categories/%E5%87%BA%E7%89%88/%E5%8D%9A%E5%AE%A2/"/>
+      <category term="博客" scheme="./categories/%E5%87%BA%E7%89%88/%E5%8D%9A%E5%AE%A2/"/>
     
     
-      <category term="github" scheme="http://yoursite.com/tags/github/"/>
+      <category term="github" scheme="./tags/github/"/>
     
-      <category term="主页" scheme="http://yoursite.com/tags/%E4%B8%BB%E9%A1%B5/"/>
+      <category term="主页" scheme="./tags/%E4%B8%BB%E9%A1%B5/"/>
     
-      <category term="latex" scheme="http://yoursite.com/tags/latex/"/>
+      <category term="latex" scheme="./tags/latex/"/>
     
-      <category term="pandoc" scheme="http://yoursite.com/tags/pandoc/"/>
+      <category term="pandoc" scheme="./tags/pandoc/"/>
     
   </entry>
   

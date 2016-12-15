@@ -1,0 +1,1105 @@
+<!doctype html>
+
+
+
+  
+
+
+<!--
+<html class="theme-next mist use-motion" lang="zh-Hans,en">
+-->
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="STS,状态传递系统,LTS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="80x24" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="众所周知的是传递系统只是从系统转换的观点来看问题，其理论的根据跟抽象重写系统是一样的，但是可能说明的角度不一样吧。传递系统分成两类，带标签的和不带标签的系统。传递系统在应用于模型检查的时候经常使用带标签的形式。
+Action Language是专门描述状态传递系统STS（state transition systems）的语言。经常用于形式化地创建一系列的模型。PDDL是著名的一种Action L">
+<meta property="og:type" content="article">
+<meta property="og:title" content="维基上定义的传递系统">
+<meta property="og:url" content="./wikipedia-transition-system/index.html">
+<meta property="og:site_name" content="80x24">
+<meta property="og:description" content="众所周知的是传递系统只是从系统转换的观点来看问题，其理论的根据跟抽象重写系统是一样的，但是可能说明的角度不一样吧。传递系统分成两类，带标签的和不带标签的系统。传递系统在应用于模型检查的时候经常使用带标签的形式。
+Action Language是专门描述状态传递系统STS（state transition systems）的语言。经常用于形式化地创建一系列的模型。PDDL是著名的一种Action L">
+<meta property="og:updated_time" content="2016-12-14T11:07:27.273Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="维基上定义的传递系统">
+<meta name="twitter:description" content="众所周知的是传递系统只是从系统转换的观点来看问题，其理论的根据跟抽象重写系统是一样的，但是可能说明的角度不一样吧。传递系统分成两类，带标签的和不带标签的系统。传递系统在应用于模型检查的时候经常使用带标签的形式。
+Action Language是专门描述状态传递系统STS（state transition systems）的语言。经常用于形式化地创建一系列的模型。PDDL是著名的一种Action L">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="./wikipedia-transition-system/"/>
+
+
+
+
+
+  <title> 维基上定义的传递系统 | 80x24 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?763bee904aa6d81fdf017659d162188f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">80x24</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Keep Stupid, Keep Hungry</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-atom">
+          <a href="/atom.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-rss"></i> <br />
+            
+            Atom订阅
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+          <li class="menu-item"><a href="/wikipedia-transition-system/">简体中文</a></li>
+          
+          <li class="menu-item"><a href="/en/wikipedia-transition-system/">English (US)</a></li>
+          
+
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="./wikipedia-transition-system/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Istyasna">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="80x24">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="80x24" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                维基上定义的传递系统
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-13T00:00:00+08:00">
+                2016-01-13
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              <span class="post-meta-item-text">更新于</span>
+              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:07:27+08:00">
+                2016-12-14
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机科学/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机科学/计算模型/" itemprop="url" rel="index">
+                    <span itemprop="name">计算模型</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/wikipedia-transition-system/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/wikipedia-transition-system/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>众所周知的是传递系统只是从系统转换的观点来看问题，其理论的根据跟抽象重写系统是一样的，但是可能说明的角度不一样吧。传递系统分成两类，带标签的和不带标签的系统。传递系统在应用于模型检查的时候经常使用带标签的形式。</p>
+<p>Action Language是专门描述状态传递系统STS（state transition systems）的语言。经常用于形式化地创建一系列的模型。PDDL是著名的一种Action Language。</p>
+<p>状态转移系统往往显得太过抽象。感觉好像跟动力系统理论和自动机理论都有一些差别。或许它们是研究离散状态的一种抽象理论吧。状态转移系统自然是关联着状态及其转移的。但是动力系统呢？</p>
+<p>目前，我们似乎可以这样关联状态转移与动力系统理论。所谓的系统，我们关注的还是系统的演化的特性，也就是系统的存在及其演化。那么，自然中心的问题是，系统是怎样随时间变化的？因而，首先的问题就是所谓的对于状态的定义。在动力系统中，状态是由一个实参量标识的，它可以对时间演化可微。而在状态转移系统中，状态是一种不同的数学结构，比如说，状态是一个有穷序列，而时间也是离散的。那么，基于这种认识，似乎结合起来看，所谓的系统理论，就是某个数学结构上面的参数的理论。就像是微分几何中，每一点附上一个特定的数学结构一样，系统理论是演化过程中的每一时间点附上一个状态–似乎系统理论研究的情况，都是底空间是低维的情况。</p>
+<a id="more"></a>
+<p>另外，状态转移系统中，虽然状态是连续的，但是状态转移的过程可以是连续的。</p>
+<h2 id="互模拟与lts基础介绍">互模拟与LTS基础介绍</h2>
+<dl>
+<dt>Bisimulation</dt>
+<dd>Given a labelled state transition system <span class="math inline">\((S,\Lambda, \to)\)</span>, a bisimulation relation is a binary relation <span class="math inline">\(R\)</span> over <span class="math inline">\(S\)</span> such that both <span class="math inline">\(R^{-1}\)</span> and <span class="math inline">\(R\)</span> are simulations. Equivalently <span class="math inline">\(R\)</span> is a bisimulation if for every pair of elements <span class="math inline">\(p,q\)</span> is <span class="math inline">\(S\)</span> with <span class="math inline">\((p,q)\)</span> in <span class="math inline">\(R\)</span>, for all <span class="math inline">\(\alpha\)</span> in <span class="math inline">\(\Lambda\)</span>: * for all <span class="math inline">\(p&#39;\)</span> in <span class="math inline">\(S\)</span>, <span class="math inline">\(p\overset{\alpha}{\rightarrow} p&#39;\)</span> implies that there is a <span class="math inline">\(q&#39; \in S\)</span> such that <span class="math inline">\(q \overset{\alpha}{\rightarrow} q&#39;\)</span> and <span class="math inline">\((p&#39;, q&#39;)\in R\)</span>. * for all <span class="math inline">\(q&#39;\)</span> in <span class="math inline">\(S\)</span>, <span class="math inline">\(q\overset{\alpha}{\rightarrow} q&#39;\)</span> implies that there is a <span class="math inline">\(p&#39; \in S\)</span> such that <span class="math inline">\(p \overset{\alpha}{\rightarrow} p&#39;\)</span> and <span class="math inline">\((p&#39;, q&#39;)\in R\)</span>.
+</dd>
+</dl>
+<p>Given two states <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> in <span class="math inline">\(S\)</span>, <span class="math inline">\(p\)</span> is <em>bisimilar</em> to <span class="math inline">\(q\)</span>, written <span class="math inline">\(p \sim q\)</span>, if there is a bisimultion <span class="math inline">\(R\)</span> such that <span class="math inline">\((p,q)\)</span> is in <span class="math inline">\(R\)</span>.</p>
+<p>也就是说，如果两个状态标记系统是互模拟的，那么我们称这两个系统是相互等价的。这个时候，<span class="math inline">\(p\)</span>可以模拟<span class="math inline">\(q\)</span>，而<span class="math inline">\(q\)</span>也可以模拟<span class="math inline">\(p\)</span>（但是反过来则不成立，因为还需要一些附加的条件）。我们可以证明，两个状态的相似性是一个等价关系。互模拟有多个定义，比较不动点的定义。可能是我们必须要熟悉的。</p>
+<p>下面我们来看什么是transition systems.</p>
+<p>In theoretical computer science, a transition system is a concept used in the sutdy of computation. It is used to describe the potential <strong>behavior</strong> of discrete systems. It consists of states and transitions between states, which may be labeled with labels chosen from a set; the same label may appear on more than one transition.</p>
+<p><strong>Transition systems coincide mathematically with abstract rewriting systems</strong>. and directed graphs. They differ from finite state automata in several ways:</p>
+<ul>
+<li>The set of states is not necessarily finite, or even countable.</li>
+<li>The set of transitions if not necessarily finite, or even countable.</li>
+<li>No “start” state or “final” states are given.</li>
+</ul>
+<p>Transition systems can be represented as directed graphs.</p>
+<dl>
+<dt>transition system</dt>
+<dd>A transition system is a pair <span class="math inline">\((S,\rightarrow)\)</span> where <span class="math inline">\(S\)</span> is a set of states and <span class="math inline">\(\rightarrow\)</span> is a set of state transitions, i.e., <span class="math inline">\(\rightarrow \in S\times S\)</span>. The fact that there is a transition from step <span class="math inline">\(P\)</span> to state <span class="math inline">\(q\)</span>, i.e. <span class="math inline">\((p,q)\in\rightarrow\)</span>, is written as <span class="math inline">\(p\rightarrow q\)</span>.
+</dd>
+<dt>labelled transition system</dt>
+<dd>A labelled transition system is a tuple <span class="math inline">\((S,\Lambda,\rightarrow)\)</span> where <span class="math inline">\(S\)</span> is a set of states, <span class="math inline">\(\Lambda\)</span> is a set of labels and <span class="math inline">\(\rightarrow\)</span> is a set of labelled transitions (where <span class="math inline">\(\rightarrow \in S\times \Lambda\times S\)</span>). The fact that <span class="math inline">\((p, \alpha, q)\in \rightarrow\)</span> is written as <span class="math inline">\(p \overset{\alpha}{\rightarrow} q\)</span>.
+</dd>
+</dl>
+<p>Labels can represent different things depending on the language of interest. Typical uses of labels include representing input expected , conditions that must be true to trigger the transition, or actions performed during the transition. Labelled transitions systems were originally introduced as <strong>named transition systems</strong>.</p>
+<p>我们都知道状态机广泛用于系统的行为的建模，TS(Transition System)也是如此。状态与转换我们都容易理解，但是可能label就不那么容易理解了。labels可以表示发生这一转换的时候的各种来自环境的需求，比较发生转换的条件，转换的输出，转换的时候需要执行的代码等等。label集<span class="math inline">\(\Lambda\)</span>实际上可以有复杂的结构，用于满足各种不同目的的状态转换系统建模的需求。</p>
+<p>LTS在数学上等价于ARS（Abstract Rewritting System），而后者在数学与数理逻辑中被广泛用来表示逻辑推理的过程。但是考察的角度不一样。逻辑推理系统关心的重点与离散系统关心的重点不一样。虽然自己觉得ARS是逻辑学的研究的重点，但是觉得，在SC.3的笔记中引入ARS作为LTS的等价物也没有什么不妥，毕竟SC.3当然可以引入各种逻辑学的知识。</p>
+<p>In mathematical logic and theoretical computer science, an <strong>abstract rewriting system</strong> (<strong>reduction system</strong>, <strong>abstract reduction system</strong>, <strong>abstract rewrite system</strong>, abbreviation <strong>ARS</strong>) is a formalism that captures the quintessential（精髓，精粹） notion and properties of rewriting systems. in its simplest form, an ARS is simply a set of “objects” together with a binary relation, traditionally denoted with <span class="math inline">\(\rightarrow\)</span>. this definition can be further refined if we index (label) subsets of the binary relation. Desipte its simplicity, an ARS is sufficient to describe important properties of rewriting systems link normal forms, termination, and various notions of confluence.</p>
+<p>ARS与LTS的定义就是特价的，只不过数学上关注的重点不太一样。假设<span class="math inline">\((A,\rightarrow)\)</span>是一个ARS，那么数学上关心的是<span class="math inline">\(trans\)</span>这个二元关系的传递闭包、反射闭包等。</p>
+<p>ARS的定义可能引起人的混淆，因为有时候它就像是一个语法生成式，只不过，一个重写规则的左边与右边都是一个单独的对象，而不是不同的语法项。所以ARS中只有<span class="math inline">\(a\rightarrow b\)</span>而没有<span class="math inline">\(a\rightarrow b c\)</span>这样的形式。</p>
+<p>下面我们介绍数学家对于ARS的研究兴趣。</p>
+<dl>
+<dt>reducible objects</dt>
+<dd>An object <span class="math inline">\(x\in A\)</span> is called <strong>reducible</strong> in <span class="math inline">\((A,\rightarrow)\)</span> if <span class="math inline">\(\exists y\in A\)</span> such that <span class="math inline">\(x\rightarrow y\)</span>. otherwise it is called <strong>irreducible</strong> or a <strong>normal form</strong>.
+</dd>
+<dt>normal form</dt>
+<dd>Denoting that <span class="math inline">\(\overset{*}{\leftrightarrow}\)</span> is the transitive closure of <span class="math inline">\(\leftrightarrow \cup =\)</span>, where <span class="math inline">\(\leftrightarrow\)</span> is <span class="math inline">\(\leftarrow \cup \leftarrow^{-1}\)</span>, an object <span class="math inline">\(y\in A\)</span> is called a normal form of <span class="math inline">\(x\)</span> if <span class="math inline">\(x\overset{*}{\leftrightarrow} y\)</span>, where <span class="math inline">\(y\)</span> is irreducible. If <span class="math inline">\(x\)</span> has a <strong>unique normal form</strong>, then this is usually denoted with <span class="math inline">\(x\downarrow\)</span>. If every object has at least one normal form, the ARS is called <strong>normalizing</strong>.
+</dd>
+<dt>Word Problem</dt>
+<dd>Given <span class="math inline">\(x\)</span> and <span class="math inline">\(y\in A\)</span>, are they equivalent under <span class="math inline">\(\overset{*}{\leftrightarrow}\)</span> ?
+</dd>
+</dl>
+<p>接下来对于ARS，自然而然地引入所谓的Church-Rosser定理。因为<span class="math inline">\(\lambda\)</span>演算具有这样的性质。不过，对于模型检查等应用来说，TS才是比较实用的工具。下面我们就借助于TS来给bisimulation几种等价的，但是表述不同的定义。</p>
+<dl>
+<dt>Relational definition of bisimulation</dt>
+<dd>Given a labelled transition system <span class="math inline">\((S, \Lambda, \rightarrow)\)</span>, a bisimulation is a binary relation <span class="math inline">\(R\)</span> over <span class="math inline">\(S\)</span> such that <span class="math inline">\(\forall \alpha \in \Lambda\)</span>,
+<span class="math display">\[\begin{equation}
+R;\overset{\alpha}{\rightarrow} \subseteq \overset{\alpha}{\rightarrow};R
+\end{equation}\]</span>
+and
+<span class="math display">\[\begin{equation}
+R^{-1};\overset{\alpha}{\rightarrow} \subseteq \overset{\alpha}{\rightarrow};R^{-1}
+\end{equation}\]</span>
+</dd>
+<dt>Fixpoint definition of bisimulation</dt>
+<dd>Given a labelled transition system <span class="math inline">\((S, \Lambda, \rightarrow)\)</span>, define
+<span class="math display">\[\begin{equation}
+F: 2^{S\times S} \mapsto 2^{S\times S}
+\end{equation}\]</span>
+to be a function from binary relations over <span class="math inline">\(S\)</span> to binary relations over <span class="math inline">\(S\)</span>, as follows: let <span class="math inline">\(R\)</span> be any binary relation over <span class="math inline">\(S\)</span>, <span class="math inline">\(F(R)\)</span> is defnied to be the set of all pairs <span class="math inline">\((p,q)\in S\times S\)</span> such that
+<span class="math display">\[\begin{equation}
+\forall \alpha\in\Lambda, p&#39;\in S, p\overset{\alpha}{\rightarrow} p&#39; \Rightarrow
+\exists q&#39; \in S, q\overset{q&#39;}{\rightarrow}, (p&#39;,q&#39;)\in R
+\end{equation}\begin{equation}
+\forall \alpha\in\Lambda, q&#39;\in S, q\overset{\alpha}{\rightarrow} q&#39; \Rightarrow
+\exists p&#39; \in S, p\overset{p&#39;}{\rightarrow}, (p&#39;,q&#39;)\in R
+\end{equation}\]</span>
+Then, bisimilarity is defined to be the greatest fixed point of <span class="math inline">\(F\)</span>.
+</dd>
+</dl>
+<p>从博弈的角度也可以定义互模拟。另外，从余代数的角度的定义可能在理论上更坚实一些，因为余代数可以对共模拟的字义作出推广。因为TS的共模拟可以看成是共代数模拟的特殊的情况。因为TS可以给出编程语言的操作语义，所以LTS在编程语言中的设计当中也变得非常重要。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/STS/" rel="tag"># STS</a>
+          
+            <a href="/tags/状态传递系统/" rel="tag"># 状态传递系统</a>
+          
+            <a href="/tags/LTS/" rel="tag"># LTS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/information-geometry/" rel="next" title="信息几何简介">
+                <i class="fa fa-chevron-left"></i> 信息几何简介
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/datatype-abstraction/" rel="prev" title="常见的数据结构的抽象">
+                常见的数据结构的抽象 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="/wikipedia-transition-system/"
+           data-title="维基上定义的传递系统" data-url=".//wikipedia-transition-system/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Istyasna" />
+          <p class="site-author-name" itemprop="name">Istyasna</p>
+          <p class="site-description motion-element" itemprop="description">GO FORTH now and create masterpieces of the publishing art!</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/irhawks" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://coding.aliyun.com/u/irhawks" target="_blank" title="Aliyun">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Aliyun
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="./" title="Title" target="_blank">Title</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hainu.edu.cn" title="Hainan University" target="_blank">Hainan University</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#互模拟与lts基础介绍"><span class="nav-number">1.</span> <span class="nav-text">互模拟与LTS基础介绍</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Istyasna</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+<!-- I manually add this to enable bootstrap style dropdown menu -->
+<script type="text/javascript" src="/js/src/bootstrap/dropdown.js"></script>
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"irhawks"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

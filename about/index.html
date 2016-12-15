@@ -5,7 +5,10 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans,en,default">
+<!--
+<html class="theme-next mist use-motion" lang="zh-Hans,en">
+-->
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -91,6 +94,8 @@
 
 
 
+  
+
 
   <link rel="alternate" href="/atom.xml" title="80x24" type="application/atom+xml" />
 
@@ -109,7 +114,7 @@
 I am a data scientist and recovering mathematician from Philadelphia, Pennsylvania. I am passionate about math education, statistics, machine learning, software development, functional programm">
 <meta property="og:type" content="website">
 <meta property="og:title" content="关于本站">
-<meta property="og:url" content="http://yoursite.com/about/index.html">
+<meta property="og:url" content="./about/index.html">
 <meta property="og:site_name" content="80x24">
 <meta property="og:description" content="About
 
@@ -147,7 +152,7 @@ I am a data scientist and recovering mathematician from Philadelphia, Pennsylvan
 
 
 
-  <link rel="canonical" href="http://yoursite.com/about/"/>
+  <link rel="canonical" href="./about/"/>
 
 
 
@@ -272,12 +277,12 @@ I am a data scientist and recovering mathematician from Philadelphia, Pennsylvan
         </li>
       
         
-        <li class="menu-item menu-item-sitemap">
+        <li class="menu-item menu-item-atom">
           <a href="/atom.xml" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-rss"></i> <br />
             
-            Sitemap
+            Atom订阅
           </a>
         </li>
       
@@ -294,6 +299,11 @@ I am a data scientist and recovering mathematician from Philadelphia, Pennsylvan
           </a>
         </li>
       
+          <li class="menu-item"><a href="/about/index.html">简体中文</a></li>
+          
+          <li class="menu-item"><a href="/en/about/index.html">English (US)</a></li>
+          
+
     </ul>
   
 
@@ -310,6 +320,7 @@ I am a data scientist and recovering mathematician from Philadelphia, Pennsylvan
 
     </div>
   
+
 </nav>
 
 
@@ -391,7 +402,7 @@ I am a data scientist and recovering mathematician from Philadelphia, Pennsylvan
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">35</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -400,7 +411,7 @@ I am a data scientist and recovering mathematician from Philadelphia, Pennsylvan
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">198</span>
+                <span class="site-state-item-count">196</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -580,6 +591,9 @@ I am a data scientist and recovering mathematician from Philadelphia, Pennsylvan
 
   <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
 
+
+<!-- I manually add this to enable bootstrap style dropdown menu -->
+<script type="text/javascript" src="/js/src/bootstrap/dropdown.js"></script>
 
 
   

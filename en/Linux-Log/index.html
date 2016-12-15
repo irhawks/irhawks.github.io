@@ -1,0 +1,1179 @@
+<!doctype html>
+
+
+
+  
+
+
+<!--
+<html class="theme-next mist use-motion" lang="zh-Hans,en">
+-->
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="linux,日志,log,syslog," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="80x24" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="本章标题是《系统日志与系统文件》。因为日志在系统当中的确占有非常重的地位。原来自己没有接触过关于syslog与logrotate等工具，所以在查看日志的时候用的只是非常基本的功能。但是按照自己的需求。以后自己也要学习更多的日志分析技巧，如果要学习网络的话。
+日志通常如一条一条的概要，由某个应用程序产生并提交到特定的日志系统去处理。有的日志系统比较简单，或是由应用程序服务自动管理。但是更多的时候，需">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux下的日志记录及其策略">
+<meta property="og:url" content="./en//Linux-Log/index.html">
+<meta property="og:site_name" content="80x24">
+<meta property="og:description" content="本章标题是《系统日志与系统文件》。因为日志在系统当中的确占有非常重的地位。原来自己没有接触过关于syslog与logrotate等工具，所以在查看日志的时候用的只是非常基本的功能。但是按照自己的需求。以后自己也要学习更多的日志分析技巧，如果要学习网络的话。
+日志通常如一条一条的概要，由某个应用程序产生并提交到特定的日志系统去处理。有的日志系统比较简单，或是由应用程序服务自动管理。但是更多的时候，需">
+<meta property="og:updated_time" content="2016-12-14T08:49:02.987Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux下的日志记录及其策略">
+<meta name="twitter:description" content="本章标题是《系统日志与系统文件》。因为日志在系统当中的确占有非常重的地位。原来自己没有接触过关于syslog与logrotate等工具，所以在查看日志的时候用的只是非常基本的功能。但是按照自己的需求。以后自己也要学习更多的日志分析技巧，如果要学习网络的话。
+日志通常如一条一条的概要，由某个应用程序产生并提交到特定的日志系统去处理。有的日志系统比较简单，或是由应用程序服务自动管理。但是更多的时候，需">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="./en//Linux-Log/"/>
+
+
+
+
+
+  <title> Linux下的日志记录及其策略 | 80x24 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?763bee904aa6d81fdf017659d162188f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">80x24</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Keep Stupid, Keep Hungry</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-atom">
+          <a href="/atom.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-rss"></i> <br />
+            
+            Atom
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+          <li class="menu-item"><a href="//Linux-Log/">简体中文</a></li>
+          
+          <li class="menu-item"><a href="/en//Linux-Log/">English (US)</a></li>
+          
+
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="./en/Linux-Log/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Istyasna">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="80x24">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="80x24" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Linux下的日志记录及其策略
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2013-02-17T00:00:00+08:00">
+                2013-02-17
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              <span class="post-meta-item-text">Post modified</span>
+              <time title="Post modified" itemprop="dateModified" datetime="2016-12-14T16:49:02+08:00">
+                2016-12-14
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/系统管理/" itemprop="url" rel="index">
+                    <span itemprop="name">系统管理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/en/Linux-Log/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="en//Linux-Log/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本章标题是《系统日志与系统文件》。因为日志在系统当中的确占有非常重的地位。原来自己没有接触过关于syslog与logrotate等工具，所以在查看日志的时候用的只是非常基本的功能。但是按照自己的需求。以后自己也要学习更多的日志分析技巧，如果要学习网络的话。</p>
+<p>日志通常如一条一条的概要，由某个应用程序产生并提交到特定的日志系统去处理。有的日志系统比较简单，或是由应用程序服务自动管理。但是更多的时候，需要在系统范围内才能分析出日志包含的重要信息。</p>
+<p>日志文件因为它所反映的信息类型的不同而不同。因此需要各自对待。</p>
+<p>虽然在操作系统编程与应用程序编程，或者网络编程中也常用到日志，但是日志的最核心的功能还是在于为系统或者应用管理员提供足够的信息，以便支持某种决策。这样一来，在编程中使用的日志只是提供一种基础设施。只在站在系统管理的水平上，我们才能利用好日志记录。</p>
+<h3 id="几种对待日志的策略">几种对待日志的策略</h3>
+<p>一般情况下应用程序已经配置好所产生的日志级别。一旦日志产生就进入到日志管理这一主题之下。通常情况下，日志可以分成保存的日志与立即的日志。后者又有立即扔掉与在内存区域中缓存，或者在终端上显示。前者则可以选择转发到另一地点或者在本地保存。</p>
+<p>计算机管理系统环境下，一般产生意义的动作只是立刻扔掉，或者定期复位，或者采取轮换，或者将日志压缩或保存到永久介质上。它们的不同完全可以由日志信息存在与时间的函数关系决定：前者总是取零，定期复位使得可追溯的日志像周期函数一样变化；轮换则是一个单调递增，而后保持不变的函数；后者则是一个不断增加的函数。</p>
+<p>在unix下无论何种方案，都必须采用cron自动维护日志文件。</p>
+<h3 id="关于扔掉日志">关于扔掉日志</h3>
+<p>一般来说不应当扔掉所有的日志信息。因为日志文件首先为站点提供了非法入侵的重要证据。其次还有助于分析有关硬件或者软件方面的问题。《手册》中给出的意见是所有日志到少保存一个月的时间。特别是站点环境下，可能需要很长时间才能发现入侵。此时需要退回很长时间才可以找到入侵时间。并且还需要以压缩形式保存更长时间的日志。</p>
+<p>不过有些时候保存日志的策略有一定的政治，法律或者商业上的原因。这就得具体问题具体分析了。不过留下日志总能够提供某种分析手段，至少能够使得对事物的认识更加具体。</p>
+<h3 id="轮换日志文件">轮换日志文件</h3>
+<p>这种做法通常是把每周或者每月的日志信息保留在一个单独文件里，就像维护一个长度有限的队列一样。</p>
+<p>对于一个日志文件来说，其属主通常很重要，决定着日志管理时的权限使用。日志文件的命名可以使用序号区分，也可以使用日期。在unix上可以通过date命令的+%Y.%m.%d 格式就是通常的做法。</p>
+<p>在轮换日志的时候可能会遇到日志正在使用的情况。这种情况下正在使用的日志文件会因为文件位置的改变而自动改变。通常的解决办法是在移动日志后重新启动守护进程，以让守护进程使用新的，空白的日志文件。</p>
+<p>比如向syslogd发送HUP信号就会导至syslogd守护进程挂起然后重新读取日志。</p>
+<h3 id="存档日志文件">存档日志文件</h3>
+<p>“除非就是要避免留下书面记录，否则就应该在常规备份中包含日志文件”。并且在转储频度允许的情况下以最高频度备份日志文件。此外。我们可以为日志文件专门设计一个备份脚本以直接对日志备份进行控制。</p>
+<h3 id="linux日志文件">linux日志文件</h3>
+<p>linux系统的软件包一般将其日志记录到/var/log下的文件里。</p>
+<p>/var目录是相当重要的。在正常运行的系统里应该都存在。因为里面还会随时写入很多信息，因此应当以读写方式挂载文件系统。</p>
+<p>linux下大多数程序将其日志发送到syslog中央系统。由syslog负责将日志写入文件或者进行转发。总之，应用程序只需要把产生的日志信息提交到syslog就可以了。</p>
+<p>日志权限需要管理员仔细衡量。这些权限中查看权限或许最为关键。一般而言黑客会特别照顾日志文件。大多数文件因此应当设置成权限600.</p>
+<p>/var目录应当是所有用户都有权限访问的。但是用户不能在/var下删除log/目录。用户查看log/里面的内容也是允许的。但是用户不一定能查看具体某个应用程序的日志。</p>
+<p>专门为日志文件建立一个组，以使得组里的其它成员有查看它的权限也是不错的。注意这里只是说日志属于某个组，而不是日志属于某个特殊用户。一个用户可以属于多个组，通常从组中得到的权限是各个组之和。</p>
+<p>从一个具体的应用程序到日志文件的过程大致是，应用程序首先得使用syslog程序，这样以来就可以把日志提交到syslog系统。这一过程中得保证运行应用程序的当前用户或者进程有向syslog提交日志的权利。然后就是由syslog负责整理日志了。由于syslog是以root的身份执行，因此它总能创建出日志文件，后续的行为只需要chgrp命令修改日志所属组就可以了。特别是修改日志文件所属组的行为可以通过syslog完成。</p>
+<h2 id="系统日志的层次安排">系统日志的层次安排</h2>
+<p>/var/log下的常见日志</p>
+<p>一般来说secure,auth.log与sudo.log文件都不应当由一般用户查看。除了读限制，应当禁止除了属主外的任何人对日志文件的写权限。</p>
+<p>一般来说：</p>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left">auth.log</td>
+<td align="left">由su等程序产生，负责授权</td>
+</tr>
+<tr class="even">
+<td align="left">boot.log</td>
+<td align="left">系统启动脚本的输出</td>
+</tr>
+<tr class="odd">
+<td align="left">boot.msg</td>
+<td align="left">内核消息缓冲的存储</td>
+</tr>
+<tr class="even">
+<td align="left">cron</td>
+<td align="left">cron的执行情况与出错信息</td>
+</tr>
+<tr class="odd">
+<td align="left">cups</td>
+<td align="left">与打印有关的信息</td>
+</tr>
+<tr class="even">
+<td align="left">daemon.log</td>
+<td align="left">所有与守护进程相关的信息</td>
+</tr>
+<tr class="odd">
+<td align="left">debug</td>
+<td align="left">调试输出</td>
+</tr>
+<tr class="even">
+<td align="left">dmesg</td>
+<td align="left">内核输出消息的缓冲</td>
+</tr>
+<tr class="odd">
+<td align="left">dpkg.log</td>
+<td align="left">软件包管理日志</td>
+</tr>
+<tr class="even">
+<td align="left">faillog</td>
+<td align="left">不成功的登录企图</td>
+</tr>
+<tr class="odd">
+<td align="left">messages</td>
+<td align="left">经常是系统日志文件</td>
+</tr>
+<tr class="even">
+<td align="left">secure</td>
+<td align="left">sshd,sudo等，保密的授权信息</td>
+</tr>
+<tr class="odd">
+<td align="left">syslog</td>
+<td align="left">主要的系统日志文件</td>
+</tr>
+<tr class="even">
+<td align="left">warn</td>
+<td align="left">所有的警告级与出错级消息</td>
+</tr>
+<tr class="odd">
+<td align="left">wtmp</td>
+<td align="left">二进制记录的所有登录记录</td>
+</tr>
+<tr class="even">
+<td align="left">yum.log</td>
+<td align="left">软件包管理日志</td>
+</tr>
+</tbody>
+</table>
+<p>具体文件因系统不同而有差异，并且因使用的系统日志守护进程的不同而有异。</p>
+<h3 id="内核和启动日志">内核和启动日志</h3>
+<p>内核的日志机制是通过让内核把它的日志项保存在一个大小有限的内部缓冲区来做到的。缓冲区具有适当的大小，既足以容纳内核引导是产生的所有消息，又要节省内存用量。一旦系统启动完成，用户进程应当能够访问内核的日志缓冲，最终处理其内容。各个发行版本一般使用dmesg命令并将其输出重定向到/var/log/dmesg.（因发行版而异）。</p>
+<p>内核当前运行的日志是通过klogd内核线程处理的。在正常运行方式下，klogd将内核产生的日志发送到一个文件或者syslog守护进程。一般情况下syslog依照kern中的规则处理这些日志，并将其发送到/var/log/messages文件。</p>
+<p>dmesg与klogd都有一个选项可以设置内核控制台的日志级别。这实际上是同内核进行对话。如dmesg就使用了-n选项。内核的日志级别分为7级（第7级称为调试级，输出最多）。</p>
+<p>启动脚本的日志可以没有内核日志机制做得好。</p>
+<h2 id="日志管理与分析工具">日志管理与分析工具</h2>
+<h3 id="logrotate">logrotate</h3>
+<p>logrotate用于管理日志文件，它的基本功能也就是作为一个过护进程，定期检测日志文件并对日志文件进行转储的操作。一般情况下在/etc/cron.daily下都可以发现logrotate这一个文件。也就是logrotate的计划任务。</p>
+<p>原则上说logrotate应该在syslog之后讲述。不过我们可以把logrotate仅看成是一个定期分隔文件的程序而不去管它分隔的是怎样的文件类型，这才是它的功能的完整的应用领域。</p>
+<p>前面我们说了logrotate在cron.daily下面定期运行。实际上在crontab中运行它的命令以及参数是</p>
+<figure class="highlight plain"><figcaption><span>.shell&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/logrotate /etc/logrotate.conf 2&gt;&amp;1 | tee $TMPF</div></pre></td></tr></table></figure>
+<p>所以我们知道它的功能是读取logrotate.conf文件并执行。</p>
+<p>在该crontab文件下还执行的功能是，如果logrotate异常退出，就向syslog发送一个logrotate运行失败的cron.warning消息。</p>
+<p>所以接下来就要学习logrotate.conf的配置了。</p>
+<p>logrotate的主配置文件是logrotate.conf,但是在该文件中有一条命令是</p>
+<figure class="highlight plain"><figcaption><span>.shell&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">include /etc/logrotate.d</div></pre></td></tr></table></figure>
+<p>所以在目录下才是针对每个程序的配置。主配置文件一般参考logrotate(8)。</p>
+<p>针对某些文件的配置格式为：</p>
+<figure class="highlight plain"><figcaption><span>.shell&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$&#123;path_match&#125; &#123;</div><div class="line">    $&#123;rotate_command_list&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>表示对某一个配置文件执行哪些操作。</p>
+<p>实在不想再学习logrotate的配置文件了。又得学习一种配置语言。想写的时候参考实时手册页就可以了。</p>
+<h2 id="syslog日志分发程序">syslog日志分发程序</h2>
+<h3 id="系统事件日志程序">系统事件日志程序</h3>
+<p>syslog最初是由Eric Allman编写的一个综合日志记录系统。syslog具有两个重要的特性。首先它能让消息按照其来源和严重级别排序；其次是能够把消息送到各种目的地，包括日志文件，用户终端，甚至是其它计算机。这给予syslog以极大的灵活性。</p>
+<p>尽管如此syslog也有一些缺点。所以已经开发出几种替代方案。比如syslog-ng.以及圣地亚哥超级计算中心的sdscsyslog.除此之外，SUSE上使用的是rsyslog.</p>
+<h3 id="syslog的体系结构">syslog的体系结构</h3>
+<p>syslog由三个部分组成。其一是syslog守护进程，其二是库调用，其三是logger提交日志的命令。</p>
+<p>syslog在系统启动后连续运行。懂得syslog的应用程序把日志发送到/dev/log文件，然后由syslog守护进程读取消自息并根据配置文件分发信息到目的地。syslog接受挂起信号并解释为重新打开配置文件；同时接受TERM信号并使守护进程退出。</p>
+<p>syslog守护进程还会把它的进程PID写入到/var/run/syslogd.pid文件里。这使得向它发送信号变得比较容易，如： kill -HUP $(/bin/cat /var/run/syslogd.pid)</p>
+<p>因为logrotate就经常要求syslog重新读取相关的日志文件。</p>
+<p>守护进程使用/etc/syslog.conf配置文件。</p>
+<p>其它的syslog程序通常也支持类似于syslog.conf配置文件里的语法。</p>
+<p>配置文件的基本格式是：</p>
+<figure class="highlight plain"><figcaption><span>.shell&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$selector   $action</div></pre></td></tr></table></figure>
+<p>其中<code>$selector</code>的基本格式为<code>$facility.$level</code>.表示的含义是属于这一类别的某个等级的日志将会采取<code>$action</code>所指定的行为处理。<code>$facility</code>与<code>$level</code>都是由syslog规定好了的取值范围。一般情况下，比如cron代表来自cron的日志，daemon代表来自系统守护进程，而kern代表来自内核，local0-7代表来自本地的8种类型，user代表来自用户进程，syslog代表syslog内部消息。级别从低到高依次是debug, info, notice, warning, err, crit, alert, emerg.这些级别的具体含义由用户安排。</p>
+<p>facility支持使用星号通配。</p>
+<p><code>$action</code>可以是一个本地文件名，或者<code>@hostname</code>,或者<code>@ip</code>,或者用户列表，或者<code>fifoname</code>,或者<code>*(代表所有用户)</code>。在<code>$action</code>前面加一个短划线代表写入文件后不执行sync命令。syslog对待一条日志的行为类似于一个匹配器。前面说到<code>$selector</code>的格式。实际上syslogd还支持语法糖的形式，允许一条匹配应用多个规则。分号表示取并区间。</p>
+<p>具体来说<code>$f.$l</code>表示<code>$l</code>及以上，<code>$f.=$l</code>表示只匹配该级别， <code>s1;s2</code>表示选择器取并，在s1及s2之间。</p>
+<p>syslog守护进程在启动时默认是不接收其它机器的消息的，除非是以-r选项启动的。并且syslog如果从网络接收到一条日志，无论符合哪一<code>$selector</code>都不会转发，除非使用了-h选项。开机时候的syslog选项可以从/etc/init.d/syslog里配置。</p>
+<h3 id="站点设计方案">站点设计方案</h3>
+<p>在一个小型站点中重要的系统错误和警告保存在每台计算机的文件当中就可以了。但是在在个大型的网络中必须有中央日志记录。有了中央日志记录的话，大量的日志信息就会处于可管理的状态，而且运气好的话还能使破坏计算机安全的人无法访问到审计数据。（这要求站点级的防火墙禁止从外部向syslog提交信息。）</p>
+<p>一般来说选择一台稳定的机器作为日志记录服务器，并且最好有很好的安全措施而且登录用户不多的一台机器。其他的计算机可以使用保存在中央主机上的通用配置文件。这样一来只需要维护两份不同的syslog.conf文件。</p>
+<p>syslog服务器应当具有足够的安全性。其安全性可通过防火墙对于连接的控制，以及系统管理员访问的途径体现。</p>
+<h3 id="syslog应用">syslog应用</h3>
+<p>有许多程序或守护进程使用了syslog系统。并且通过logger命令，一般脚本也可以向syslog发送某些信息。如果要了解可详细的信息，可能需要查找POSIX相关规范。</p>
+<p>logger的通常用法是</p>
+<figure class="highlight plain"><figcaption><span>.shell&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">logger -p $selector &quot;$&#123;messages&#125;&quot;</div></pre></td></tr></table></figure>
+<p>该命令可以用于调试syslog.方法是先在配置文件中添加一个指令选择器的地址，然后使用logger向该选择器写入指定的信息。</p>
+<p>在应用的时候都忽略了权限的问题。但是我们应该知道让任何人都有发送日志的权利也是不应该的。</p>
+<h2 id="日志分析工具">日志分析工具</h2>
+<p>比如swatch, logcheck, logwatch.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+            <a href="/tags/日志/" rel="tag"># 日志</a>
+          
+            <a href="/tags/log/" rel="tag"># log</a>
+          
+            <a href="/tags/syslog/" rel="tag"># syslog</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Linux-Daemon/" rel="next" title="linux下的守护进程">
+                <i class="fa fa-chevron-left"></i> linux下的守护进程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/周期性进程与crontab/" rel="prev" title="周期性进程与crontab">
+                周期性进程与crontab <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="en//Linux-Log/"
+           data-title="Linux下的日志记录及其策略" data-url=".//Linux-Log/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Istyasna" />
+          <p class="site-author-name" itemprop="name">Istyasna</p>
+          <p class="site-description motion-element" itemprop="description">GO FORTH now and create masterpieces of the publishing art!</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/irhawks" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://coding.aliyun.com/u/irhawks" target="_blank" title="Aliyun">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Aliyun
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="./" title="Title" target="_blank">Title</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hainu.edu.cn" title="Hainan University" target="_blank">Hainan University</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#几种对待日志的策略"><span class="nav-number">1.</span> <span class="nav-text">几种对待日志的策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于扔掉日志"><span class="nav-number">2.</span> <span class="nav-text">关于扔掉日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#轮换日志文件"><span class="nav-number">3.</span> <span class="nav-text">轮换日志文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存档日志文件"><span class="nav-number">4.</span> <span class="nav-text">存档日志文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux日志文件"><span class="nav-number">5.</span> <span class="nav-text">linux日志文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统日志的层次安排"><span class="nav-number"></span> <span class="nav-text">系统日志的层次安排</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内核和启动日志"><span class="nav-number">1.</span> <span class="nav-text">内核和启动日志</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志管理与分析工具"><span class="nav-number"></span> <span class="nav-text">日志管理与分析工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#logrotate"><span class="nav-number">1.</span> <span class="nav-text">logrotate</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#syslog日志分发程序"><span class="nav-number"></span> <span class="nav-text">syslog日志分发程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统事件日志程序"><span class="nav-number">1.</span> <span class="nav-text">系统事件日志程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#syslog的体系结构"><span class="nav-number">2.</span> <span class="nav-text">syslog的体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#站点设计方案"><span class="nav-number">3.</span> <span class="nav-text">站点设计方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#syslog应用"><span class="nav-number">4.</span> <span class="nav-text">syslog应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志分析工具"><span class="nav-number"></span> <span class="nav-text">日志分析工具</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Istyasna</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+<!-- I manually add this to enable bootstrap style dropdown menu -->
+<script type="text/javascript" src="/js/src/bootstrap/dropdown.js"></script>
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"irhawks"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

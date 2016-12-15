@@ -5,7 +5,10 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans,en,default">
+<!--
+<html class="theme-next mist use-motion" lang="zh-Hans,en">
+-->
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -107,7 +110,7 @@
 <meta name="description" content="GO FORTH now and create masterpieces of the publishing art!">
 <meta property="og:type" content="website">
 <meta property="og:title" content="80x24">
-<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:url" content="./page/2/index.html">
 <meta property="og:site_name" content="80x24">
 <meta property="og:description" content="GO FORTH now and create masterpieces of the publishing art!">
 <meta name="twitter:card" content="summary">
@@ -140,7 +143,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/page/2/"/>
+  <link rel="canonical" href="./page/2/"/>
 
 
 
@@ -261,12 +264,12 @@
         </li>
       
         
-        <li class="menu-item menu-item-sitemap">
+        <li class="menu-item menu-item-atom">
           <a href="/atom.xml" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-rss"></i> <br />
             
-            Sitemap
+            Atom订阅
           </a>
         </li>
       
@@ -283,6 +286,11 @@
           </a>
         </li>
       
+          <li class="menu-item"><a href="/page/2/index.html">简体中文</a></li>
+          
+          <li class="menu-item"><a href="/en/page/2/index.html">English (US)</a></li>
+          
+
     </ul>
   
 
@@ -299,6 +307,7 @@
 
     </div>
   
+
 </nav>
 
 
@@ -322,7 +331,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/06/08/agda-lang/">
+  <link itemprop="mainEntityOfPage" href="./modelica-basics/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Istyasna">
@@ -347,8 +356,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/06/08/agda-lang/" itemprop="url">
-                  Agda语言介绍
+                <a class="post-title-link" href="/modelica-basics/" itemprop="url">
+                  快速了解Modelica与OpenModelica建模1-基本知识
                 </a>
               
             
@@ -362,8 +371,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-08T00:00:00+08:00">
-                2015-06-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-11T00:00:00+08:00">
+                2016-03-11
               </time>
             
 
@@ -376,7 +385,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:17:12+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:06:52+08:00">
                 2016-12-14
               </time>
             
@@ -391,8 +400,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程语言/" itemprop="url" rel="index">
-                    <span itemprop="name">编程语言</span>
+                  <a href="/categories/仿真/" itemprop="url" rel="index">
+                    <span itemprop="name">仿真</span>
                   </a>
                 </span>
 
@@ -406,8 +415,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/06/08/agda-lang/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/08/agda-lang/" itemprop="commentCount"></span>
+                <a href="/modelica-basics/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/modelica-basics/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -434,11 +443,12 @@
 
       
         
-          <p>Agda语言是使用了依存类型的函数式编程语言。最初发表于2007年，是在Ulf Norell的博士论文里面。目前实践当中，函数式语言中使用依存类型还不多。但是依存类型在可以预见的未来内会继续发展。目前发展依存类型的函数式语言的动力在于形式证明。目前的版本是Agda2，基本上是重写了。Agda2不像Coq的地方在于，Agda没有对于tactics与函数式proofs的支持。Agda 2语言有对于数据类型、模式匹配、记录、模块、Haskell语法的支持。Agda 2是基于Zhaohui Luo的UTT类型理论，与Martin-L&quot;of类型理论（也就是直觉类型论）有一点的不同。</p>
-<p>Agda的值得提及的特性有归纳类型定义（这在Coq中也存在）、依存类型的模式匹配机制（允许在依存类型系统下使用模式匹配）、元变量（允许变量在运行的时候被细化和修改，因此支持程序在运行的时候增量构造，部分代替了tactics在Coq中的作用）、证明自动化（通过反射实现，以及允许程序在5s内枚举可能的证明），以及终止检查（因为Agda是一个完全的语言，能够保证每个程序都必然终止，以此保证语言的一致性，借助于Foetus termination checker实现终止检查）。</p>
+          <p>Modelica里面倒是有不少的面向对象的建模的工具，也支持PetriNet的描述。而且最近也有相关的论文的发表<span class="citation">(Proß et al. 2012)</span>。OpenModelica上面的PNlib工具包倒好像是不错的。</p>
+<p>OpenModelica是其一个实现。OpenModelica环境由若干个子系统构顶成。包括文本模型与图形模型编辑器、编译器调试器与执行环境、笔记本、优化器以及Eclipse插件。其中的编译子系统用于将Modelica语言编译成C代码。面向Eclipse的插件被称为MDT。最基本的方式自然是安装之后点击OMShell进入文本编辑环境。里面输入Modelica的代码。OMShell命令会打开一个新的窗格，使用OMShell-terminal命令可以直接在Linux终端中进入OpenModelica的环境。这时进入的就是交互式模式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">model A Integer t= 1.5; end A;</div><div class="line">instantiateModel(A);</div><div class="line">model C</div><div class="line">Integer a;</div><div class="line">Real b;</div><div class="line">equation</div><div class="line">    der(a) = b;</div><div class="line">    der(b) = 12.0;</div><div class="line">end C</div></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/06/08/agda-lang/#more" rel="contents">
+            <a class="btn" href="/modelica-basics/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -479,7 +489,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/06/06/elixir-lang/">
+  <link itemprop="mainEntityOfPage" href="./datatype-abstraction/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Istyasna">
@@ -504,8 +514,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/06/06/elixir-lang/" itemprop="url">
-                  Elixir：建立在Erlang虚拟机上的函数式语言
+                <a class="post-title-link" href="/datatype-abstraction/" itemprop="url">
+                  常见的数据结构的抽象
                 </a>
               
             
@@ -519,8 +529,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-06T00:00:00+08:00">
-                2015-06-06
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-15T00:00:00+08:00">
+                2016-01-15
               </time>
             
 
@@ -533,7 +543,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:20:36+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:04:04+08:00">
                 2016-12-14
               </time>
             
@@ -548,8 +558,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程语言/" itemprop="url" rel="index">
-                    <span itemprop="name">编程语言</span>
+                  <a href="/categories/计算机科学/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学</span>
                   </a>
                 </span>
 
@@ -563,8 +573,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/06/06/elixir-lang/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/06/elixir-lang/" itemprop="commentCount"></span>
+                <a href="/datatype-abstraction/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/datatype-abstraction/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -591,661 +601,23 @@
 
       
         
-          <p>Elixir是建立头Elrang虚拟机上的函数式、并发的、通用的编程语言。Elixir是一个BEAM（Erlang虚拟机的名称）上面的一个比较新的编程语言。Elixir的思想是所有的事物都看成是表达式。现代编程语言通常都具有开些诸如泛型编程、函数式编程、面向对象编程，对并发、并行、异步、非阻塞都有很好的支持，支持多态特性。在函数式编程方面上也支持模式匹配。类型系统当然更为严谨。此外，模式匹配、惰性求值、unicode支持、多态、文档注释甚至文学编程特性、高阶函数也往往都具备。</p>
-<p>Elixir的REPL环境是iex命令。Elixir的语言的扩展名是exs。</p>
-<p>Erlang的虚拟机的配置是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">erl -name node06@10.0.0.151 --cookie a</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/06/06/elixir-lang/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/06/06/erlang-concurrency-test/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/06/06/erlang-concurrency-test/" itemprop="url">
-                  Erlang编程语言中的并发小测试
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-06T00:00:00+08:00">
-                2015-06-06
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:21:30+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程语言/" itemprop="url" rel="index">
-                    <span itemprop="name">编程语言</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2015/06/06/erlang-concurrency-test/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/06/erlang-concurrency-test/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>已经接触了很多的编程语言。大概分成Lisp一系的、Haskell一系的，Erlang一系的、JVM一系的、C#一系的，以及OCaml一系的语言。但是自己感觉，分类上，可能还是按照类型的动态与静态，是否是纯函数式的，是否支持面向对象特性，是否支持自动类型推断（其实现代编程语言大概都支持了），求值的时候是否是惰性求值的，以及对于并发和并行的支持等。函数式语言的特性大概就这么看。其它的方面，说是语言的包管理系统、编译环境与版本控制。如果是在虚拟机上，那么对虚拟机上的原生语言的支持等。</p>
-<p>看到这么多编程语言，自己感觉很多的设计模式都是内置在函数式语言中的，比如自己设想的在改变一个变量的时候，同时产生一种日志记录，已经在Clojure中完美实现。其它的语言特性也很多。</p>
-<p>Erlang上面还建立有Eixir编程语言。语言更进一步。Erlang是运行在EVM虚拟机上的。有个时候，一些并发处理的机制与面向对象其实是不谋而合的。由于设计模式已经融入其中，自己感觉，设计模式是一种比较高级的抽象了。</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/06/06/erlang-concurrency-test/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/06/02/elastic-search/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/06/02/elastic-search/" itemprop="url">
-                  ElasticSearch搜索软件
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-02T00:00:00+08:00">
-                2015-06-02
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:20:08+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/运行维护/" itemprop="url" rel="index">
-                    <span itemprop="name">运行维护</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2015/06/02/elastic-search/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/02/elastic-search/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>这里参考了Gitbook上面中文翻译的<a href="https://www.gitbook.com/book/fuxiaopang/learnelasticsearch/details" class="uri">https://www.gitbook.com/book/fuxiaopang/learnelasticsearch/details</a>。也就是ElasticSearch权威指南。自己觉得现在正面临的问题，也就是在文档中说的：已经被数据淹没，我们创造的系统产生的数据可以瞬间轻而易举地将我们压跨。现在的科技只是致力于如何存储数据，并能将拥有大量信息的数据仓库结构化。而一旦我们想从大量的数据中得出结做做决策的时候，美好的一天就要被毁灭了。不可否认的是，没有数据分析，数据确实要成为一种负担了。所以，我们必须建立能够分析数据的工具，帮助我们从数据中得到知识，得到决策的依据。</p>
-<p>ElasticSearch适用于全文搜索、结构化数据的实时统计。Elastic并不只是全文搜索，还具有结构化搜索，统计、查询过滤、地理定位、自动完成等。ElasticSearch也可以应用于生产的环境。所以对我们而言是比较合理的。自己理想中的文献检索，特别是学术文献检索系统，也应该就是这样的。个人感觉，希望ElasticSearch成为自己一生的小伙伴。</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/06/02/elastic-search/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/06/01/solr/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/06/01/solr/" itemprop="url">
-                  Apache的企业搜索工具
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-01T00:00:00+08:00">
-                2015-06-01
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T16:36:16+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2015/06/01/solr/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/01/solr/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>企业级的应用相对于普通的软件相比，体现了更多的理性，体现了更多的需求的驱动。对普通的程序员来讲，学习企业级的软件提供了一个从底层的程序员上升到资深架构师的问题。不同层次的程序员，思考问题的方式也不一样。到了架构的层面，更多的时候讨论的是架构的缺点与优点。这个时候，根本不是一味地讨论程序有哪些功能。技术不等于产品，产品不等于市场，市场不等于盈利。但是一般程序员做的，只能是基本的技术。掌握架构师的技能，大概是可以做到高级的技术、产品以及市场。</p>
-<p>不多说然它的事情。今天的主要的目的是帮助实现一个全文搜索引擎。全文搜索引擎在企业中的应用可以说是信息检索的一个重要的应用。整个的框架的部分为自然语言处理等奠定了基础。没有人工智能的时候，可以是传统的检索的方式。有人工智能与自然语言处理的时候，可以以插件的形式提供新的功能。但是这个架构是稳定的。</p>
-<p>通过查找网络上的资料。比较有名的企业级应用的全文搜索引擎有Apache Solr、Sphinx、Elasticsearch等。其中，除了Sphinx，都是基于Lucene的。Java平台上还有所谓的Hibernate Search。一个技术到达企业级别的应用，一般而言是在编程与布署的层面上做一些更大的问题。比如，Lucene作为信息检索基础库，在编程层面上就可以做，许多软件的帮助文档就是使用Lucene作为索引的。但是到了企业级的应用上，Lucene就只是一个基本的IR（Information Retrival）库了。在Solr上面可能有更多的集成。所以，目前我们把Solr和Lucene的分界面看成是编程与架构的分界线。并以Lucene作为案例分析编程与架构是如何关联的。</p>
-<p>本章的计划是，首先介绍Lucene在信息检索中的基础功能与用法，然后讲解Solr等全文搜索引擎在企业搜索中的应用。再然后是讨论一下为什么全文搜索是必要的。以此为机会，了解编程是如何走向商业实践的，掌握怎样的技术才能够把握技术发展趋势。</p>
-<h2 id="lucene软件介绍">Lucene软件介绍</h2>
-<p>Apache Lucene是一个开源的IR软件库，原始版本是由Doug Cutting在Java语言之下写成的。目前以Apache Software License发布。目前Lucene程序已经移植到Delphi、Perl、C#、C++、Python、Ruby与PHP等多种语言。（这种移植可能是按照Lucene的架构在另外的语言中重新设计它，而不是简单提供一个接口那么简单）。</p>
-<p>Lucene原始版本写于1999年。当时是一个SourceForge项目。后来加入Apache软件基金会，并于2005年成为Apache的一个顶级的项目。Lucene曾经包括许多的子项目，如Lucene.NET、Mahout、Solr、Nutch。现在Solr已经独立出来，而Mahout、Tika等项目也已经成为独立的顶级项目。4.0版本是2012年至2015年主要的开发版本。而2015年Lucene升级到了5.0版本。</p>
-<p>Lucene所满足的应用主要有两个方面。第一个方面是应用程序对于全文检索数据的需求，第二个方面是对于单机或者互联网的个性化的数据集上的搜索的需求。比较典型的应用有，Eclipse的帮助子系统使用Lucene作为全文搜索引擎；Apache的网站使用Lucene作为全文检索的引擎。</p>
-<p>Lucene的核心逻辑架色是把一个文档document看成是由fields文本构成的结构。这种结构使用Lucene的API独立于文件格式。因此，从PDF、HTML、Word、Open Document中抽取出来的文本都可以被Lucene所识别。对于许多的格式，只要它们的文本信息能够被抽取出来，Lucene就可以利用它构建全文引擎。</p>
-<p>这里，我们对Lucene的功能深入思考一下。首先，音乐、图片、视频等信息基本上与Lucene没有什么关系，因为里面没什么文件信息。其次，Lucene是假设文件信息已经从PDF等文件格式中抽取出来，Lucene项目本身并不设计这样的抽取器。另外，Lucene本身并不包含HTML挖掘与解析的功能。但是有一些上层的库可以弥补。比如Apache Nutch提供了HTML抽取（挖掘）与解析的功能、Apache Solr与Elasticsearch这两个企业级的搜索服务器提供了完整的架构。还有Compass、DocFetcher、Swiftype、Kinosearch、Apache Lucy、Luke等工具也对Lucene做了不同程度的补充。</p>
-<p>应当注意的是，信息检索程序虽然与搜索引擎有关，但是两者仍然是不同的概念，不应该混成同一个东西。</p>
-<p><strong>Lucene实现的特点</strong></p>
-<p>Lucene具有如下的特点：</p>
+          <p>为了编程的顺利进行，自然有一种控制复杂性的措施。而且复杂性的控制从编程语言一开始的时候就有了，成为所谓的内部模式：内建的数据结构，甚至是语言机制里面的内容。现在我们看一些常见的数据类型。</p>
+<h3 id="数组">数组</h3>
+<p>按照Wiki的要求，应该按照数据结构和数据类型两个不同的角度讲数组array。作为数据结构的数组是由一系列元素（值或者变量）构成的，每个元素数数组由键或者索引来标识。按照要求，数组里的元素的存储应该可以按照数学公式来计算，也就是说，数组的标识不能是简单的字符串，而要使用一个域，特别是使用整数来标识。</p>
+<p>数组在历史上出现得是非常早的，经常作为列表list以及字符串string的实现。在现代计算机当中，内存通常都是按照一维数组的方式来计算的。而现代计算机中的优化，特别是向量处理机，都是针对数组的操作而优化的。（数据结构就是数据结构，跟它们使用硬件或者软件实现并没有关系）。</p>
+<p>数组的一个大优势在于所使用的下标可以在运行时候被计算出来。但是需要注意的是，在底层数据结构也可能非常复杂。数组可能用哈希表、链表、查找树等结构实现。总而言之，底层数据结构与顶层数据结构有很大的不同。1945年John von Neumann写了第一个数组排序的算法。</p>
+<p>作为抽象数据类型的列表，包含的操作有：</p>
 <ol style="list-style-type: decimal">
-<li>索引格式独立于应用平台。Lucene的索引文件格式是内部定义的八字节为基础的格式，不受不同的系统与不同的平台的影响。因此应用程序能够共享建立的索引文件。</li>
-<li>在传统全文检索引擎的倒排索引（不是由记录来确定属性的值，而是由属性值来确定记录的位置。这种索引的索引表中的每一项都包括一个属性值和具有该属性值的各记录的地址，这种方式正好与数据库中的索引相反）的基础上，实现分块索引（针对新的文件建立小文件索引，提升索引速度，然后与原有索引合并）。</li>
-<li>采用面向对象的思想与架构设计，方便扩充新的功能。</li>
-<li>设计了独立于语言与文件格式的分析接口。用户可以通过实现文本分析接口来扩展新的语言和文件格式。</li>
-<li>默认已经有一套强大的查询引擎，实现了布尔操作、模糊查询、分组查询等功能。</li>
+<li>创建一个空表；</li>
+<li>测试当前列表是否为空；</li>
+<li>添加一个元素到列表的第一个位置；</li>
+<li>添加一个元素到列表的最后位置；</li>
+<li>得到列表的第一个元素；</li>
+<li>引用列表中除了第一个元素之外的其它元素。</li>
 </ol>
-<p>面对已经存在的商业的全文检索引擎，Lucene也具有相当的优势。比如开源发行、方便扩展、可以扩展支持中文、扩展支持HTML与PDF等格式。</p>
-<p>Lucene的工作的时候采用的是索引检索。因此，可以把任务分割成建立索引与基于索引的查询两个阶段。在建立索引的阶段，做一些指定索引文件位置与索引特性的选项，然后添加字段。在查询索引的阶段，读取索引文件，设置查询格式，然后输出结果。Lucene的操作的对象是很明确的，就是文件系统当中的文件作为索引文件。运行的计算模型是传统的单机模式。</p>
-<p>Lucene不是一个看爬虫。如果需要爬虫功能的话，应该参考Nutch；Lucene也不是一个完整的应用，若需要，应该参考PoweredBy；Lucene也不是实现了PageRank等算法的链接分析算法库，若需要后者，应该参考Nutch与Hadoop。它只是一个实现了基于文本的搜索的算法（在其上可以施行PageRank与Arc等链接分析算法）。</p>
-<p>Lucene的一个Index是文档的集合Collection；一个文档是Fields的集合；一个Field则由描述文本内容的metadata构成。一个Field里面可以包含多个属性。</p>
-<p>Lucene上面的编程任务可以分成两类。第一类是写代码以将Documents添加到index当中；第二类则是写代码将用户的查询转换成Lucene查询，并写Lucene提交查询，然后显示结果。整个的流程可以看成：围绕Index文件，一方面是提取文档元数据，把元数据通过IndexWriter添加到Index文件中。另一方面，通过IndexSearcher查询Index文件。</p>
-<p>Lucene本身并不关心文件的格式。因为文件在添加之前，都要构造出一个索引字符串，不论被索引的文档是PDF还是纯文本。这样以来，Lucene必须结合一些好的开源的文档格式抽取器（如Tika）。在搜索的阶段，Lucene Query Parser把字符串转换成一系列的编程对象，由这些对象支持查询。</p>
-<p>在从文档构造Index文件的过程中，需要经过“分析”。分析的任务是将原始的文本转化成可被索引的记号流。Lucene使用Analyser、Tokenizer与TokenFilter类负责这些任务。其中TokerFilters就是细节性地修正产生的Token了。</p>
-<p>除此之外，Lucene还有一些高亮匹配文本、拼写检查、查找相似页面等功能。Luke是其上的一个前端。可以用它来查看索引文件，并执行相关的查询。</p>
-<h2 id="solr介绍">Solr介绍</h2>
-<p>Solr于2006年成为Apache的一个项目。目前常把Lucene与Solr放在一起讲述。目前的搜索模型有许多种，布尔模型、向量空间模型、语言模型、概率模型等。向量空间模型用得大概是最多的。经典的TF-IDF方法就是其中之一。Lucene的模型是修改过的向量空间模型，采用这样的原理检索文档。</p>
-<p>Solr是一个开源的企业搜索服务器。基于Lucene。具有XML/HTTP API。在工作的时候支持cache、replication、web管理等功能。Solr实现中，借鉴了许多Lucene的最佳实践。方便扩展，并且安装与配置都很方便。在客户端方面，还设计了针对许多语言的接口。Solor的安装与启动都很简单。流程是：下载、运行。想要建立索引的话，cd到examples docs目录下，运行 <code>java -jar post.jar *.xml</code> 就可以了。</p>
-<p>Solr的schema.xml描述了用户的数据与数据是怎样被处理的。它还允许用户添加除了字符串以外的一些类型（整型、浮点等）。solrconfig.xml文件描述了用户是怎样与数据交互的。配置了数据放置的位置、性能选项、以及允许的操作权限等。（企业级的应用中，许多的可选项一般是必然需要的）。</p>
-<p>在Solr中添加索引一般需要客户端通过HTTP发送XML格式的文档表示添加索引的企图。通过HTTP与XML格式请求，客户端也可以完成删除文档、更新文档的操作。同样地，想要搜索文件，也通过客户端连接HTTP的方式请求指定的URL。Solr也有高亮、更多、拼写检查等功能。</p>
-<p>Solr的高级功能有支持提高查询效率的副本功能、负载均衡、缓存等。Lucene采用的是嵌入到应用程序里面进行工作，而Solr采用的是作为单独的网络服务进行工作。</p>
-<p>想具体测试Solr的性能，可以使用HTMLUNIT（Google）等工具。Solr的典型的使用场景是在Lucene索引文件的基础上，建立一个Solr Search Server。然后把它布署在HTTP Server应用服务器之上，用户通过访问应用服务器，间接使用Solr的服务。</p>
-<p>至于传统CMS想使用Solr作为索引，则可以使用Curl与XSTL工具先进行转换，然后以XML的格式存到Solr当中。</p>
-<p>在语言支持上面，Scala的Play框架可以异步调用Solr查询引擎。the play.api.libs.ws.WS library to call Solr and use Plays JSON support to extract the result (like in the example below) or is there any easier/faster way。网上有一些已经存在的好的实践方式，自己可以吸纳它们在Scala中是如何与Solr交互的。</p>
-<p>Solr与自己的应用集成的时候，总是通过构造XML格式的添加文档、删除文档等命令实现。只要应用程序知道Solr服务器的URL就可以做到了。值得注意的是，Solr应当配置为utf-8编码，返回的结果也要使用utf-8转码。</p>
-<p>注：Apache有一个叫OpenEJB的开源项目。似乎也值得一试。<a href="http://www.crawl-anywhere.com/" class="uri" target="_blank" rel="external">http://www.crawl-anywhere.com/</a>上面给出了一个基于Solr的爬虫设计器。Mahout现在是用于机器学习，特别是用于协同过滤。在Mahout上面还有所谓的Giraph，用于图模型。</p>
-<p>Apache的Solr官方网站上有Solr的快速入门及参考手册。但是在Solr快速入门中，介绍的最初的方式是纯文本的东西，比如XML、JSON、CSV格式的文档的查询。<a href="http://www.ibm.com/developerworks/cn/java/j-solr-lucene/#download" class="uri" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/java/j-solr-lucene/#download</a>上面的教程似乎更具有参考性。IBM上面提到了搜索引擎的新的用法。因为之间我们的理解都是搜索引擎用于搜索文本。但是Solr 4.x开始，发现了新的应用的需求。搜索引擎的核心被定义为关乎快速的、高效的过滤，然后依据某种相似度的概念对数据进行归类。搜索引擎还要能够处理稀疏数据和模糊数据，这此数据是现代数据应用程序的标志性特征。Lucene和Solr实现了各种灵活的相似性算法，还能够分析地理空间问题。这些功能使得搜索应用程序与传统的数据库应用程序（甚至是NoSQL应用）之间的界线。现在的Lucene与Solr可以说是不仅集成了数据后端（因而成为一种NoSQL），还可以自己定义复杂数据类型、数据存储、归类与分析功能。虽然搜索引擎不能解决所有的数据问题，然而我们仍然应该跳出众所周知的思维模式。</p>
-<p><strong>其实，很多的数据应用都是借助于搜索与简单的分析可以解决的，并不需要那么严谨的科学研究的模式。</strong></p>
-<p>欲使Solr支持PDF，还需要一些配置。参考<a href="https://wiki.apache.org/solr/UpdateRichDocuments" class="uri" target="_blank" rel="external">https://wiki.apache.org/solr/UpdateRichDocuments</a> 。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/05/24/scala-sbt/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/05/24/scala-sbt/" itemprop="url">
-                  在Debian/Ubuntu系统下面的Java与Scala包
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-05-24T00:00:00+08:00">
-                2015-05-24
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:09:36+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程语言/" itemprop="url" rel="index">
-                    <span itemprop="name">编程语言</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2015/05/24/scala-sbt/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/24/scala-sbt/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="java包目前在ubuntu下面的管理">Java包目前在Ubuntu下面的管理</h2>
-<p>目前的情况是，许多的Java包也安装在系统当中，在系统中的路径是<code>/usr/share/doc</code>、<code>/usr/share/java</code>以及<code>/user/share/maven-repo</code>。三个路径中，<code>/usr/share/java</code>里面用于放置所需要的库，我们可以通过<code>apt-get source libjdom1-java</code>，并在当前目录下解包这个文件，然后就知道jdom1这个jar包是怎样被安装到系统当中去的了。</p>
-<p>这里有一个官方的“为Java库构建deb安装包” <a href="https://wiki.debian.org/Java/MavenBuilder" class="uri">https://wiki.debian.org/Java/MavenBuilder</a> 的指南。思想是利用Maven构建一个deb安装包。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/24/scala-sbt/#more" rel="contents">
+            <a class="btn" href="/datatype-abstraction/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1286,7 +658,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/05/14/julia-lang-types/">
+  <link itemprop="mainEntityOfPage" href="./wikipedia-transition-system/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Istyasna">
@@ -1311,8 +683,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/05/14/julia-lang-types/" itemprop="url">
-                  Julia类型系统与并发
+                <a class="post-title-link" href="/wikipedia-transition-system/" itemprop="url">
+                  维基上定义的传递系统
                 </a>
               
             
@@ -1326,8 +698,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-05-14T00:00:00+08:00">
-                2015-05-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-13T00:00:00+08:00">
+                2016-01-13
               </time>
             
 
@@ -1340,7 +712,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:24:11+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:07:27+08:00">
                 2016-12-14
               </time>
             
@@ -1355,8 +727,19 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程语言/" itemprop="url" rel="index">
-                    <span itemprop="name">编程语言</span>
+                  <a href="/categories/计算机科学/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机科学/计算模型/" itemprop="url" rel="index">
+                    <span itemprop="name">计算模型</span>
                   </a>
                 </span>
 
@@ -1370,8 +753,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/05/14/julia-lang-types/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/14/julia-lang-types/" itemprop="commentCount"></span>
+                <a href="/wikipedia-transition-system/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/wikipedia-transition-system/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1398,11 +781,13 @@
 
       
         
-          <p>一般认为有类型系统的编程语言分成静态类型系统与动态类型系统两大类。静态系统指的是每个程序表达式在程序执行之前都有一个可以计算的类型。而动态类型的类型，只是在运行的期间才被感知。面向对象的编程实践中，经常是在静态类型系统中添加一些灵活的机制。如果代码能够操作不同的类型，便称为是多态。在经典动态类型系统中，多态是显而易见的。</p>
-<p>在理解动态系统的时候，需要注意binding与dispatch的区别。具体地说，绑定是把一个名子与一个类型关联起来，而dispatch指的是给出了方法，然后确定由哪个实现来执行这个方法。Julia’s type system is dynamic, but gains some of the advantages of static type systems by making it possible to indicate that certain values are of specific types. This can be of great assistance in generating efficient code, but even more significantly, it allows method dispatch on the types of function arguments to be deeply integrated with the language. Method dispatch is explored in detail in Methods, but is rooted in the type system presented here.</p>
+          <p>众所周知的是传递系统只是从系统转换的观点来看问题，其理论的根据跟抽象重写系统是一样的，但是可能说明的角度不一样吧。传递系统分成两类，带标签的和不带标签的系统。传递系统在应用于模型检查的时候经常使用带标签的形式。</p>
+<p>Action Language是专门描述状态传递系统STS（state transition systems）的语言。经常用于形式化地创建一系列的模型。PDDL是著名的一种Action Language。</p>
+<p>状态转移系统往往显得太过抽象。感觉好像跟动力系统理论和自动机理论都有一些差别。或许它们是研究离散状态的一种抽象理论吧。状态转移系统自然是关联着状态及其转移的。但是动力系统呢？</p>
+<p>目前，我们似乎可以这样关联状态转移与动力系统理论。所谓的系统，我们关注的还是系统的演化的特性，也就是系统的存在及其演化。那么，自然中心的问题是，系统是怎样随时间变化的？因而，首先的问题就是所谓的对于状态的定义。在动力系统中，状态是由一个实参量标识的，它可以对时间演化可微。而在状态转移系统中，状态是一种不同的数学结构，比如说，状态是一个有穷序列，而时间也是离散的。那么，基于这种认识，似乎结合起来看，所谓的系统理论，就是某个数学结构上面的参数的理论。就像是微分几何中，每一点附上一个特定的数学结构一样，系统理论是演化过程中的每一时间点附上一个状态–似乎系统理论研究的情况，都是底空间是低维的情况。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/14/julia-lang-types/#more" rel="contents">
+            <a class="btn" href="/wikipedia-transition-system/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1443,7 +828,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/05/13/julia-basics/">
+  <link itemprop="mainEntityOfPage" href="./information-geometry/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Istyasna">
@@ -1468,8 +853,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/05/13/julia-basics/" itemprop="url">
-                  Julia编程语言基础知识
+                <a class="post-title-link" href="/information-geometry/" itemprop="url">
+                  信息几何简介
                 </a>
               
             
@@ -1483,8 +868,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-05-13T00:00:00+08:00">
-                2015-05-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-06T00:00:00+08:00">
+                2016-01-06
               </time>
             
 
@@ -1497,7 +882,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:23:47+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:13:56+08:00">
                 2016-12-14
               </time>
             
@@ -1512,8 +897,19 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程语言/" itemprop="url" rel="index">
-                    <span itemprop="name">编程语言</span>
+                  <a href="/categories/数学/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数学/几何/" itemprop="url" rel="index">
+                    <span itemprop="name">几何</span>
                   </a>
                 </span>
 
@@ -1527,8 +923,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/05/13/julia-basics/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/13/julia-basics/" itemprop="commentCount"></span>
+                <a href="/information-geometry/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/information-geometry/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1555,12 +951,13 @@
 
       
         
-          <p>也许这个编程语言才真正贴近科学计算的真实需求。见<a href="http://en.wikipedia.org/wiki/Julia_%28programming_language%29">http://en.wikipedia.org/wiki/Julia_%28programming_language%29</a>。在Ubuntu下面可以直接安装它。</p>
-<p>基本的定位是，发明于2012年，多范式（面向对象、过程、函数式加元编程语言），具有动态类型，以及类型注解功能。受到很多高级动态语言的启发。同样地，它也是一个高级动态编程语言，但是对于高性能数值计算与科学计算非常重视。对于通用编程也有一定的效率。注：其实是2009年开发，2012年释出开源版本。</p>
-<p>Julia具有一个参数类型的类型系统。使用并行与分布式计算，并且可以直接调用C与Fortran的接口库。而且具有自动内存回收的功能。它的浮点数库、线性代数库、随机数生成、快速傅里叶变换以及正则表达式匹配都非常有效率。目前的版本是0.4。</p>
+          <h2 id="认识信息几何">认识信息几何</h2>
+<p>信息几何的方法其实是将统计理论中的参数问题变成额外的一个空间，在这个空间上建立统计函数之间的距离，相当于仍然是使用测度的理论研究问题。这种方法自然对于参数的生成有重要的启示。启示我们为什么要选择这样的参数，这什么参数有这些形态。在扩大的空间当中，自然而然地可以非常方便地研究统计系统的重多的要素。在机器学习中也有更多的应用。</p>
+<p>然而单纯起来看，并非信息是几何的，而是因为分布函数之间的距离就是可以度量的。这样的话，未必形成微分流形，甚至是更一般的内容也可以，比如离散分布与离散参数的问题。总而言之，关键在于考察“所有可能的参数所形成的空间”，而不是“某个参数下的分布”所起的作用吧。</p>
+<p>信息几何有几种经典的方法。第一是基于流形上的Riemann度量的方法，第二种是基于<span class="math inline">\(\alpha\)</span>联络与对偶几何的方法。还可以是基于曲率度量的方法，或者基于信息散度(divergence)的方法。散度在信息什么几何中充当距离函数，用来度量两个点之间的分离度或者差异，但散度不是严格意义上的距离函数。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/13/julia-basics/#more" rel="contents">
+            <a class="btn" href="/information-geometry/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1601,7 +998,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/05/04/scala-features/">
+  <link itemprop="mainEntityOfPage" href="./blog-hexo-1/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Istyasna">
@@ -1626,8 +1023,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/05/04/scala-features/" itemprop="url">
-                  Scala的一些设计特点
+                <a class="post-title-link" href="/blog-hexo-1/" itemprop="url">
+                  Hello World from the Hexo
                 </a>
               
             
@@ -1641,8 +1038,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-05-04T00:00:00+08:00">
-                2015-05-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-01T00:00:00+08:00">
+                2016-01-01
               </time>
             
 
@@ -1655,1056 +1052,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:10:03+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程语言/" itemprop="url" rel="index">
-                    <span itemprop="name">编程语言</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2015/05/04/scala-features/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/04/scala-features/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>首先，Scala中的几乎所有的语言元素都是表达式。也就是返回一个值。另外，Scala中的val实际上是“常量”，或者说，“字面变量”的意思。相当于给常量一个名子。对于编程实践与软件工程具有重要性。</p>
-<p>函数可以用def语句定义也可以使用val语句来定义。主要是看有没有小括号方法。这一点就很容易混少淆了：def与val定义的函数在实质上有什么区别呢？</p>
-<figure class="highlight plain"><figcaption><span>.scala&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">def square(a: Int)  = a * a</div><div class="line">def squareWithBlock(a: Int) = &#123; a * a&#125;</div><div class="line">val squareVal = (a: Int) =&gt; a * a</div></pre></td></tr></table></figure>
-<p>Scala的变量的使用的时候不需要指明类型，而且Scala支持按值传递与按名传递，所以就有了不同的模式。试着把函数定义为 <code>def log(msg: String)</code> 与把函数定义为 <code>def log(msg: =&gt; String)</code> 都不会使 <code>log(MSG + 1 / 0 )</code> 出现编译期错误。然而后者是按名传递，所以1/0不会被求值，也就不会在运行期出现错误。按名传递的优点是可以避免不必要的计算。</p>
-<p>标准的调用类的方式是使用new方法。</p>
-<p>柯里化currying的意思是允许一个函数的多次调用，并且只有最后一次调用的时候返回的是正常的值，中间的所有的调用只是产生一个特定函数（参数被确定了）。</p>
-<p>Traits就像是一个Interface。但是可以有函数体。</p>
-<h2 id="模式匹配特性">模式匹配特性</h2>
-<p>自己中间的时候接触到了模式匹配。模式匹配与switch case语句最大的匹别就是它可以直接匹配一个类型而不单单是匹配在一个值。在支持高阶函数等特性的语言中，模式匹配是很强大的，尤其是用来构造一个分析器。</p>
-<figure class="highlight plain"><figcaption><span>.sh&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">def fib(int: Any) : Int = in match &#123;</div><div class="line">    case 0 =&gt; 0</div><div class="line">    case 1 =&gt; 1</div><div class="line">    case n: Int =&gt; fib(n-1) + fib(n-2)</div><div class="line">    case _ =&gt; 0</div><div class="line">    case n: String =&gt; fib(n.toInt)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>注意上面的后两个匹配条件。它显然容许了final类型的匹配，以及在泛型的情况下，如果匹配到一个字符串的类型，就把它处理成整数后再计算。这对于应用程序传参是非常有利的。应该是比具有变长参数的函数传递，以及Key=Value方法的传递更自由。</p>
-<h2 id="实例类">实例类</h2>
-<p>一个函数与一个类有什么样的区别呢？在函数的调用的时候，以及类的构造的时候，都是使用所谓的小括号的表达式。但是不同之处在于，给类传递参数的时候，类的参数会持久化起来。因为类有存储空间。这样的话，类的参数的信息实际上是保留下来了。于是我们可以认为类是一个惰性的函数。即使被调用的时候，里面的参数也保存了下来。请看下面的写法：</p>
-<figure class="highlight plain"><figcaption><span>.scala&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">abstract class Expr </div><div class="line">case class FibExpr(n : Int) extends Expr &#123;</div><div class="line">    require(n &gt;= 0)</div><div class="line">&#125;</div><div class="line">case class SumExpr(a: Expr, b: Expr) extends Expr</div><div class="line">def value(in: Expr): Int = in match &#123;</div><div class="line">    case FibExpr(0) =&gt; 0</div><div class="line">    case FibExpr(1) =&gt; 1</div><div class="line">    case FibExpr(n) =&gt; value(SumExpr(Fib(n-1), Fib(n-2)))</div><div class="line">    case SumExpr(a,b) =&gt; value(a) + value(b)</div><div class="line">    case _ =&gt; 0</div><div class="line">&#125;</div><div class="line">println(value(FibExpr(3)))</div></pre></td></tr></table></figure>
-<p>工作的时候，FibExpr(0)作为一个参数被匹配。因为FibExpr是一个实例类，所以实例类中的成员都保存了下来。在语义上，FibExpr出现在Case中，表示该类的名称是FibExpr，同时它的传值是0。正好匹配。这样的话，一个类的对象更像是一个实体。因为我们可以拿两个类的构造函数直接比较。</p>
-<p>因为函数式语言可以直接将函数作为传递的参数。同时函数式语言中函数的声明与操纵往往很方便，所以判断也是很容易的。比如Scala中|list.exists(_ % 2 ==1)|就表示判断列表当中有没有奇数。</p>
-<h2 id="函数式语言中的map-reduce">函数式语言中的Map-Reduce</h2>
-<p>在Scala中实现Map和Reduce是非常直接的。因为List对象直接有map方法，而且map的参数就是一个函数。另外，map后可以直接使用reduceLeft这样的函数。用于把列表折叠起来。假设StrList是一个包含字符串的列表，那么下面的方法就用MapReduce实现了一个统计列表中的单词总数的方法：</p>
-<figure class="highlight plain"><figcaption><span>.scala&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">def wordCount(str: String): Int = str.split(&quot; &quot;).count(&quot;msg&quot;==_)</div><div class="line">file.map(wordCount).reduceLeft(_+_)</div></pre></td></tr></table></figure>
-<p>Map的参数是一个正常的，操纵单个元素的函数是很常见的。许多向量式的语言就有这个特性。但是我们对于reduce函数却生疏一些。因为reduce要把许多元素结合起来。所以reduce函数的执行有两个要素，第一个是怎么结合子元素，第二是怎样执行合并的次序。reduceLeft函数的参数告诉我们，从左到右，两个元素依次相加，返回的元素再和右边的元素相加，直到最后一个元素被处理。</p>
-<p>Scala还具有优化尾递归的能力。因为在函数式语言中，尾递归的效率比C++之类的要高很多。在编译器就会全部优化这些东西。</p>
-<p>Scala的for也是函数式的for。意思是依次读取列表中的元素，生成一个新的列表。在for当中使用yield可以返回值。比如：</p>
-<figure class="highlight plain"><figcaption><span>.scala&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">val counts = for (line &lt;- file) yield wordCount(line)</div><div class="line">val num = counts.reduceLeft(_+_)</div></pre></td></tr></table></figure>
-<p>总而言之，Scala对于多种编程方式都有支持，它们完成的任务都类似。关键还是看风格的问题了。现在我们缺的不是先进的编程方法，而是如何更好地运用这样的编程方法。</p>
-<p>模式匹配的应用范围很广。比如在得到一个值的时候，返回的是错误该怎么办？通常情况下就要进行错误处理了。但是这样其实很麻烦。更好的做法，而且不打断业务逻辑的做法就是使用内容匹配。</p>
-<p>处理错误通常发生在同样具有意义的函数的高层。通常而言是由某个操作所引起的。因此都是放在try块当中。使用错误处理的时候，利用match方法更为简洁，这是因为，处理错误的代码与算法的代码被分割了。比如</p>
-<figure class="highlight plain"><figcaption><span>.scala&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">val osName = getProperty(&quot;os.name&quot;)</div><div class="line">osName match &#123;</div><div class="line">    case Some(value) =&gt; println(value)</div><div class="line">    case _ =&gt; println(&quot;none&quot;)</div><div class="line">&#125;</div><div class="line">println(osName.getOrElse(&quot;none&quot;))</div><div class="line">osName.foreach(print _)</div></pre></td></tr></table></figure>
-<p>Scala的lazy初始化也是一个具有重要意义的特性。其重点在于把耗时的操作推后，放在尽可能需要做的时候才开始做。特别是访问网络。比如一个类需要访问网址的时候，最好的方法可能不是在构造类的时候就开始做，而是首次访问网络的时候。这个时候用lazy操作就可以了。另外，lazy操作中调用lazy函数的时候，操作也不会立即完成。只有lazy变量被首次使用的时候，才逐步执行lazy变量的初始化。</p>
-<h2 id="scala的并发">Scala的并发</h2>
-<p>Scala的并发主要是Actor库。Actor是Scala的并发模型。而2.10之后，推荐Akka作为Scala的Actor的实现。Actor类似于一个线程，有一个邮箱。Actor可以通过system.actorOf来创建，通过receive来获取消息，用叹号发送消息。实现了语言级别对于并行的支持。Actor还有一个DSL可以使用。Actor是比线程还较量的并发的实现。因为Scala可以实现线程的复用。</p>
-<p>Scala通过future实现异步的返回。另外，对于列表，Scala还能够形成并行集合。像普通并行计算那样进入并行区。通过par.map方法就可以实现并行的map操作了。不过，这里的并行，主要是利用多核的能力。</p>
-<p>Akka也支持远程的并发的模型，在Akka中通过<code>akka:&lt;//RemoteSystem@127.0.0.1&gt;:2552/user/echoServer</code>这样的地址就可以做到分布式的消息通信与并发。</p>
-<p>自己可能在C42的第一阶段中了解编译的概念与并发的概念，并将它们与操作系统相结合起来了。这样好像是一切的基础。而且自己觉得，只有软件工程与安全工程、系统工程学习得多了，才知道编译器为什么这样设计、并行系统为什么那样处理。</p>
-<p>个人始终认为，学习计算机和学习数学是一样的道理，自己学习过很多的基础的知识，未必就理解它的意义和用途了。反而是自己把更高级的东西学会之后，有了新的视角的时候，对于有些东西才能看得非常透。比如，编译原理与操作系统和网络显然是非常深的知识，但是我们肯定不知道为什么这样。</p>
-<h2 id="实战中的scala与java的互操作">实战中的Scala（与Java的互操作）</h2>
-<p>首先是Java与Scala的互操作。在scala中有beans这样的库，以至于可以允许Scala中也使用beans的对象，Scala也支持beans中的<code>@BeanProperty</code>注解。</p>
-<p>在Java中判断类是否相等是一件不容易的事，因为它的equals方法与 <code>==</code> 方法的含义是不一样的。而且有时候这样的判断非常难写正确。在Scala中 <code>==</code> 与equals的含义完全相同。另外，在Scala中，建议在需要判断类的相等的时候使用实例类case class，而不用对通常的类判断相等。</p>
-<p>抽取器也是Scala的一大特色。具体来说，抽取器允许直接变量的匹配。注意到Scala的case可以匹配一个带有形参的函数，那么，从Email中抽取用户可以这样做：</p>
-<figure class="highlight plain"><figcaption><span>.scala&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">import scala.util.matchingRegex</div><div class="line">object Email &#123;</div><div class="line">    def unapply(str: String) = new Regex(&quot;&quot;&quot;(.*)@(.*)&quot;&quot;&quot;)</div><div class="line">    .unapplySeq(str).get match &#123;</div><div class="line">        case user :: domain :: Nil =&gt; Some(user, domain)</div><div class="line">        case _ =&gt; None</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">&quot;user@domain.com&quot; match &#123;</div><div class="line">    case Email(user, domain) =&gt; println(user + &apos;@&apos;+ domain)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这种方法，依赖于对象有unapply方法，以及正则表达式的match功能。</p>
-<p>另外，Scala执行中可以启用Cache的功能。具体来说，就是对于函数的指定调用启用Cache。因为每次结果相同，下一次的时候就不再调用了。这种方法需要显式使用。尤其是自己建立一个维护cache的字典。不过，使用的方法也是相当简单的。使用cache的最大的优势可能在于非尾递归的情形下，也不用我们手工改成迭代的方法。在scala中，是通过memo函数（scala.collection.mutable.WeakHashMap）实现的。中文译为“记忆模式”。</p>
-<p>记忆模式在计算Fibnacci数之类的问题上是非常显著的。这使得Scala在科学计算中具有表达十分简洁、效率又十分高的特点。</p>
-<p>定义了implicit的函数可以成为一个隐式类型转换函数。比如</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">implicit</span> <span class="function"><span class="keyword">def</span> <span class="title">strToData</span></span>(str: <span class="type">String</span>) = ...&#125;</div></pre></td></tr></table></figure>
-<p>这样就可以实现隐式类型转换了。关键还是在于implicit关键字。</p>
-<p>另外，Scala的强大的地方就在于DSL。Scala有许多特性看起来是语言级的，但是其实是DSL的结果。比如Scala操作JSON的方法。</p>
-<p>此外，Scala还有一些测试的套件。可以使用Spec2、ScalaTest等测试。通过使用shound, mustEqual等语句，就好像是在写自然语言一样(好像是声明式的效果）。</p>
-<p>另外，Scala还有自己的sbt工具。构建的时候会方便很多。使用sbt，甚至只需要安装JRE，scala就能够把东西构造出来。</p>
-<h2 id="sbt教程">SBT教程</h2>
-<p>sbt的入门是非常简单的。创建一个新目录，新目录下有一个scala文件，直接运行sbt run，或者先输入sbt，在交互式窗口中输入run，就可以编译并运行结果了。</p>
-<p>但是通常情况下，sbt会像java那样工作。也就是，先查找当前目录下的文件，然后查找src/main/scala或者src/main/java目录下的文件，再找src/test/scala与src/test/java目录下面的文件，再找src/main/resources或者src/test/resources目录下的文件。最后找在lib目录下的jar文件。其实是继承了java的优点。因为java就是让哪些不懂软件工程的人也能够按照软件工程的实践来配置，从而避免了随意性。</p>
-<p>sbt是和scala同时发布的。默认的情况下，sbt编译的时候也会使用和scala相同的版本的编译器。其实，scala本身就是用java写的编译器。</p>
-<p>sbt的配置文件是当前目录中的build.sbt文件。配置根元素的方法是：</p>
-<figure class="highlight plain"><figcaption><span>.scala&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">lazy val root = (project in file(&quot;.&quot;)).</div><div class="line">  settings(</div><div class="line">    name := &quot;hello&quot;,</div><div class="line">    version := &quot;1.0&quot;,</div><div class="line">    scalaVersion := &quot;2.11.4&quot;</div><div class="line">  )</div></pre></td></tr></table></figure>
-<p>sbt文件的书写规范可以参考<a href="http://www.scala-sbt.org/0.13/tutorial/Basic-Def.html" class="uri" target="_blank" rel="external">http://www.scala-sbt.org/0.13/tutorial/Basic-Def.html</a>。在project/build.properties文件里面可以加上<code>sbt.version=0.13.8</code>来配置所使用的编译器。scala的工程的目录结构，一般和maven保持相同。但是java目录的优先级要低于scala目录。以点号开头的所有的文件都会被忽略。</p>
-<p>在sbt中，主要的配置文件放在build.sbt文件中，而其余的配置文件放在project/目录的下面。它们各自有自己的作用。在project/目录下还可以有.scala文件。它们也用于指导构建的过程。</p>
-<p>在目录下完全可以使用.gitigonre文件。尤其是，在根目录下应当有.gitignore文件，把target/目录给忽略掉。</p>
-<p>在所有的配置中，添加依赖可以说是最基本的了。一般而言，采取这样的风格：</p>
-<figure class="highlight plain"><figcaption><span>.scala&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">val derby = &quot;org.apache.derby&quot; % &quot;derby&quot; % &quot;10.4.1.3&quot;</div><div class="line"></div><div class="line">lazy val commonSettings = Seq(</div><div class="line">  organization := &quot;com.example&quot;,</div><div class="line">  version := &quot;0.1.0&quot;,</div><div class="line">  scalaVersion := &quot;2.11.4&quot;</div><div class="line">  )</div><div class="line"></div><div class="line">lazy val root = (project in file(&quot;.&quot;)).</div><div class="line">  settings(commonSettings: _*).</div><div class="line">  settings(</div><div class="line">    name := &quot;hello&quot;,</div><div class="line">      libraryDependencies += derby</div><div class="line">  )</div></pre></td></tr></table></figure>
-<p>特别是，使用derby常量定义一个串，然后在settings的libraryDependencies中添加这个库。</p>
-<h2 id="play等网页框架">Play等网页框架</h2>
-<p>这里介绍了Play框架用来开发Scala网页应用的技术<a href="https://playframework.com/" class="uri" target="_blank" rel="external">https://playframework.com/</a> 。这里是中文的一个介绍play框架的博客<a href="http://www.cnblogs.com/nixil/articles/play_with_scala.html" class="uri" target="_blank" rel="external">http://www.cnblogs.com/nixil/articles/play_with_scala.html</a> 。</p>
-<p><a href="http://stevenshe.ca/" class="uri" target="_blank" rel="external">http://stevenshe.ca/</a> 是一个博士生的主页。做的也是SPLC与feature model方向。而且使用的编程语言是scala。</p>
-<p>Scala的语言的完整的规范，包括语法解析规则可以参考<a href="http://www.scala-lang.org/files/archive/spec/2.11/" class="uri" target="_blank" rel="external">http://www.scala-lang.org/files/archive/spec/2.11/</a> 。</p>
-<h2 id="scala对于xml的支持">Scala对于XML的支持</h2>
-<p>Scala的语言的完整的规范，包括语法解析规则可以参考<a href="http://www.scala-lang.org/files/archive/spec/2.11/" class="uri" target="_blank" rel="external">http://www.scala-lang.org/files/archive/spec/2.11/</a>。以下就是从这本书里面提取出的Scala的语言级别的特性。</p>
-<p>XML可以直接作为一种数据类型而出现，而不必添加其它的标注。比如:</p>
-<figure class="highlight plain"><figcaption><span>.scala&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">val b = &lt;book&gt;</div><div class="line">&lt;title&gt;The Scala Language Specification&lt;/title&gt;</div><div class="line">&lt;version&gt;&#123;scalaBook.version&#125;&lt;/version&gt;</div><div class="line">&lt;authors&gt;&#123;scalaBook.authors.mkList(&quot;&quot;, &quot;, &quot;, &quot;&quot;)&#125;&lt;/authors&gt;</div><div class="line">&lt;/book&gt;</div></pre></td></tr></table></figure>
-<p>其中的scalaBook.version可以用于对于scala变量的求值。这样一来，XML完全可以作为一种原生的数据类型出现。至少表现得与原生数据类型是一样的。在词法的级别，Scala也引入了其它的一些特性，比如支持unicode作为变量名。这是Scala的词法文法的介绍<a href="http://www.scala-lang.org/files/archive/spec/2.11/01-lexical-syntax.html" class="uri" target="_blank" rel="external">http://www.scala-lang.org/files/archive/spec/2.11/01-lexical-syntax.html</a>。</p>
-<p>在Scala当中，类型、值、方法、类都统称为一个实体(Names in Scala identify types, values, methods and classes which are collectively called entities)。引入一个名称称为绑定（bind）这个名称。在scala当中，引入一个名称的方式有局部声明与定义、继承、import子句、package子句。将一个名称引入之后，scala就知道这个东西该怎样被解析了。</p>
-<p>如果不同的绑定定义了同样一个方法，那么它们会有不同的优先级。在编译的时候，编译器会按照优先级来查找这些名称的含义。</p>
-<p>在scala中，有两种name spaces。也就是有两个命名的空间。第一个空间是为类型准备的，第二个是为项准备的。因此即使name相同，如果它们属于不同的语法单元，scala也不会把它们弄混了。根据上下文，一个名称，可以被指派给一个类型或者一个项。</p>
-<p>每一个绑定都有一个作用域。(A binding has a scope)。在scala中，作用域是可以嵌套的。如果在上下文菜单中出现了一个普通的标识符，scala会尝试从当前生效的作用域中找出这个绑定对应的名子。如果没有这个名子，将会出错。标识符有定域和非定域之分（identifier: unqualified identifier and qualified identifier）。定域的标识符，指的是使用a.x这样中间有点号限定的标识符。</p>
-<p>如果是定域标识符，也就是 <span class="math inline">\(e.x\)</span> 的形式，那么scala会把x绑定到具有成员 <span class="math inline">\(x\)</span> 的一个对象 <span class="math inline">\(e\)</span> 当中，但是这个时候， <span class="math inline">\(e\)</span> 的类型 <span class="math inline">\(T\)</span> 不是任意选择的。如果 <span class="math inline">\(T\)</span> 不是value type，那么就会出错。</p>
-<h2 id="scala的类型系统">Scala的类型系统</h2>
-<p>Scala的类型有value type, non-value type之分。因为对于高阶的支持，所以在scala中有first-order types与type constructors之分。顾名思义，两种类型中，一种是语言内置的，另外一种是接受类型参数以生成另外一种类型。其实可以算是元类型，因为它接受类型参数之后才变成一个具体的类型。</p>
-<p>value types is a subset of first-order types. value types又有具体类型concerte与抽象类型abstract之分。它是一个具体的value types的属性。一个具体的value type，要么是具体的，要么是抽象的。value types在scala中又称为first-class values。译为一等值？</p>
-<p>Every concrete value type can be represented as a class type, i.e. a type designator that refers to a class or a trait 1, or as a compound type representing an intersection of types, possibly with a refinement that further constrains the types of its members.</p>
-<p>Abstract value types are introduced by type parameters and abstract type bindings. Parentheses in types can be used for grouping.</p>
-<p>Non-value types capture properties of identifiers that are not values. For example, a type constructor does not directly specify a type of values. However, when a type constructor is applied to the correct type arguments, it yields a first-order type, which may be a value type.</p>
-<p>Non-value types are expressed indirectly in Scala. E.g., a method type is described by writing down a method signature, which in itself is not a real type, although it gives rise to a corresponding method type. Type constructors are another example, as one can write type <code>Swap[m[_, _], a,b] = m[b, a]</code> , but there is no syntax to write the corresponding anonymous type function directly.</p>
-<p>在scala中，non-value types包含了其它的一些东西。特别是，在scala中，一个方法的类型与它的字面意思并不相同。方法的签名自然是与它的类型有关，但是方法的名称却不能唯一决定它的类型。也就是说，non-value types的含义实际上就是和编程的时候出现在代码中的名称不一样的类型。它的类型是由编译器推导出来的，有一个内部的，隐式的表达。另外，一个类型构造子也不算一个具体的类型，是因为，一个类型构造子的名称还不足以成为一个类型。只有它接受了特定的参数之后，才成为一个类型。</p>
-<p>Scala的名称还可能有点号作为限定符。这个时候，完整的路径并不是类型的一部分。但是它们对于确定出现的一个名称是什么类型非常重要。Paths are not types themselves, but they can be a part of named types and in that function form a central role in Scala’s type system.</p>
-<p>在scala中的c.x中，x必须是p的一个稳定的成员： <span class="math inline">\(p.x\)</span> where <span class="math inline">\(p\)</span> is a path and <span class="math inline">\(x\)</span> is a stable member of p. Stable members are packages or members introduced by object definitions or by value definitions of non-volatile types.其中，稳定成员就是在路径中，它是一个叶结点: A stable identifier is a path which ends in an identifier.也就是出现c.x之后，x不能再有子成员？</p>
-<p>注意，引用一个类的超类中的成员也是可能的。比如C.super.x或者super[M].x。</p>
-<p>A stable type is either a singleton type or a type which is declared to be a subtype of trait scala.Singleton.</p>
-<h3 id="编程语言的类型问题">编程语言的类型问题</h3>
-<p>在这一领域有许多正式的名称。它们甚至是可以形式地定义出来的。比如<span class="math inline">\(T[T_1,\cdots]\)</span> 。这个完整的整体叫做一个含参类型，称为parameterized types，而 <span class="math inline">\(T\)</span> 本身则称为一个类型构造子。也就是说， <span class="math inline">\(T[T_1]\)</span> 是对类型构造子已经使用了 <span class="math inline">\(T_1\)</span> 构造之后的结果。类型参数是可以定义上界与下界的。尤其是在声明一个类型构造子的时候。</p>
-<p>比如声明 <code>class S[K&lt;: String] {...}; class G[M[Z&lt;:I],I]{...}</code> 的话，可以使用 <span class="math inline">\(G[S,String]\)</span> 来构造一个带参类。</p>
-<p>Scala还允许元组类型。这种类型是由 <span class="math inline">\((T_1,\cdots,T_n)\)</span> 构成的。在使用的时候，相应的数据的各个维数属于不同的类型，类似于结构体。</p>
-<p>另外一种是所谓的注解类(Annotated types)，用法如<code>String @suspendable</code>。其它的，还有合成类型（compound types）、中缀类型（Infix Types）、函数类型(function types)等。</p>
-<p>函数的类型是由 <span class="math inline">\(T_1,\cdots, T_n \Rightarrow U\)</span> 来决定的。也可以使用复合的类型，如 <span class="math inline">\(S\Rightarrow T \Rightarrow U\)</span>，但是这个类型是右结合的，表示的是等价于 <span class="math inline">\(S\Rightarrow (T\Rightarrow U)\)</span>的元素。</p>
-<p>中缀类型具有 <span class="math inline">\(T_1 op T_2\)</span> 的类型。从实现上看，中缀类型是对于<span class="math inline">\(op[T_1, T_2]\)</span> 的一个语法糖。</p>
-<p>在Scala当中，函数是具有apply方法的类，因此函数类型实际上是一种类类型（class types)。函数类型的结果是共变的，但是参数是反变的。</p>
-<p>在编程语言中，把一个名子与一个类型关联起来的过程称为绑定。然而，具体实现绑定的方法就是通过声明或者定义。</p>
-<p>Scala的Object实际上是由设计模式中的“单件”改变而来。参考 <a href="http://zh.wikipedia.org/wiki/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F" target="_blank" rel="external">http://zh.wikipedia.org/wiki/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F</a> 。</p>
-<p>模式匹配的技术与模式识别正好相反。在模式匹配中，模型是精确指定的。但是在模式识别中，模式却南大要挖掘。Tree patterns are used in some programming languages as a general tool to process data based on its structure, e.g., Haskell, ML, Scala and the symbolic mathematics language Mathematica have special syntax for expressing tree patterns and a language construct for conditional execution and value retrieval based on it. For simplicity and efficiency reasons, these tree patterns lack some features that are available in regular expressions.</p>
-<h2 id="使用scala实现一个符号微分的程序">使用Scala实现一个符号微分的程序</h2>
-<p>类型的匹配其实就是使用带参类与泛型的结果。尤其是对于一个表达式，通常的情况下，都是设置优先级来匹配一个类。比如</p>
-<figure class="highlight plain"><figcaption><span>.scala&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">def Diff(Expr, Var) = Expr match &#123;</div><div class="line">    case Sum (l, r) =&gt; Diff (l, Var) + Diff (r, Var)</div><div class="line">    case Prod (l, r) =&gt; Diff (l, Var) * r + l * Diff(r, Var)</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>实现中缀形式的匹配也是有可能的，特别是在scala中中缀也可以惰性匹配的情况下。个人认为，大学的时候学习编程语言不能非常方便地写出一个符号微分的程序就是一个失败。</p>
-<p>写符号微分的另外一种方式是使用语法解析器。如果能把语法解析器自动嵌入到一个语言中，会是很有趣的一件事情。特别是如果一个语言的子解析模式是可以由用户方便地定制的话。</p>
-<h2 id="scala下的actor06-09-2015-222156">Scala下的Actor[06-09-2015 22:21:56]</h2>
-<p>使用AKKA并发库来解决问题。Actor系统的原理我们已经知道了。对于Erlang而言，程序本身就是一个Actor（进程）。而在scala当中，进程通过创建actor中的一个对象实现与actor通信系统的关联。示例的代码如下：</p>
-<figure class="highlight plain"><figcaption><span>.scala&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">case class Greet(name: String)</div><div class="line">case class Praise(name: String)</div><div class="line">case class Celebrate(name: String, age: Int)</div><div class="line"></div><div class="line">class Talker extends Actor &#123;</div><div class="line">    def receive = &#123;</div><div class="line">        case Greet(name) =&gt; println(s&quot;Hello $name&quot;)</div><div class="line">        case Praise(name)=&gt; println(s&quot;$name, you&apos;re amazing&quot;)</div><div class="line">        case Celebrate(name, age) =&gt; println(s&quot;Here&apos;s to another $age years, $name&quot;)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">object HeloActors extneds App &#123;</div><div class="line">    val system = ActorSystem(&quot;HelloActors&quot;)</div><div class="line">    val talker = system.actorOf(Props[Talker], &quot;talker&quot;)</div><div class="line"></div><div class="line">    talker ! Greet(&quot;Huey&quot;)</div><div class="line">    talker ! Praise(&quot;Dewey&quot;)</div><div class="line">    talker ! Celebrate(&quot;Louie&quot;, 16)</div><div class="line"></div><div class="line">    Thread.sleep(1000)</div><div class="line"></div><div class="line">    system.shutdown</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在上面的代码中，使用ActorSystem进入Actor系统当中（可能需要一些认证），而使用actorOf来创建一个actor。发送消息使用叹号，而使用shutdown来实现断开actor.基本原理就是这样。如果需要多个消费者协调，或者错误处理功能，就需要再参考相关的书籍了。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/12/06/eclipse-architecture/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/12/06/eclipse-architecture/" itemprop="url">
-                  Eclipse体系结构与Ecore技术
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-12-06T00:00:00+08:00">
-                2014-12-06
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:19:23+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/软件工程/" itemprop="url" rel="index">
-                    <span itemprop="name">软件工程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2014/12/06/eclipse-architecture/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/06/eclipse-architecture/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>这对于理解Eclipse的建模的技术至关重要。Eclipse Modeling Framework(EMF)是Eclipse提供的一套建模的框架，可以使用EMF建立自己的UML模型，设计模型的XML格式或编写模型的Java代码。EMF提供了一套机制实现功能的相互转换，大大提高了效率。</p>
-<h2 id="统一javauml与xml的ecore文件">统一Java、UML与XML的Ecore文件</h2>
-<p>故事不妨从程序员开始。一般的程序员都是上来写Java代码，但是按照软件工程的要求，往往要先开始建模。两种思路各有千秋吧。但是如果我们能写一份代码，然后自动转成另一种格式，明显会使程序员舒服许多，同时又减少了程序员对软件工程的抵触情绪。这种思路能够转变成为现实，这是因为，Java代码描述，UML描述是等价的，理论上也就存在一种转换的可能。（特别是类图的转换）。</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/12/06/eclipse-architecture/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/11/22/scala-history/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/11/22/scala-history/" itemprop="url">
-                  Scala介绍（第二版资料）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-11-22T00:00:00+08:00">
-                2014-11-22
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:12:15+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2014/11/22/scala-history/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/11/22/scala-history/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>使用了这么久的Scala，对于Scala就又有了新的认识。觉得Scala还是一种普通的语言。它有它支持的编程范式。其实编程范式是属于思维方式问题，可以跟编程语言亳无关系。面对对象的程序设计，其实与面向对象的软件工程没有什么关系。因为软件工程的重点在软件系统上。</p>
-<p>Scala的IDE需要在Eclipse中实现，这让人实在很头疼。一方面计算机没有足够的性能运行大型的程序，另一方面，自己也不想使用大型的软件了。很多大型软件的设计，其实根本就没有必要。软件设计的最高境界，就是软件本身作为一种语言被人使用着。</p>
-<p>Simula 67是第一种面向对象的语言应该是可以接受的（而非Smalltalk），现在回过头来发现，其实面向对象的设计其实就是模拟现实世界，不然，也不会在与软件工程结合得那么紧密。很多软件是我们不曾接触到的。像军工等东西，应用的技术我们听都没听过，更不用说研究了。但是它们确确实实存在着，我们也得正视其存在。虽然我们现在没有那样的实验条件，但是我们也得认可Simula 67与Ada等是一种实际存在的语言。</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/11/22/scala-history/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/09/22/pxeliunux/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/22/pxeliunux/" itemprop="url">
-                  PXE方法远程启动Ubuntu 14.04桌面版
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-09-22T00:00:00+08:00">
-                2014-09-22
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T16:36:14+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/操作系统-pxe-ubuntu/" itemprop="url" rel="index">
-                    <span itemprop="name">操作系统, pxe, ubuntu</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2014/09/22/pxeliunux/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/09/22/pxeliunux/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>之前使用过各种启动方法。最近要往实验室计算机里装系统，而手头又没有光盘或者优盘，就只能再使用PXELINUX的启动方法了。再想一想，实验室里那么多台计算机，要一个一个地整系统实在太麻烦了，还不如远程启动，让一切自动化。</p>
-<h2 id="原理">原理</h2>
-<p>许多计算机都有自己的远程启动机制，Intel系列使用的技术叫做PXE(Portable eXcution Enviroment)。</p>
-<p>远程启动的过程可以与本地启动相类比。无论SYSLINUX还是Grub，抑或其它的启动模块，都完成的是Bootloader的功能。它们仅限于在开机后，帮助我们找到操作系统内核，向操作系统传递启动参数。完成这些功能后，它们就不再被使用了。引导程序(Bootloader)一般比较轻量，在几兆的数量级。操作系统（的内核）相对较大，在几十兆的数量级。</p>
-<p>假设当前系统已经装好了SYSLINUX引导程序，启动的过程大致是：</p>
-<ul>
-<li><p>机器加电，BIOS开机自检。完成自检后到启动设备（光盘或硬盘）的约定的位置查找引导程序Bootloader，将Bootloader的代码加载到内存指定位置</p></li>
-<li><p>BIOS将机器的控制权交给SYSLINUX，原则上SYSLINUX可以做很多的工作。不过，我们现在关心的是，它从指定的位置读取配置文件，找到操作系统，并按设置加载操作系统。</p></li>
-<li><p>操作系统启动，设置根文件系统，加载开机自启的程序，等等。</p></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/09/20/PXEboot/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/20/PXEboot/" itemprop="url">
-                  命令行下面的关机，PXE远程启动
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-09-20T00:00:00+08:00">
-                2014-09-20
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T16:36:14+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2014/09/20/PXEboot/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/09/20/PXEboot/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>下午针对这个问题google了一下，原因大概就是 halt 是强制关机，而poweroff 会先给 ACPI （Advanced Configuration and Power Management Interface）一个命令，之后再关机（不知道这么理解是不是准确，逃）。感觉是我直接用 halt 才出的问题。继而观察了下这三个命令，</p>
-<p>shutdown实际上是调用init 0, init 0会cleanup一些工作然后调用halt或者poweroff。其实主要区别是halt和poweroff，做没有acpi的系统上，halt只是关闭了os，电源还在工作，你得手动取按一下那个按钮，而poweroff会发送一个关闭电源的信号给acpi。但在现在的系统上，他们实际上都一样了</p>
-<p>可以参考juju-charm上面的关于maas的区域控制器的介绍。上面用图表的形式列出了区域控制器所依赖的psql、sstream等组件。</p>
-<h2 id="远程启动">远程启动</h2>
-<p>不同计算机支持的远程启动协议是各种各样的，在Intel的机器上，使用的是所谓的PXE(Preboot Execution Enviroment)技术。PXE协议是根据服务器端收到的工作站的MAC地址，使用DHCP服务给这个MAC地址指定一个IP。在PXE中，待启动的机器常称为工作站。PXE工作的大致过程是，工作站开机后，PXE BootROM(网卡上的自启芯片)获得控制权之前先做自我测试，然后以广播形式发出一个请求FIND帧。服务器若收到工作站的要求，就会发出DHCP回应。内容包括用户端的IP地址、预设通讯通道、开机映象文件等。工作站收到后回应相应的帧请求传送所需文件。之后将会有多次协商过程，以决定启动参数。之后BootROM由TFTP通讯协议从服务器下载开机映象文件。这个映象档就是软盘映象文件（系统映象文件）。工作站使用TFTP接收启动文件后，将控制权转交启动块，引导操作系统映象，完成自启动过程。</p>
-<p>配置过程中，针对DHCP、TFTP、NFS进行相应的配置。DHCP用于将引导模块交给工作站，TFTP用于传送操作系统映象，而NFS用于加载开机启动时所需的各个文件。</p>
-<p>TFTP的配置可由xinetd决定。而DHCP中的一些选项是与TFTP启动配合的。所以在正常配置好DHCP服务器之后，由next-server选项指定TFTP服务器的地址，由filename选项指定TFTP服务器文件的路径。这是因为，根据DHCP协议的规范，next-server就是TFTP服务器的地址。</p>
-<figure class="highlight plain"><figcaption><span>.c&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">## 目标机器的DHCP配置项</div><div class="line">host target &#123;</div><div class="line">## 目标机器所匹配的MAC地址</div><div class="line">hardware ethernet 00:13:21:1F:F1:82;</div><div class="line">## 目标机器分配到的IP地址</div><div class="line">fixed-address 192.168.0.10;</div><div class="line">## 目标机器所使用的网关地址</div><div class="line">option routers 192.168.0.254;</div><div class="line">## 目标机器所用的DNS</div><div class="line">option domain-name-servers 208.67.222.222,208.67.220.220;</div><div class="line">## 指定TFTP服务器的地址。如果TFTP与DHCP服务器是一个IP，则可以忽略</div><div class="line">next-server 192.168.0.2;</div><div class="line">## 指定开机文档在TFTP服务器上的路径</div><div class="line">filename &quot;/ubuntu-installer/i386/pxelinux.0&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>然后可以开启TFTP服务，并且操作系统映象也可以放在TFTP服务器上。对于Ubuntu来说，可以将光盘中的/install/netboot/ubuntu-installer/目录复制到TFTP目录下面。之后，打开客户机的电源，BIOS中选择从网络启动即可。</p>
-<p>上面的DHCP配置中仅有被启动的工作站的配置节，而正常的DHCP应当有针对子网的配置。dhcpd.conf文件的其他部分可参考示例文件：</p>
-<figure class="highlight plain"><figcaption><span>.c&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">ddns-update-style none;</div><div class="line">ignore client-updates;</div><div class="line">allow booting;</div><div class="line">allow bootp;</div><div class="line"></div><div class="line">subnet 192.168.5.0 netmask 255.255.255.0 &#123;</div><div class="line">option routers 192.168.5.1;</div><div class="line">option subnet-mask 255.255.255.0;</div><div class="line">option domain-name-servers 202.112.128.50;</div><div class="line">range dynamic-bootp 192.168.5.33 192.168.5.38;</div><div class="line">default-lease-time 21600;</div><div class="line">max-lease-time 43200;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>我们知道，本地启动的时候，有GRUB和LINUX系统映象两个文件。前面的pxelinux.0就相当于GRUB、整个光盘就相当于开机系统。linux发行版光盘的<code>install/netboot</code>目录中有pxelinux.0文件及相应的配置选项，使用的时候，该文件夹的内容全部拷贝到TFTP根目录下面。</p>
-<p>Ubuntu一系的软件，光盘映象基本上都放在HTTP服务器上。也就是操作系统映象自TFTP传到工作站并运行的时候，Ubuntu自动从本网络的一台HTTP服务器上查找安装所需文档。此时，我们可以选择将整个光盘映象挂载至HTTP服务器的 <code>/ubuntu</code>目录下面。工作站的PXELINUX启动的时候，会向我们询问操作系统映象的地址。</p>
-<p>如果合适，我们也可以将安装好的系统分发给其它的工作站，而不用远程安装系统。</p>
-<h2 id="实战">实战</h2>
-<p>首先安装Ubuntu上所需要的各种软件，然后将Ubuntu14.04的映象下载过来。</p>
-<figure class="highlight plain"><figcaption><span>.bash&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">apt-get install nfs-common nfs-kernel-server</div><div class="line">apt-get install tftpd-hpa tftp-hpa</div><div class="line">apt-get install isc-dhcp-server</div></pre></td></tr></table></figure>
-<p>DHCP服务的端口号是TCP67，而TFTP服务的端口号是UDP59，可以通过netstat命令查看相关的设置。</p>
-<p>tftp-hpa使用的配置文件是 <code>/etc/default/tftpd-hpa</code> ，可以根据需要，将TFTP的服务器目录改变到其它的位置。不过，配置的时候，注意权限问题。</p>
-<p>isc-dhcp-server使用的配置文件是 <code>/etc/dhcp/dhcpd.conf</code> 。配置的时候按照格式。</p>
-<p>配置DHCP的时候，应将这里的DHCP与服务器上的DHCP区分开。一般而言，笔记本在连接无线的时候，有线网络并不受到影响。这个时候我们可以指定本机的地址，然后在dhcpd.conf文件中，将网关的位置填写成自己的。其实，如果是局域网里面访问，则根本不需要网关地址。因为局域网中的主机访问，不需要通过网关。</p>
-<p>NFS服务是可选的。如果需要使用这个服务的话，使用NFS的时候，别忘了安装nfs-kernel-server。然后编辑 <code>/etc/exports</code> 文件，选择需要导出的数据。</p>
-<p>然而在共享的时候，NFS需要用户的密码。这一点需要我们注意。没有<code>/etc/exports</code>里面的文件的时候，导出的目录是空的，NFSD守护进程也不会运行。简单的导出可 以是 <code>/srv/www *(ro)</code> 这样的行。</p>
-<h2 id="pxelinux介绍">PXELINUX介绍</h2>
-<p>其实使用TFTP服务全部依赖于所谓的PXELINUX启动程序。该程序与SYSLINUX、EXTLINUX同属于一个发行版。PXELINUX的pxelinux.0文件所在的TFTP的根目录，其实就相当于本地启动的时候的boot分区而已。</p>
-<p>下载PXELINUX程序之后，将 <code>/usr/lib/syslinux/pxelinux.0</code> 文件复制在TFTP根目录下面。然后在TFTP根目录下建立pxelinux.cfg目录。在目录中建立default文件。其实，PXELINUX的解释是， <code>pxelinux.cfg</code>目录代表了对不同的客户机的启动选项的配置，以便支持不同的系统。而只有一个<code>default</code>文件的时候，相当于局域网中只有一个主机。</p>
-<p>下面是PXELINUX的配置文件的一个示例写法：</p>
-<figure class="highlight plain"><figcaption><span>.shell&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">DEFAULT ubuntu</div><div class="line">LABEL ubuntu</div><div class="line">kernel linux</div><div class="line">append initrd=initrd.nfs root=/dev/nfs nfsroot=192.168.1.88:/home/cache/netboot/root ip=dhcp rw</div></pre></td></tr></table></figure>
-<p>kernel与append命令所需的linux与initrd文件，都是以TFTP根目录为根所得到的文件路径。因此内核linux与initrd文件要与pxelinux.0一起放在TFTP根目录下。</p>
-<p>任何linux内核均支持root=这样的参数，大部分也支持nfsroot选项。如果把nfsroot都指定了，那么工作站将以nfsroot所指的位置作为根系统。然后，找到根系统后，我们就可以从根文件系统的 <code>/etc/fstab</code>中加载其它的NFS挂载选项。通过不同的组合，可以实现无盘工作站或者有盘工作站。</p>
-<p>如果理解了内核的root=选项，以及联想到OpenSUSE安装光盘具有指定光盘位置的选项，那么远程安装系统就不是什么困难的事情了。</p>
-<p>对于Ubuntu来说，不同之处在于，Ubuntu的安装映象支持ks=选项，而ks=又可以调用http服务，因此Ubuntu具有从HTTP服务器上下载文件的能力。显然，如果工作站能够下载服务器上的安装映象，那么自然就能够完成接下来的安装。</p>
-<h2 id="网络唤醒功能">网络唤醒功能</h2>
-<p>网络唤醒功能一个是网卡支持，第二个是BIOS启用，另外一个是有应用工具。网卡的支持是生产商的问题。BIOS中启用与否，可以在机器BIOS中启用，应用工具则是运行在具体操作系统下面的。</p>
-<p>linux的ethtool工具可以用于修改网卡上WOL的状态，决定从网络唤醒是否启用。使用 <code>ethtool -s eth0 wol g</code> 就可以启用网卡的网络唤醒功能。 <code>wol d</code>表示禁用。</p>
-<p>linux的 <code>wakeonlan</code>工具是唤醒网卡的终端。它接受MAC地址作为参数，唤醒局域网中具有此MAC的机器。</p>
-<p>完成PXE启动的时候，导出NFSROOT目录，配置为</p>
-<figure class="highlight plain"><figcaption><span>.c&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">/etc/exports: the access control list for filesystems which may be exported</div><div class="line">    to NFS clients.  See exports(5).</div><div class="line"></div><div class="line">Example for NFSv2 and NFSv3:</div><div class="line">/srv/homes       hostname1(rw,sync,no_subtree_check) hostname2(ro,sync,no_subtree_check)</div><div class="line"></div><div class="line">Example for NFSv4:</div><div class="line">/srv/nfs4        gss/krb5i(rw,sync,fsid=0,crossmnt,no_subtree_check)</div><div class="line">/srv/nfs4/homes  gss/krb5i(rw,sync,no_subtree_check)</div><div class="line"></div><div class="line">/srv/www    *(ro)</div><div class="line">/srv/tftpboot/ *(no_subtree_check,rw,no_root_squash,async)</div></pre></td></tr></table></figure>
-<p>然后在启动文件 <code>pxelinux.cfg/default</code> 中配置启动选项为:</p>
-<figure class="highlight plain"><figcaption><span>.shell&#125;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># D-I config version 2.0</div><div class="line">prompt 0</div><div class="line">timeout 100</div><div class="line"></div><div class="line">DEFAULT ubuntu</div><div class="line">LABEL ubuntu</div><div class="line">KERNEL ../ubuntu/casper/vmlinuz.efi</div><div class="line">APPEND initrd=../ubuntu/casper/initrd.lz boot=casper netboot=nfs root=/dev/nfs nfsroot=10.10.10.1:/srv/tftpboot/ubuntu ip=dhcp</div></pre></td></tr></table></figure>
-<p>其中 <code>/srv/tftpboot/ubuntu</code> 相当于光盘的根目录，里面有linux安装光盘里面的所有的文件。这种方式只需要NFS就可以，不用HTTP服务，因此是一种比较好的解决的办法。</p>
-<p>剩下的就是 <code>wakonlan</code> 的测试了。这也应该是不成为问题的。只需要将网卡配置好就可以了。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/09/14/scala-tutorial/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/14/scala-tutorial/" itemprop="url">
-                  Scala语言编程
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-09-14T00:00:00+08:00">
-                2014-09-14
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:10:38+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程语言/" itemprop="url" rel="index">
-                    <span itemprop="name">编程语言</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2014/09/14/scala-tutorial/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/09/14/scala-tutorial/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>接触过许多编程语言后，对Scala也就不那么热心了。一句话，Scala有的，有什么是在其它编程语言中没有的么？像函数式编程语言、面向对象编程，找了一打，也找不到以Scala为代表。在具体特性上，Python的字典，比Scala的映射表其实更为好用。在叠代上，Python至少更方便，而且C#的LINQ查询似乎比Scala走得更远。Scala是静态类型的，而现在，有很多脚本语言已经成为了“高级动态语言”，这也是Scala望尘莫及的。</p>
-<p>个人觉得，对Scala语言的正确定位是，它是一种新的开发应用的方式，按照Scala的这种方式，并不需要激进的革命，传统的程序员就可以完成转型。因此，软件工程与编程语言的结合得到了保留，一个语言同时也就是为一个软件工程而生。</p>
-<p>甚至C#，因为所使用的CLR技术，比Scala更强调机器的技术。Java和Scala一系的基础结构其实很简单，就是脱离机器的JVM虚拟机。得益于对这个虚拟机的优化，它们得以演变成独立的生态环境。而像Python与Ruby这样的，对于怎样编译其实并不关心，因为有CLR帮助它们，所以Python与Ruby可以更强调编程的灵活。</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/14/scala-tutorial/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/09/13/blog-github/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/13/blog-github/" itemprop="url">
-                  千呼万唤始出来(整好github)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-09-13T00:00:00+08:00">
-                2014-09-13
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:21:58+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:22:49+08:00">
                 2016-12-14
               </time>
             
@@ -2745,8 +1093,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2014/09/13/blog-github/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/09/13/blog-github/" itemprop="commentCount"></span>
+                <a href="/blog-hexo-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog-hexo-1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -2773,859 +1121,10 @@
 
       
         
-          
-            <h2 id="整理github博客">整理github博客</h2>
-<p>测试了很多。现在的代码应该是正常的吧。</p>
-<p>代码使用Python块，使用Markdown内嵌的支持。</p>
-<p>A block of text.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">print</span> <span class="string">"hello,world"</span></div></pre></td></tr></table></figure>
-<p>代码虽然不是很好看，但是也可以接受。</p>
-<p>数学公式使用MathJax插件，下面的是勾股定理： <span class="math display">\[a^2+b^2=c^2.\]</span></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/09/13/MathGL/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/09/13/MathGL/" itemprop="url">
-                  MathGL绘图工具
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-09-13T00:00:00+08:00">
-                2014-09-13
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T16:36:13+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2014/09/13/MathGL/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/09/13/MathGL/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>该绘图工具的应用也很广，但是之前一直都没有能够接触到。现在才将相关的内容补充到笔记当中，希望这是一个非常有效的绘图的工具。</p>
-<p>MathGL在Ubuntu下的安装是一件简单的事，安装mathgl关键字开头的程序、文档、头文件与库文件、面向Python语言的python-mathgl库，以及udav可视化工具即可。MathGL支持几种不同的编程方式，面向C、C++、Fortran、Octave或者Python。根据需要，应当安装上不同的接口。也许有一天，支持R也是可行的。此外，MathGL工具还可以分析一种称为MGL的脚本文件，该脚本文件可以方便地完成MathGL中的一些绘图操作，是值得学习的一种操作方式。</p>
-<p>在绘图过程中，MathGL有自己的字体系统，但是尽量可以做到与TeX的兼容。不仅可以方便地选择字体，而且提供了大量的数学符号。这些对于初学者及一般的应用都是非常充足的。</p>
-<p>MathGL有很多优点。如脚本化的绘图语言、C++的执行效率、多语言接口、支持输出多种图形格式、内建多种绘图方法、支持MPI等编程接口、与C++等宿主语言的数据结构融合。这些使它成为很有吸引力的一个绘图库。</p>
-<h2 id="mathgl基础操作">MathGL基础操作</h2>
-<p>首先我们介绍在MathGL在C++下的使用。像C++这类接口，一般要安装lib*这样的软件包，而不只mathgl软件包一个，这样g++在编译的时候，才可能与正确的库文件链接。这是一个需要注意的地方。如果下面的MathGL C++程序出错，根据编译器反馈的错误信息，我们应当能够发现错误、纠正错误。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mgl2/mgl.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></div><div class="line">&#123;</div><div class="line">    mglGraph graph;</div><div class="line">    graph.FPlot(<span class="string">"sin(pi*x)"</span>);</div><div class="line">    graph.WriteFrame(<span class="string">"test.png"</span>);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>编译、运行<code>mathgl1.cpp</code>，查看图片所使用的Bash命令建议为:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">g++ -lmgl mathgl1.cpp -o mathgl1</div><div class="line">./mathgl1</div><div class="line">eog sample.png</div></pre></td></tr></table></figure>
-<p>注：如果使用了其它的绘图接口，可能需要使用 <code>-lmgl-wnd</code> 等库。</p>
-<p>MathGL的绘图画布中使用帧、子图等概念，因此一个 <code>mglGraph</code>对象可以创造出多个子图的组合，以及多个帧的组合。后者使MathGL有制作动画的能力。</p>
-<p>使用MGL脚本的时候，MathGL中有 <code>mglconv</code> 工具和 <code>mglview</code>工具可以使用。它们 是运行MGL脚本的宿主环境。</p>
-<p>MathGL库支持的输出方式，包括向图形终端输出，此方式下可以完成一些交互式的动作；直接写入到点阵或者矢量图形格式，此方式下直接运行MathGL的C++程序以得到结果。</p>
-<h2 id="窗口绘图glut绘图与输出到文件">窗口绘图、GLUT绘图与输出到文件</h2>
-<p>绘图到一个单独的窗口，或者使用GLUT库输出，道理是一样的。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">#include &lt;mgl2/mgl.h&gt;</div><div class="line">#include &lt;mgl2/window.h&gt;</div><div class="line"></div><div class="line">int do_draw(mglGraph *graph)</div><div class="line">&#123;</div><div class="line">    graph-&gt;Rotate(60,40);</div><div class="line">    graph-&gt;Box();</div><div class="line">    return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">int main(int argc, char* argv[])</div><div class="line">&#123;</div><div class="line">    mglWindow window(do_draw, "MathGL Window example');</div><div class="line">    int status = window.Run();</div><div class="line">    return status;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>原理就是如此了，不过在Ubuntu上有些错误，可能是安装MathGL的问题。</p>
-<p>使用GLUT作为后端的时候，更为简单，因为不用WX组件了。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mgl2/mgl.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mgl2/glut.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">do_draw</span><span class="params">(mglGraph *graph)</span></span></div><div class="line">&#123;</div><div class="line">    graph-&gt;Rotate(<span class="number">60</span>,<span class="number">40</span>);</div><div class="line">    graph-&gt;Box();</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></div><div class="line">&#123;</div><div class="line">    <span class="function">mglGLUT <span class="title">window</span><span class="params">(do_draw, <span class="string">"MathGL Window example"</span>)</span></span>;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在编译的时候，调用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">g++ mglut.cpp -o mglut -lmgl -lmgl-glut</div></pre></td></tr></table></figure>
-<p>如果将 <code>-lmgl</code> 选项放在 <code>mglut.cpp</code>的前面，似乎总会出现连接错误。这个问题 目前还不知道是怎么样的一回事。</p>
-<p>在GLUT界面中，使用aswd按键旋转图形，使用r与f切换透明(transparency)与光照(lighting)状态。按键x可以退出窗口。</p>
-<p>说明：以后我们的绘图的时候，就使用上面的代码所提供的方法，把绘图的代码都放在 <code>do\_draw()</code> 函数里面，然后由 <code>mglGLUT</code>对象调用。这样可以使我们更 专心于图形的绘制。</p>
-<p>如果是输出到文件，那么调用 <code>mglGraph</code> 对象的 <code>WritePNG()</code>、 <code>WriteEPS()</code> 等 函数即可。在使用g++编译的时候，除了<code>-lmgl</code> 选项，其它都不用。</p>
-<p>动画的制作使用 <code>mglGraph</code>对象的多帧功能。如果是保存GIF格式，在绘出每帧 之前，就应当使用<code>mglGraph</code> 的 <code>StartGIF()</code> 函数保存文件，并在完成所有的帧的绘制之后使用 <code>CloseGIF()</code> 函数关闭GIF文件的描述符。</p>
-<p>保存动画还有另一种方法，就是绘制完当前帧后，以frameXX.jpg的格式保存当前帧，然后切换到下一帧。所有的帧都各自输出成JPEG格式后，使用ImageMagick提供的convert命令将JPEG制作成MPG。</p>
-<p>MathGL也支持在Qt绘图画布中绘图，图形作为Qt窗口的一部分。但是那并非MathGL绘图语言的核心。现在不讲，或许以后结合PyQt库使用MathGL的时候这个功能我们会用到。</p>
-<h2 id="mathgl对子图绘制的支持">MathGL对子图绘制的支持</h2>
-<p>MathGL采用“选中-绘制”的方法支持子图的绘制，也就是一个<code>mglGraph</code> 对象使用 <code>SubPlot()</code>方法选中一块子图区域，之后还是使用 <code>mglGraph</code> 对象的<code>Title()</code>等函数来操作绘图，此时图形会自动绘制在当前的子图上。在绘制子图的时候，另一种编程实现是“切换-绘制”的方法。该方法是调用当前绘图对象的方法产生一个子图对象，通过操作子图对象的方法在子图上绘图。Asymptote与Mathplotlib等都是采用这种方法。MathGL是前一种方法，因此要与后一种实现方式区分开。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">do_draw</span><span class="params">(mglGraph *g)</span></span></div><div class="line">&#123;</div><div class="line">    g-&gt;SubPlot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">0</span>); g-&gt;Box();</div><div class="line">    g-&gt;Puts(mglPoint(<span class="number">-1</span>,<span class="number">1</span>,<span class="number">1</span>),:<span class="string">"Just box"</span>, <span class="string">":L"</span>);</div><div class="line">    g-&gt;InPlot(<span class="number">0.2</span>,<span class="number">0.5</span>,<span class="number">0.7</span>,<span class="number">1</span>,<span class="literal">false</span>);</div><div class="line">    g-&gt;Box();</div><div class="line">    g-&gt;Puts(mglPoint(<span class="number">0</span>,<span class="number">1.2</span>), <span class="string">"InPlot Example"</span>);</div><div class="line"></div><div class="line">    g-&gt;SubPlot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>);</div><div class="line">    g-&gt;Title(<span class="string">"Rotate only"</span>);</div><div class="line">    g-&gt;Rotate(<span class="number">50</span>,<span class="number">60</span>);</div><div class="line">    g-&gt;Box();</div><div class="line"></div><div class="line">    g-&gt;SubPlot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>);</div><div class="line">    g-&gt;Title(<span class="string">"Rotate and Aspect"</span>);</div><div class="line">    g-&gt;Rotate(<span class="number">50</span>,<span class="number">60</span>);</div><div class="line">    g-&gt;Aspect(<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>);</div><div class="line">    g-&gt;Box();</div><div class="line"></div><div class="line">    g-&gt;SubPlot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>);</div><div class="line">    g-&gt;Title(<span class="string">"Aspect in other direction"</span>);</div><div class="line">    g-&gt;Rotate(<span class="number">50</span>,<span class="number">60</span>);</div><div class="line">    g-&gt;Aspect(<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>);</div><div class="line">    g-&gt;Box();</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>更复杂的子图绘制方式，可以参考 <code>MultiPlot()</code> 、<code>StickPlot()</code> 等函数。</p>
-<p>剩下的就是具体各种图形的绘制了。</p>
-<h3 id="使用mathgl绘制动画示例">使用MathGL绘制动画示例</h3>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">do_draw</span><span class="params">(mglGraph *gr)</span></span></div><div class="line">&#123;</div><div class="line">    gr-&gt;NewFrame();</div><div class="line">    gr-&gt;Rotate(<span class="number">60</span>,<span class="number">40</span>);</div><div class="line">    gr-&gt;Box();</div><div class="line">    gr-&gt;EndFrame();</div><div class="line">    gr-&gt;NewFrame();</div><div class="line">    gr-&gt;Box();</div><div class="line">    gr-&gt;Axis(<span class="string">"xy"</span>);</div><div class="line">    gr-&gt;EndFrame();</div><div class="line">    <span class="keyword">return</span> gr-&gt;GetNumFrame();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="使用mgl脚本语言">使用MGL脚本语言</h2>
-<p>MGL脚本语言其实是很方便的一个东西。该语言每一行都代表一个命令，类似于tcl脚本，而且连注释的格式都是与tcl语言相同的：从<code>#</code>开始直到行尾。另一方面，MGL脚本按行分析语句，语句的第一个单词代表一个命令，像Bash中那样。而MGL脚本中的字符串用成对的单引号括起来，如果需要跨行，则使用反斜杠加换行表示将本行与下一行联系在一起。</p>
-<p>MGL脚本中的命令都来自 <code>mglGraph</code>的成员函数，因此只要我们了解了MathGL面向C++的库的用法，自然就知道如何写MGL脚本文件。</p>
-<p>除此之外，MGL还有一些定义函数、声明变量的语句。它们都转成相应的C++的语法。在C++中使用MGL语言也是可行的，因为MGL脚本会通过 <code>Parse()</code>函数 被解析，由 <code>Execute()</code>函数执行。(两个函数都在mgl2/mgl.h头文件中)。</p>
-<p>A. A. Balakin所蓍的《MathGL官方文档》中的《MathGL core》一章，既介绍了MathGL语言(C++库的函数)，同时又介绍了MGL的命令，是MGL语言与MathGL库的最标准的参考手册。</p>
-<p>MathGL所提供的mglconv工具可以将MGL脚本转换成PGF/TikZ、EPS、PRC、SVG等格式，因此也可以作为一个实用的面向TeX文档的接口。这样一来，可能在MathGL中文字处理变得更简单了。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/06/26/drawing-gnuplot/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/06/26/drawing-gnuplot/" itemprop="url">
-                  Gnuplot绘图
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-06-26T00:00:00+08:00">
-                2014-06-26
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:22:23+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/出版/" itemprop="url" rel="index">
-                    <span itemprop="name">出版</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/出版/绘图/" itemprop="url" rel="index">
-                    <span itemprop="name">绘图</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2014/06/26/drawing-gnuplot/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/06/26/drawing-gnuplot/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>使用过很多的绘图的软件了，但是用起来总是不那么方便。而且我的绘图是在文档当中的，要求与文档有相同的风格。但是通常情况下，这些都难以达到。因此，不管是Asymptote还是其它的软件，配置起来都比较麻烦。</p>
-<p>MetaPost的问题是，Metapost与XeTeX不太兼容。使用中文的时候又不方便了。所以我们还是使用其它的方法。</p>
-<p>gnuplot有一个优点，就是它可输出成TeX的源代码的格式。第一种是LaTeX自带的picture环境，在里面直接绘图。第二种是tikz环境。无论哪一种环境，排版的工作都是连同文字一起的。所以正文是什么格式，其它文章也可以是这样的格式。</p>
-<p>如果将gnuplot的输出改成picture环境，那么在每个gnuplot文件前面添加如下的行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">set terminal latex    ## 也可以是emtex环境。</div><div class="line">set output &quot;pic.tex&quot;  ## 生成的.tex文件。</div></pre></td></tr></table></figure>
-<p>然后使用<code>\input{pic.tex}</code>将生成的文件嵌入到文本中，注意段落的安排，以及将图表排版有适当的空格。</p>
+          A short description of the blog
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/06/26/drawing-gnuplot/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/06/16/awk-lang/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/06/16/awk-lang/" itemprop="url">
-                  Awk工具与编程语言
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-06-16T00:00:00+08:00">
-                2014-06-16
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:17:44+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/操作系统/" itemprop="url" rel="index">
-                    <span itemprop="name">操作系统</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/操作系统/实用工具/" itemprop="url" rel="index">
-                    <span itemprop="name">实用工具</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2014/06/16/awk-lang/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/06/16/awk-lang/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="说明">说明</h2>
-<p>刚接触unix相关的书籍的时候，里面有一章是专门介绍awk的使用的。但当时觉得它过于复杂，很难记住它是什么，能干什么。想来是因为我知识的储备还不够。Awk主要的思想就是，它的确是一种设计得非常精巧的编程语言，很好地满足了实际应用的同时，也能够让我们以软件工程，编译原理等理论性的东西欣赏它。因此，我就知道awk的使用不再是一件困难的事情。</p>
-<h2 id="awk基础">awk基础</h2>
-<p>有些东西，理解它的过程，就好像是要进入一个豪华的庭院，要进入门内，非得绕过门前的屏风墙。不这样，就看不到里面的风景。</p>
-<p>awk本身的语法是比较怪异的。然而外面的人看到的，往往是用awk写出来的程序，而非程序的规范。所以就不得要领。人们又常常抱着学习awk就直接是为了处理文本的功利目的，一旦不能一眼看出来它在处理文本上的直观，就放弃了。但是，绝大部分事情，是不能凭感官的。我们必须要有一种理论的指导。</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/06/16/awk-lang/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/06/06/non-standard-analysis/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/06/06/non-standard-analysis/" itemprop="url">
-                  非标准分析简介
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-06-06T00:00:00+08:00">
-                2014-06-06
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:26:05+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数学/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2014/06/06/non-standard-analysis/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/06/06/non-standard-analysis/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>人们对非标准分析的通常说法是非标准分析建立在实数域<span class="math inline">\(\mathbb{R}\)</span>的扩张之上。扩张之后的<span class="math inline">\(\mathbb{R}^*\)</span>包含了无限小的非零数，以及无限大的数。无限小的非零数具有的特点是绝对值比任何正实数都小，无限大的数的特点是绝对值比任何正实数都大。</p>
-<p>显然，非标准分析得提供许多有益的结论，并且不会导致与直观相悖的结果才能为人接受。事实上它正符合这一点。因此非标准分析很有发展的前途。</p>
-<p>然而为此建立新的公理基础的方法却比较艰难。在微积分的创立时期，Newton,Leibniz都是在一阶与高阶无穷小的基础上发展起了微积分的理论。但是因为不严格而备受责难。现在看来，当时主要是没有严格的逻辑公理基础，因而对实数的理解不够深刻。那么这样的思想，也就是把无穷小与无穷大作为实数中正常的元素的思想，就不能继续发展下去。</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/06/06/non-standard-analysis/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/03/10/dotnet-lang/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/03/10/dotnet-lang/" itemprop="url">
-                  .NET平台上的一些程序语言
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-03-10T00:00:00+08:00">
-                2014-03-10
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:18:54+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机/编程/" itemprop="url" rel="index">
-                    <span itemprop="name">编程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2014/03/10/dotnet-lang/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/03/10/dotnet-lang/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="asp.net使用说明">asp.net使用说明</h2>
-<p>使用一个技术架构, 需要了解其原理, 并知道其实现的思路. 为了更清楚地知道这一点, 必需从.NET架构开始.</p>
-<p>现在的互联网技术, 甚至是一般的连网平台的技术, 跨平台性都是一个重要的特性. 在跨平台的背景下我们讨论各种技术.</p>
-<p>.NET的开发虽然比较早, 但是后来被ECMA规范化了, 标准是ECMA335.</p>
-<p>关于.NET技术, 我们以Mono的实现为例进行介绍. Visual Studio 开发环境是相同的原理可以理解的.</p>
-<p>mono计划从核心虚拟机引擎开始. 这个引擎用于编译C#等代码, 也就是高层的代码. 在一些平台, 比如x86, x86-64当中, 这个引擎具有实时性, 也就是现在可以编译成平台相关代码的形式. 在其它平台上, Mono用解释的方式运行.NET的相关代码.</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/03/10/dotnet-lang/#more" rel="contents">
+            <a class="btn" href="/blog-hexo-1/">
               阅读全文 &raquo;
             </a>
           </div>
@@ -3661,7 +1160,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -3710,7 +1209,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">35</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -3719,7 +1218,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">198</span>
+                <span class="site-state-item-count">196</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -3899,6 +1398,9 @@
 
   <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
 
+
+<!-- I manually add this to enable bootstrap style dropdown menu -->
+<script type="text/javascript" src="/js/src/bootstrap/dropdown.js"></script>
 
 
   

@@ -1,0 +1,1075 @@
+<!doctype html>
+
+
+
+  
+
+
+<!--
+<html class="theme-next mist use-motion" lang="zh-Hans,en">
+-->
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="绘图,可视化,python,gnuplot," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="80x24" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="使用过很多的绘图的软件了，但是用起来总是不那么方便。而且我的绘图是在文档当中的，要求与文档有相同的风格。但是通常情况下，这些都难以达到。因此，不管是Asymptote还是其它的软件，配置起来都比较麻烦。
+MetaPost的问题是，Metapost与XeTeX不太兼容。使用中文的时候又不方便了。所以我们还是使用其它的方法。
+gnuplot有一个优点，就是它可输出成TeX的源代码的格式。第一种是LaT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gnuplot绘图">
+<meta property="og:url" content="./drawing-gnuplot/index.html">
+<meta property="og:site_name" content="80x24">
+<meta property="og:description" content="使用过很多的绘图的软件了，但是用起来总是不那么方便。而且我的绘图是在文档当中的，要求与文档有相同的风格。但是通常情况下，这些都难以达到。因此，不管是Asymptote还是其它的软件，配置起来都比较麻烦。
+MetaPost的问题是，Metapost与XeTeX不太兼容。使用中文的时候又不方便了。所以我们还是使用其它的方法。
+gnuplot有一个优点，就是它可输出成TeX的源代码的格式。第一种是LaT">
+<meta property="og:updated_time" content="2016-12-14T11:22:23.169Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Gnuplot绘图">
+<meta name="twitter:description" content="使用过很多的绘图的软件了，但是用起来总是不那么方便。而且我的绘图是在文档当中的，要求与文档有相同的风格。但是通常情况下，这些都难以达到。因此，不管是Asymptote还是其它的软件，配置起来都比较麻烦。
+MetaPost的问题是，Metapost与XeTeX不太兼容。使用中文的时候又不方便了。所以我们还是使用其它的方法。
+gnuplot有一个优点，就是它可输出成TeX的源代码的格式。第一种是LaT">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="./drawing-gnuplot/"/>
+
+
+
+
+
+  <title> Gnuplot绘图 | 80x24 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?763bee904aa6d81fdf017659d162188f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">80x24</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Keep Stupid, Keep Hungry</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-atom">
+          <a href="/atom.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-rss"></i> <br />
+            
+            Atom订阅
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+          <li class="menu-item"><a href="/drawing-gnuplot/">简体中文</a></li>
+          
+          <li class="menu-item"><a href="/en/drawing-gnuplot/">English (US)</a></li>
+          
+
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="./drawing-gnuplot/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Istyasna">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="80x24">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="80x24" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Gnuplot绘图
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-06-26T00:00:00+08:00">
+                2014-06-26
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              <span class="post-meta-item-text">更新于</span>
+              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:22:23+08:00">
+                2016-12-14
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/出版/" itemprop="url" rel="index">
+                    <span itemprop="name">出版</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/出版/绘图/" itemprop="url" rel="index">
+                    <span itemprop="name">绘图</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/drawing-gnuplot/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/drawing-gnuplot/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>使用过很多的绘图的软件了，但是用起来总是不那么方便。而且我的绘图是在文档当中的，要求与文档有相同的风格。但是通常情况下，这些都难以达到。因此，不管是Asymptote还是其它的软件，配置起来都比较麻烦。</p>
+<p>MetaPost的问题是，Metapost与XeTeX不太兼容。使用中文的时候又不方便了。所以我们还是使用其它的方法。</p>
+<p>gnuplot有一个优点，就是它可输出成TeX的源代码的格式。第一种是LaTeX自带的picture环境，在里面直接绘图。第二种是tikz环境。无论哪一种环境，排版的工作都是连同文字一起的。所以正文是什么格式，其它文章也可以是这样的格式。</p>
+<p>如果将gnuplot的输出改成picture环境，那么在每个gnuplot文件前面添加如下的行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">set terminal latex    ## 也可以是emtex环境。</div><div class="line">set output &quot;pic.tex&quot;  ## 生成的.tex文件。</div></pre></td></tr></table></figure>
+<p>然后使用<code>\input{pic.tex}</code>将生成的文件嵌入到文本中，注意段落的安排，以及将图表排版有适当的空格。</p>
+<a id="more"></a>
+<p>如果将gnuplot的输出改成tikzpicture环境，那么在每个gnuplot文件前添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">set terminal tikz     ## 也可以是 set terminal lua tikz。</div><div class="line">## 还可以在 tikz 后添加额外选项，如 fontscale 0.9 , latex, tex, context。</div><div class="line">set output &quot;pic.tex&quot;</div></pre></td></tr></table></figure>
+<p>同样使用<code>\input{pic.tex}</code>将生成的文件嵌入到文本中。不过tikz图像 也可以在 <code>plain TeX</code> 环境下使用，因此使用这种方法，支持在tex或者xetex环境中插入图片，并不局限于latex或者xelatex。如果是在LaTeX环境中使用，则需要使用如下的宏包：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">\<span class="name">usepackage</span><span class="string">&#123;tikz&#125;</span></span></div><div class="line"><span class="tag">\<span class="name">usepackage</span><span class="string">&#123;gnuplot-lua-tikz&#125;</span></span></div></pre></td></tr></table></figure>
+<p>如果是plain TeX，则使用<code>\input gnuplot-lua-tikz.tex</code>命令。这样一来，gnuplot就非常能够满足我们的需要了。所以我们学习绘图也就从 它开始讲起。</p>
+<h2 id="gnuplot绘图基础">Gnuplot绘图基础</h2>
+<p>Gnuplot是一个交互式的绘图语言。绘出的图形展示在一个设备上。所以我们在绘图脚本中需要指定绘图的终端类型，以及输出的文件。默认情况下，Gnuplot是将图形输出到显示器。我们也可以更改成其它类型。前面我们就已经介绍了如何将图形导出成 <code>.tex</code> 格式。实际上，Gnuplot支持几乎所有的图片格式与文档格式，完整的支持可以参考Gnuplot官方文档的 <code>Terminal Types</code>一节。</p>
+<p>从4.6版本开始，Gnuplot支持了控制语句 <code>if/else/while/do</code>。这使得一些 表达式变得非常简单。</p>
+<p>建议对Gnuplot文件使用 <code>.gpl</code> 扩展名。</p>
+<p>出于排版文档的需要，在绘图之前，我们需要明确地指定绘图画布的大小，使图片不超过这个区域。在Gnuplot中，是通过 <code>set termial</code> 命令的<code>size XX,YY</code>实现的。任何终端均支持这个选项，前面的文档也不例外。如果<code>terminal</code> 类型 是 <code>tikz</code> ，那么默认的单位是 <code>cm</code>，后面跟数字。实际上， <code>XX</code> 、 <code>YY</code> 的 单位也可以是<code>mm</code> 、 <code>in</code> 、 <code>pt</code>等。建议在绘图之前给图像确定一个大小。</p>
+<p><code>set size XX,YY</code> 命令也起到设置图片大小的命令。但是它只是改变绘图区的大小，而非改变画布的大小。绘图区的大小可以通过 <code>ratio</code> 等指定，分别表示在 (X) 或 (Y) 方向的比例缩放的情况。</p>
+<p>在Gnuplot当中，绘图都是通过绘图语句实现的，因此讲的并不多。重点的是Gnuplot的数据类型与运算规则。</p>
+<p>而Gnuplot的表达式运算规则主要来自于C语言。与C语言相同，Gnuplot的表达式中间的空格会被忽略。</p>
+<p>在Gnuplot当中，复数值有特定的表示方法，一个二维数组，用大括号括起来，就是一个复数，第一分量代表实部，第二分量代表虚部。如 <code>{3,2}</code> 代表着复数 (3+2i)。如果对字符串使用用于数值类型的运算符，则Gnuplot尝试把字符串转成数值再进行运算。比如在Gnuplot当中， <code>&quot;3&quot;+&quot;4&quot;=7</code> ，并且 <code>6.78=&quot;6.78&quot;</code> 。</p>
+<p>对字符串允许使用下标运算符 <code>[BEGIN:END]</code> ，表示提取数组中区间<span class="math inline">\([BEGIN,END]\)</span>中的元素。使用 <code>*</code> 号，可以代表对其中一个区间不加限制。</p>
+<p>在Gnuplot当中内置了许多数学函数，而反函数在原函数前加 <code>a</code> ，如 <code>sin(x)</code> 的 反函数是 <code>asin(y)</code> 。三角函数的单位是弧度。<code>**</code> 表示取幂运算， <code>*</code> 表示乘法。 <code>.</code>表示字符串的连接。 <code>ne</code> 、 <code>eq</code> 表示字符串的相等的判断（而 <code>==</code> 表示 的是两个数值类型的相等。</p>
+<h3 id="绘图语句">绘图语句</h3>
+<p>在Gnuplot中实际绘图的语句只有 <code>plot</code> 、 <code>splot</code> 、<code>replot</code> 三个。 <code>plot</code> 语句产生2D图形， <code>splot</code> 产生3D图形，而 <code>replot</code> 则是把它的参数 加到前一 <code>plot</code> 或 <code>splot</code> 语句绘图当中，并修改它们的绘图结果。</p>
+<p><code>plot</code> 绘图可以使用直角坐标或者极坐标，具体行为受到 <code>set polar</code> 命令的 影响。 <code>splot</code> 绘图仅能使用直角坐标，但是也能通过 <code>set mapping</code> 选项使用其它的一些坐标系。最后， <code>using</code> 命令可以让我们对付大多数的坐标系。</p>
+<p>在直角坐标系下面， <code>plot</code> 命令可以使用四个坐标轴 (X) 、 (X2)、 (Y) 和 (Y2) 。它们分别代表底、顶、左、右方向的坐标轴。 <code>axes</code> 选项可以指定我们所使用的数对分别与哪一个坐标轴相对应。坐标轴的刻度也可以修改。比如 <code>set logscale xy</code> 允许我们对两个坐标轴都使用对度刻度。</p>
+<p><code>splot</code> 命令可以绘制表面图(surfaces)或者等高图(contours)。使用 <code>set contour</code> 或者 <code>set cntrparam</code> 命令可以改变绘图等高图时候的行为。在3D绘图中，对坐标轴同样可以使用不同的刻度，如对数刻数。</p>
+<h3 id="绘图的参数来源">绘图的参数来源</h3>
+<p>Gnuplot的绘图语句中都可以直接书写绘图的表达式，它们含有若干个变量。但是表达式可以有不同的产生方法。在赋值语句中，以单引号括起来的内容表示一个Shell命令。在解释时，Gnuplot会将出现的地方替换成相应的结果。比如<span class="math inline">\(f(x)=`whoami`\)</span> ，实际上是<span class="math inline">\(f(x)\)</span>等于命令<span class="math inline">\(whoami\)</span>执行的结果。</p>
+<p>在shell命令中，也可以通过 <code>@var</code> 引用Gnuplot里面的变量。即使 <code>\\\``出现在字符串双引号当中，也并不影响命令的执行。</code>“`uname -a`”<code>返回的仍然是命令的结果。不过</code>“uname -a”`并不会引起Gnuplot执行一个系统命令。</p>
+<p>绘图语句与绘图风格是相关联的。绘图风格指的是图形的类型，比如直方图，散点图等。绘图风格不同，绘图语句的行为也不相同。</p>
+<p>绘图风格由 <code>set style</code> 指定。常包括 <code>set style data</code> 与 <code>set style function</code> 。它们影响其后的 <code>plot</code> 与 <code>splot</code> 语句的行为。</p>
+<h2 id="gnuplot绘图工具">GNUplot绘图工具</h2>
+<p>使用之后，除了命令行不太方便外，其它地方还很方便。至少可以直接整合到LaTeX里面，这样就使排版的效果大大增强了。</p>
+<p>GNUplot的用法其实很简单，其设置是样式、选项与绘图的综合。绘图语法中需要指定数据源以及绘图的样式即可。坐标轴也各自有自己设置的办法。</p>
+<p>对GNUPLOT有疑问的话，可以直接使用help语句，此时在对话界面中会显示出来相应的帮助。另外，gnuplot的一个简单的例子如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">set terminal png size 1000,400  </div><div class="line">set output &quot;./sin.png&quot;  </div><div class="line">plot sin(x)</div></pre></td></tr></table></figure>
+<p>gnuplot的命令有两类，一类是修改状态，一种是绘图指令。set方法都是修改状态。使用plot, replot, multiplot来绘图。</p>
+<p>gnuplot对于数据中的时间项有很好的支持，可以直接将文本中某些数据项设置成时间的格式。这一功能对于日志分析与统计报表极为有用。</p>
+<p>上面列举了许多极有有趣的例子。</p>
+<p>上面给出了调整直方图的一个教程。</p>
+<p>命令式编程语言的绘图包括Python绘图工具，gnuplot, 以及C语言的编译工具等。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/绘图/" rel="tag"># 绘图</a>
+          
+            <a href="/tags/可视化/" rel="tag"># 可视化</a>
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/gnuplot/" rel="tag"># gnuplot</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/awk-lang/" rel="next" title="Awk工具与编程语言">
+                <i class="fa fa-chevron-left"></i> Awk工具与编程语言
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/MathGL/" rel="prev" title="MathGL绘图工具">
+                MathGL绘图工具 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="/drawing-gnuplot/"
+           data-title="Gnuplot绘图" data-url=".//drawing-gnuplot/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Istyasna" />
+          <p class="site-author-name" itemprop="name">Istyasna</p>
+          <p class="site-description motion-element" itemprop="description">GO FORTH now and create masterpieces of the publishing art!</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">196</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/irhawks" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://coding.aliyun.com/u/irhawks" target="_blank" title="Aliyun">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Aliyun
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="./" title="Title" target="_blank">Title</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hainu.edu.cn" title="Hainan University" target="_blank">Hainan University</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#gnuplot绘图基础"><span class="nav-number">1.</span> <span class="nav-text">Gnuplot绘图基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#绘图语句"><span class="nav-number">1.1.</span> <span class="nav-text">绘图语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绘图的参数来源"><span class="nav-number">1.2.</span> <span class="nav-text">绘图的参数来源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gnuplot绘图工具"><span class="nav-number">2.</span> <span class="nav-text">GNUplot绘图工具</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Istyasna</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+<!-- I manually add this to enable bootstrap style dropdown menu -->
+<script type="text/javascript" src="/js/src/bootstrap/dropdown.js"></script>
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"irhawks"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

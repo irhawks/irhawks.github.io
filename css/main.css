@@ -206,6 +206,9 @@ body {
     font-size: 16px;
   }
 }
+body {
+  background: url("/uploads/images/background.jpg") repeat top;
+}
 h1,
 h2,
 h3,
@@ -1680,7 +1683,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #79fffa;
+  background: #a252fa;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2529,7 +2532,7 @@ hr {
   float: right;
 }
 .menu {
-  float: right;
+  float: center;
   margin: 8px 0 0 0;
 }
 @media (max-width: 767px) {

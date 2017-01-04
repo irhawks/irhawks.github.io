@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>./wikipedia-transition-system/</loc>
+        <lastmod>2016-12-18T11:29:34.535Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>./library-lapack/</loc>
         <lastmod>2016-12-15T12:56:17.998Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -337,14 +345,6 @@
     <url>
         <loc>./scheme-lang/</loc>
         <lastmod>2016-12-14T11:08:10.697Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>./wikipedia-transition-system/</loc>
-        <lastmod>2016-12-14T11:07:27.273Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

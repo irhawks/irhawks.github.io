@@ -218,9 +218,9 @@ Hexo的Next主题可以识别&lt;! -- more --.&gt;，并且在主页当中展示
     
       <category term="OpenModelica" scheme="./tags/OpenModelica/"/>
     
-      <category term="仿真" scheme="./tags/%E4%BB%BF%E7%9C%9F/"/>
-    
       <category term="ModelicaML" scheme="./tags/ModelicaML/"/>
+    
+      <category term="仿真" scheme="./tags/%E4%BB%BF%E7%9C%9F/"/>
     
       <category term="DAE" scheme="./tags/DAE/"/>
     
@@ -306,7 +306,7 @@ end C&lt;/code&gt;&lt;/pre&gt;
     <link href=".//wikipedia-transition-system/"/>
     <id>.//wikipedia-transition-system/</id>
     <published>2016-01-12T16:00:00.000Z</published>
-    <updated>2016-12-14T11:07:27.273Z</updated>
+    <updated>2016-12-18T11:29:34.535Z</updated>
     
     <summary type="html">
     
@@ -569,6 +569,8 @@ end C&lt;/code&gt;&lt;/pre&gt;
     
       <category term="scala" scheme="./tags/scala/"/>
     
+      <category term="面向对象" scheme="./tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
+    
       <category term="控制语句" scheme="./tags/%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/"/>
     
       <category term="设计模式" scheme="./tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
@@ -576,8 +578,6 @@ end C&lt;/code&gt;&lt;/pre&gt;
       <category term="映射" scheme="./tags/%E6%98%A0%E5%B0%84/"/>
     
       <category term="类" scheme="./tags/%E7%B1%BB/"/>
-    
-      <category term="面向对象" scheme="./tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
     
       <category term="注解" scheme="./tags/%E6%B3%A8%E8%A7%A3/"/>
     
@@ -604,11 +604,11 @@ end C&lt;/code&gt;&lt;/pre&gt;
     
       <category term="scala" scheme="./tags/scala/"/>
     
-      <category term="面向对象" scheme="./tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
-    
       <category term="文档" scheme="./tags/%E6%96%87%E6%A1%A3/"/>
     
       <category term="注释" scheme="./tags/%E6%B3%A8%E9%87%8A/"/>
+    
+      <category term="面向对象" scheme="./tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
     
   </entry>
   

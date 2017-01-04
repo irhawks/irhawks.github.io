@@ -115,7 +115,7 @@ Action Language是专门描述状态传递系统STS（state transition systems�
 <meta property="og:site_name" content="80x24">
 <meta property="og:description" content="众所周知的是传递系统只是从系统转换的观点来看问题，其理论的根据跟抽象重写系统是一样的，但是可能说明的角度不一样吧。传递系统分成两类，带标签的和不带标签的系统。传递系统在应用于模型检查的时候经常使用带标签的形式。
 Action Language是专门描述状态传递系统STS（state transition systems）的语言。经常用于形式化地创建一系列的模型。PDDL是著名的一种Action L">
-<meta property="og:updated_time" content="2016-12-14T11:07:27.273Z">
+<meta property="og:updated_time" content="2016-12-18T11:29:34.535Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="维基上定义的传递系统">
 <meta name="twitter:description" content="众所周知的是传递系统只是从系统转换的观点来看问题，其理论的根据跟抽象重写系统是一样的，但是可能说明的角度不一样吧。传递系统分成两类，带标签的和不带标签的系统。传递系统在应用于模型检查的时候经常使用带标签的形式。
@@ -231,16 +231,6 @@ Action Language是专门描述状态传递系统STS（state transition systems�
         </li>
       
         
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            About
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
@@ -251,32 +241,22 @@ Action Language是专门描述状态传递系统STS（state transition systems�
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
+        <li class="menu-item menu-item-resources">
+          <a href="/resources" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-folder"></i> <br />
             
-            Categories
+            Resources
           </a>
         </li>
       
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            Tags
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-atom">
-          <a href="/atom.xml" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-rss"></i> <br />
-            
-            Atom
+            About
           </a>
         </li>
       
@@ -389,8 +369,8 @@ Action Language是专门描述状态传递系统STS（state transition systems�
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               <span class="post-meta-item-text">Post modified</span>
-              <time title="Post modified" itemprop="dateModified" datetime="2016-12-14T19:07:27+08:00">
-                2016-12-14
+              <time title="Post modified" itemprop="dateModified" datetime="2016-12-18T19:29:34+08:00">
+                2016-12-18
               </time>
             
           </span>
@@ -471,7 +451,7 @@ Action Language是专门描述状态传递系统STS（state transition systems�
 </dl>
 <p>Given two states <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> in <span class="math inline">\(S\)</span>, <span class="math inline">\(p\)</span> is <em>bisimilar</em> to <span class="math inline">\(q\)</span>, written <span class="math inline">\(p \sim q\)</span>, if there is a bisimultion <span class="math inline">\(R\)</span> such that <span class="math inline">\((p,q)\)</span> is in <span class="math inline">\(R\)</span>.</p>
 <p>也就是说，如果两个状态标记系统是互模拟的，那么我们称这两个系统是相互等价的。这个时候，<span class="math inline">\(p\)</span>可以模拟<span class="math inline">\(q\)</span>，而<span class="math inline">\(q\)</span>也可以模拟<span class="math inline">\(p\)</span>（但是反过来则不成立，因为还需要一些附加的条件）。我们可以证明，两个状态的相似性是一个等价关系。互模拟有多个定义，比较不动点的定义。可能是我们必须要熟悉的。</p>
-<p>下面我们来看什么是transition systems.</p>
+<h3 id="下面我们来看什么是transition-systems.">下面我们来看什么是transition systems.</h3>
 <p>In theoretical computer science, a transition system is a concept used in the sutdy of computation. It is used to describe the potential <strong>behavior</strong> of discrete systems. It consists of states and transitions between states, which may be labeled with labels chosen from a set; the same label may appear on more than one transition.</p>
 <p><strong>Transition systems coincide mathematically with abstract rewriting systems</strong>. and directed graphs. They differ from finite state automata in several ways:</p>
 <ul>
@@ -494,7 +474,7 @@ Action Language是专门描述状态传递系统STS（state transition systems�
 <p>In mathematical logic and theoretical computer science, an <strong>abstract rewriting system</strong> (<strong>reduction system</strong>, <strong>abstract reduction system</strong>, <strong>abstract rewrite system</strong>, abbreviation <strong>ARS</strong>) is a formalism that captures the quintessential（精髓，精粹） notion and properties of rewriting systems. in its simplest form, an ARS is simply a set of “objects” together with a binary relation, traditionally denoted with <span class="math inline">\(\rightarrow\)</span>. this definition can be further refined if we index (label) subsets of the binary relation. Desipte its simplicity, an ARS is sufficient to describe important properties of rewriting systems link normal forms, termination, and various notions of confluence.</p>
 <p>ARS与LTS的定义就是特价的，只不过数学上关注的重点不太一样。假设<span class="math inline">\((A,\rightarrow)\)</span>是一个ARS，那么数学上关心的是<span class="math inline">\(trans\)</span>这个二元关系的传递闭包、反射闭包等。</p>
 <p>ARS的定义可能引起人的混淆，因为有时候它就像是一个语法生成式，只不过，一个重写规则的左边与右边都是一个单独的对象，而不是不同的语法项。所以ARS中只有<span class="math inline">\(a\rightarrow b\)</span>而没有<span class="math inline">\(a\rightarrow b c\)</span>这样的形式。</p>
-<p>下面我们介绍数学家对于ARS的研究兴趣。</p>
+<h3 id="下面我们介绍数学家对于ars的研究兴趣">下面我们介绍数学家对于ARS的研究兴趣。</h3>
 <dl>
 <dt>reducible objects</dt>
 <dd>An object <span class="math inline">\(x\in A\)</span> is called <strong>reducible</strong> in <span class="math inline">\((A,\rightarrow)\)</span> if <span class="math inline">\(\exists y\in A\)</span> such that <span class="math inline">\(x\rightarrow y\)</span>. otherwise it is called <strong>irreducible</strong> or a <strong>normal form</strong>.
@@ -506,7 +486,8 @@ Action Language是专门描述状态传递系统STS（state transition systems�
 <dd>Given <span class="math inline">\(x\)</span> and <span class="math inline">\(y\in A\)</span>, are they equivalent under <span class="math inline">\(\overset{*}{\leftrightarrow}\)</span> ?
 </dd>
 </dl>
-<p>接下来对于ARS，自然而然地引入所谓的Church-Rosser定理。因为<span class="math inline">\(\lambda\)</span>演算具有这样的性质。不过，对于模型检查等应用来说，TS才是比较实用的工具。下面我们就借助于TS来给bisimulation几种等价的，但是表述不同的定义。</p>
+<p>接下来对于ARS，自然而然地引入所谓的Church-Rosser定理。因为<span class="math inline">\(\lambda\)</span>演算具有这样的性质。不过，对于模型检查等应用来说，TS才是比较实用的工具。</p>
+<h3 id="下面我们就借助于ts来给bisimulation几种等价的但是表述不同的定义">下面我们就借助于TS来给bisimulation几种等价的，但是表述不同的定义</h3>
 <dl>
 <dt>Relational definition of bisimulation</dt>
 <dd>Given a labelled transition system <span class="math inline">\((S, \Lambda, \rightarrow)\)</span>, a bisimulation is a binary relation <span class="math inline">\(R\)</span> over <span class="math inline">\(S\)</span> such that <span class="math inline">\(\forall \alpha \in \Lambda\)</span>,
@@ -523,17 +504,18 @@ R^{-1};\overset{\alpha}{\rightarrow} \subseteq \overset{\alpha}{\rightarrow};R^{
 <span class="math display">\[\begin{equation}
 F: 2^{S\times S} \mapsto 2^{S\times S}
 \end{equation}\]</span>
-to be a function from binary relations over <span class="math inline">\(S\)</span> to binary relations over <span class="math inline">\(S\)</span>, as follows: let <span class="math inline">\(R\)</span> be any binary relation over <span class="math inline">\(S\)</span>, <span class="math inline">\(F(R)\)</span> is defnied to be the set of all pairs <span class="math inline">\((p,q)\in S\times S\)</span> such that
-<span class="math display">\[\begin{equation}
-\forall \alpha\in\Lambda, p&#39;\in S, p\overset{\alpha}{\rightarrow} p&#39; \Rightarrow
-\exists q&#39; \in S, q\overset{q&#39;}{\rightarrow}, (p&#39;,q&#39;)\in R
-\end{equation}\begin{equation}
-\forall \alpha\in\Lambda, q&#39;\in S, q\overset{\alpha}{\rightarrow} q&#39; \Rightarrow
-\exists p&#39; \in S, p\overset{p&#39;}{\rightarrow}, (p&#39;,q&#39;)\in R
-\end{equation}\]</span>
-Then, bisimilarity is defined to be the greatest fixed point of <span class="math inline">\(F\)</span>.
+to be a function from binary relations over <span class="math inline">\(S\)</span> to binary relations over <span class="math inline">\(S\)</span>, as follows: let <span class="math inline">\(R\)</span> be any binary relation over <span class="math inline">\(S\)</span>, <span class="math inline">\(F(R)\)</span> is defined to be the set of all pairs <span class="math inline">\((p,q)\in S\times S\)</span> such that
 </dd>
 </dl>
+<span class="math display">\[\begin{equation}
+    \forall \alpha\in\Lambda, p&#39;\in S, p\overset{\alpha}{\rightarrow} p&#39; \Rightarrow
+    \exists q&#39; \in S, q\overset{q&#39;}{\rightarrow}, (p&#39;,q&#39;)\in R
+\end{equation}\]</span>
+<span class="math display">\[\begin{equation}
+    \forall \alpha\in\Lambda, q&#39;\in S, q\overset{\alpha}{\rightarrow} q&#39; \Rightarrow
+    \exists p&#39; \in S, p\overset{p&#39;}{\rightarrow}, (p&#39;,q&#39;)\in R
+\end{equation}\]</span>
+<p>Then, bisimilarity is defined to be the greatest fixed point of <span class="math inline">\(F\)</span>.</p>
 <p>从博弈的角度也可以定义互模拟。另外，从余代数的角度的定义可能在理论上更坚实一些，因为余代数可以对共模拟的字义作出推广。因为TS的共模拟可以看成是共代数模拟的特殊的情况。因为TS可以给出编程语言的操作语义，所以LTS在编程语言中的设计当中也变得非常重要。</p>
 
       
@@ -700,19 +682,19 @@ Then, bisimilarity is defined to be the greatest fixed point of <span class="mat
 
           
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
+              
                 <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">categories</span>
-              </a>
+              
             </div>
           
 
           
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
+              
                 <span class="site-state-item-count">199</span>
                 <span class="site-state-item-name">tags</span>
-              </a>
+              
             </div>
           
 
@@ -796,7 +778,7 @@ Then, bisimilarity is defined to be the greatest fixed point of <span class="mat
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#互模拟与lts基础介绍"><span class="nav-number">1.</span> <span class="nav-text">互模拟与LTS基础介绍</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#互模拟与lts基础介绍"><span class="nav-number">1.</span> <span class="nav-text">互模拟与LTS基础介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下面我们来看什么是transition-systems."><span class="nav-number">1.1.</span> <span class="nav-text">下面我们来看什么是transition systems.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下面我们介绍数学家对于ars的研究兴趣"><span class="nav-number">1.2.</span> <span class="nav-text">下面我们介绍数学家对于ARS的研究兴趣。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下面我们就借助于ts来给bisimulation几种等价的但是表述不同的定义"><span class="nav-number">1.3.</span> <span class="nav-text">下面我们就借助于TS来给bisimulation几种等价的，但是表述不同的定义</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -816,8 +798,8 @@ Then, bisimilarity is defined to be the greatest fixed point of <span class="mat
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

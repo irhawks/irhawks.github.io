@@ -154,9 +154,14 @@ shutdown实际上是调用init 0, init 0会cl">
 
 
 <!-- add highlight.js to render pandoc code blocks -->
-<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/github.min.css" rel="stylesheet">  
-<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>  
-<script>hljs.initHighlightingOnLoad();</script>  
+<!--
+<link href="http://cdn.bootcss.com/highlight.js/9.10.0/styles/github.min.css" rel="stylesheet">  
+-->
+<link href="/css/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>  
+<script src="/js/highlightjs-line-numbers.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.initLineNumbersOnLoad(); </script>
 
   <title> 命令行下面的关机，PXE远程启动 | 80x24 </title>
 </head>
@@ -440,13 +445,13 @@ host target {
 <span class="er">## 目标机器所匹配的MAC地址</span>
 hardware ethernet <span class="dv">00</span>:<span class="dv">13</span>:<span class="dv">21</span>:1F:F1:<span class="dv">82</span>;
 <span class="er">## 目标机器分配到的IP地址</span>
-fixed-address <span class="fl">192.168.0.10</span>;
+fixed-address <span class="fl">192.168</span>.<span class="fl">0.10</span>;
 <span class="er">## 目标机器所使用的网关地址</span>
-option routers <span class="fl">192.168.0.254</span>;
+option routers <span class="fl">192.168</span>.<span class="fl">0.254</span>;
 <span class="er">## 目标机器所用的DNS</span>
-option domain-name-servers <span class="fl">208.67.222.222</span>,<span class="fl">208.67.220.220</span>;
+option domain-name-servers <span class="fl">208.67</span>.<span class="fl">222.222</span>,<span class="fl">208.67</span>.<span class="fl">220.220</span>;
 <span class="er">## 指定TFTP服务器的地址。如果TFTP与DHCP服务器是一个IP，则可以忽略</span>
-next-server <span class="fl">192.168.0.2</span>;
+next-server <span class="fl">192.168</span>.<span class="fl">0.2</span>;
 <span class="er">## 指定开机文档在TFTP服务器上的路径</span>
 filename <span class="st">&quot;/ubuntu-installer/i386/pxelinux.0&quot;</span>;
 }</code></pre></div>
@@ -457,12 +462,12 @@ ignore client-updates;
 allow booting;
 allow bootp;
 
-subnet <span class="fl">192.168.5.0</span> netmask <span class="fl">255.255.255.0</span> {
-option routers <span class="fl">192.168.5.1</span>;
-option subnet-mask <span class="fl">255.255.255.0</span>;
-option domain-name-servers <span class="fl">202.112.128.50</span>;
-range dynamic-bootp <span class="fl">192.168.5.33</span> <span class="fl">192.168.5.38</span>;
-<span class="kw">default</span>-lease-time <span class="dv">21600</span>;
+subnet <span class="fl">192.168</span>.<span class="fl">5.0</span> netmask <span class="fl">255.255</span>.<span class="fl">255.0</span> {
+option routers <span class="fl">192.168</span>.<span class="fl">5.1</span>;
+option subnet-mask <span class="fl">255.255</span>.<span class="fl">255.0</span>;
+option domain-name-servers <span class="fl">202.112</span>.<span class="fl">128.50</span>;
+range dynamic-bootp <span class="fl">192.168</span>.<span class="fl">5.33</span> <span class="fl">192.168</span>.<span class="fl">5.38</span>;
+<span class="cf">default</span>-lease-time <span class="dv">21600</span>;
 max-lease-time <span class="dv">43200</span>;
 }</code></pre></div>
 <p>我们知道，本地启动的时候，有GRUB和LINUX系统映象两个文件。前面的pxelinux.0就相当于GRUB、整个光盘就相当于开机系统。linux发行版光盘的<code>install/netboot</code>目录中有pxelinux.0文件及相应的配置选项，使用的时候，该文件夹的内容全部拷贝到TFTP根目录下面。</p>
@@ -470,9 +475,9 @@ max-lease-time <span class="dv">43200</span>;
 <p>如果合适，我们也可以将安装好的系统分发给其它的工作站，而不用远程安装系统。</p>
 <h2 id="实战">实战</h2>
 <p>首先安装Ubuntu上所需要的各种软件，然后将Ubuntu14.04的映象下载过来。</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">apt-get</span> install nfs-common nfs-kernel-server
-<span class="kw">apt-get</span> install tftpd-hpa tftp-hpa
-<span class="kw">apt-get</span> install isc-dhcp-server</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">apt-get</span> install nfs-common nfs-kernel-server
+<span class="ex">apt-get</span> install tftpd-hpa tftp-hpa
+<span class="ex">apt-get</span> install isc-dhcp-server</code></pre></div>
 <p>DHCP服务的端口号是TCP67，而TFTP服务的端口号是UDP59，可以通过netstat命令查看相关的设置。</p>
 <p>tftp-hpa使用的配置文件是 <code>/etc/default/tftpd-hpa</code> ，可以根据需要，将TFTP的服务器目录改变到其它的位置。不过，配置的时候，注意权限问题。</p>
 <p>isc-dhcp-server使用的配置文件是 <code>/etc/dhcp/dhcpd.conf</code> 。配置的时候按照格式。</p>
@@ -496,13 +501,13 @@ append initrd=initrd.nfs root=/dev/nfs nfsroot=192.168.1.88:/home/cache/netboot/
 <p>linux的ethtool工具可以用于修改网卡上WOL的状态，决定从网络唤醒是否启用。使用 <code>ethtool -s eth0 wol g</code> 就可以启用网卡的网络唤醒功能。 <code>wol d</code>表示禁用。</p>
 <p>linux的 <code>wakeonlan</code>工具是唤醒网卡的终端。它接受MAC地址作为参数，唤醒局域网中具有此MAC的机器。</p>
 <p>完成PXE启动的时候，导出NFSROOT目录，配置为</p>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">/etc/exports: the access control list <span class="kw">for</span> filesystems which may be exported
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">/etc/exports: the access control list <span class="cf">for</span> filesystems which may be exported
     to NFS clients.  See exports(<span class="dv">5</span>).
 
-Example <span class="kw">for</span> NFSv2 and NFSv3:
+Example <span class="cf">for</span> NFSv2 and NFSv3:
 /srv/homes       hostname1(rw,sync,no_subtree_check) hostname2(ro,sync,no_subtree_check)
 
-Example <span class="kw">for</span> NFSv4:
+Example <span class="cf">for</span> NFSv4:
 /srv/nfs4        gss/krb5i(rw,sync,fsid=<span class="dv">0</span>,crossmnt,no_subtree_check)
 /srv/nfs4/homes  gss/krb5i(rw,sync,no_subtree_check)
 

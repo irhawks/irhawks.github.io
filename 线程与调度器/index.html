@@ -163,9 +163,14 @@
 
 
 <!-- add highlight.js to render pandoc code blocks -->
-<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/github.min.css" rel="stylesheet">  
-<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>  
-<script>hljs.initHighlightingOnLoad();</script>  
+<!--
+<link href="http://cdn.bootcss.com/highlight.js/9.10.0/styles/github.min.css" rel="stylesheet">  
+-->
+<link href="/css/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>  
+<script src="/js/highlightjs-line-numbers.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.initLineNumbersOnLoad(); </script>
 
   <title> 进程原理三：线程原理与编程、调度器 | 80x24 </title>
 </head>
@@ -506,23 +511,23 @@
 <p>看起来 <code>pthread_create</code> 函数使用了一大堆的指针，其实却很简单，返回值是否为零代表成功或者失败。第一个参数相当于线程控制块，第二个是线程的属性，第三个是线程的入口函数，第四个是需要传递给该函数的参数。</p>
 <p>UNIX函数的惯例是调用失败时返回-1,比如对于前面到的fork函数。0代表对函数来说有特殊含义的一个量，-1才代表一个调用错误，函数内部的代码无法完成所称的工作。</p>
 <p>函数要写成 <code>void *function(void *arg)</code> 的形式，以便正确地进行转换。下面是一个例子。可以和fork()相对比。</p>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="ot">#include &lt;stdio.h&gt;</span>
-<span class="ot">#include &lt;stdlib.h&gt;</span>
-<span class="ot">#include &lt;pthread.h&gt;</span>
-<span class="ot">#include &lt;errno.h&gt;</span>
-<span class="ot">#include &lt;string.h&gt;</span>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;pthread.h&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;errno.h&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;string.h&gt;</span>
 <span class="dt">int</span> main(){
 <span class="dt">int</span> ret;
 pthread_t mythread;
 ret = pthread_create(&amp;mythread, NULL, myThread, NULL);
-<span class="kw">if</span> (ret != <span class="dv">0</span>){
-    printf(<span class="st">&quot;Cannot create thread (%s)</span><span class="ch">\n</span><span class="st">&quot;</span>, strerror(errno));
+<span class="cf">if</span> (ret != <span class="dv">0</span>){
+    printf(<span class="st">&quot;Cannot create thread (%s)</span><span class="sc">\n</span><span class="st">&quot;</span>, strerror(errno));
     exit(-<span class="dv">1</span>);
 }
-<span class="kw">return</span> <span class="dv">0</span>;
+<span class="cf">return</span> <span class="dv">0</span>;
 }
 <span class="dt">void</span> *myThread(<span class="dt">void</span> *arg){
-printf(<span class="st">&quot;Thread is running.</span><span class="ch">\n</span><span class="st">&quot;</span>);
+printf(<span class="st">&quot;Thread is running.</span><span class="sc">\n</span><span class="st">&quot;</span>);
 pthread_exit(arg);
 }</code></pre></div>
 <p>以上代码的重要之处如下：</p>

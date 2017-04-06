@@ -154,9 +154,14 @@
 
 
 <!-- add highlight.js to render pandoc code blocks -->
-<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/github.min.css" rel="stylesheet">  
-<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>  
-<script>hljs.initHighlightingOnLoad();</script>  
+<!--
+<link href="http://cdn.bootcss.com/highlight.js/9.10.0/styles/github.min.css" rel="stylesheet">  
+-->
+<link href="/css/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>  
+<script src="/js/highlightjs-line-numbers.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.initLineNumbersOnLoad(); </script>
 
   <title> 在Debian/Ubuntu系统下面的Java与Scala包 | 80x24 </title>
 </head>
@@ -464,7 +469,7 @@
 <p>sbt-native-packager可能的缺点就是它把依赖的jar包都放在程序当中，因此，整个程序显得非常拥挤了。其实按照集群来配置的话，/usr目录是放置软件的，没有必要每个结点机器上都安装一遍，那样也太占空间了。</p>
 <p>我们来看具体的做法。</p>
 <p>生成deb包被看成是构建任务的一部分。所以简化到使用一个plugin的程度。首先，我们指定sbt的版本：</p>
-<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala">sbt.<span class="fu">version</span> = <span class="fl">0.13.7</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala">sbt.<span class="fu">version</span> = <span class="fl">0.13</span>.<span class="dv">7</span></code></pre></div>
 <p>然后，在project/plugins.sbt文件中添加如下的插件：</p>
 <div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="fu">addSbtPlugin</span>(<span class="st">&quot;com.typesafe.sbt&quot;</span> % <span class="st">&quot;sbt-native-packager&quot;</span> % <span class="st">&quot;1.0.0&quot;</span>)</code></pre></div>
 <p>之后，在build.sbt中启用相应的插件，并指定生成debian包的时候所需要的一些关键字段，比如维护者名称，开发者名称等。</p>

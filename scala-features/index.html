@@ -157,9 +157,14 @@ def square(a: Int)  = a *">
 
 
 <!-- add highlight.js to render pandoc code blocks -->
-<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/github.min.css" rel="stylesheet">  
-<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>  
-<script>hljs.initHighlightingOnLoad();</script>  
+<!--
+<link href="http://cdn.bootcss.com/highlight.js/9.10.0/styles/github.min.css" rel="stylesheet">  
+-->
+<link href="/css/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>  
+<script src="/js/highlightjs-line-numbers.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.initLineNumbersOnLoad(); </script>
 
   <title> Scala的一些设计特点 | 80x24 </title>
 </head>
@@ -460,7 +465,7 @@ def square(a: Int)  = a *">
 <p>Traits就像是一个Interface。但是可以有函数体。</p>
 <h2 id="模式匹配特性">模式匹配特性</h2>
 <p>自己中间的时候接触到了模式匹配。模式匹配与switch case语句最大的匹别就是它可以直接匹配一个类型而不单单是匹配在一个值。在支持高阶函数等特性的语言中，模式匹配是很强大的，尤其是用来构造一个分析器。</p>
-<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="kw">def</span> fib(int: Any) <span class="kw">:</span> Int = in match {
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="ex">def</span> fib(int: Any) <span class="bu">:</span> Int = in match {
     <span class="kw">case</span> 0 =&gt; 0
     case 1 =&gt; 1
     case n: Int =&gt; fib(n-1) + fib(n-2)
@@ -478,7 +483,7 @@ def square(a: Int)  = a *">
 <span class="kw">def</span> <span class="fu">value</span>(in: Expr): Int = in <span class="kw">match</span> {
     <span class="kw">case</span> <span class="fu">FibExpr</span>(<span class="dv">0</span>) =&gt; <span class="dv">0</span>
     <span class="kw">case</span> <span class="fu">FibExpr</span>(<span class="dv">1</span>) =&gt; <span class="dv">1</span>
-    <span class="kw">case</span> <span class="fu">FibExpr</span>(n) =&gt; <span class="fu">value</span>(<span class="fu">SumExpr</span>(<span class="fu">Fib</span>(n<span class="dv">-1</span>), <span class="fu">Fib</span>(n<span class="dv">-2</span>)))
+    <span class="kw">case</span> <span class="fu">FibExpr</span>(n) =&gt; <span class="fu">value</span>(<span class="fu">SumExpr</span>(<span class="fu">Fib</span>(n-<span class="dv">1</span>), <span class="fu">Fib</span>(n-<span class="dv">2</span>)))
     <span class="kw">case</span> <span class="fu">SumExpr</span>(a,b) =&gt; <span class="fu">value</span>(a) + <span class="fu">value</span>(b)
     <span class="kw">case</span> _ =&gt; <span class="dv">0</span>
 }
@@ -524,7 +529,7 @@ osName.<span class="fu">foreach</span>(print _)</code></pre></div>
     }
 }
 <span class="st">&quot;user@domain.com&quot;</span> <span class="kw">match</span> {
-    <span class="kw">case</span> <span class="fu">Email</span>(user, domain) =&gt; <span class="fu">println</span>(user + &#39;@&#39;+ domain)
+    <span class="kw">case</span> <span class="fu">Email</span>(user, domain) =&gt; <span class="fu">println</span>(user + <span class="ch">&#39;@&#39;</span>+ domain)
 }</code></pre></div>
 <p>这种方法，依赖于对象有unapply方法，以及正则表达式的match功能。</p>
 <p>另外，Scala执行中可以启用Cache的功能。具体来说，就是对于函数的指定调用启用Cache。因为每次结果相同，下一次的时候就不再调用了。这种方法需要显式使用。尤其是自己建立一个维护cache的字典。不过，使用的方法也是相当简单的。使用cache的最大的优势可能在于非尾递归的情形下，也不用我们手工改成迭代的方法。在scala中，是通过memo函数（scala.collection.mutable.WeakHashMap）实现的。中文译为“记忆模式”。</p>

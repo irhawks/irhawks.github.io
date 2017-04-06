@@ -157,9 +157,14 @@
 
 
 <!-- add highlight.js to render pandoc code blocks -->
-<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/github.min.css" rel="stylesheet">  
-<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>  
-<script>hljs.initHighlightingOnLoad();</script>  
+<!--
+<link href="http://cdn.bootcss.com/highlight.js/9.10.0/styles/github.min.css" rel="stylesheet">  
+-->
+<link href="/css/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>  
+<script src="/js/highlightjs-line-numbers.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.initLineNumbersOnLoad(); </script>
 
   <title> Apache Nutch的介绍与基本使用 | 80x24 </title>
 </head>
@@ -553,48 +558,48 @@ http://localhost:8983/solr/ , 这是Solr服务器
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">### 我们从DMOZ开放式分类目录添加URL。</span>
 <span class="co">### 首先我们必须下载并且解压缩这个DMOZ所有网页的列表</span>
 <span class="co">### 这是一个200多MB的文件，所以这会消耗几分钟</span>
-<span class="kw">wget</span> http://rdf.dmoz.org/rdf/content.rdf.u8.gz
-<span class="kw">gunzip</span> content.rdf.u8.gz 
+<span class="fu">wget</span> http://rdf.dmoz.org/rdf/content.rdf.u8.gz
+<span class="fu">gunzip</span> content.rdf.u8.gz 
 
 <span class="co">### 接下来我们选择这些网页当中随机的一些子集</span>
 <span class="co">### 我们使用随机的子集所以所有在跟着这一个教程做的人就不会伤害到同样的网站</span>
 <span class="co">### DMOZ包含了大约三百万个URL。我们从每5000个URL中选择出一个，因此我们就有大约1000个URL</span>
 <span class="co">### 这里我们从50000个URL中选择出一个，因此总共选择大约100个，可以节省很多时间</span>
-<span class="kw">nutch</span> org.apache.nutch.tools.DmozParser content.rdf.u8 -subset 5000 <span class="kw">&gt;</span> dmoz/seed.txt
+<span class="ex">nutch</span> org.apache.nutch.tools.DmozParser content.rdf.u8 -subset 5000 <span class="op">&gt;</span> dmoz/seed.txt
 
 <span class="co">###  最后，我们用这些选出的URL来初始化crawlId（在Nutch 2中改成了crawlId而不是db文件，</span>
 <span class="co">### crawlId存在相应的hbase库当中</span>
-<span class="kw">nutch</span> inject ./dmoz/ -crawlId dmozcrawl 
+<span class="ex">nutch</span> inject ./dmoz/ -crawlId dmozcrawl 
 
 <span class="co">###  要获取，我们首先要从数据库里产生一个获取的列表，</span>
 <span class="co">### 生成的任务中，-topN表示选择的URL数</span>
 <span class="co">### -batchId表示我们所生成的这些初始网页的任务名，接下来在fetch等操作的时候可以指定任务名</span>
 <span class="co">### topN是每一级所获取的网页数，限制topN可以减少抓取的数目</span>
-<span class="kw">nutch</span> generate -crawlId dmozcrawl -topN 100
+<span class="ex">nutch</span> generate -crawlId dmozcrawl -topN 100
 
 <span class="co">### 在以下面的命令在这个分段里进行获取</span>
 <span class="co">### 可以改成前面-batchId指定的参数，以代替fetch</span>
-<span class="kw">nutch</span> fetch -all -crawlId dmozcrawl -threads 2
+<span class="ex">nutch</span> fetch -all -crawlId dmozcrawl -threads 2
 
 <span class="co">### 获取之后parse有关条目</span>
-<span class="kw">nutch</span> parse -all -crawlId dmozcrawl
+<span class="ex">nutch</span> parse -all -crawlId dmozcrawl
 
 <span class="co">###  当这一切完成以后，我们就以获取回来的结果更新数据库</span>
-<span class="kw">nutch</span> updatedb -all -crawlId dmozcrawl
+<span class="ex">nutch</span> updatedb -all -crawlId dmozcrawl
 
 <span class="co">### 进行索引，在新的nutch里面，已经没有invertindex了，只有index了</span>
-<span class="kw">nutch</span> index -all -crawlId dmozcrawl
-<span class="kw">nutch</span> solrindex http://10.0.8.68:8983/solr/test/ -all -crawlId dmozcrawl
-<span class="kw">nutch</span> solrindex http://10.0.8.68:8983/solr/collection1/ sec200 -crawlId dmozcrawl
+<span class="ex">nutch</span> index -all -crawlId dmozcrawl
+<span class="ex">nutch</span> solrindex http://10.0.8.68:8983/solr/test/ -all -crawlId dmozcrawl
+<span class="ex">nutch</span> solrindex http://10.0.8.68:8983/solr/collection1/ sec200 -crawlId dmozcrawl
 
 <span class="co">### 爬完之后，在nutch里面可以进行查询诊断，其中的faq是关键词</span>
 <span class="co">### 该脚本尝试过，不能正常工作</span>
-<span class="kw">nutch</span> org.apache.nutch.searcher.NutchBean faq
+<span class="ex">nutch</span> org.apache.nutch.searcher.NutchBean faq
 
 <span class="co">### 提交之后，我们将可以在solr控制台中看到有关文档的数目。</span>
 <span class="co">### 任何时候都能运行的测试命令</span>
-<span class="kw">nutch</span> parse http://www.precastdesign.com/
-<span class="kw">nutch</span> indexchecker http://www.precastdesign.com/</code></pre></div>
+<span class="ex">nutch</span> parse http://www.precastdesign.com/
+<span class="ex">nutch</span> indexchecker http://www.precastdesign.com/</code></pre></div>
 <h2 id="nutch加mongodb加elasticsearch的配置">Nutch加MongoDB加ElasticSearch的配置</h2>
 <p>见<a href="http://www.jeepshoe.org/82645084.htm" class="uri" target="_blank" rel="external">http://www.jeepshoe.org/82645084.htm</a>。</p>
 <p>一：nutch2.x与nutch1.x的主要区别：数据访问层的抽象 nutch 2.x—-gora-core-0.3—-gora-hbase—-hbase</p>

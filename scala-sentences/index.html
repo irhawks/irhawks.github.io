@@ -89,7 +89,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="scala,控制语句,设计模式,映射,类,面向对象,注解,序列化," />
+  <meta name="keywords" content="scala,面向对象,控制语句,设计模式,映射,类,注解,序列化," />
 
 
 
@@ -157,9 +157,14 @@ Scala的for语句
 
 
 <!-- add highlight.js to render pandoc code blocks -->
-<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/github.min.css" rel="stylesheet">  
-<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>  
-<script>hljs.initHighlightingOnLoad();</script>  
+<!--
+<link href="http://cdn.bootcss.com/highlight.js/9.10.0/styles/github.min.css" rel="stylesheet">  
+-->
+<link href="/css/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>  
+<script src="/js/highlightjs-line-numbers.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.initLineNumbersOnLoad(); </script>
 
   <title> Scala编程概要（二）：基本结构，常用模式 | 80x24 </title>
 </head>
@@ -530,7 +535,7 @@ pacakge <span class="kw">object</span> people {
 <div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">import</span> java.<span class="fu">awt</span>.{Color, Font}</code></pre></div>
 <p>或者重命名要导入的成员以解决可能的冲突</p>
 <div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">import</span> java.<span class="fu">util</span>.{HashMap =&gt; JavaHashMap}
-<span class="kw">import</span> scala.<span class="fu">collection</span>.<span class="fu">mutable</span>.<span class="fu">_</span></code></pre></div>
+<span class="kw">import</span> scala.<span class="fu">collection</span>.<span class="fu">mutable</span>._</code></pre></div>
 <p>总而言之，在scala程序员中，把包中的所有的对象都导入进来是很普遍的。</p>
 <h2 id="scala的面向对象的机制">Scala的面向对象的机制</h2>
 <p>首先，scala的类的机制与java类似，另外，scala中重写一个非抽象的方法的时候必须使用override修饰符。</p>
@@ -579,6 +584,8 @@ pacakge <span class="kw">object</span> people {
           
             <a href="/tags/scala/" rel="tag"># scala</a>
           
+            <a href="/tags/面向对象/" rel="tag"># 面向对象</a>
+          
             <a href="/tags/控制语句/" rel="tag"># 控制语句</a>
           
             <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
@@ -586,8 +593,6 @@ pacakge <span class="kw">object</span> people {
             <a href="/tags/映射/" rel="tag"># 映射</a>
           
             <a href="/tags/类/" rel="tag"># 类</a>
-          
-            <a href="/tags/面向对象/" rel="tag"># 面向对象</a>
           
             <a href="/tags/注解/" rel="tag"># 注解</a>
           
@@ -600,8 +605,8 @@ pacakge <span class="kw">object</span> people {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/scala-tutorial-intro/" rel="next" title="Scala编程概要（一）：文档，注释，面向对象">
-                <i class="fa fa-chevron-left"></i> Scala编程概要（一）：文档，注释，面向对象
+              <a href="/ai-and-bootstraping/" rel="next" title="用自举理解人工智能与学术研究">
+                <i class="fa fa-chevron-left"></i> 用自举理解人工智能与学术研究
               </a>
             
           </div>
@@ -610,8 +615,8 @@ pacakge <span class="kw">object</span> people {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/scala-overview-4/" rel="prev" title="Scala编程概要（四）：控制抽象, 集合, 模式匹配, 编译器">
-                Scala编程概要（四）：控制抽象, 集合, 模式匹配, 编译器 <i class="fa fa-chevron-right"></i>
+              <a href="/scala-tutorial-intro/" rel="prev" title="Scala编程概要（一）：文档，注释，面向对象">
+                Scala编程概要（一）：文档，注释，面向对象 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

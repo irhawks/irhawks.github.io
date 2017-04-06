@@ -150,9 +150,14 @@
 
 
 <!-- add highlight.js to render pandoc code blocks -->
-<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/github.min.css" rel="stylesheet">  
-<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>  
-<script>hljs.initHighlightingOnLoad();</script>  
+<!--
+<link href="http://cdn.bootcss.com/highlight.js/9.10.0/styles/github.min.css" rel="stylesheet">  
+-->
+<link href="/css/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>  
+<script src="/js/highlightjs-line-numbers.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.initLineNumbersOnLoad(); </script>
 
   <title> 80x24 </title>
 </head>
@@ -613,8 +618,8 @@
 <p>虽然编组的功能很强大，但是也容易使文档变得难读。幸好在普通文稿当中不必使用太多的编组。</p>
 <p>括号的作用有多个，一个是把多个单词看成一个结构，另一种是提供了一个局部模块结构。不应当认为大括号仅有一个作用。</p>
 <p>ex5.3 键入下列内容会得到什么结果?</p>
-<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\centerline{This information should be {centered}.}
-\centerline So should this.</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex"><span class="fu">\centerline</span>{This information should be {centered}.}
+<span class="fu">\centerline</span> So should this.</code></pre></div>
 <p>它的结果是，第一条命令产生一个居中的文本块，但是第二行将只有一个单词S。第三行变成了一o开头。</p>
 <p>注意第二行不是一个单词，因为TeX控制系列默认将后面的一个字母而不是单词视为一个单独的参数。</p>
 <p>ex5.5 定义一个控制系列<code>\ital</code>,使得用户键入<code>\ital{text}</code>来代替<code>{\it text\/}</code>.与<code>\it</code>相比它有什么优缺点。</p>
@@ -622,13 +627,13 @@
 <p>TeX的宏定义与m4差不多，过多的括号里面，只有最外层的被去掉，内层的括号得到了保留。</p>
 <p>TeX的参数的处理</p>
 <p>与C语言不同，在编组当中改变即使是全局变量，当走出编组的时候全局变量也会恢复成原来的样子（这有一点像是有硬堆栈变量的计算机）。使用<code>\global</code>命令可以做到这一点。比如将计数器加一的操作，显然通过普通方法是不行的，在块里面需要使用</p>
-<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\global\advance\count0 by 1</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex"><span class="fu">\global\advance\count</span>0 by 1</code></pre></div>
 <p>其中的advance表示对指定的计数器加上特定的值。<code>\count0</code>是TeX内部的一个计数器。</p>
 <p>分组</p>
 <p>另一个分组的命令是<code>\begingroup{GRPNAME}...\endgroup{GRPNAME}</code>.</p>
 <p>这个可以看成是LaTeX环境的基础。如果使组正常工作，那么我们就应当避免Sa,Sb,Ea,Eb这样的情况，方法其实很简单，在Sa的时候定义一个<code>\blockname{}</code>名子与本环境的名子相同，Sb也同样这种做法。这样在Ea的时候，Sb定义的blockname就会消失，在读到Eb的时候检查一下b有没有被定义就可以了。</p>
-<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\def\beginthe#1{\begingroup\def\blockname{ #1}}
-\def\endthe#1{\def\test{ #1}<span class="co">%</span>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex"><span class="fu">\def</span>\beginthe#1{\begingroup\def\blockname{ #1}}
+<span class="fu">\def</span>\endthe#1{\def\test{ #1}<span class="co">%</span>
 \ifx\test\blockname\endgroup
 \else\errmessage{You should have said
 \string\endthe{\blockname}}\fi}</code></pre></div>
@@ -747,8 +752,8 @@
 </table>
 <p>其中每类都可以包含若干个字符。当使用plainTeX格式的时候，$,%,&amp;,#,_要转义使用。此外，一些词在转义时有其它的含义，比如<code>\~</code>得到的是波浪重音。</p>
 <p>在TeX工作的时候源文件中所有的部分被分成一个一个的记号，它们或者是指定类代码中的单个字符，或者是一个控制序列。也就是在读内容的时候，TeX先给字符分类，根据分类的情况作进一步的处理:</p>
-<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\hskip 36 pt
-\\[1]skip3[12]6[12] [10]p[11]t[11]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex"><span class="fu">\hskip</span> 36 pt
+<span class="fu">\\</span>[1]skip3[12]6[12] [10]p[11]t[11]</code></pre></div>
 <p>TeX有一个叫INITEX的版本。这个版本里面气有的字母都被认为是12,除了字母，回车，空格，delete,注释与反斜杠符号之外。</p>
 <p>一个明显的特点是，编组符号是不能使用的。</p>
 <p>使用<code>\catcode</code>SYMBOL=N`来将字符更改到指定的类代码当中。</p>
@@ -756,9 +761,9 @@
 <p><code>\string</code>宏可以看成是读取后面的非空白字符并按照原样显示，它可以用在我们的<code>\message{\stringXXX}</code>命令当中，以便正确显示出向用户提示的信息。</p>
 <p>注: 当<code>\csname</code>用来第一次定义控制系列的时候，那个控制系列在重新被定义之前等价于<code>\relax</code>命令产生的效果。</p>
 <p>使用<code>\let</code>命令可以给一个记号赋值，使用</p>
-<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\ifundefined{TOKEN}&lt;if_true&gt;\else&lt;if_false&gt;\fi</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex"><span class="fu">\ifundefined</span>{TOKEN}&lt;if_true&gt;<span class="fu">\else</span>&lt;if_false&gt;<span class="fu">\fi</span></code></pre></div>
 <p>可以完成一个复杂的判断逻辑。比如</p>
-<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\ifundefined{TeX}&lt;true_text&gt;\else&lt;false_text&gt;\fi</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex"><span class="fu">\ifundefined</span>{TeX}&lt;true_text&gt;<span class="fu">\else</span>&lt;false_text&gt;<span class="fu">\fi</span></code></pre></div>
 <p>表示在<code>\TeX</code>宏未被定义或者为<code>\relax</code>的时候被展开成<true-text>，否则被展开成<false-text>.</false-text></true-text></p>
 <p><code>\let</code>的语法是<code>\let\TOKEN=\VALUE</code></p>
 <p>除了<code>\string</code>用于得到记号外，还可以使用<code>\numberNUM</code>用于得到一个小数，使用<code>\romannumeralNUMBER</code>得到一个用小写罗马数字表示的数(如<code>\romannumeral24</code>得到xxiv)。并且可以使用<code>\numberREG</code>来得到一个内部寄存器里面的数字。</p>
@@ -769,7 +774,7 @@
 <p>ex7.9 TeX有一个内部整数参数叫做year,它等于任务开始时当前年的数字，看看怎样用<code>\year</code>以及<code>\romannumeral</code>和<code>\uppercase</code>对所有运行在2003的任务给出后面的版权表示。</p>
 <p>根据前面的介绍<code>\uppercase{\romannumeral\year}</code>显然是不行的，因为uppercase在展开的时候，首先得到它的参数，而它的参数还没有被展开，为了解决这个问题，必须使用<code>\expandafter</code>宏，让里面的宏先展开，让uppercase得到宏展开后的参数。</p>
 <p>正确的答案是</p>
-<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\copyright\ \uppercase\expandafter{\romannumeral\year}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex"><span class="fu">\copyright\ \uppercase\expandafter</span>{<span class="fu">\romannumeral\year</span>}</code></pre></div>
 <p>TeX的语法的特殊性现在有一点了解了。但是还差很多基础的知识，等看到后面更多的控制系列之后再看它的语法结构吧。</p>
 <h2 id="字符输入">字符输入</h2>
 <p>很少有键盘能够提供256个字符，而且有的字符已经有其它的用处，所以我们使用下面的char命令得到任意的字符。格式是: <code>\char&lt;NUMBER&gt;</code>得到当前字体的相应字符。注意是当前字体中的字符。</p>
@@ -1300,7 +1305,7 @@ plt.savefig(<span class="st">&#39;../img/&#39;</span><span class="op">+</span>re
 <h3 id="jdk-7">JDK 7</h3>
 <p>Debian, Ubuntu, etc.</p>
 <p>On the command line, type:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install openjdk-7-jre</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> apt-get install openjdk-7-jre</code></pre></div>
 <p>The openjdk-7-jre package contains just the Java Runtime Environment. If you want to develop Java programs then install the openjdk-7-jdk package.</p>
           <!--noindex-->
           <div class="post-more-link text-center">

@@ -150,9 +150,14 @@
 
 
 <!-- add highlight.js to render pandoc code blocks -->
-<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/github.min.css" rel="stylesheet">  
-<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>  
-<script>hljs.initHighlightingOnLoad();</script>  
+<!--
+<link href="http://cdn.bootcss.com/highlight.js/9.10.0/styles/github.min.css" rel="stylesheet">  
+-->
+<link href="/css/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>  
+<script src="/js/highlightjs-line-numbers.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.initLineNumbersOnLoad(); </script>
 
   <title> 80x24 </title>
 </head>
@@ -1151,7 +1156,7 @@ mul_by_2.call(<span class="dv">8</span>)</code></pre></div>
 <p>其中<code>mul_by()</code>函数接受<code>factor</code>参数，返回相应的乘积函数，然后用<code>mul_by_2</code>作为一个函数对象，使用它的call方法计算函数值。</p>
 <p>函数式语言中，通常支持函数调用自身。它是函数式语言中典型的实现循环的方法。比如在LISP中的使用递归计算阶乘:</p>
 <div class="sourceCode"><pre class="sourceCode lisp"><code class="sourceCode commonlisp">(<span class="kw">defun</span><span class="fu"> fact </span>(n) 
-(<span class="kw">if</span> (<span class="kw">=</span> n <span class="dv">1</span>) <span class="dv">1</span> (<span class="kw">*</span> n factor(n<span class="dv">-1</span>))))</code></pre></div>
+(<span class="kw">if</span> (<span class="op">=</span> n <span class="dv">1</span>) <span class="dv">1</span> (<span class="op">*</span> n factor(n-<span class="dv">1</span>))))</code></pre></div>
 <p>LISP的特殊性不只是它采用函数式设计，而也是因为它的运算表达式都是前缀形式的表达式。以前以为理解LISP代码与写LISP代码都很难，但是现在觉得括号也没有引起想象中的太大的混淆。</p>
 <p>闭包是函数式程序设计中与一等函数相关的一个很有用的特性。被传递到不同的词汇上下文使用的动态函数(有时是匿名的)被称为闭包。在计算机科学中，闭包（Closure）是词法闭包（Lexical Closure）的简称，是引用了自由变量的函数。这个被引用的自由变量将和这个函数一同存在，即使已经离开了创造它的环境也不例外。所以，有另一种说法认为闭包是由函数和与其相关的引用环境组合而成的实体。</p>
 <p>闭包的特殊性在于它引入了已有函数中的变量，当我们返回一个内部的函数的时候，虽然外函数结束，但是我们不能释放掉此函数里面的参数(因为它被闭包函数使用)，所以需要编程语言进行额外的处理才能支持闭包。</p>
@@ -1172,7 +1177,7 @@ mul_by_2.call(<span class="dv">8</span>)</code></pre></div>
 <p>LISP表达式采取表的方式表示，是采用前缀表示法。每一个LISP表达式都会返回一个值，而且事实上，一个LISP函数可以返回任意个值。</p>
 <p>LISP中还有提供判断的谓词，比如atom用于返回它的参数是否是一个原子，返回true或者false.</p>
 <p>LISP的赋值也有多种方法，常见的是采用setq方法。用于将一个值赋给一个符号，或者将一系列的值赋值给一系列的符号。比如:</p>
-<div class="sourceCode"><pre class="sourceCode lisp"><code class="sourceCode commonlisp">(<span class="kw">setq</span> score<span class="dv">-1</span> <span class="dv">95</span> score<span class="dv">-2</span> <span class="dv">100</span>)
+<div class="sourceCode"><pre class="sourceCode lisp"><code class="sourceCode commonlisp">(<span class="kw">setq</span> score-<span class="dv">1</span> <span class="dv">95</span> score-<span class="dv">2</span> <span class="dv">100</span>)
 (<span class="kw">setq</span> thedate &#39;(<span class="st">&quot;April&quot;</span> <span class="dv">13</span> <span class="dv">1968</span>))</code></pre></div>
 <p>其中在表开头前使用单引号，表示不要对此表进行求值后再赋值。LISP语言的另一种赋值方法是let.</p>
 <p>LISP的表处理是其核心的机制。前面已经说过用setq建立一个表(是建立一个表的同时对变量赋值)。</p>

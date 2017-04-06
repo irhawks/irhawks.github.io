@@ -157,9 +157,14 @@ runInThread() { () =&amp;gt; println(&amp;quot;Hi&amp;quot;); Thread.sleep(1000)
 
 
 <!-- add highlight.js to render pandoc code blocks -->
-<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/github.min.css" rel="stylesheet">  
-<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>  
-<script>hljs.initHighlightingOnLoad();</script>  
+<!--
+<link href="http://cdn.bootcss.com/highlight.js/9.10.0/styles/github.min.css" rel="stylesheet">  
+-->
+<link href="/css/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>  
+<script src="/js/highlightjs-line-numbers.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.initLineNumbersOnLoad(); </script>
 
   <title> Scala编程概要（四）：控制抽象, 集合, 模式匹配, 编译器 | 80x24 </title>
 </head>
@@ -491,8 +496,8 @@ runInThread() { () =&amp;gt; println(&amp;quot;Hi&amp;quot;); Thread.sleep(1000)
 <p>模式匹配可以匹配变量的值，是也是最基本的方式。也可以用于匹配一个类型。</p>
 <p>给模式添加守卫的方法示例如下：</p>
 <div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala">ch <span class="kw">match</span> {
-    <span class="kw">case</span> &#39;+&#39; =&gt; sign = <span class="dv">1</span>
-    <span class="kw">case</span> &#39;-&#39; =&gt; sign = -<span class="dv">1</span>
+    <span class="kw">case</span> <span class="ch">&#39;+&#39;</span> =&gt; sign = <span class="dv">1</span>
+    <span class="kw">case</span> <span class="ch">&#39;-&#39;</span> =&gt; sign = -<span class="dv">1</span>
     <span class="kw">case</span> _ <span class="kw">if</span> Character.<span class="fu">isDigit</span>(ch) =&gt; digit = Character.<span class="fu">digit</span>(ch,<span class="dv">10</span>)
     <span class="kw">case</span> _   =&gt; sign = <span class="dv">0</span></code></pre></div>
 <p>第三句就是加入了一个守卫。注意，守卫出现在动作的前面。另外，模式匹配是从上到下执行的，遇到成功的匹配就跳出余下的匹配。</p>
@@ -565,8 +570,8 @@ runInThread() { () =&amp;gt; println(&amp;quot;Hi&amp;quot;); Thread.sleep(1000)
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/scala-sentences/" rel="next" title="Scala编程概要（二）：基本结构，常用模式">
-                <i class="fa fa-chevron-left"></i> Scala编程概要（二）：基本结构，常用模式
+              <a href="/scala-tutorial-intro/" rel="next" title="Scala编程概要（一）：文档，注释，面向对象">
+                <i class="fa fa-chevron-left"></i> Scala编程概要（一）：文档，注释，面向对象
               </a>
             
           </div>

@@ -150,9 +150,14 @@
 
 
 <!-- add highlight.js to render pandoc code blocks -->
-<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/github.min.css" rel="stylesheet">  
-<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>  
-<script>hljs.initHighlightingOnLoad();</script>  
+<!--
+<link href="http://cdn.bootcss.com/highlight.js/9.10.0/styles/github.min.css" rel="stylesheet">  
+-->
+<link href="/css/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>  
+<script src="/js/highlightjs-line-numbers.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.initLineNumbersOnLoad(); </script>
 
   <title> 80x24 </title>
 </head>
@@ -765,13 +770,13 @@
 <p>MathGL有很多优点。如脚本化的绘图语言、C++的执行效率、多语言接口、支持输出多种图形格式、内建多种绘图方法、支持MPI等编程接口、与C++等宿主语言的数据结构融合。这些使它成为很有吸引力的一个绘图库。</p>
 <h2 id="mathgl基础操作">MathGL基础操作</h2>
 <p>首先我们介绍在MathGL在C++下的使用。像C++这类接口，一般要安装lib*这样的软件包，而不只mathgl软件包一个，这样g++在编译的时候，才可能与正确的库文件链接。这是一个需要注意的地方。如果下面的MathGL C++程序出错，根据编译器反馈的错误信息，我们应当能够发现错误、纠正错误。</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;mgl2/mgl.h&gt;</span>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;mgl2/mgl.h&gt;</span>
 <span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>* argv[])
 {
     mglGraph graph;
     graph.FPlot(<span class="st">&quot;sin(pi*x)&quot;</span>);
     graph.WriteFrame(<span class="st">&quot;test.png&quot;</span>);
-    <span class="kw">return</span> <span class="dv">0</span>;
+    <span class="cf">return</span> <span class="dv">0</span>;
 }</code></pre></div>
 <p>编译、运行<code>mathgl1.cpp</code>，查看图片所使用的Bash命令建议为:</p>
 <pre class="shell"><code>g++ -lmgl mathgl1.cpp -o mathgl1
@@ -783,38 +788,38 @@ eog sample.png</code></pre>
 <p>MathGL库支持的输出方式，包括向图形终端输出，此方式下可以完成一些交互式的动作；直接写入到点阵或者矢量图形格式，此方式下直接运行MathGL的C++程序以得到结果。</p>
 <h2 id="窗口绘图glut绘图与输出到文件">窗口绘图、GLUT绘图与输出到文件</h2>
 <p>绘图到一个单独的窗口，或者使用GLUT库输出，道理是一样的。</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;mgl2/mgl.h&gt;</span>
-<span class="ot">#include &lt;mgl2/window.h&gt;</span>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;mgl2/mgl.h&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;mgl2/window.h&gt;</span>
 
 <span class="dt">int</span> do_draw(mglGraph *graph)
 {
     graph-&gt;Rotate(<span class="dv">60</span>,<span class="dv">40</span>);
     graph-&gt;Box();
-    <span class="kw">return</span> <span class="dv">0</span>;
+    <span class="cf">return</span> <span class="dv">0</span>;
 }
 
 <span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>* argv[])
 {
     mglWindow window(do_draw, <span class="st">&quot;MathGL Window example&#39;);</span>
     <span class="dt">int</span> status = window.Run();
-    <span class="kw">return</span> status;
+    <span class="cf">return</span> status;
 }</code></pre></div>
 <p>原理就是如此了，不过在Ubuntu上有些错误，可能是安装MathGL的问题。</p>
 <p>使用GLUT作为后端的时候，更为简单，因为不用WX组件了。</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;mgl2/mgl.h&gt;</span>
-<span class="ot">#include &lt;mgl2/glut.h&gt;</span>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;mgl2/mgl.h&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;mgl2/glut.h&gt;</span>
 
 <span class="dt">int</span> do_draw(mglGraph *graph)
 {
     graph-&gt;Rotate(<span class="dv">60</span>,<span class="dv">40</span>);
     graph-&gt;Box();
-    <span class="kw">return</span> <span class="dv">0</span>;
+    <span class="cf">return</span> <span class="dv">0</span>;
 }
 
 <span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>* argv[])
 {
     mglGLUT window(do_draw, <span class="st">&quot;MathGL Window example&quot;</span>);
-    <span class="kw">return</span> <span class="dv">0</span>;
+    <span class="cf">return</span> <span class="dv">0</span>;
 }</code></pre></div>
 <p>在编译的时候，调用</p>
 <pre class="shell"><code>g++ mglut.cpp -o mglut -lmgl -lmgl-glut</code></pre>
@@ -852,7 +857,7 @@ eog sample.png</code></pre>
     g-&gt;Aspect(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>);
     g-&gt;Box();
 
-    <span class="kw">return</span> <span class="dv">0</span>;
+    <span class="cf">return</span> <span class="dv">0</span>;
 }</code></pre></div>
 <p>更复杂的子图绘制方式，可以参考 <code>MultiPlot()</code> 、<code>StickPlot()</code> 等函数。</p>
 <p>剩下的就是具体各种图形的绘制了。</p>
@@ -867,7 +872,7 @@ eog sample.png</code></pre>
     gr-&gt;Box();
     gr-&gt;Axis(<span class="st">&quot;xy&quot;</span>);
     gr-&gt;EndFrame();
-    <span class="kw">return</span> gr-&gt;GetNumFrame();
+    <span class="cf">return</span> gr-&gt;GetNumFrame();
 }</code></pre></div>
 <h2 id="使用mgl脚本语言">使用MGL脚本语言</h2>
 <p>MGL脚本语言其实是很方便的一个东西。该语言每一行都代表一个命令，类似于tcl脚本，而且连注释的格式都是与tcl语言相同的：从<code>#</code>开始直到行尾。另一方面，MGL脚本按行分析语句，语句的第一个单词代表一个命令，像Bash中那样。而MGL脚本中的字符串用成对的单引号括起来，如果需要跨行，则使用反斜杠加换行表示将本行与下一行联系在一起。</p>

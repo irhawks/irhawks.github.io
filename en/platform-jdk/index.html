@@ -169,9 +169,14 @@ sudo apt-get ins">
 
 
 <!-- add highlight.js to render pandoc code blocks -->
-<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/github.min.css" rel="stylesheet">  
-<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>  
-<script>hljs.initHighlightingOnLoad();</script>  
+<!--
+<link href="http://cdn.bootcss.com/highlight.js/9.10.0/styles/github.min.css" rel="stylesheet">  
+-->
+<link href="/css/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>  
+<script src="/js/highlightjs-line-numbers.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.initLineNumbersOnLoad(); </script>
 
   <title> JDK与OpenJDK的安装与使用 | 80x24 </title>
 </head>
@@ -467,7 +472,7 @@ sudo apt-get ins">
 <h3 id="jdk-7">JDK 7</h3>
 <p>Debian, Ubuntu, etc.</p>
 <p>On the command line, type:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install openjdk-7-jre</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> apt-get install openjdk-7-jre</code></pre></div>
 <p>The openjdk-7-jre package contains just the Java Runtime Environment. If you want to develop Java programs then install the openjdk-7-jdk package.</p>
 <a id="more"></a>
 <p>Fedora, Oracle Linux, Red Hat Enterprise Linux, etc.</p>
@@ -488,32 +493,32 @@ sudo apt-get ins">
 <h3 id="java的环境变量设置">JAVA的环境变量设置</h3>
 <p>当安装好相应的JRE与JDK之后，一般Java的路径位于<code>/usr/lib64/jvm/java-1.7.0-openjdk</code>下面。注意如果只安装了JRE,那么这个目录就只有JRE一个子文件夹。</p>
 <p><code>JAVA_HOME</code> 就是上面的那个目录， <code>JRE_HOME</code>就是前面那个目录的jre子文件夹。一般而言我们还需要设置可执行文件的路径，以及需要加载的库文件。比如另外:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">export</span> <span class="ot">JAVA_HOME=</span>/usr/lib64/jvm/java-1.7.0-openjdk
-<span class="kw">export</span> <span class="ot">JRE_HOME=$JAVA_HOME</span>/jre
-<span class="kw">export</span> <span class="ot">CLASS_PATH=</span>.:<span class="ot">$JAVA_HOME</span>/lib/tools.jar:<span class="ot">$JAVA_HOME</span>/lib.dt.jar:<span class="ot">$JAVA_HOME</span>/lib.rt.jar
-<span class="kw">export</span> <span class="ot">PATH=$PATH</span>:<span class="ot">$JAVA_HOME</span>/bin:<span class="ot">$JRE_HOME</span>/bin</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="bu">export</span> <span class="va">JAVA_HOME=</span>/usr/lib64/jvm/java-1.7.0-openjdk
+<span class="bu">export</span> <span class="va">JRE_HOME=$JAVA_HOME</span>/jre
+<span class="bu">export</span> <span class="va">CLASS_PATH=</span>.:<span class="va">$JAVA_HOME</span>/lib/tools.jar:<span class="va">$JAVA_HOME</span>/lib.dt.jar:<span class="va">$JAVA_HOME</span>/lib.rt.jar
+<span class="bu">export</span> <span class="va">PATH=$PATH</span>:<span class="va">$JAVA_HOME</span>/bin:<span class="va">$JRE_HOME</span>/bin</code></pre></div>
 <p>这就就完成的环境配置。一般情况下，还需要执行一下<code class="shell">java -version</code>命令调试一下看看是否正常工作了。</p>
 <h2 id="jdk的相关的安装">JDK的相关的安装</h2>
 <p>随着版本的向前演变，程序的安装的方式也在不断变化。相对来说，JDK的安装还是比较容易的。我们只需要从官方网站上下载JDK，直接解压到/usr/lib/jvm目录下，然后更新目录即可。</p>
 <p>比如下面就安装并配置好了JDK8</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> bash
-<span class="kw">cd</span> /usr/lib/jvm
-<span class="kw">tar</span> zxvf jdk-8u25-linux-x64.tar.xz -C ./
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> bash
+<span class="bu">cd</span> /usr/lib/jvm
+<span class="fu">tar</span> zxvf jdk-8u25-linux-x64.tar.xz -C ./
 <span class="co">##然后配置环境变量</span>
-<span class="kw">vim</span> .bashrc
-<span class="kw">export</span> <span class="ot">JAVA_HOME=</span>/usr/lib/jvm/jdk1.8.0_25
-<span class="kw">export</span> <span class="ot">JRE_HOME=${JAVA_HOME}</span>/jre
-<span class="kw">export</span> <span class="ot">CLASSPATH=</span>.:<span class="ot">${JAVA_HOME}</span>/lib:<span class="ot">${JRE_HOME}</span>/lib
-<span class="kw">export</span> <span class="ot">PATH=$PATH</span>:<span class="ot">${JAVA_HOME}</span>/bin</code></pre></div>
+<span class="ex">vim</span> .bashrc
+<span class="bu">export</span> <span class="va">JAVA_HOME=</span>/usr/lib/jvm/jdk1.8.0_25
+<span class="bu">export</span> <span class="va">JRE_HOME=${JAVA_HOME}</span>/jre
+<span class="bu">export</span> <span class="va">CLASSPATH=</span>.:<span class="va">${JAVA_HOME}</span>/lib:<span class="va">${JRE_HOME}</span>/lib
+<span class="bu">export</span> <span class="va">PATH=$PATH</span>:<span class="va">${JAVA_HOME}</span>/bin</code></pre></div>
 <p>自从从Oracle收购Sun近三年来，已经有很多变化。早在8月，甲骨文将“Operating System Distributor License for Java”许可证终结，这意味着第三方将不可以依据这一许可分发他们的软件包。因此Ubuntu Linux已经开始禁用所有机器上的Oracle JDK浏览器插件，并很快会从档案中删除软件包。公司指出，禁用Oracle的插件将可以帮助提高安全性，因为这些插件已经被证实包含许多漏洞，虽然这是一个事实，但真正的原因恐怕是Sun的JDK在升级时会清理掉用户机器上自认为不安全的软件，大多数PC用户认为这样很安全，但通常基于UNIX系统的用户并不这么认为。Oracle的JDK被废弃后，OpenJDK将取代它的位置在Ubuntu及其它Linux中默认安装。</p>
 <p>虽然很多Linux发行版现在已经自带OpenJDK，但是在开发过程中与Oracle-JDK(SUN-JDK)还是略有不同。通常，Java开发人员还是以Oracle-JDK为标准来进行开发。下面介绍一下Linux下的JDK安装与配置，这里使用的Linux发行版是Ubuntu 12.04。</p>
 <p>由于一些Linux的发行版中已经存在默认的JDK，如OpenJDK等。所以为了使得我们刚才安装好的JDK版本能成为默认的JDK版本，我们还要进行下面的配置。</p>
 <p>执行下面的命令：</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk7/bin/java 300
-<span class="kw">sudo</span> update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/jdk7/bin/javac 300</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk7/bin/java 300
+<span class="fu">sudo</span> update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/jdk7/bin/javac 300</code></pre></div>
 <p>注意：如果以上两个命令出现找不到路径问题，只要重启一下计算机在重复上面两行代码就OK了。</p>
 <p>执行下面的代码可以看到当前各种JDK版本和配置：</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> update-alternatives --config java</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> update-alternatives --config java</code></pre></div>
 <p>注意Ubuntu的update-alternatives机制。它使得我们自己安装的软件也可以被系统很好地识别出来。</p>
 <h2 id="java的版本库的管理">Java的版本库的管理</h2>
 <p>可以用Nexus来完成这件事件，不然Java的库在国内基本上下不来。参考网上的手册配置该应用程序。</p>

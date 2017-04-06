@@ -150,9 +150,14 @@
 
 
 <!-- add highlight.js to render pandoc code blocks -->
-<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/github.min.css" rel="stylesheet">  
-<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>  
-<script>hljs.initHighlightingOnLoad();</script>  
+<!--
+<link href="http://cdn.bootcss.com/highlight.js/9.10.0/styles/github.min.css" rel="stylesheet">  
+-->
+<link href="/css/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>  
+<script src="/js/highlightjs-line-numbers.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.initLineNumbersOnLoad(); </script>
 
   <title> 80x24 </title>
 </head>
@@ -830,23 +835,23 @@
 <p>看起来 <code>pthread_create</code> 函数使用了一大堆的指针，其实却很简单，返回值是否为零代表成功或者失败。第一个参数相当于线程控制块，第二个是线程的属性，第三个是线程的入口函数，第四个是需要传递给该函数的参数。</p>
 <p>UNIX函数的惯例是调用失败时返回-1,比如对于前面到的fork函数。0代表对函数来说有特殊含义的一个量，-1才代表一个调用错误，函数内部的代码无法完成所称的工作。</p>
 <p>函数要写成 <code>void *function(void *arg)</code> 的形式，以便正确地进行转换。下面是一个例子。可以和fork()相对比。</p>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="ot">#include &lt;stdio.h&gt;</span>
-<span class="ot">#include &lt;stdlib.h&gt;</span>
-<span class="ot">#include &lt;pthread.h&gt;</span>
-<span class="ot">#include &lt;errno.h&gt;</span>
-<span class="ot">#include &lt;string.h&gt;</span>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;pthread.h&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;errno.h&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;string.h&gt;</span>
 <span class="dt">int</span> main(){
 <span class="dt">int</span> ret;
 pthread_t mythread;
 ret = pthread_create(&amp;mythread, NULL, myThread, NULL);
-<span class="kw">if</span> (ret != <span class="dv">0</span>){
-    printf(<span class="st">&quot;Cannot create thread (%s)</span><span class="ch">\n</span><span class="st">&quot;</span>, strerror(errno));
+<span class="cf">if</span> (ret != <span class="dv">0</span>){
+    printf(<span class="st">&quot;Cannot create thread (%s)</span><span class="sc">\n</span><span class="st">&quot;</span>, strerror(errno));
     exit(-<span class="dv">1</span>);
 }
-<span class="kw">return</span> <span class="dv">0</span>;
+<span class="cf">return</span> <span class="dv">0</span>;
 }
 <span class="dt">void</span> *myThread(<span class="dt">void</span> *arg){
-printf(<span class="st">&quot;Thread is running.</span><span class="ch">\n</span><span class="st">&quot;</span>);
+printf(<span class="st">&quot;Thread is running.</span><span class="sc">\n</span><span class="st">&quot;</span>);
 pthread_exit(arg);
 }</code></pre></div>
 <p>以上代码的重要之处如下：</p>
@@ -1112,8 +1117,8 @@ pid_t vfork(<span class="dt">void</span>);
 <p>不知道是不是所有的数据都被替换了呢？那么除了进程控制块之外所有的数据都要分配，因此开销也是不小的。</p>
 <p>几个exec函数最终都变成调用 <code>do_exec()</code> 。其功能是加载新程序并跳转执行。</p>
 <p>在前面讲了如何使父进程与子进程同时运行。但是有时候父进程还想知道子进程的状态，这时的解决办法是使用wait()或者waitpid()函数。</p>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="ot">#include &lt;sys/types.h&gt;</span>
-<span class="ot">#include &lt;sys/wait.h&gt;</span>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="pp">#include </span><span class="im">&lt;sys/types.h&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;sys/wait.h&gt;</span>
 pid_t wait(<span class="dt">int</span> *status);
 pid_t waitpid(pid_t pid, <span class="dt">int</span> *status, <span class="dt">int</span> options);</code></pre></div>
 <p>编程方法：当不需要得知子进程退出的原因的时候，wait(NULL)即可，否则自己分配一个整型变量的空间。这个整型变量的不同比特位代表不同的含义，使用系统提供的对应的宏可以检查退出状态。</p>
@@ -1124,14 +1129,14 @@ pid_t waitpid(pid_t pid, <span class="dt">int</span> *status, <span class="dt">i
 <p>waitpid仍然只能等待其子进程pid.</p>
 <p>相对wait,waitpid的优点是可以等待特定子进程退出，可以非阻塞运行，可以支持作业控制。</p>
 <p>进程退出的方法。使进程自动退出的函数是exit()， <code>_exit()</code> 。</p>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="ot">#include &lt;stdlib.h&gt;</span>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span>
 <span class="dt">void</span> exit(<span class="dt">int</span> status);
-<span class="ot">#include &lt;unistd.h&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;unistd.h&gt;</span>
 <span class="dt">void</span> _exit(<span class="dt">int</span> status);</code></pre></div>
 <p>两个函数的关系相当于一个是C库函数，一个是系统函数。由于C语言和unix系列的密切关系，不能不讲C库函数的同时讲C库函数所使用的更底层函数。</p>
 <p>两个函数的status用于指示退出状态。最终两个函数都是调用系统的 <code>do_exit()</code> 函数。在退出的进程中， <code>do_exit()</code> 还会使用各种退出函数，与文件系统有关的，与信号量有关的，与文件描述符有关的，与切换进程有关的，等等。</p>
 <p>在linux的标准函数库当中，有一套高级IO使用了主存当中的缓冲区，C语言当中的printf(),fopen(),fread(),fwrite()都是其中的函数。此时使用 <code>_exit()</code> 会导致缓冲区当中的数据丢失，因此需要用exit()函数，它能够对缓冲区里的内容同步。</p>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">printf(<span class="st">&quot;output begin</span><span class="ch">\n</span><span class="st">&quot;</span>);
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">printf(<span class="st">&quot;output begin</span><span class="sc">\n</span><span class="st">&quot;</span>);
 printf(<span class="st">&quot;content in buffer&quot;</span>);
 _exit(<span class="dv">0</span>);</code></pre></div>
 <p>上面的代码运行时，第二行的printf语句结果并没有显示出来。</p>

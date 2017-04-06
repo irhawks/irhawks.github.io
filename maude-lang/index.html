@@ -151,9 +151,14 @@
 
 
 <!-- add highlight.js to render pandoc code blocks -->
-<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/github.min.css" rel="stylesheet">  
-<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>  
-<script>hljs.initHighlightingOnLoad();</script>  
+<!--
+<link href="http://cdn.bootcss.com/highlight.js/9.10.0/styles/github.min.css" rel="stylesheet">  
+-->
+<link href="/css/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>  
+<script src="/js/highlightjs-line-numbers.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.initLineNumbersOnLoad(); </script>
 
   <title> Maude语言 | 80x24 </title>
 </head>
@@ -449,8 +454,8 @@
 <a id="more"></a>
 <p>Maude更强调的是元编程，元编程有多条路线，而Maude的元编程是通过反射实现的。所谓的反射，就是在运行的时候能够检查和修改程序的行为与结构。这其实是应用程序在运行的时候能够探查程序的结构的能力。</p>
 <p>Java的反射是这样的：</p>
-<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java">Object foo = Class.<span class="fu">forName</span>(<span class="st">&quot;complete.classpath.and.Foo&quot;</span>).<span class="fu">newInstance</span>()
-Method m = foo.<span class="fu">getClass</span>().<span class="fu">getDeclaredMethod</span>(<span class="st">&quot;hello&quot;</span>,<span class="kw">new</span> Class&lt;?&gt;[<span class="dv">0</span>]);
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="bu">Object</span> foo = <span class="bu">Class</span>.<span class="fu">forName</span>(<span class="st">&quot;complete.classpath.and.Foo&quot;</span>).<span class="fu">newInstance</span>()
+<span class="bu">Method</span> m = foo.<span class="fu">getClass</span>().<span class="fu">getDeclaredMethod</span>(<span class="st">&quot;hello&quot;</span>,<span class="kw">new</span> <span class="bu">Class</span>&lt;?&gt;[<span class="dv">0</span>]);
 m.<span class="fu">invoke</span>(foo);</code></pre></div>
 <p>其中的第一句是反射一个对象（通过字符串来找到一个类），而第二句是通过字符串查找一个方法，以及通过对象查找类的名子。很多语言都支持反射。虽然很多功能也可以不通过使用反射的方法来完成。反射的实现得依赖于特殊的函数。比如Python中，</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">class_name <span class="op">=</span> <span class="st">&quot;Foo&quot;</span>

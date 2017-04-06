@@ -160,9 +160,14 @@ import sys.process._
 
 
 <!-- add highlight.js to render pandoc code blocks -->
-<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/github.min.css" rel="stylesheet">  
-<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>  
-<script>hljs.initHighlightingOnLoad();</script>  
+<!--
+<link href="http://cdn.bootcss.com/highlight.js/9.10.0/styles/github.min.css" rel="stylesheet">  
+-->
+<link href="/css/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>  
+<script src="/js/highlightjs-line-numbers.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.initLineNumbersOnLoad(); </script>
 
   <title> Scala编程概要（三）：进程控制与shell，函数式特性 | 80x24 </title>
 </head>
@@ -464,14 +469,14 @@ import sys.process._
 
       
         <p>应该说，这种特性是可以让人大吼大叫的。简单的示例如下：</p>
-<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">import</span> sys.<span class="fu">process</span>.<span class="fu">_</span>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">import</span> sys.<span class="fu">process</span>._
 <span class="st">&quot;ls -al ..&quot;</span> !</code></pre></div>
 <p>之所以可以这样做，是因为sys.process包含一个从字符串到ProcessBuild对象的隐式类型转换。注意后面的<code>!</code>号操作符，以ProcessBuild类型为参数类型，返回的是被执行程序的返回值。如果需要返回的是程序的输出的字符串，可以使用<code>!!</code>代替<code>!</code>号。</p>
 <a id="more"></a>
 <p>如果需要把程序通过管道，scala支持使用<code>#|</code>运算符。比如：</p>
 <div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="st">&quot;ls -al ..&quot;</span> #| <span class="st">&quot;grep sec&quot;</span> !</code></pre></div>
 <p>这样显然具有优势，因为让scala可以编译检查程序的结构。除此之外，scala的运算符还有重定向<code>#&gt;</code>、<code>#&gt;&gt;</code>，<code>#&lt;</code>等。如下面的示例：</p>
-<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">import</span> sys.<span class="fu">process</span>.<span class="fu">_</span>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">import</span> sys.<span class="fu">process</span>._
 <span class="st">&quot;ls -al ..&quot;</span> #&gt;&gt; <span class="kw">new</span> File(<span class="st">&quot;output.txt&quot;</span>) !
 <span class="st">&quot;grep Scala&quot;</span> #&lt; <span class="kw">new</span> URL(<span class="st">&quot;http://horstmann.com/index.html&quot;</span>)</code></pre></div>
 <p>这种特性确实是不错，貌似比Shell还要更强大一些。</p>

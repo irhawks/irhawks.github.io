@@ -163,9 +163,14 @@ unix下的守护进程分为独立守护">
 
 
 <!-- add highlight.js to render pandoc code blocks -->
-<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/github.min.css" rel="stylesheet">  
-<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>  
-<script>hljs.initHighlightingOnLoad();</script>  
+<!--
+<link href="http://cdn.bootcss.com/highlight.js/9.10.0/styles/github.min.css" rel="stylesheet">  
+-->
+<link href="/css/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>  
+<script src="/js/highlightjs-line-numbers.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.initLineNumbersOnLoad(); </script>
 
   <title> linux下的守护进程 | 80x24 </title>
 </head>
@@ -604,8 +609,8 @@ esac</code></pre>
 <p>上面就是一个符合chkconfig规范的启动脚本。</p>
 <p>实际中我们可能把创建网桥的工作交给开机脚本，而把配置虚拟接口的网络地址这样的任务交给network子程序。</p>
 <p>然后使用</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">chkconfig</span> --add config_tap
-<span class="kw">chkconfig</span> --level 345 config_tap on</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">chkconfig</span> --add config_tap
+<span class="ex">chkconfig</span> --level 345 config_tap on</code></pre></div>
 <p>让它启动。在Debian系的系统上，使用service命令完成这样的工作。</p>
 <p>对于个人用户来说，登录的时候运行某一个程序才是恰当的。因此用户登入之后才需要相应的环境。</p>
 

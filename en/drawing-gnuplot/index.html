@@ -157,9 +157,14 @@ gnuplot有一个优点，就是它可输出成TeX的源代码的格式。第一�
 
 
 <!-- add highlight.js to render pandoc code blocks -->
-<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/github.min.css" rel="stylesheet">  
-<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>  
-<script>hljs.initHighlightingOnLoad();</script>  
+<!--
+<link href="http://cdn.bootcss.com/highlight.js/9.10.0/styles/github.min.css" rel="stylesheet">  
+-->
+<link href="/css/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>  
+<script src="/js/highlightjs-line-numbers.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.initLineNumbersOnLoad(); </script>
 
   <title> Gnuplot绘图 | 80x24 </title>
 </head>
@@ -473,8 +478,8 @@ set output &quot;pic.tex&quot;  ## 生成的.tex文件。</code></pre>
 ## 还可以在 tikz 后添加额外选项，如 fontscale 0.9 , latex, tex, context。
 set output &quot;pic.tex&quot;</code></pre>
 <p>同样使用<code>\input{pic.tex}</code>将生成的文件嵌入到文本中。不过tikz图像 也可以在 <code>plain TeX</code> 环境下使用，因此使用这种方法，支持在tex或者xetex环境中插入图片，并不局限于latex或者xelatex。如果是在LaTeX环境中使用，则需要使用如下的宏包：</p>
-<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex">\usepackage{tikz}
-\usepackage{gnuplot-lua-tikz}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex"><span class="bu">\usepackage</span>{<span class="ex">tikz</span>}
+<span class="bu">\usepackage</span>{<span class="ex">gnuplot-lua-tikz</span>}</code></pre></div>
 <p>如果是plain TeX，则使用<code>\input gnuplot-lua-tikz.tex</code>命令。这样一来，gnuplot就非常能够满足我们的需要了。所以我们学习绘图也就从 它开始讲起。</p>
 <h2 id="gnuplot绘图基础">Gnuplot绘图基础</h2>
 <p>Gnuplot是一个交互式的绘图语言。绘出的图形展示在一个设备上。所以我们在绘图脚本中需要指定绘图的终端类型，以及输出的文件。默认情况下，Gnuplot是将图形输出到显示器。我们也可以更改成其它类型。前面我们就已经介绍了如何将图形导出成 <code>.tex</code> 格式。实际上，Gnuplot支持几乎所有的图片格式与文档格式，完整的支持可以参考Gnuplot官方文档的 <code>Terminal Types</code>一节。</p>

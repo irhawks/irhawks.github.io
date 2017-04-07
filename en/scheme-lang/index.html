@@ -110,7 +110,7 @@
 <meta name="description" content="在人工智能语言中我们应该接触过Scheme。根据介绍，Scheme和CommonLisp是两种主要的Lisp方言之一，也就是说，在讲Lisp语言的时候，我们也包括了讲Lisp或者CommonLisp语言。Scheme语言的地位是由一系列的Lambda论文决定的。见https://en.wikipedia.org/wiki/History_of_the_Scheme_programming_lang">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Scheme语言概要">
-<meta property="og:url" content="./en//scheme-lang/index.html">
+<meta property="og:url" content="./en/scheme-lang/index.html">
 <meta property="og:site_name" content="80x24">
 <meta property="og:description" content="在人工智能语言中我们应该接触过Scheme。根据介绍，Scheme和CommonLisp是两种主要的Lisp方言之一，也就是说，在讲Lisp语言的时候，我们也包括了讲Lisp或者CommonLisp语言。Scheme语言的地位是由一系列的Lambda论文决定的。见https://en.wikipedia.org/wiki/History_of_the_Scheme_programming_lang">
 <meta property="og:updated_time" content="2016-12-14T11:08:10.697Z">
@@ -144,7 +144,7 @@
 
 
 
-  <link rel="canonical" href="./en//scheme-lang/"/>
+  <link rel="canonical" href="./en/scheme-lang/"/>
 
 
 
@@ -295,9 +295,9 @@
           </a>
         </li>
       
-          <li class="menu-item"><a href="//scheme-lang/">简体中文</a></li>
+          <li class="menu-item"><a href="/scheme-lang/">简体中文</a></li>
           
-          <li class="menu-item"><a href="/en//scheme-lang/">English (US)</a></li>
+          <li class="menu-item"><a href="/en/scheme-lang/">English (US)</a></li>
           
 
     </ul>
@@ -306,12 +306,23 @@
   
     <div class="site-search">
       
-  <div class="popup">
+  <!-- previous -->
+<script type="text/javascript">
+   var search_path = "<%= config.search.path %>";
+   if (search_path.length == 0) {
+       search_path = "search.xml";
+   }
+   var path = "<%= config.root %>" + search_path;
+   searchFunc(path, 'local-search-input', 'local-search-result');
+</script>
+<!-- optimized -->
+<div class="popup">
  <span class="search-icon fa fa-search"></span>
  <input type="text" id="local-search-input">
  <div id="local-search-result"></div>
  <span class="popup-btn-close">close</span>
 </div>
+
 
 
     </div>
@@ -433,7 +444,7 @@
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <a href="/en/scheme-lang/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="en//scheme-lang/" itemprop="commentCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="en/scheme-lang/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -653,8 +664,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="en//scheme-lang/"
-           data-title="Scheme语言概要" data-url=".//scheme-lang/">
+      <div class="ds-thread" data-thread-key="en/scheme-lang/"
+           data-title="Scheme语言概要" data-url="./scheme-lang/">
       </div>
     
   </div>
@@ -776,7 +787,7 @@
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
-                  <a href="./" title="Title" target="_blank">Title</a>
+                  <a href="./" title="Homepage" target="_blank">Homepage</a>
                 </li>
               
                 <li class="links-of-blogroll-item">
@@ -1085,10 +1096,31 @@
   
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
+        TeX: {
+          extensions: ["amsthm.js", "AMSmath.js","AMSsymbols.js", "autobold.js"],
+        },
         tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          <!--(disable $) inlineMath: [ ['$','$'], ["\\(","\\)"]  ],-->
+          inlineMath: [ ["\\(","\\)"]  ],
           processEscapes: true,
           skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        },
+        <!-- add zoom options for math equations-->
+        MathZoom: {
+          styles: { "#MathJax_Zoom": {
+              "background-color": "rgba(255,255,255,0.9)"
+            } }
+        },
+        extensions: ["[Contrib]/a11y/accessibility-menu.js"],
+        explorer: {
+          walker: 'syntactic',         // none, syntactic, semantic
+          highlight: 'none',           // none, hover, flame
+          background: 'blue',          // blue, red, green, yellow, cyan, magenta, white, black
+          foreground: 'black',         // black, white, magenta, cyan, yellow, green, red, blue
+          speech: true,                // true, false
+          generation: 'lazy',          // eager, mixed, lazy
+          subtitle: true,              // true, false
+          ruleset: 'mathspeak-default' // mathspeak-default, mathspeak-brief, mathspeak-sbrief, chromevox-default, chromevox-short, chromevox-alternative
         }
       });
     </script>

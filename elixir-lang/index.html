@@ -306,12 +306,23 @@
   
     <div class="site-search">
       
-  <div class="popup">
+  <!-- previous -->
+<script type="text/javascript">
+   var search_path = "<%= config.search.path %>";
+   if (search_path.length == 0) {
+       search_path = "search.xml";
+   }
+   var path = "<%= config.root %>" + search_path;
+   searchFunc(path, 'local-search-input', 'local-search-result');
+</script>
+<!-- optimized -->
+<div class="popup">
  <span class="search-icon fa fa-search"></span>
  <input type="text" id="local-search-input">
  <div id="local-search-result"></div>
  <span class="popup-btn-close">close</span>
 </div>
+
 
 
     </div>
@@ -422,7 +433,7 @@
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <a href="/elixir-lang/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/elixir-lang/" itemprop="commentCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="elixir-lang/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -504,8 +515,8 @@ juju run --all &quot;sudo apt-get install elixir&quot;</code></pre>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/erlang-concurrency-test/" rel="next" title="Erlang编程语言中的并发小测试">
-                <i class="fa fa-chevron-left"></i> Erlang编程语言中的并发小测试
+              <a href="/elastic-search/" rel="next" title="ElasticSearch搜索软件">
+                <i class="fa fa-chevron-left"></i> ElasticSearch搜索软件
               </a>
             
           </div>
@@ -514,8 +525,8 @@ juju run --all &quot;sudo apt-get install elixir&quot;</code></pre>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/agda-lang/" rel="prev" title="Agda语言介绍">
-                Agda语言介绍 <i class="fa fa-chevron-right"></i>
+              <a href="/erlang-concurrency-test/" rel="prev" title="Erlang编程语言中的并发小测试">
+                Erlang编程语言中的并发小测试 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -580,8 +591,8 @@ juju run --all &quot;sudo apt-get install elixir&quot;</code></pre>
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="/elixir-lang/"
-           data-title="Elixir：建立在Erlang虚拟机上的函数式语言" data-url=".//elixir-lang/">
+      <div class="ds-thread" data-thread-key="elixir-lang/"
+           data-title="Elixir：建立在Erlang虚拟机上的函数式语言" data-url="./elixir-lang/">
       </div>
     
   </div>
@@ -694,7 +705,7 @@ juju run --all &quot;sudo apt-get install elixir&quot;</code></pre>
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
-                  <a href="./" title="Title" target="_blank">Title</a>
+                  <a href="./" title="Homepage" target="_blank">Homepage</a>
                 </li>
               
                 <li class="links-of-blogroll-item">
@@ -987,10 +998,31 @@ juju run --all &quot;sudo apt-get install elixir&quot;</code></pre>
   
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
+        TeX: {
+          extensions: ["amsthm.js", "AMSmath.js","AMSsymbols.js", "autobold.js"],
+        },
         tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          <!--(disable $) inlineMath: [ ['$','$'], ["\\(","\\)"]  ],-->
+          inlineMath: [ ["\\(","\\)"]  ],
           processEscapes: true,
           skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        },
+        <!-- add zoom options for math equations-->
+        MathZoom: {
+          styles: { "#MathJax_Zoom": {
+              "background-color": "rgba(255,255,255,0.9)"
+            } }
+        },
+        extensions: ["[Contrib]/a11y/accessibility-menu.js"],
+        explorer: {
+          walker: 'syntactic',         // none, syntactic, semantic
+          highlight: 'none',           // none, hover, flame
+          background: 'blue',          // blue, red, green, yellow, cyan, magenta, white, black
+          foreground: 'black',         // black, white, magenta, cyan, yellow, green, red, blue
+          speech: true,                // true, false
+          generation: 'lazy',          // eager, mixed, lazy
+          subtitle: true,              // true, false
+          ruleset: 'mathspeak-default' // mathspeak-default, mathspeak-brief, mathspeak-sbrief, chromevox-default, chromevox-short, chromevox-alternative
         }
       });
     </script>

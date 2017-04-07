@@ -114,7 +114,7 @@
 键盘上，左单引号与右单引号是区分开来的。一个是好像重音符号的东西，另一个就是普通的单号">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LaTeX的编程原理">
-<meta property="og:url" content="./en//tex-tokens/index.html">
+<meta property="og:url" content="./en/tex-tokens/index.html">
 <meta property="og:site_name" content="80x24">
 <meta property="og:description" content="第二节 书籍排版与普通排版
 %%% 这部分实际上是介绍tex的输入与词法规则，算是编程基础
@@ -156,7 +156,7 @@
 
 
 
-  <link rel="canonical" href="./en//tex-tokens/"/>
+  <link rel="canonical" href="./en/tex-tokens/"/>
 
 
 
@@ -307,9 +307,9 @@
           </a>
         </li>
       
-          <li class="menu-item"><a href="//tex-tokens/">简体中文</a></li>
+          <li class="menu-item"><a href="/tex-tokens/">简体中文</a></li>
           
-          <li class="menu-item"><a href="/en//tex-tokens/">English (US)</a></li>
+          <li class="menu-item"><a href="/en/tex-tokens/">English (US)</a></li>
           
 
     </ul>
@@ -318,12 +318,23 @@
   
     <div class="site-search">
       
-  <div class="popup">
+  <!-- previous -->
+<script type="text/javascript">
+   var search_path = "<%= config.search.path %>";
+   if (search_path.length == 0) {
+       search_path = "search.xml";
+   }
+   var path = "<%= config.root %>" + search_path;
+   searchFunc(path, 'local-search-input', 'local-search-result');
+</script>
+<!-- optimized -->
+<div class="popup">
  <span class="search-icon fa fa-search"></span>
  <input type="text" id="local-search-input">
  <div id="local-search-result"></div>
  <span class="popup-btn-close">close</span>
 </div>
+
 
 
     </div>
@@ -445,7 +456,7 @@
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <a href="/en/tex-tokens/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="en//tex-tokens/" itemprop="commentCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="en/tex-tokens/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -572,8 +583,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/LaTeX-grouping/" rel="next" title="TeX与LaTeX的编组">
-                <i class="fa fa-chevron-left"></i> TeX与LaTeX的编组
+              <a href="/PythonPlot/" rel="next" title="使用python下面的enthought和matplotlib绘图">
+                <i class="fa fa-chevron-left"></i> 使用python下面的enthought和matplotlib绘图
               </a>
             
           </div>
@@ -582,8 +593,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/人工智能语言/" rel="prev" title="人工智能语言介绍">
-                人工智能语言介绍 <i class="fa fa-chevron-right"></i>
+              <a href="/LaTeX-grouping/" rel="prev" title="TeX与LaTeX的编组">
+                TeX与LaTeX的编组 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -648,8 +659,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="en//tex-tokens/"
-           data-title="LaTeX的编程原理" data-url=".//tex-tokens/">
+      <div class="ds-thread" data-thread-key="en/tex-tokens/"
+           data-title="LaTeX的编程原理" data-url="./tex-tokens/">
       </div>
     
   </div>
@@ -771,7 +782,7 @@
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
-                  <a href="./" title="Title" target="_blank">Title</a>
+                  <a href="./" title="Homepage" target="_blank">Homepage</a>
                 </li>
               
                 <li class="links-of-blogroll-item">
@@ -1080,10 +1091,31 @@
   
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
+        TeX: {
+          extensions: ["amsthm.js", "AMSmath.js","AMSsymbols.js", "autobold.js"],
+        },
         tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          <!--(disable $) inlineMath: [ ['$','$'], ["\\(","\\)"]  ],-->
+          inlineMath: [ ["\\(","\\)"]  ],
           processEscapes: true,
           skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        },
+        <!-- add zoom options for math equations-->
+        MathZoom: {
+          styles: { "#MathJax_Zoom": {
+              "background-color": "rgba(255,255,255,0.9)"
+            } }
+        },
+        extensions: ["[Contrib]/a11y/accessibility-menu.js"],
+        explorer: {
+          walker: 'syntactic',         // none, syntactic, semantic
+          highlight: 'none',           // none, hover, flame
+          background: 'blue',          // blue, red, green, yellow, cyan, magenta, white, black
+          foreground: 'black',         // black, white, magenta, cyan, yellow, green, red, blue
+          speech: true,                // true, false
+          generation: 'lazy',          // eager, mixed, lazy
+          subtitle: true,              // true, false
+          ruleset: 'mathspeak-default' // mathspeak-default, mathspeak-brief, mathspeak-sbrief, chromevox-default, chromevox-short, chromevox-alternative
         }
       });
     </script>

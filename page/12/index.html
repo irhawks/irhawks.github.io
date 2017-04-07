@@ -307,12 +307,23 @@
   
     <div class="site-search">
       
-  <div class="popup">
+  <!-- previous -->
+<script type="text/javascript">
+   var search_path = "<%= config.search.path %>";
+   if (search_path.length == 0) {
+       search_path = "search.xml";
+   }
+   var path = "<%= config.root %>" + search_path;
+   searchFunc(path, 'local-search-input', 'local-search-result');
+</script>
+<!-- optimized -->
+<div class="popup">
  <span class="search-icon fa fa-search"></span>
  <input type="text" id="local-search-input">
  <div id="local-search-result"></div>
  <span class="popup-btn-close">close</span>
 </div>
+
 
 
     </div>
@@ -426,7 +437,7 @@
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <a href="/Linux-Daemon/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/Linux-Daemon/" itemprop="commentCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="Linux-Daemon/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -598,7 +609,7 @@
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <a href="/regex-intro/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/regex-intro/" itemprop="commentCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="regex-intro/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -767,7 +778,7 @@
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <a href="/线程与调度器/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/线程与调度器/" itemprop="commentCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="线程与调度器/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1050,7 +1061,7 @@ pthread_exit(arg);
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <a href="/进程原理二/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/进程原理二/" itemprop="commentCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="进程原理二/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1288,7 +1299,7 @@ _exit(<span class="dv">0</span>);</code></pre></div>
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <a href="/进程原理一/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/进程原理一/" itemprop="commentCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="进程原理一/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1564,7 +1575,7 @@ _exit(<span class="dv">0</span>);</code></pre></div>
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
-                  <a href="./" title="Title" target="_blank">Title</a>
+                  <a href="./" title="Homepage" target="_blank">Homepage</a>
                 </li>
               
                 <li class="links-of-blogroll-item">
@@ -1853,10 +1864,31 @@ _exit(<span class="dv">0</span>);</code></pre></div>
   
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
+        TeX: {
+          extensions: ["amsthm.js", "AMSmath.js","AMSsymbols.js", "autobold.js"],
+        },
         tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          <!--(disable $) inlineMath: [ ['$','$'], ["\\(","\\)"]  ],-->
+          inlineMath: [ ["\\(","\\)"]  ],
           processEscapes: true,
           skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        },
+        <!-- add zoom options for math equations-->
+        MathZoom: {
+          styles: { "#MathJax_Zoom": {
+              "background-color": "rgba(255,255,255,0.9)"
+            } }
+        },
+        extensions: ["[Contrib]/a11y/accessibility-menu.js"],
+        explorer: {
+          walker: 'syntactic',         // none, syntactic, semantic
+          highlight: 'none',           // none, hover, flame
+          background: 'blue',          // blue, red, green, yellow, cyan, magenta, white, black
+          foreground: 'black',         // black, white, magenta, cyan, yellow, green, red, blue
+          speech: true,                // true, false
+          generation: 'lazy',          // eager, mixed, lazy
+          subtitle: true,              // true, false
+          ruleset: 'mathspeak-default' // mathspeak-default, mathspeak-brief, mathspeak-sbrief, chromevox-default, chromevox-short, chromevox-alternative
         }
       });
     </script>

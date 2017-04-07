@@ -218,9 +218,9 @@ Hexo的Next主题可以识别&lt;! -- more --.&gt;，并且在主页当中展示
     
       <category term="OpenModelica" scheme="./tags/OpenModelica/"/>
     
-      <category term="ModelicaML" scheme="./tags/ModelicaML/"/>
-    
       <category term="仿真" scheme="./tags/%E4%BB%BF%E7%9C%9F/"/>
+    
+      <category term="ModelicaML" scheme="./tags/ModelicaML/"/>
     
       <category term="DAE" scheme="./tags/DAE/"/>
     
@@ -476,40 +476,6 @@ end C&lt;/code&gt;&lt;/pre&gt;
   </entry>
   
   <entry>
-    <title>Scala编程概要（四）：控制抽象, 集合, 模式匹配, 编译器</title>
-    <link href="./scala-overview-4/"/>
-    <id>./scala-overview-4/</id>
-    <published>2015-07-01T16:00:00.000Z</published>
-    <updated>2016-12-14T11:09:01.020Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;scala的控制抽象&quot;&gt;Scala的控制抽象&lt;/h3&gt;
-&lt;p&gt;Haskell有自己的抽制抽象。使用的是单体。但是在Scala中，没有必要做得那么纯函数式。所以为了调用控制流，Scala使用了&lt;code&gt;() =&amp;gt; Unit&lt;/code&gt;类型。比如说，我们要在某个线程当中创建一个过程：&lt;/p&gt;
-&lt;div class=&quot;sourceCode&quot;&gt;&lt;pre class=&quot;sourceCode scala&quot;&gt;&lt;code class=&quot;sourceCode scala&quot;&gt;&lt;span class=&quot;fu&quot;&gt;runInThread&lt;/span&gt;() { () =&amp;gt; &lt;span class=&quot;fu&quot;&gt;println&lt;/span&gt;(&lt;span class=&quot;st&quot;&gt;&amp;quot;Hi&amp;quot;&lt;/span&gt;); Thread.&lt;span class=&quot;fu&quot;&gt;sleep&lt;/span&gt;(&lt;span class=&quot;dv&quot;&gt;1000&lt;/span&gt;); &lt;span class=&quot;fu&quot;&gt;println&lt;/span&gt;(&lt;span class=&quot;st&quot;&gt;&amp;quot;Bye&amp;quot;&lt;/span&gt;) }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;其中定义的runInThead函数是：&lt;/p&gt;
-&lt;div class=&quot;sourceCode&quot;&gt;&lt;pre class=&quot;sourceCode scala&quot;&gt;&lt;code class=&quot;sourceCode scala&quot;&gt;&lt;span class=&quot;kw&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;runInThread&lt;/span&gt;( block : () =&amp;gt; Unit) {
-    &lt;span class=&quot;kw&quot;&gt;new&lt;/span&gt; Thread {
-        &lt;span class=&quot;kw&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;kw&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;run&lt;/span&gt;() { &lt;span class=&quot;fu&quot;&gt;block&lt;/span&gt;() }
-    }.&lt;span class=&quot;fu&quot;&gt;start&lt;/span&gt;()
-}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-    
-    </summary>
-    
-    
-      <category term="scala" scheme="./tags/scala/"/>
-    
-      <category term="控制抽象" scheme="./tags/%E6%8E%A7%E5%88%B6%E6%8A%BD%E8%B1%A1/"/>
-    
-      <category term="集合" scheme="./tags/%E9%9B%86%E5%90%88/"/>
-    
-      <category term="模式匹配" scheme="./tags/%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D/"/>
-    
-      <category term="编译器" scheme="./tags/%E7%BC%96%E8%AF%91%E5%99%A8/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Scala编程概要（三）：进程控制与shell，函数式特性</title>
     <link href="./scala-process-and-shell/"/>
     <id>./scala-process-and-shell/</id>
@@ -549,39 +515,36 @@ end C&lt;/code&gt;&lt;/pre&gt;
   </entry>
   
   <entry>
-    <title>Scala编程概要（二）：基本结构，常用模式</title>
-    <link href="./scala-sentences/"/>
-    <id>./scala-sentences/</id>
-    <published>2015-06-30T16:00:00.000Z</published>
-    <updated>2016-12-14T11:11:37.384Z</updated>
+    <title>Scala编程概要（四）：控制抽象, 集合, 模式匹配, 编译器</title>
+    <link href="./scala-overview-4/"/>
+    <id>./scala-overview-4/</id>
+    <published>2015-07-01T16:00:00.000Z</published>
+    <updated>2016-12-14T11:09:01.020Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;设计模式在软件编程的各个方面都有应用。MVC与分布式一般算成是架构模式，而写文档注释也有一定的模式可以遵守。另外，我们也可以设计出一些使用的模式，以便在开发软件之后，可以让用户按照指定的模式使用软件。&lt;/p&gt;
-&lt;h2 id=&quot;scala的for语句&quot;&gt;Scala的for语句&lt;/h2&gt;
-&lt;p&gt;在scala当中，for并不是经典的控制流语句而已。在for里面可以加一些过滤器，同时，也可使用yield来生成一个集合。这种控制语句应该是与Map-Reduce相互配合的。而且为了支持新的范式，也需要修改for语句的行为。&lt;/p&gt;
-&lt;p&gt;对于非递归的函数，scala不需要指定返回的类型。这是因为，虽然hindley-Milner算法能够推断出递归函数的返回的类型，但是在面向对象的语言中却并不是总是可以行得通的。所以，在处理递归函数的返回类型上，Scala并没有使用Hindley-Milner类型推断算法。&lt;/p&gt;
+      &lt;h3 id=&quot;scala的控制抽象&quot;&gt;Scala的控制抽象&lt;/h3&gt;
+&lt;p&gt;Haskell有自己的抽制抽象。使用的是单体。但是在Scala中，没有必要做得那么纯函数式。所以为了调用控制流，Scala使用了&lt;code&gt;() =&amp;gt; Unit&lt;/code&gt;类型。比如说，我们要在某个线程当中创建一个过程：&lt;/p&gt;
+&lt;div class=&quot;sourceCode&quot;&gt;&lt;pre class=&quot;sourceCode scala&quot;&gt;&lt;code class=&quot;sourceCode scala&quot;&gt;&lt;span class=&quot;fu&quot;&gt;runInThread&lt;/span&gt;() { () =&amp;gt; &lt;span class=&quot;fu&quot;&gt;println&lt;/span&gt;(&lt;span class=&quot;st&quot;&gt;&amp;quot;Hi&amp;quot;&lt;/span&gt;); Thread.&lt;span class=&quot;fu&quot;&gt;sleep&lt;/span&gt;(&lt;span class=&quot;dv&quot;&gt;1000&lt;/span&gt;); &lt;span class=&quot;fu&quot;&gt;println&lt;/span&gt;(&lt;span class=&quot;st&quot;&gt;&amp;quot;Bye&amp;quot;&lt;/span&gt;) }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;其中定义的runInThead函数是：&lt;/p&gt;
+&lt;div class=&quot;sourceCode&quot;&gt;&lt;pre class=&quot;sourceCode scala&quot;&gt;&lt;code class=&quot;sourceCode scala&quot;&gt;&lt;span class=&quot;kw&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;runInThread&lt;/span&gt;( block : () =&amp;gt; Unit) {
+    &lt;span class=&quot;kw&quot;&gt;new&lt;/span&gt; Thread {
+        &lt;span class=&quot;kw&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;kw&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;run&lt;/span&gt;() { &lt;span class=&quot;fu&quot;&gt;block&lt;/span&gt;() }
+    }.&lt;span class=&quot;fu&quot;&gt;start&lt;/span&gt;()
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
     
     </summary>
-    
-      <category term="编程语言" scheme="./categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
     
     
       <category term="scala" scheme="./tags/scala/"/>
     
-      <category term="控制语句" scheme="./tags/%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/"/>
+      <category term="控制抽象" scheme="./tags/%E6%8E%A7%E5%88%B6%E6%8A%BD%E8%B1%A1/"/>
     
-      <category term="设计模式" scheme="./tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+      <category term="集合" scheme="./tags/%E9%9B%86%E5%90%88/"/>
     
-      <category term="映射" scheme="./tags/%E6%98%A0%E5%B0%84/"/>
+      <category term="模式匹配" scheme="./tags/%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D/"/>
     
-      <category term="类" scheme="./tags/%E7%B1%BB/"/>
-    
-      <category term="面向对象" scheme="./tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
-    
-      <category term="注解" scheme="./tags/%E6%B3%A8%E8%A7%A3/"/>
-    
-      <category term="序列化" scheme="./tags/%E5%BA%8F%E5%88%97%E5%8C%96/"/>
+      <category term="编译器" scheme="./tags/%E7%BC%96%E8%AF%91%E5%99%A8/"/>
     
   </entry>
   
@@ -604,11 +567,48 @@ end C&lt;/code&gt;&lt;/pre&gt;
     
       <category term="scala" scheme="./tags/scala/"/>
     
-      <category term="面向对象" scheme="./tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
-    
       <category term="文档" scheme="./tags/%E6%96%87%E6%A1%A3/"/>
     
       <category term="注释" scheme="./tags/%E6%B3%A8%E9%87%8A/"/>
+    
+      <category term="面向对象" scheme="./tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Scala编程概要（二）：基本结构，常用模式</title>
+    <link href="./scala-sentences/"/>
+    <id>./scala-sentences/</id>
+    <published>2015-06-30T16:00:00.000Z</published>
+    <updated>2016-12-14T11:11:37.384Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;设计模式在软件编程的各个方面都有应用。MVC与分布式一般算成是架构模式，而写文档注释也有一定的模式可以遵守。另外，我们也可以设计出一些使用的模式，以便在开发软件之后，可以让用户按照指定的模式使用软件。&lt;/p&gt;
+&lt;h2 id=&quot;scala的for语句&quot;&gt;Scala的for语句&lt;/h2&gt;
+&lt;p&gt;在scala当中，for并不是经典的控制流语句而已。在for里面可以加一些过滤器，同时，也可使用yield来生成一个集合。这种控制语句应该是与Map-Reduce相互配合的。而且为了支持新的范式，也需要修改for语句的行为。&lt;/p&gt;
+&lt;p&gt;对于非递归的函数，scala不需要指定返回的类型。这是因为，虽然hindley-Milner算法能够推断出递归函数的返回的类型，但是在面向对象的语言中却并不是总是可以行得通的。所以，在处理递归函数的返回类型上，Scala并没有使用Hindley-Milner类型推断算法。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="编程语言" scheme="./categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+    
+      <category term="scala" scheme="./tags/scala/"/>
+    
+      <category term="面向对象" scheme="./tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
+    
+      <category term="控制语句" scheme="./tags/%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/"/>
+    
+      <category term="设计模式" scheme="./tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="映射" scheme="./tags/%E6%98%A0%E5%B0%84/"/>
+    
+      <category term="类" scheme="./tags/%E7%B1%BB/"/>
+    
+      <category term="注解" scheme="./tags/%E6%B3%A8%E8%A7%A3/"/>
+    
+      <category term="序列化" scheme="./tags/%E5%BA%8F%E5%88%97%E5%8C%96/"/>
     
   </entry>
   

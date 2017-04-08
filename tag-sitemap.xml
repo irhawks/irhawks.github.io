@@ -1094,20 +1094,6 @@
     </url>
 
     <url>
-        <loc>./tags/git/</loc>
-        <lastmod>2016-12-14T13:47:43.137Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>./tags/hakyll/</loc>
-        <lastmod>2016-12-14T13:47:43.137Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>./tags/regex/</loc>
         <lastmod>2016-12-14T13:48:09.818Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1320,6 +1306,20 @@
     <url>
         <loc>./tags/LTS/</loc>
         <lastmod>2016-12-18T11:29:34.535Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./tags/git/</loc>
+        <lastmod>2017-04-08T01:27:24.072Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./tags/hakyll/</loc>
+        <lastmod>2017-04-08T01:27:24.072Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

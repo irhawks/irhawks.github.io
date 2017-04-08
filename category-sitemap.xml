@@ -217,20 +217,6 @@
     </url>
 
     <url>
-        <loc>./categories/%E5%87%BA%E7%89%88/%E5%8D%9A%E5%AE%A2/</loc>
-        <lastmod>2016-12-15T03:57:04.406Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>./categories/%E5%87%BA%E7%89%88/</loc>
-        <lastmod>2016-12-15T12:33:21.163Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>./categories/%E5%87%BA%E7%89%88/Pandoc/</loc>
         <lastmod>2016-12-15T12:33:21.163Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -254,6 +240,20 @@
     <url>
         <loc>./categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%9E%8B/</loc>
         <lastmod>2016-12-18T11:29:34.535Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./categories/%E5%87%BA%E7%89%88/</loc>
+        <lastmod>2017-04-08T01:27:24.072Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./categories/%E5%87%BA%E7%89%88/%E5%8D%9A%E5%AE%A2/</loc>
+        <lastmod>2017-04-08T01:27:24.072Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

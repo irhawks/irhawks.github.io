@@ -1,0 +1,1170 @@
+<!doctype html>
+
+
+
+  
+
+
+<!--
+<html class="theme-next mist use-motion" lang="zh-Hans,en">
+-->
+<html class="theme-next mist use-motion" lang="CODE">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="scala,控制语句,设计模式,映射,类,面向对象,注解,序列化," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="80x24" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="设计模式在软件编程的各个方面都有应用。MVC与分布式一般算成是架构模式，而写文档注释也有一定的模式可以遵守。另外，我们也可以设计出一些使用的模式，以便在开发软件之后，可以让用户按照指定的模式使用软件。
+Scala的for语句
+在scala当中，for并不是经典的控制流语句而已。在for里面可以加一些过滤器，同时，也可使用yield来生成一个集合。这种控制语句应该是与Map-Reduce相互配合的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scala编程概要（二）：基本结构，常用模式">
+<meta property="og:url" content="./CODE/scala-sentences/index.html">
+<meta property="og:site_name" content="80x24">
+<meta property="og:description" content="设计模式在软件编程的各个方面都有应用。MVC与分布式一般算成是架构模式，而写文档注释也有一定的模式可以遵守。另外，我们也可以设计出一些使用的模式，以便在开发软件之后，可以让用户按照指定的模式使用软件。
+Scala的for语句
+在scala当中，for并不是经典的控制流语句而已。在for里面可以加一些过滤器，同时，也可使用yield来生成一个集合。这种控制语句应该是与Map-Reduce相互配合的。">
+<meta property="og:updated_time" content="2016-12-14T11:11:37.384Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scala编程概要（二）：基本结构，常用模式">
+<meta name="twitter:description" content="设计模式在软件编程的各个方面都有应用。MVC与分布式一般算成是架构模式，而写文档注释也有一定的模式可以遵守。另外，我们也可以设计出一些使用的模式，以便在开发软件之后，可以让用户按照指定的模式使用软件。
+Scala的for语句
+在scala当中，for并不是经典的控制流语句而已。在for里面可以加一些过滤器，同时，也可使用yield来生成一个集合。这种控制语句应该是与Map-Reduce相互配合的。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="./CODE/scala-sentences/"/>
+
+
+
+
+
+<!-- add highlight.js to render pandoc code blocks -->
+<!--
+<link href="http://cdn.bootcss.com/highlight.js/9.10.0/styles/github.min.css" rel="stylesheet">  
+-->
+<link href="/css/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>  
+<script src="/js/highlightjs-line-numbers.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.initLineNumbersOnLoad(); </script>
+
+  <title> Scala编程概要（二）：基本结构，常用模式 | 80x24 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="CODE">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?763bee904aa6d81fdf017659d162188f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">80x24</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Keep Stupid, Keep Hungry</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-resources">
+          <a href="/resources" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-folder"></i> <br />
+            
+            Resources
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Suche
+          </a>
+        </li>
+      
+          <li class="menu-item"><a href="/scala-sentences/">简体中文</a></li>
+          
+          <li class="menu-item"><a href="/en/scala-sentences/">English (US)</a></li>
+          
+
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <!-- previous -->
+<script type="text/javascript">
+   var search_path = "<%= config.search.path %>";
+   if (search_path.length == 0) {
+       search_path = "search.xml";
+   }
+   var path = "<%= config.root %>" + search_path;
+   searchFunc(path, 'local-search-input', 'local-search-result');
+</script>
+<!-- optimized -->
+<div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+
+    </div>
+  
+
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="./CODE/scala-sentences/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Istyasna">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="80x24">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="80x24" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Scala编程概要（二）：基本结构，常用模式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-07-01T00:00:00+08:00">
+                2015-07-01
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              <span class="post-meta-item-text">Updated at</span>
+              <time title="Updated at" itemprop="dateModified" datetime="2016-12-14T19:11:37+08:00">
+                2016-12-14
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">in</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程语言/" itemprop="url" rel="index">
+                    <span itemprop="name">编程语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/CODE/scala-sentences/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="CODE/scala-sentences/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>设计模式在软件编程的各个方面都有应用。MVC与分布式一般算成是架构模式，而写文档注释也有一定的模式可以遵守。另外，我们也可以设计出一些使用的模式，以便在开发软件之后，可以让用户按照指定的模式使用软件。</p>
+<h2 id="scala的for语句">Scala的for语句</h2>
+<p>在scala当中，for并不是经典的控制流语句而已。在for里面可以加一些过滤器，同时，也可使用yield来生成一个集合。这种控制语句应该是与Map-Reduce相互配合的。而且为了支持新的范式，也需要修改for语句的行为。</p>
+<p>对于非递归的函数，scala不需要指定返回的类型。这是因为，虽然hindley-Milner算法能够推断出递归函数的返回的类型，但是在面向对象的语言中却并不是总是可以行得通的。所以，在处理递归函数的返回类型上，Scala并没有使用Hindley-Milner类型推断算法。</p>
+<a id="more"></a>
+<p>另外，Scala的函数参数也可以使用默认参数，或者使用变长的参数（变长的参数的处理与Java是类似的）。</p>
+<p>不返回值的函数，一般都是使用Unit作为返回类型。</p>
+<p>Scala中捕获异常可以采用模式匹配的方法。这比Java精简了不少。</p>
+<p>另外，在数据流编程当中，一种方法是使用if守卫加上yield和for产生序列，比如<code>for (elem &lt;- a if elem % 2 == 0) yield 2 * elem</code>。但是对于函数式语言实践而言，最经常使用的是filter-map-reduce的方法，比如<code>a.filter( _ % 2 == 0).map(2*_)</code>或者甚至是<code>a.filter { _ % 2 == 0 } map { 2 * _ }</code>这样的序列化的形式。另外，很大一部分时间编程语言都是在做查找和排序的操作。这种情况下，Scala对数组采用了很多的方法。比如整型数组的<code>Array(1,2,3,4,5).sum</code>方法，以及<code>ArrayBuffer(1,7,2,9).sorted(_&lt;_)</code>方法。</p>
+<p>在类型系统比较丰富的语言中，不熟悉类型系统的编程者可能觉得语法很奇怪。不过，其实也没有什么好奇怪的。学完类型系统就会觉得是自然而然的。</p>
+<h2 id="scala中的映射">Scala中的映射</h2>
+<p>Scala中，其实又被称为字典，在Scala中称为哈希表。哈希表是应用非常广泛的数据结构。Scala用Map来记其名子。比如</p>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">val</span> scores = Map(<span class="st">&quot;Alice&quot;</span> -&gt; <span class="dv">10</span>, <span class="st">&quot;Bob&quot;</span> -&gt; <span class="dv">3</span>, <span class="st">&quot;Cindy&quot;</span> -&gt; <span class="dv">8</span>)</code></pre></div>
+<p>在Scala中，哈希表具有<code>Map(T1, T2)</code>这样的数据类型，而且这里的哈希表是不可变元素。要使用可变的映射，数据结构应该变成<code>scala.collection.mutable.Map</code>。或者要从头开始建立哈希表的时候，使用<code>scala.collection.mutable.HashMap[String, Int]</code>这样的形式。</p>
+<p>在Scala中，函数与映射在语法上类似。比如<code>scores(&quot;Bob&quot;)</code>可以取到相应键的值。如果相应的键不存在，则抛出异常就可以了。另外，可以使用<code>score.contains</code>之类的方法检查映射中是否包含指定的键。另外，使用<code>getOrElse()</code>方法，可以执行，如果包含相应键就返回值，否则就返回一个指定的值的方法。</p>
+<p>如果映射是可变的，可以使用<code>score(&quot;Bob&quot;) = 10</code>或者<code>scores(&quot;Fred&quot;) = 7</code>这样的语法来更新已有的键的值，或者创建一个新的键值对。或者使用<code>+=</code>方法来把新的关系加上去，如</p>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala">scores += (<span class="st">&quot;Bob&quot;</span> -&gt; <span class="dv">10</span>, <span class="st">&quot;Fred&quot;</span> -&gt; <span class="dv">7</span>)
+socres -= <span class="st">&quot;Alice&quot;</span></code></pre></div>
+<p>对于不可变映射而言，不能重新赋值，但是可以通过<code>+</code>与<code>-</code>方法生成与原来映射相关的一个新的映射。假如不可变映射与一个<code>var</code>相关联，还可以重新给var赋值。虽然表面上看起来，创建新的映射效率比较低，但是实际上，函数式语言中正好相反。在函数式语言中，递归与不可变元素的使用反而是效率比较高的。取遍映射中的所有的键值对可以使用for方法，比如</p>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">for</span> ((k,v) &lt;- 映射) 处理k与v</code></pre></div>
+<p>之所以能够在for语句中实现这一点，主要是因为for语句里面能够模式匹配。另外，也可以使用<code>score.keys</code>与<code>score.values</code>之类的返回相应的键与值。总而言之，这是映射这种数据结构的通用的方法。</p>
+<p>另外，要想混用Java与Scala中的映射，必须要经过一个类型转换。比如</p>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">import</span> scala.<span class="fu">collection</span>.<span class="fu">JavaConversions</span>.<span class="fu">mapAsScalaMap</span>
+<span class="kw">val</span> scores : scala.<span class="fu">collection</span>.<span class="fu">mutable</span>.<span class="fu">Map</span>[String, Int] =
+    <span class="kw">new</span> java.<span class="fu">util</span>.<span class="fu">TreeMap</span>[String, Int]
+
+<span class="kw">import</span> scala.<span class="fu">collection</span>.<span class="fu">JavaConversions</span>.<span class="fu">propertiesAsScalaMap</span>
+<span class="kw">val</span> props : scala.<span class="fu">collection</span>.<span class="fu">Map</span>[String, String] = System.<span class="fu">getProperties</span>()</code></pre></div>
+<p>反过来的类型转换，提供的是相反的隐式类型转换的值。这时候导入的是</p>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">import</span> scala.<span class="fu">collection</span>.<span class="fu">JavaConversions</span>.<span class="fu">mapAsJavaMap</span></code></pre></div>
+<p>另外一种常见的数据结构是元组。Scala的元组是一个多类型的参数类。另外，可以使用模式匹配来将元组中相应位置的值赋给相应的变量。元组的一个作用是通过具体的元组的部长乘积，构造出对偶的数组。比如</p>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">val</span> symbols = Array(<span class="st">&quot;&lt;&quot;</span>, <span class="st">&quot;-&quot;</span>, <span class="st">&quot;&gt;&quot;</span>)
+<span class="kw">val</span> counts  = Array(<span class="dv">2</span>, <span class="dv">10</span> ,<span class="dv">2</span>)
+<span class="kw">val</span> pairs = symbols.<span class="fu">zip</span>(counts)
+<span class="kw">for</span> ((s, n) &lt;- pairs) Console.<span class="fu">print</span>(s*n)</code></pre></div>
+<p>在上面的式子中，pairs是如<code>Array((&quot;&lt;&quot;, 2), (&quot;-&quot;,10), (&quot;&gt;&quot;,2))</code>之类的有序组。对于二元序组来说，可以通过toMap方法将其转换成相应的映射。</p>
+<p>注，在scala中，无参函数调用也不必带()，其实也许是因为本来函数与变量以及类的名子空间都是在同一个当中，所以，实际上，根据名子就知道它是函数，是变量还是方法，根本没有必要区分。而且，一个函数中实际上也可以带有相关的参数（惰性求值）。编译器如有可能，总是应该完成大部分的工作，应该具有常识，应该具有智能。</p>
+<h2 id="scala中的类的使用">Scala中的类的使用</h2>
+<p>Scala中的类的风格大部分是与Java相通的。但是Scala作为一种更高级的语言，应该使用那些支持的高级的特性来完成类的声明与定义。</p>
+<p>对于getter/setter(取值器与改值器），有时候需要特别的处理，比如不允许改值。这种方式下，还是要使用private关键字来修饰变量，并且自己手动写getter/setter方法。注意，可以使用this来引用类的成员。在默认情况下，Scala为其每一个字段都提供getter/setter方法，除非成员被声明为private。要想查看Scalac到底生成了哪些代码，可以使用javap来查看生成的class文件。另外，其实getter/setter方法默认是与变量同名的一个无参函数。因此可以手工地使用<code>def age</code>来定义取到成员变量的一个值。</p>
+<p>如果不允许类中的名子被修改，那么更好的办法是使用val代替var。</p>
+<p>按照JavaBeans中的要求，所有的属性都要有<code>getFoo</code>与<code>setFoo</code>这样的方法。为此，可以使用scala中的<code>scala.reflect.BeanProperty</code>包提供的<code>@BeanProperty</code>修饰器，来完成相应的操作。具体用法是：</p>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">class</span> person {
+    @BeanProperty <span class="kw">var</span> name : String = _
+}</code></pre></div>
+<p>这样除了生成一般的方法之外，还生成getName与setName方法。此外，注解也可以以</p>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">class</span> <span class="fu">Person</span> (@BeanProperty <span class="kw">var</span> name : String)</code></pre></div>
+<p>这样的方式被使用。</p>
+<p>与Java一样，Scala中的类的构造器也可以有多个。不过，在Scala中，构造器的名子为<code>this</code>（在Java中就是类的同名的函数）。构造器有主构造器与辅构造器之分。我们可以通过某些方法指定。默认Scala会生成一个无参的主构造器。</p>
+<p>Scala的设计者认为每敲一个键都是珍贵的，所以可以把主构造器与类定义结合在一起。也就是说，在定义类的时候，就可以定义传入类的相关的参数。如</p>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">class</span> <span class="fu">Person</span> (<span class="kw">val</span> name : String){}</code></pre></div>
+<p>这样的紧凑形式。</p>
+<p>另外，Scala也支持嵌套类的使用，使用的方式与java不太一样。</p>
+<p>注：java中，#运算符代表的是一个类型投影，比如说，Network#Member，会得到Network中的嵌套类Member。</p>
+<h2 id="scala中的对象">Scala中的对象</h2>
+<p>scala中的对象直接实现了单件的模式。因为既然被定义为一个对象，那么所有的该对象的变量都是共同的操作。与类相比，对象只是没有有参构造函数，以及对象的构造器在该对象第一次被使用的时候调用。为了使类具有类似于静态方法的效果，可以给类定义一个伴生的对象。这个时候，类可以调用伴生对象的方法。不过，访问的时候必须显式地指明伴生对象。而且Scala中强制要求伴生对象的定义必须与类的定义放在一起。</p>
+<p>对象的常用的方法是继承一个抽象类，并且实例化方法。比如，绿色是一种取特殊的值的颜色，那么绿色就成为一个对象。扩展了抽象类的方法。</p>
+<h2 id="scala应用程序">Scala应用程序</h2>
+<p>与Java一样，scala程序的运行是从一个对象的main方法开始。main方法的类型是<code>Array[String] =&gt; Unit</code>。除了直接写main方法之外，我们也可以自己扩展App特质，然后把程序代码放在构造器方法体内。</p>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">object</span> Hello <span class="kw">extends</span> App {
+    <span class="fu">println</span>(<span class="st">&quot;hello, World!&quot;</span>)
+}</code></pre></div>
+<p>还可以在App构造器内使用args.length得到参数的长度，以及得到相关的参数。应当注意，程序的体是放在App特定的构造器里面，所以println函数不用放在方法中，就好像是直接使用类的成员传递一样。</p>
+<p>包管理是构造大型应用程序的一部分，属于封装。在Java中，包总是以绝对路径的方式被访问，但是在Scala中可以是相对路径。此外，包名可以放在不同的文件中。由于Java虚拟机的局限，包可以包含类、对象与特质，但是不能直接包含函数或者变量定义。为了解决这种困难，可以使用“包对象”的概念，也就是使用</p>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">package</span> com.<span class="fu">horstmann</span>.<span class="fu">impatient</span>
+
+pacakge <span class="kw">object</span> people {
+    <span class="kw">val</span> defaultName = <span class="st">&quot;John Q. Public&quot;</span>
+}
+<span class="kw">package</span> people {
+    <span class="kw">class</span> Person {
+        <span class="kw">var</span> name = defaultName 
+    }
+}</code></pre></div>
+<p>这样的方式来定义一个包对象。由于Person类既在com.horstmann.impatient.people包的作用域中，而该作用域下定义了defaultName成员，所以可以在Person类中访问defaultName。</p>
+<p>包以象是Scala的一个小把戏。在内部，包对象被编译成带有静态方法和字段的JVM类，名为package.class，位于相应的包下面。</p>
+<p>另外，引入包的时候可以引入包中的所有的名称（使用下划线），也可以引入单独的名称（比如引用包中的一个类）。在Scala中，包引入可以放在任何作用域里面，不必放在文件的顶部。这样可以只在运行的时候才引用相应的包。Java程序员的实践比较依赖于IDE。因为他们不喜欢把包中的所有的对象都引入文件，而IDE正好可以让它们选择引用哪些包，并且为相应的引入生成长长的<code>import</code>语句。</p>
+<p>如果要引入包中的几个对象，可以使用选取器，如</p>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">import</span> java.<span class="fu">awt</span>.{Color, Font}</code></pre></div>
+<p>或者重命名要导入的成员以解决可能的冲突</p>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">import</span> java.<span class="fu">util</span>.{HashMap =&gt; JavaHashMap}
+<span class="kw">import</span> scala.<span class="fu">collection</span>.<span class="fu">mutable</span>._</code></pre></div>
+<p>总而言之，在scala程序员中，把包中的所有的对象都导入进来是很普遍的。</p>
+<h2 id="scala的面向对象的机制">Scala的面向对象的机制</h2>
+<p>首先，scala的类的机制与java类似，另外，scala中重写一个非抽象的方法的时候必须使用override修饰符。</p>
+<p>与java中一样，调用超类的方法也使用super关键字。</p>
+<p>如果需要类型检查，可以按照如下的方式：</p>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">if</span> (p.<span class="fu">isInstanceOf</span>[Employee]) {
+    <span class="kw">val</span> s = p.<span class="fu">asInstanceOf</span>[Employee]
+    ...
+}</code></pre></div>
+<p>注意scala是静态的语言，所以运行期中的<code class="sourceCode python"><span class="bu">type</span>(a) <span class="op">==</span> <span class="bu">int</span></code>这样的代码显然是不容许的（即使容许，求值也会发生在编译期）。因此，使用了isInstanceOf作为一个有参数的构造器。与其直接使用类型运算符，在scala中，不如使用模式匹配这种轻量级的类型运算符。比如在检查变量的类型的时候，使用</p>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala">p <span class="kw">match</span> {
+    <span class="kw">case</span> s : Employee =&gt; ...
+    <span class="kw">case</span> _ =&gt; <span class="co">//otherwise</span>
+}</code></pre></div>
+<p>我们或许可以把模式匹配看成轻量级的类型运算。另外，可能令人感到困惑的是，因为是静态类型，难道程序员不是知道所有的变量的类型了么？为什么还需要做检查变量的类型这样看起来无意义的工作呢？</p>
+<h2 id="剩下的编程实践">剩下的编程实践</h2>
+<p>一种编程语言有理论的部分和实践的部分两个大类。在理论的部分，几乎只能是执行某些计算。然而一个有实际意义的语言，通常的编程主题有文件Io、进程控制等。访问操作系统接口往往也是必要的。</p>
+<p>文件的本质，在Haskell中显示的比较紧。但是在通常的编程语言中，理解的层次往往只是文件当成是一个可以随时读取的对象。随着读取的进行，每次都往前移动。现在我们知道，我们完全可以把文件当成是一个惰性数据结构。</p>
+<p>随着软件产业的发展，有一些主题在编程语言中也变得流行起来。除了文件IO，访问操作系统函数接口之外，还有的普遍的操作有XML、序列化，异常处理等。</p>
+<p>Scala的序列化来自于java.io.Serializable。但是在scala中，要声明一个类是可以序列化的，使用的方法是注解。比如</p>
+<div class="sourceCode"><pre class="sourceCode scala"><code class="sourceCode scala">@<span class="fu">SerialVersionUID</span>(42L) <span class="kw">class</span> Person <span class="kw">extends</span> Serializable</code></pre></div>
+<p>注意，由于scala包直接包含了Serializable，所以不需要引入额外的序列化的包。另外，scala的所有的集合类都是可以序列化的。</p>
+<p>注：自己在Python中曾看到“注解”或者装饰器其实就是一个高阶函数。并且，使用了注解后，每次调用这个类，这个类都与这个高阶函数相绑定。也许序列化函数也应该这样。虽然注解可能在语言习惯上不是太好，但是确实是非常有效。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/scala/" rel="tag"># scala</a>
+          
+            <a href="/tags/控制语句/" rel="tag"># 控制语句</a>
+          
+            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
+          
+            <a href="/tags/映射/" rel="tag"># 映射</a>
+          
+            <a href="/tags/类/" rel="tag"># 类</a>
+          
+            <a href="/tags/面向对象/" rel="tag"># 面向对象</a>
+          
+            <a href="/tags/注解/" rel="tag"># 注解</a>
+          
+            <a href="/tags/序列化/" rel="tag"># 序列化</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/zh_CN/ai-and-bootstraping/" rel="next" title="用自举理解人工智能与学术研究">
+                <i class="fa fa-chevron-left"></i> 用自举理解人工智能与学术研究
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/CODE/scala-tutorial-intro/" rel="prev" title="Scala编程概要（一）：文档，注释，面向对象">
+                Scala编程概要（一）：文档，注释，面向对象 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="CODE/scala-sentences/"
+           data-title="Scala编程概要（二）：基本结构，常用模式" data-url="./CODE/scala-sentences/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Istyasna" />
+          <p class="site-author-name" itemprop="name">Istyasna</p>
+          <p class="site-description motion-element" itemprop="description">GO FORTH now and create masterpieces of the publishing art!</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">60</span>
+              <span class="site-state-item-name">Artikel</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">Kategorien</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">199</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/irhawks" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://code.aliyun.com/u/irhawks" target="_blank" title="Aliyun">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Aliyun
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="./" title="Homepage" target="_blank">Homepage</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hainu.edu.cn" title="Hainan University" target="_blank">Hainan University</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://qiqi789.github.io/" title="Qi Qi" target="_blank">Qi Qi</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#scala的for语句"><span class="nav-number">1.</span> <span class="nav-text">Scala的for语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scala中的映射"><span class="nav-number">2.</span> <span class="nav-text">Scala中的映射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scala中的类的使用"><span class="nav-number">3.</span> <span class="nav-text">Scala中的类的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scala中的对象"><span class="nav-number">4.</span> <span class="nav-text">Scala中的对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scala应用程序"><span class="nav-number">5.</span> <span class="nav-text">Scala应用程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scala的面向对象的机制"><span class="nav-number">6.</span> <span class="nav-text">Scala的面向对象的机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#剩下的编程实践"><span class="nav-number">7.</span> <span class="nav-text">剩下的编程实践</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Istyasna</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+<!-- I manually add this to enable bootstrap style dropdown menu -->
+<script type="text/javascript" src="/js/src/bootstrap/dropdown.js"></script>
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"irhawks"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: {
+          extensions: ["amsthm.js", "AMSmath.js","AMSsymbols.js", "autobold.js"],
+        },
+        tex2jax: {
+          <!--(disable $) inlineMath: [ ['$','$'], ["\\(","\\)"]  ],-->
+          inlineMath: [ ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        },
+        <!-- add zoom options for math equations-->
+        MathZoom: {
+          styles: { "#MathJax_Zoom": {
+              "background-color": "rgba(255,255,255,0.9)"
+            } }
+        },
+        extensions: ["[Contrib]/a11y/accessibility-menu.js"],
+        explorer: {
+          walker: 'syntactic',         // none, syntactic, semantic
+          highlight: 'none',           // none, hover, flame
+          background: 'blue',          // blue, red, green, yellow, cyan, magenta, white, black
+          foreground: 'black',         // black, white, magenta, cyan, yellow, green, red, blue
+          speech: true,                // true, false
+          generation: 'lazy',          // eager, mixed, lazy
+          subtitle: true,              // true, false
+          ruleset: 'mathspeak-default' // mathspeak-default, mathspeak-brief, mathspeak-sbrief, chromevox-default, chromevox-short, chromevox-alternative
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

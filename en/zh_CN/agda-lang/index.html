@@ -1,0 +1,1138 @@
+<!doctype html>
+
+
+
+  
+
+
+<!--
+<html class="theme-next mist use-motion" lang="zh-Hans,en">
+-->
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="agda,haskell,直觉类型论,函数式,依存类型," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="80x24" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Agda语言是使用了依存类型的函数式编程语言。最初发表于2007年，是在Ulf Norell的博士论文里面。目前实践当中，函数式语言中使用依存类型还不多。但是依存类型在可以预见的未来内会继续发展。目前发展依存类型的函数式语言的动力在于形式证明。目前的版本是Agda2，基本上是重写了。Agda2不像Coq的地方在于，Agda没有对于tactics与函数式proofs的支持。Agda 2语言有对于数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Agda语言介绍">
+<meta property="og:url" content="./en/zh_CN/agda-lang/index.html">
+<meta property="og:site_name" content="80x24">
+<meta property="og:description" content="Agda语言是使用了依存类型的函数式编程语言。最初发表于2007年，是在Ulf Norell的博士论文里面。目前实践当中，函数式语言中使用依存类型还不多。但是依存类型在可以预见的未来内会继续发展。目前发展依存类型的函数式语言的动力在于形式证明。目前的版本是Agda2，基本上是重写了。Agda2不像Coq的地方在于，Agda没有对于tactics与函数式proofs的支持。Agda 2语言有对于数据">
+<meta property="og:updated_time" content="2016-12-14T11:17:12.142Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Agda语言介绍">
+<meta name="twitter:description" content="Agda语言是使用了依存类型的函数式编程语言。最初发表于2007年，是在Ulf Norell的博士论文里面。目前实践当中，函数式语言中使用依存类型还不多。但是依存类型在可以预见的未来内会继续发展。目前发展依存类型的函数式语言的动力在于形式证明。目前的版本是Agda2，基本上是重写了。Agda2不像Coq的地方在于，Agda没有对于tactics与函数式proofs的支持。Agda 2语言有对于数据">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="./en/zh_CN/agda-lang/"/>
+
+
+
+
+
+<!-- add highlight.js to render pandoc code blocks -->
+<!--
+<link href="http://cdn.bootcss.com/highlight.js/9.10.0/styles/github.min.css" rel="stylesheet">  
+-->
+<link href="/css/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>  
+<script src="/js/highlightjs-line-numbers.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.initLineNumbersOnLoad(); </script>
+
+  <title> Agda语言介绍 | 80x24 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?763bee904aa6d81fdf017659d162188f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">80x24</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Keep Stupid, Keep Hungry</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-resources">
+          <a href="/resources" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-folder"></i> <br />
+            
+            Resources
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+          <li class="menu-item"><a href="/zh_CN/agda-lang/">简体中文</a></li>
+          
+          <li class="menu-item"><a href="/en/zh_CN/agda-lang/">English (US)</a></li>
+          
+
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <!-- previous -->
+<script type="text/javascript">
+   var search_path = "<%= config.search.path %>";
+   if (search_path.length == 0) {
+       search_path = "search.xml";
+   }
+   var path = "<%= config.root %>" + search_path;
+   searchFunc(path, 'local-search-input', 'local-search-result');
+</script>
+<!-- optimized -->
+<div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+
+    </div>
+  
+
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="./en/zh_CN/agda-lang/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Istyasna">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="80x24">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="80x24" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Agda语言介绍
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-08T00:00:00+08:00">
+                2015-06-08
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              <span class="post-meta-item-text">Post modified</span>
+              <time title="Post modified" itemprop="dateModified" datetime="2016-12-14T19:17:12+08:00">
+                2016-12-14
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程语言/" itemprop="url" rel="index">
+                    <span itemprop="name">编程语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/en/zh_CN/agda-lang/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="en/zh_CN/agda-lang/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Agda语言是使用了依存类型的函数式编程语言。最初发表于2007年，是在Ulf Norell的博士论文里面。目前实践当中，函数式语言中使用依存类型还不多。但是依存类型在可以预见的未来内会继续发展。目前发展依存类型的函数式语言的动力在于形式证明。目前的版本是Agda2，基本上是重写了。Agda2不像Coq的地方在于，Agda没有对于tactics与函数式proofs的支持。Agda 2语言有对于数据类型、模式匹配、记录、模块、Haskell语法的支持。Agda 2是基于Zhaohui Luo的UTT类型理论，与Martin-L&quot;of类型理论（也就是直觉类型论）有一点的不同。</p>
+<p>Agda的值得提及的特性有归纳类型定义（这在Coq中也存在）、依存类型的模式匹配机制（允许在依存类型系统下使用模式匹配）、元变量（允许变量在运行的时候被细化和修改，因此支持程序在运行的时候增量构造，部分代替了tactics在Coq中的作用）、证明自动化（通过反射实现，以及允许程序在5s内枚举可能的证明），以及终止检查（因为Agda是一个完全的语言，能够保证每个程序都必然终止，以此保证语言的一致性，借助于Foetus termination checker实现终止检查）。</p>
+<a id="more"></a>
+<p>Agda和Coq等“后现代的编程语言”一样，对Unicode的变量支持很好。（相比之下，我们认为Haskell、Scala是属于所谓的现代编程语言）。Agda支持三种编译器后端：MAlonzo（输出Haskell）、JavaScript后端，以及Epic后端。关于Agda的论文与理论研究在这里自己就不总结了。</p>
+<p>Agda语言的安装是比较简单的。可以直接在ubuntu下面使用apt-get安装。但是建议的安装方式是使用hackage的cabal install agda，因为它是用Haskell写成的。</p>
+<p>自己学习Agda目前主要是根据《Dependently Typed Programming in Agda》<a href="http://www.cse.chalmers.se/~ulfn/papers/afp08/tutorial.pdf" class="uri" target="_blank" rel="external">http://www.cse.chalmers.se/~ulfn/papers/afp08/tutorial.pdf</a>。里面强调的是其依存类型的风格。Hindley-Milner风格的编程语言如Haskell与ML中，类型与值之间存在明显的分割。两者是互不相关的。但是在依存类型当中，值与类型是相互关联的。函数可以根据值返回不同的类型，但是又不同于动态类型的语言。</p>
+<p>在Agda的理解中，典型的依存类型是<span class="math inline">\(n\)</span>-维向量。若把不同的<span class="math inline">\(n\)</span>-维向量看成是不同的，那么向理的类型必然依赖于参数<span class="math inline">\(n\)</span>。C++的模块编程支持这种<span class="math inline">\(n\)</span>维向量的风格，但是在Hindley-Milner的类型系统中，区别似乎是有些困难。通过这个例子可以看出，依存类型系统会更精细，而且也有可能为C++的模块机制提供一个理论基础。</p>
+<p>依存类型在定理证明中的可能的作用是：值的属性当成是一个元素为使得证明的属值为真的那些类型。这样，依存类型的编程语言可以当成是逻辑语言使用。</p>
+<p>Agda语言的每个源文件都由一个顶层的模块名称声明开始。此外，agda使用的扩展名是lagda，表示的是agda源文件里面支持了文学编程（其实我们也可以把文学编程看成是后现代编程语言的一种特性，Haskell就具有这个特性）。Agda的文件名与模块名保持一致（像Java那样）。</p>
+<p>Agda与Haskell与ML一样，支持对代数数据类型进行模式匹配（但是一般介绍Agda语言的书中，刚开始的时候还是介绍简单类型的函数式数据类型的匹配，而把依存类型的匹配规则放在最后）。数据类型使用data关键字来声明。比如声明一个布尔类型为：</p>
+<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda"><span class="kw">data</span> Bool <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span>
+    true  <span class="ot">:</span> Bool
+    false <span class="ot">:</span> Bool</code></pre></div>
+<p>声明中，Bool的类型是Set，Set是小类型的类型（因为Agda支持把Set这个类型当成是Set1的一个元素，也就是支持层次化类型）。此外，Agda的函数定义语法（不动点定义）与Haskell也是很像的，比如Bool的not函数：</p>
+<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda">not <span class="ot">:</span> Bool <span class="ot">-&gt;</span> Bool
+not true <span class="ot">=</span> false
+not false <span class="ot">=</span> true</code></pre></div>
+<p>不过，not的类型声明其实不是必须的。</p>
+<p>另外一种定义是采用归纳定义一个类型定义，比如自然数的定义：</p>
+<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda"><span class="kw">data</span> Nat <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span>
+    zero <span class="ot">:</span> Nat 
+    succ <span class="ot">:</span> Nat <span class="ot">-&gt;</span> Nat
+<span class="ot">_</span>+<span class="ot">_</span> <span class="ot">:</span> Nat <span class="ot">-&gt;</span> Nat <span class="ot">-&gt;</span> Nat
+zero + m <span class="ot">=</span> m
+succ n + m <span class="ot">=</span> succ <span class="ot">(</span>n + m<span class="ot">)</span>
+<span class="ot">_</span>*<span class="ot">_</span> <span class="ot">:</span> Nat <span class="ot">-&gt;</span> Nat <span class="ot">-&gt;</span> Nat
+zero * m <span class="ot">=</span> zero
+succ n * m <span class="ot">=</span> m + n * m</code></pre></div>
+<p>这种定义是允许的，但是为了保证合理性，应该加上一个n &lt; succ n的断言。</p>
+<p>甚至函数的定义也是基于模式匹配的，比如定义if_then_else为：</p>
+<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda">if<span class="ot">_</span>then<span class="ot">_</span>else<span class="ot">_</span> <span class="ot">:</span> <span class="ot">{</span>A: <span class="dt">Set</span><span class="ot">}</span> <span class="ot">-&gt;</span> Bool <span class="ot">-&gt;</span> A <span class="ot">-&gt;</span> A <span class="ot">-&gt;</span> A
+if true then x else y <span class="ot">=</span> x
+if false then x else y <span class="ot">=</span> y</code></pre></div>
+<p>这样我们就定义了一个if_then_else函数，而且可以把变量加在中间。如果需要声明中缀函数，以及指定中缀函数的优先级，可以使用infixr关键字。另外，像Haskell与ML一样，Agda允许含参数据类型，如：</p>
+<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda"><span class="kw">infixr</span> <span class="dv">40</span> <span class="ot">_</span>::<span class="ot">_</span>
+<span class="kw">data</span> List <span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span>
+    [] <span class="ot">:</span> List A
+    <span class="ot">_</span>::<span class="ot">_</span> <span class="ot">:</span> A <span class="ot">-&gt;</span> List A <span class="ot">-&gt;</span> List A</code></pre></div>
+<p>上面的List是一个含参类，除此之外，由于Unicode特性，变量可以包含任何的符号。</p>
+<h2 id="agda的依存类型的函数">Agda的依存类型的函数</h2>
+<p>Agda的依存类型的函数的声明并不特别之处，也是使用<code>(x:A)-&gt;B</code>来声明这个变量。不过，由于指定了变元x，所以类型B是可以包含x作为变量的。此外，由于Agda的类型层次结构，所以一个类型的元素也可以是一个类型。</p>
+<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda">identity <span class="ot">:</span> <span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span> <span class="ot">)</span> <span class="ot">-&gt;</span> A <span class="ot">-&gt;</span> A
+identity A x <span class="ot">=</span> x
+zero&#39; <span class="ot">:</span> Nat
+zero&#39; <span class="ot">=</span> identity Nat zero</code></pre></div>
+<p>上面的函数接受类型<span class="math inline">\(A\)</span>以及类型<span class="math inline">\(A\)</span>的一个元素为参数，然后返回相应的元素。再来一个非平凡的例子，这个例子创建了一个apply函数：</p>
+<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda">apply <span class="ot">:</span> <span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)(</span>B <span class="ot">:</span> A <span class="ot">-&gt;</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">-&gt;</span>
+    <span class="ot">((</span>x <span class="ot">:</span> A<span class="ot">)</span> <span class="ot">-&gt;</span> B x<span class="ot">)</span> <span class="ot">-&gt;</span> <span class="ot">(</span>a <span class="ot">:</span> A<span class="ot">)</span> <span class="ot">-&gt;</span> B a
+apply A B f a <span class="ot">=</span> f a</code></pre></div>
+<p>对于依存函数类型，有一些简便的记法可以使用，比如</p>
+<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda"><span class="ot">(</span>x <span class="ot">:</span> A<span class="ot">)(</span>y <span class="ot">:</span> B<span class="ot">)</span> <span class="ot">-&gt;</span> C for <span class="ot">(</span>x <span class="ot">:</span> A<span class="ot">)</span> <span class="ot">-&gt;</span> <span class="ot">(</span>y <span class="ot">:</span> B<span class="ot">)</span> <span class="ot">-&gt;</span> C
+<span class="ot">(</span>x y <span class="ot">:</span> A<span class="ot">)</span> <span class="ot">-&gt;</span> B for <span class="ot">(</span>x <span class="ot">:</span> A<span class="ot">)(</span>y <span class="ot">:</span> A<span class="ot">)</span> <span class="ot">-&gt;</span> B</code></pre></div>
+<p>具体的运算，可能要参考依存类型<span class="math inline">\(\lambda\)</span>-演算来解决。函数式语言在处理可选参数的上面可能没有一些命令式语言直观。但是Agda提供了缺省参数的情况，这样一个函数可以应用在不同参数数目的场合。</p>
+<p>Agda使用如下的方式声明<span class="math inline">\(n\)</span>-维向量：</p>
+<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda"><span class="kw">data</span> Vec <span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> Nat <span class="ot">-&gt;</span> <span class="dt">Set</span> <span class="kw">where</span>
+    []   <span class="ot">:</span> Vec A zero
+    <span class="ot">_</span>::<span class="ot">_</span> <span class="ot">:</span> <span class="ot">{</span>n <span class="ot">:</span> Nat<span class="ot">}</span> <span class="ot">-&gt;</span> A <span class="ot">-&gt;</span> Vec A n <span class="ot">-&gt;</span> Vec A <span class="ot">(</span>suc n<span class="ot">)</span></code></pre></div>
+<p>上式表示Vec A是一个Nat-&gt;Set的映射，所以Vec A n得到一个具体的类型。</p>
+<p>个人感觉，Agda的设计体现了对模式匹配与类型系统的大的发展。我们可以参考一下。这样我们遇到再奇怪的编程语言的时候也就不再感到奇怪了。Agda还可以导入Haskell的模块。agda的输入输出也是基于单体的。</p>
+<h2 id="agda的文学化编程">Agda的文学化编程</h2>
+<p>Agda的文学化编程与Latex是类似的。不过agda程序可以使用–latex来输出一个tex文档，这样的话，可以实现许多的排版的功能。文学编程功能与Haskell是一样的。</p>
+<p>lagda可以看成是一个.lhs文件，它可以由lhs2tex来处理。</p>
+<p>agda的vim高亮可以参考<a href="https://github.com/derekelkins/agda-vim.git" class="uri" target="_blank" rel="external">https://github.com/derekelkins/agda-vim.git</a>。</p>
+<p><a href="http://stevebob.net/agda-environment/" class="uri" target="_blank" rel="external">http://stevebob.net/agda-environment/</a>上介绍了Agda的入门程序。包括在ubuntu下面安装一直到使用。</p>
+<p>编译agda的时候，要想连接到相应的库，使用</p>
+<pre class="shell"><code>agda -c -i /usr/share/agda-stdlib -i . hello.agda</code></pre>
+<p>agda的编译器是通过调用Haskell来实现的。</p>
+<p><a href="http://blog.oxij.org/2011/12/22/howto-get-started-with-agda/" class="uri" target="_blank" rel="external">http://blog.oxij.org/2011/12/22/howto-get-started-with-agda/</a>上介绍了怎样开始Agda。不过是2011年的。关键的不是自己写出来一个Hello World，而是怎样让别人在网上写的复杂的教程，或者是一个实际的工程在自己的计算机上跑起来。写这篇博文的是教本科生Haskell的老师。但是作者也想利用Agda。看起来，研究生的阶段不是学习Agda，而是真正地理解其背后的依存类型、归纳数据类型等的原理与实现。（其实自己理想中，所有的形而上学的知识都应该是在大学完成的。但是很多时候，研究生的阶段我们尚未完成）。作者那个时候也认为，本科生理解Agda是几乎不可能的。</p>
+<h2 id="作者对于高级编程语言的看法">作者对于高级编程语言的看法：</h2>
+<p>Advanced programming language requires advanced tools.</p>
+<p>比如说，有企业级的开发环境（IDE、自动编译、调试、符号表查找、版本控制）。此外，也可以是最简单的一个文本编辑器。</p>
+<p>不过，Agda的程序比较特殊，通常这些代码并不运行，甚至不进行编译，我们只是想对它们进行类型检查。对于Agda来说，调试也是没有用的。也根本没有调试器。</p>
+<p>此外，为了使用Agda，还得有一种方便的方式输入Unicode字符。不过，大部分编辑器中，实现这个功能可能是非常复杂的。</p>
+<p>写Agda代码也会不同于以往，因为一般有的时候，一天也写不到25行Agda代码。因为需要Unicode，而且目前Agda提供的也只有Emacs，所以不会Emacs就已经把大部分的程序员阻止在外了。</p>
+<p>确保安装了如下的程序：</p>
+<pre class="shell"><code>cabal install agda
+## 打开软件包，并安装agda-libs cabal install
+cabal install Agda-executable</code></pre>
+<p>然后配置~/.emacs文件：　</p>
+<pre class="emacs"><code>(load-file (let ((coding-system-for-read &#39;utf-8))
+    (shell-command-to-string &quot;agda-mode locate&quot;)))</code></pre>
+<p>打开emacs，使用C-x C-f打开一个编辑的文档。配置Emacs环境的方法有很多。但是必须在Emacs下面工作不可。否则，是没法写出合法的Agda代码的。</p>
+<p>Agda程序写出来有什么样的作用：其实跟Haskell差不多，Agda程序也从Main开始。</p>
+<h2 id="agda的用法06-30-2015-164601">Agda的用法[06-30-2015 16:46:01]</h2>
+<p>Agda的一种用法是作为一个交互式的定理编辑器，或者说辅助定理证明器。不过，其实没有意义，是因为这些应用中，看不到使用它们证明了什么样的数学的定理。所以，感觉好像真的是没有什么用途。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/agda/" rel="tag"># agda</a>
+          
+            <a href="/tags/haskell/" rel="tag"># haskell</a>
+          
+            <a href="/tags/直觉类型论/" rel="tag"># 直觉类型论</a>
+          
+            <a href="/tags/函数式/" rel="tag"># 函数式</a>
+          
+            <a href="/tags/依存类型/" rel="tag"># 依存类型</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/zh_CN/erlang-concurrency-test/" rel="next" title="Erlang编程语言中的并发小测试">
+                <i class="fa fa-chevron-left"></i> Erlang编程语言中的并发小测试
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/EXPR/blog-github-modify/" rel="prev" title="Github主页修整记">
+                Github主页修整记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="en/zh_CN/agda-lang/"
+           data-title="Agda语言介绍" data-url="./zh_CN/agda-lang/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Istyasna" />
+          <p class="site-author-name" itemprop="name">Istyasna</p>
+          <p class="site-description motion-element" itemprop="description">GO FORTH now and create masterpieces of the publishing art!</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">60</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">199</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/irhawks" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://code.aliyun.com/u/irhawks" target="_blank" title="Aliyun">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Aliyun
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="./" title="Homepage" target="_blank">Homepage</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hainu.edu.cn" title="Hainan University" target="_blank">Hainan University</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://qiqi789.github.io/" title="Qi Qi" target="_blank">Qi Qi</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#agda的依存类型的函数"><span class="nav-number">1.</span> <span class="nav-text">Agda的依存类型的函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#agda的文学化编程"><span class="nav-number">2.</span> <span class="nav-text">Agda的文学化编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作者对于高级编程语言的看法"><span class="nav-number">3.</span> <span class="nav-text">作者对于高级编程语言的看法：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#agda的用法06-30-2015-164601"><span class="nav-number">4.</span> <span class="nav-text">Agda的用法[06-30-2015 16:46:01]</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Istyasna</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+<!-- I manually add this to enable bootstrap style dropdown menu -->
+<script type="text/javascript" src="/js/src/bootstrap/dropdown.js"></script>
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"irhawks"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: {
+          extensions: ["amsthm.js", "AMSmath.js","AMSsymbols.js", "autobold.js"],
+        },
+        tex2jax: {
+          <!--(disable $) inlineMath: [ ['$','$'], ["\\(","\\)"]  ],-->
+          inlineMath: [ ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        },
+        <!-- add zoom options for math equations-->
+        MathZoom: {
+          styles: { "#MathJax_Zoom": {
+              "background-color": "rgba(255,255,255,0.9)"
+            } }
+        },
+        extensions: ["[Contrib]/a11y/accessibility-menu.js"],
+        explorer: {
+          walker: 'syntactic',         // none, syntactic, semantic
+          highlight: 'none',           // none, hover, flame
+          background: 'blue',          // blue, red, green, yellow, cyan, magenta, white, black
+          foreground: 'black',         // black, white, magenta, cyan, yellow, green, red, blue
+          speech: true,                // true, false
+          generation: 'lazy',          // eager, mixed, lazy
+          subtitle: true,              // true, false
+          ruleset: 'mathspeak-default' // mathspeak-default, mathspeak-brief, mathspeak-sbrief, chromevox-default, chromevox-short, chromevox-alternative
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

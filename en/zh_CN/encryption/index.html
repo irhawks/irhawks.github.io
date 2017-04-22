@@ -1,0 +1,1172 @@
+<!doctype html>
+
+
+
+  
+
+
+<!--
+<html class="theme-next mist use-motion" lang="zh-Hans,en">
+-->
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="openssl,gnupg,密码学,开源," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="80x24" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="加密及密码体制原理介绍
+在进行相关的渗透的时候, 可能需要使用SSL. 即使不是从事渗透, 但是为了安全起见, 我们还是使用OpenSSL工具加强数据安全性. 无论如何, 这是密码学的一个应用, 它可以起到十分强大的作用. 事实上是所有的文件加密的重要的, 几乎是唯一现代化的方法.
+密码学的一些常识我们必须了解. 现体密码体制中, 密码算法都是公开的, 保密指的是密钥的保密, 而不是算法的保密.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="密码学原理与开源工具(日期未定)">
+<meta property="og:url" content="./en/zh_CN/encryption/index.html">
+<meta property="og:site_name" content="80x24">
+<meta property="og:description" content="加密及密码体制原理介绍
+在进行相关的渗透的时候, 可能需要使用SSL. 即使不是从事渗透, 但是为了安全起见, 我们还是使用OpenSSL工具加强数据安全性. 无论如何, 这是密码学的一个应用, 它可以起到十分强大的作用. 事实上是所有的文件加密的重要的, 几乎是唯一现代化的方法.
+密码学的一些常识我们必须了解. 现体密码体制中, 密码算法都是公开的, 保密指的是密钥的保密, 而不是算法的保密.">
+<meta property="og:updated_time" content="2016-12-14T11:21:03.470Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="密码学原理与开源工具(日期未定)">
+<meta name="twitter:description" content="加密及密码体制原理介绍
+在进行相关的渗透的时候, 可能需要使用SSL. 即使不是从事渗透, 但是为了安全起见, 我们还是使用OpenSSL工具加强数据安全性. 无论如何, 这是密码学的一个应用, 它可以起到十分强大的作用. 事实上是所有的文件加密的重要的, 几乎是唯一现代化的方法.
+密码学的一些常识我们必须了解. 现体密码体制中, 密码算法都是公开的, 保密指的是密钥的保密, 而不是算法的保密.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="./en/zh_CN/encryption/"/>
+
+
+
+
+
+<!-- add highlight.js to render pandoc code blocks -->
+<!--
+<link href="http://cdn.bootcss.com/highlight.js/9.10.0/styles/github.min.css" rel="stylesheet">  
+-->
+<link href="/css/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>  
+<script src="/js/highlightjs-line-numbers.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.initLineNumbersOnLoad(); </script>
+
+  <title> 密码学原理与开源工具(日期未定) | 80x24 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?763bee904aa6d81fdf017659d162188f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">80x24</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Keep Stupid, Keep Hungry</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-resources">
+          <a href="/resources" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-folder"></i> <br />
+            
+            Resources
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+          <li class="menu-item"><a href="/zh_CN/encryption/">简体中文</a></li>
+          
+          <li class="menu-item"><a href="/en/zh_CN/encryption/">English (US)</a></li>
+          
+
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <!-- previous -->
+<script type="text/javascript">
+   var search_path = "<%= config.search.path %>";
+   if (search_path.length == 0) {
+       search_path = "search.xml";
+   }
+   var path = "<%= config.root %>" + search_path;
+   searchFunc(path, 'local-search-input', 'local-search-result');
+</script>
+<!-- optimized -->
+<div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+
+    </div>
+  
+
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="./en/zh_CN/encryption/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Istyasna">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="80x24">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="80x24" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                密码学原理与开源工具(日期未定)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-01-01T00:00:00+08:00">
+                2014-01-01
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              <span class="post-meta-item-text">Post modified</span>
+              <time title="Post modified" itemprop="dateModified" datetime="2016-12-14T19:21:03+08:00">
+                2016-12-14
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机安全/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/en/zh_CN/encryption/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="en/zh_CN/encryption/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="加密及密码体制原理介绍">加密及密码体制原理介绍</h2>
+<p>在进行相关的渗透的时候, 可能需要使用SSL. 即使不是从事渗透, 但是为了安全起见, 我们还是使用OpenSSL工具加强数据安全性. 无论如何, 这是密码学的一个应用, 它可以起到十分强大的作用. 事实上是所有的文件加密的重要的, 几乎是唯一现代化的方法.</p>
+<p>密码学的一些常识我们必须了解. 现体密码体制中, 密码算法都是公开的, 保密指的是密钥的保密, 而不是算法的保密. 因为研制一个算法是非常麻烦的, 且作为学术上的东西, 它必须还要为人广泛地知道. 这也许体现了人类活动的一个基本准则, 那就是学术开放重要于人类活动. 也就是说, 原理是人类共有的, 应用的不同, 只是人们理解上的差异. 核心的知识是人类共知的, 而那些不为了所知的, 只是用于短期需求, 且没有长久的价值.</p>
+<a id="more"></a>
+<p>密码体制中, 大概有这样几种类型, 加密, 哈希与签名. 它们各自有一套原理.</p>
+<p>其中加密又分为对称加密与不对称加密. 不管它们是如何实现的, 我们都可以用通用的公式来说明. 假设加密方有加密函数 <span class="math inline">\(E\)</span> , 解密方有函数<span class="math inline">\(D\)</span> , 原消息 <span class="math inline">\(M\)</span> ,而所使用的密钥是 <span class="math inline">\(K\)</span> , 那么加密解密过程分别是:</p>
+<ul>
+<li>加密过程<span class="math display">\[E(M,K) = C\]</span></li>
+<li>解密过程<span class="math display">\[D(C,K) = M\]</span></li>
+</ul>
+<p>在加密解密函数相互配套的情况下, 双方均需知道 <span class="math inline">\(K\)</span> 的值. 在发送的时候, 加密方只在不安全信道上传输密文 <span class="math inline">\(C\)</span> , 解密方只需要使用 <span class="math inline">\(K\)</span> 解出密文 <span class="math inline">\(C\)</span> 为 <span class="math inline">\(M\)</span> .</p>
+<p>我们可以分析, 实行加密的过程是算法规定的, 因此任何人都可以. 但是一个攻击者将因为无法知道和解密方相同的 <span class="math inline">\(K\)</span> 而不能伪造与解密方通信—如果它对 <span class="math inline">\(K\)</span> 一无所知而又试图发送密码, 那么解密出来的, 往往是随机的文字, 以致于攻击者自己也不知道解密方将会看到什么消息, 因此这种攻击就失去意义.</p>
+<p>对称加密的主要问题在于如何达成一致的密钥. 由于 <span class="math inline">\(K\)</span> 需要保密, 因此得事先由发送方与接收方秘密约定, 或使用额外的安全信道. 尽管如何, 对称加密因为速度上的原因, 以及能够配合其它体制使用, 因此也颇有应用. 主要的对称算法有DES, AES, RC4等.</p>
+<p>非对称加密一定意义下等同于公钥体制. 将体制下, 密钥分成公钥与私钥两个部分. 它们是成对出现的, 且公钥可以公开发布, 只是人们很难从公钥 <span class="math inline">\(K_1\)</span> 推出私钥 <span class="math inline">\(K_2\)</span> .加密与解密过程分别为:</p>
+<ul>
+<li>加密过程<span class="math inline">\(E(M, K_1) = C\)</span></li>
+<li>解密过程<span class="math inline">\(D(C, K_2) = M\)</span></li>
+</ul>
+<p>符合这一原理的方法有RSA(基于因子分解), ElGamal(基于离散对数)等.</p>
+<p>另外, 离散对数问题可以用于密码协商, 进一步保证前向安全. 基于它的著名协议是Diffie-Hellman密钥协商协议. 协商基本过程是, <span class="math inline">\(A\)</span> , <span class="math inline">\(B\)</span> 双方各自选择仅自己知道的数字(即使对方也不知道), 根据离散对数分别计算明文. 各自接收到对方的明文后, 再计算一次可以得到相同的数字. 该数字即为协商的结果. 该方法的特点是双方各自不知道对方的密码, 但是却可以维持一个仅能双方知道的加密信道. D-H协议的主要问题是协议中没有关于通信双方身份的验证, 因此可能被一个中间人物在协商时截取, 形成一个代理.</p>
+<p>HASH技术原本是为了方便和提高速度, 而对数据完整性校验, 但与密码体制结合起来, 也可以用于数字签名. 主要的HASH函数有MD5, SHA1等.</p>
+<p>配合HASH进行数字签名的原理是, 双方本来就已经协商好了密码体制. 这个时候, 规定消息格式由消息体和HASH两个部分规范地组成. 根据具体情况, 如果消息可以明文传递, 那么就发送消息明文和加密后的消息HASH, 对方自动计算消息HASH, 并与解开发送方加密的HASH对比就可以了; 如果是密文加密, 亦是类似.</p>
+<p>公钥算法的特点是太慢, 因此实际使用公钥的时候, 常用公钥算法传输会话密钥, 再用对称算法加密传递批量数据.</p>
+<p>公钥的发布是公钥体制的核心. 一般设立权威中心(CA), 由CA以数字签名的方式签发公钥, 即证书. 证书中包含有公钥, 持有人信息, 用途说明, 有效期, 签发人的数字签名等. 有了对方的证书后, 可以让对方签名来看看, 如果对方发过来的消息中, 能够签出这个公钥验证的名, 则可确认对方应当有对应私钥; 否则对方就是假冒的.</p>
+<p>注意, 持有证书的人虽然能够验证签名者的真伪, 但是却不能通过消息推导出签名者的私钥—否则证书体制将会面临重大缺陷.</p>
+<h2 id="openssl简介与基本使用">OpenSSL简介与基本使用</h2>
+<p>OpenSSL是使用非常广泛的SSL开源实现. 由于其中实现了为SSL所用的各种加密算法,因此OpenSSL也广泛被视为开源的加密函数库—更保况它的确提供了接口函数.</p>
+<p>OpenSSL学习的基础环境是openssl命令行. 输入 <code>openssl</code> 命令, 即可进入. 在其中可以执行OpenSSL所提供的各种功能. 比如, 生成随机数, 产生密钥对.</p>
+<p>其中较为简单的HASH验证, 产生随从数就不说了. 只是最重要的密钥与加密.</p>
+<p>要使用OpenSSL, 我们要知道它有哪几个方面的基本用途. 第一个是非对称加密, 第二个是对称加密, 第三个则是信息摘要算法. 其实信息摘要算法是很简单的, 也就是我们所说的MD5等HASH算法.</p>
+<h3 id="对称加密算法">对称加密算法</h3>
+<p>对称加密算法的基本流程是, 在一定的对称加密算法的支持下, 输入密码, 指定输入文件, 然后得到一个输出文件. 将输出发送到另外一台机器上, 在另外一台机器上应用相同配置即可解密出文件.</p>
+<p>OpenSSL提供的主要的工具是 <code>enc</code> 命令. enc -e用于加密, enc -d用于解密. 执行命令</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">openssl</span> enc -des -e -a <span class="op">&lt;</span> source.txt <span class="op">&gt;</span> source.txt.des</code></pre></div>
+<p>进入对话框, 输入密码之后就可以生成加密后的文件了, 再使用</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">openssl</span> enc -des -d -a <span class="op">&lt;</span> source.txt.des <span class="op">&gt;</span> source.txt</code></pre></div>
+<p>就可以恢复想要的 <code>source.txt</code> 文件.</p>
+<p>对称加密之间的不同, 主要在于所选用的对称加密算法, 比如 <code>-des</code> . 使用对称加密的时候, 其实也应当注意, 一个长度较少的密码, 是容易被攻破的, 因此不妨选用更长位数的密码. 这样, OpenSSL可以使用 <code>-k</code> , <code>-kfile</code> 选项从命令行选项, 或者从文件中得到密码. 不用在线输入.</p>
+<h3 id="非对称加密算法">非对称加密算法</h3>
+<p>非对称加密算法的应用范围更广. 而且也有助于产生更长的密码. 非对称加密的原理已经介绍过了. 因此在本地产生钥匙对是最基础的. 对应OpenSSL命令为:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">openssl</span> genrsa 1024 <span class="op">&gt;</span> hawk.key</code></pre></div>
+<p>产生ASCII编码的RSA钥匙对. 可以用</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">openssl</span> rsa -noout -text <span class="op">&lt;</span> hawk.pem</code></pre></div>
+<p>查看包含在 <code>hawk.pem</code> 当中的公钥与私钥的值.</p>
+<p>为了更安全起见, <code>genrsa</code> 还支持将生成的钥匙对使用对称加密算法加密, 比如加上 <code>-des</code> 选项后, 以后要再想用这个钥匙对, 必须输入一个密码才行.</p>
+<p>不管怎么说, 第一步产生钥匙对的工作总算是完成了. 此时用</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">openssl</span> rsa -pubout <span class="op">&lt;</span>hawk.key <span class="op">&gt;</span>hawk_pub.pem</code></pre></div>
+<p>可以仅导出RSA中的公钥的那个部分, 直接引用 <code>hawk_pub.pem</code> 以发布公钥. 对于DSA, 需要在生成密码的时候提供一个参数. 因此过程是</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">openssl</span> dsaparam 1024 <span class="op">&gt;</span> dsaparam.pem
+<span class="ex">openssl</span> gendsa -des3 <span class="op">&lt;</span>deaparam.pem <span class="op">&gt;</span>private.pem <span class="co">## 生成密钥</span>
+<span class="ex">openssl</span> dsa -pubout <span class="op">&lt;</span>private.pem <span class="op">&gt;</span>public.pem  ## 导出公钥</code></pre></div>
+<p>这要比RSA方式复杂一步.</p>
+<p>产生了钥匙对, 便可以分别使用私钥与公钥对文件签名与验证了. 比如</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">## signature</span>
+<span class="ex">openssl</span> dgst -sha1 -sign private.pem <span class="op">&lt;</span>file.txt <span class="op">&gt;</span>file.txt.sgn 
+
+<span class="co">## verify</span>
+<span class="ex">openssl</span> dgst -sha1 -sign public.pem <span class="op">&lt;</span>file.txt.sgn <span class="op">&gt;</span>file.txt</code></pre></div>
+<p>不过我们不一定是对整个文件加密, 而是更有可能是对文件的摘要加密.</p>
+<p>注意, 这是对文件签名与验证. 前提是接收方有正确的公钥. 如果一开始得到的是窃取者的公钥, 那么窃取者就能伪造发送方与接收方通信.</p>
+<h3 id="信息摘要算法">信息摘要算法</h3>
+<p>信息摘要算法对于验证文件有时是非常有效的. 对于较弱的验证, 比如看从网上下载的一个文件与服务器一样与否, 可以用|openssl sha1 file.txt|得到SHA1值, 然后与服务品的上对比.</p>
+<p>信息摘要算法的另一个应用是保存用户的密码, 前提是保存用户密码的地方, 其它人不能任意修改相应的摘要. 在用摘要算法保存密码的时候, 还可以加上一些噪声, 防止被用常用词摘要表的方法攻破.</p>
+<p>密码管理是 <code>passwd</code> 命令, 它可以以UNIX标准的方式加上一个密码, 以及加上一些噪声. 在服务器存储密码的时候特别有用, 比如</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">openssl</span> passwd -1 -salt </code></pre></div>
+<p>分别以password为输入文件, 和以使用摘要算法后的密码为输出文件.</p>
+<p>OpenSSL还有其它的许多功能. 有用到的时候可以参考其手册.</p>
+<h2 id="gnupg工具">GnuPG工具</h2>
+<p>GnuPG也算是密码学工具. 相对于SSL, 大概长处在于封装了一整套的方案. 面对主流的应用, gnugp直接提供了相应的命令, 相对于密码学工具, 更侧重应用.</p>
+<p>GnuPG可以完成几乎全部现行密码体制. 对称加密解密, 非对称加密解密, 数字签名与认证等. 由于已经有了OpenSSL的背景, 我们讲GnuPG的应用.</p>
+<p>GnuPG基本上可以看成是管理本地的公钥私钥的工具. 不仅可以管理自己创建的钥匙对, 还可以管理从网上下载的公钥私钥. 甚至可以发展成一个集团认证的工具, 因为对于一个签名的文档, 使用者还可以自己再加上一个签名, 从而让用户知道已经有很多人对这一个公钥认证过, 因此大大增强了信心.</p>
+<p>GnuPG的基础命令有|gpg –gen-key|与|gpg -k/-K|, 分别用于生成钥匙与查看本机的所有的钥匙. GnuPG管理它们的时候, 对钥匙文件使用 <code>Key_ID</code> 标识. 也就是说, 使用哪个文件, 通过 <code>Key_ID</code> 来指定.</p>
+<h3 id="导出公钥">导出公钥</h3>
+<p>示例命令:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">gpg</span> --export --armor Key_ID <span class="op">&gt;</span> Key_ID_pub.pem
+<span class="ex">gpg</span> --export Key_ID <span class="op">&gt;</span> Key_ID.gpg</code></pre></div>
+<p>分别表示导出ASCII格式与二进制格式的公钥. 同时, 导入另人的公钥, 使用</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">gpg</span> --import Key_ID_pub.pem</code></pre></div>
+<p>公钥总是要发布出来才有意义, GnuPG提供的命令可以直接将公钥发布到网上, 以及从网上的服务器上下载公钥. 这里有一个可用的公钥服务器 <code>keys.gnupg.net</code> .</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">gpg</span> --keyserver keys.gnupg.net --send Key_ID</code></pre></div>
+<p>从服务器上下载相应的公钥, 则可以调用</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">gpg</span> --keyserver keys.gnupg.net --recv-keys Key_ID</code></pre></div>
+<p>其实使用默认服务品的话, 可以不用指定 <code>keyserver</code> 的, 默认服务器可以在.gunpg/gpg.conf文件中配置.</p>
+<h3 id="钥匙管理">钥匙管理</h3>
+<p>按照GnuPG的基本的意思, 应该是把公钥导出, 在本地有一个私钥就行了. 但是有时候, 因为重装系统等原因, 可能需要导出以迁移私钥. 方法是:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">gpg</span> --export-secret-keys --armor Key_ID <span class="op">&gt;</span> Key_ID.pem</code></pre></div>
+<p>直于在另一台机器上导入私钥, 则是同样的道理.</p>
+<p>从上面的流程, 我们可以看出, 一个完整的 <code>Key_ID</code> 文件中, 不仅有公钥与私钥, 还有用户相关的信息, 以及加密私钥的密码, 只有提供了密码, 才能从 <code>Key_ID</code> 中提取重要数据. 因此一个 <code>Key_ID</code> 可以用于多种用途, 非对称加密, 签名均可.</p>
+<h3 id="吊销证书">吊销证书</h3>
+<p>该功能可以看成是 <code>Key_ID</code> 机制的扩展. 当一个符合要求的证书因为某种原因, 状态发生变化的时候, 可以根据吊销证书被取消. 当然, 创建吊销证书的, 必须是发布机构, 也就是知道私钥与密码的那个人. 产生相应 <code>Key_ID</code> 的吊销证书后, 在相应的时机, 导入此证书, 便可以使相应 <code>Key_ID</code> 的证书失效.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">gpg</span> --gen-revoke Key_ID <span class="op">&gt;</span> Key_ID.rvk.pem</code></pre></div>
+<p>导入吊销证书的方法, 与导入一个公钥使用相同的命令.</p>
+<h3 id="对称加密">对称加密</h3>
+<p>默认GnuPG使用的是非对称加密的方法. 所以要想使用对称加密, 虽然原则上与OpenSSL相同, 但是参数形式要稍微长一些, 或者难记一些.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">## 对称加密并生成filename.asc文档. 不带armor, 生成gpg二进制格式.</span>
+<span class="ex">gpg</span> --armor -c filename
+<span class="co">## -c 等同于命令 --symmetric</span>
+
+<span class="co">## 对称解密时输入相应的密码即可</span>
+<span class="ex">gpg</span> --armor -d filename.asc
+<span class="co">## -d 等同于 --decrypt 选项</span></code></pre></div>
+<h3 id="非对称加密">非对称加密</h3>
+<p>既然在 <code>.pem</code> 文件中, 所有的要素都准备了, 那么非对称加密也就不困难了. 使用</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">gpg</span> --armor -r Key_ID -e filename</code></pre></div>
+<p>解密的时候, 与对称加密的时候相同. 只不过解密的时候, 需要存有私钥的<code>Key_ID</code>文件.</p>
+<h3 id="数字签名">数字签名</h3>
+<p>对文件进行数字签名也是很简单的, 示例如下:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">## 对文件签名, 并且将文件签到输入文件中</span>
+<span class="ex">gpg</span> --sign filename -o filename.gpg
+
+<span class="co">## 生成文件与HASH分开的签名</span>
+<span class="ex">gpg</span> --detach-sig filename -o filename.sig</code></pre></div>
+<p>也可以通过类似 <code>--armor</code> 的选项, 导出ASCII格式的签名的文件, 这样更易于在互联网上传播( <code>--clearsign</code> 选项).</p>
+<p>至于验证签名, 则可以使用 <code>--verify</code> 选项.</p>
+<p>GnuPG还有其它很多用法, 比如在一个公钥上签上自己的名. 这里就不多讲了.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/openssl/" rel="tag"># openssl</a>
+          
+            <a href="/tags/gnupg/" rel="tag"># gnupg</a>
+          
+            <a href="/tags/密码学/" rel="tag"># 密码学</a>
+          
+            <a href="/tags/开源/" rel="tag"># 开源</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/zh_CN/bootstrap-syslinux/" rel="next" title="从磁盘启动的过程与SYSLINUX">
+                <i class="fa fa-chevron-left"></i> 从磁盘启动的过程与SYSLINUX
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/CODE/dotnet-lang/" rel="prev" title=".NET平台上的一些程序语言">
+                .NET平台上的一些程序语言 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="en/zh_CN/encryption/"
+           data-title="密码学原理与开源工具(日期未定)" data-url="./zh_CN/encryption/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Istyasna" />
+          <p class="site-author-name" itemprop="name">Istyasna</p>
+          <p class="site-description motion-element" itemprop="description">GO FORTH now and create masterpieces of the publishing art!</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">60</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">199</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/irhawks" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://code.aliyun.com/u/irhawks" target="_blank" title="Aliyun">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Aliyun
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="./" title="Homepage" target="_blank">Homepage</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hainu.edu.cn" title="Hainan University" target="_blank">Hainan University</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://qiqi789.github.io/" title="Qi Qi" target="_blank">Qi Qi</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#加密及密码体制原理介绍"><span class="nav-number">1.</span> <span class="nav-text">加密及密码体制原理介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#openssl简介与基本使用"><span class="nav-number">2.</span> <span class="nav-text">OpenSSL简介与基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对称加密算法"><span class="nav-number">2.1.</span> <span class="nav-text">对称加密算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非对称加密算法"><span class="nav-number">2.2.</span> <span class="nav-text">非对称加密算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信息摘要算法"><span class="nav-number">2.3.</span> <span class="nav-text">信息摘要算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gnupg工具"><span class="nav-number">3.</span> <span class="nav-text">GnuPG工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导出公钥"><span class="nav-number">3.1.</span> <span class="nav-text">导出公钥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#钥匙管理"><span class="nav-number">3.2.</span> <span class="nav-text">钥匙管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#吊销证书"><span class="nav-number">3.3.</span> <span class="nav-text">吊销证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对称加密"><span class="nav-number">3.4.</span> <span class="nav-text">对称加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非对称加密"><span class="nav-number">3.5.</span> <span class="nav-text">非对称加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数字签名"><span class="nav-number">3.6.</span> <span class="nav-text">数字签名</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Istyasna</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+<!-- I manually add this to enable bootstrap style dropdown menu -->
+<script type="text/javascript" src="/js/src/bootstrap/dropdown.js"></script>
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"irhawks"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: {
+          extensions: ["amsthm.js", "AMSmath.js","AMSsymbols.js", "autobold.js"],
+        },
+        tex2jax: {
+          <!--(disable $) inlineMath: [ ['$','$'], ["\\(","\\)"]  ],-->
+          inlineMath: [ ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        },
+        <!-- add zoom options for math equations-->
+        MathZoom: {
+          styles: { "#MathJax_Zoom": {
+              "background-color": "rgba(255,255,255,0.9)"
+            } }
+        },
+        extensions: ["[Contrib]/a11y/accessibility-menu.js"],
+        explorer: {
+          walker: 'syntactic',         // none, syntactic, semantic
+          highlight: 'none',           // none, hover, flame
+          background: 'blue',          // blue, red, green, yellow, cyan, magenta, white, black
+          foreground: 'black',         // black, white, magenta, cyan, yellow, green, red, blue
+          speech: true,                // true, false
+          generation: 'lazy',          // eager, mixed, lazy
+          subtitle: true,              // true, false
+          ruleset: 'mathspeak-default' // mathspeak-default, mathspeak-brief, mathspeak-sbrief, chromevox-default, chromevox-short, chromevox-alternative
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

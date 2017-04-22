@@ -7,7 +7,7 @@
     </url>
 
     <url>
-        <loc>./blog-solutions/</loc>
+        <loc>./EXPR/blog-solutions/</loc>
         <lastmod>2017-04-08T01:27:24.072Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -15,7 +15,7 @@
     </url>
 
     <url>
-        <loc>./wikipedia-transition-system/</loc>
+        <loc>./zh_CN/wikipedia-transition-system/</loc>
         <lastmod>2016-12-18T11:29:34.535Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -23,7 +23,7 @@
     </url>
 
     <url>
-        <loc>./library-lapack/</loc>
+        <loc>./zh_CN/library-lapack/</loc>
         <lastmod>2016-12-15T12:56:17.998Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -31,7 +31,7 @@
     </url>
 
     <url>
-        <loc>./LaTeX-grouping/</loc>
+        <loc>./EXPR/LaTeX-grouping/</loc>
         <lastmod>2016-12-15T12:55:45.794Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -39,7 +39,7 @@
     </url>
 
     <url>
-        <loc>./blog-pandoc-crossref/</loc>
+        <loc>./EXPR/blog-pandoc-crossref/</loc>
         <lastmod>2016-12-15T12:33:21.163Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -47,7 +47,7 @@
     </url>
 
     <url>
-        <loc>./blog-hexo-image-test/</loc>
+        <loc>./EXPR/blog-hexo-image-test/</loc>
         <lastmod>2016-12-15T03:57:04.406Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -55,7 +55,7 @@
     </url>
 
     <url>
-        <loc>./hello-world/</loc>
+        <loc>./EXPR/hello-world/</loc>
         <lastmod>2016-12-15T03:53:40.035Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -63,7 +63,7 @@
     </url>
 
     <url>
-        <loc>./blog-hexo-1/</loc>
+        <loc>./EXPR/blog-hexo-1/</loc>
         <lastmod>2016-12-15T03:53:01.363Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -71,7 +71,7 @@
     </url>
 
     <url>
-        <loc>./solr-tutorial/</loc>
+        <loc>./zh_CN/solr-tutorial/</loc>
         <lastmod>2016-12-14T14:41:20.578Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -79,7 +79,7 @@
     </url>
 
     <url>
-        <loc>./tex-tokens/</loc>
+        <loc>./EXPR/tex-tokens/</loc>
         <lastmod>2016-12-14T13:48:57.083Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -87,7 +87,7 @@
     </url>
 
     <url>
-        <loc>./regex-intro/</loc>
+        <loc>./zh_CN/regex-intro/</loc>
         <lastmod>2016-12-14T13:48:09.818Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -95,7 +95,7 @@
     </url>
 
     <url>
-        <loc>./solr-and-lucene/</loc>
+        <loc>./zh_CN/solr-and-lucene/</loc>
         <lastmod>2016-12-14T13:46:41.039Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -103,7 +103,7 @@
     </url>
 
     <url>
-        <loc>./blog-github-modify/</loc>
+        <loc>./EXPR/blog-github-modify/</loc>
         <lastmod>2016-12-14T11:27:10.196Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -111,7 +111,7 @@
     </url>
 
     <url>
-        <loc>./non-standard-analysis/</loc>
+        <loc>./zh_CN/non-standard-analysis/</loc>
         <lastmod>2016-12-14T11:26:05.395Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -119,7 +119,7 @@
     </url>
 
     <url>
-        <loc>./bootstrap-syslinux/</loc>
+        <loc>./zh_CN/bootstrap-syslinux/</loc>
         <lastmod>2016-12-14T11:25:37.744Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -127,7 +127,7 @@
     </url>
 
     <url>
-        <loc>./Linux-Daemon/</loc>
+        <loc>./ICTN/Linux-Daemon/</loc>
         <lastmod>2016-12-14T11:25:19.209Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -135,7 +135,7 @@
     </url>
 
     <url>
-        <loc>./julia-lang-types/</loc>
+        <loc>./CODE/julia-lang-types/</loc>
         <lastmod>2016-12-14T11:24:11.076Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -143,7 +143,7 @@
     </url>
 
     <url>
-        <loc>./julia-basics/</loc>
+        <loc>./CODE/julia-basics/</loc>
         <lastmod>2016-12-14T11:23:47.613Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -151,7 +151,7 @@
     </url>
 
     <url>
-        <loc>./platform-jdk/</loc>
+        <loc>./zh_CN/platform-jdk/</loc>
         <lastmod>2016-12-14T11:23:23.682Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -159,7 +159,7 @@
     </url>
 
     <url>
-        <loc>./drawing-gnuplot/</loc>
+        <loc>./zh_CN/drawing-gnuplot/</loc>
         <lastmod>2016-12-14T11:22:23.169Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -167,7 +167,7 @@
     </url>
 
     <url>
-        <loc>./blog-github/</loc>
+        <loc>./EXPR/blog-github/</loc>
         <lastmod>2016-12-14T11:21:58.607Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -175,7 +175,7 @@
     </url>
 
     <url>
-        <loc>./erlang-concurrency-test/</loc>
+        <loc>./zh_CN/erlang-concurrency-test/</loc>
         <lastmod>2016-12-14T11:21:30.556Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -183,7 +183,7 @@
     </url>
 
     <url>
-        <loc>./encryption/</loc>
+        <loc>./zh_CN/encryption/</loc>
         <lastmod>2016-12-14T11:21:03.470Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -191,7 +191,7 @@
     </url>
 
     <url>
-        <loc>./elixir-lang/</loc>
+        <loc>./zh_CN/elixir-lang/</loc>
         <lastmod>2016-12-14T11:20:36.431Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -199,7 +199,7 @@
     </url>
 
     <url>
-        <loc>./elastic-search/</loc>
+        <loc>./zh_CN/elastic-search/</loc>
         <lastmod>2016-12-14T11:20:08.889Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -207,7 +207,7 @@
     </url>
 
     <url>
-        <loc>./eclipse-architecture/</loc>
+        <loc>./zh_CN/eclipse-architecture/</loc>
         <lastmod>2016-12-14T11:19:23.236Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -215,7 +215,7 @@
     </url>
 
     <url>
-        <loc>./dotnet-lang/</loc>
+        <loc>./CODE/dotnet-lang/</loc>
         <lastmod>2016-12-14T11:18:54.862Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -223,7 +223,7 @@
     </url>
 
     <url>
-        <loc>./programming-daemon/</loc>
+        <loc>./zh_CN/programming-daemon/</loc>
         <lastmod>2016-12-14T11:18:28.344Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -231,7 +231,7 @@
     </url>
 
     <url>
-        <loc>./service-cups/</loc>
+        <loc>./zh_CN/service-cups/</loc>
         <lastmod>2016-12-14T11:18:02.010Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -239,7 +239,7 @@
     </url>
 
     <url>
-        <loc>./awk-lang/</loc>
+        <loc>./zh_CN/awk-lang/</loc>
         <lastmod>2016-12-14T11:17:44.519Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -247,7 +247,7 @@
     </url>
 
     <url>
-        <loc>./agda-lang/</loc>
+        <loc>./zh_CN/agda-lang/</loc>
         <lastmod>2016-12-14T11:17:12.142Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -255,7 +255,7 @@
     </url>
 
     <url>
-        <loc>./ai-and-bootstraping/</loc>
+        <loc>./zh_CN/ai-and-bootstraping/</loc>
         <lastmod>2016-12-14T11:15:56.908Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -263,7 +263,7 @@
     </url>
 
     <url>
-        <loc>./scala-tutorial-intro/</loc>
+        <loc>./CODE/scala-tutorial-intro/</loc>
         <lastmod>2016-12-14T11:15:35.130Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -271,7 +271,7 @@
     </url>
 
     <url>
-        <loc>./scala-process-and-shell/</loc>
+        <loc>./CODE/scala-process-and-shell/</loc>
         <lastmod>2016-12-14T11:14:50.274Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -279,7 +279,7 @@
     </url>
 
     <url>
-        <loc>./information-geometry/</loc>
+        <loc>./zh_CN/information-geometry/</loc>
         <lastmod>2016-12-14T11:13:56.024Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -287,7 +287,7 @@
     </url>
 
     <url>
-        <loc>./scala-history/</loc>
+        <loc>./CODE/scala-history/</loc>
         <lastmod>2016-12-14T11:12:15.823Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -295,7 +295,7 @@
     </url>
 
     <url>
-        <loc>./scala-sentences/</loc>
+        <loc>./CODE/scala-sentences/</loc>
         <lastmod>2016-12-14T11:11:37.384Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -303,7 +303,7 @@
     </url>
 
     <url>
-        <loc>./scala-tutorial/</loc>
+        <loc>./CODE/scala-tutorial/</loc>
         <lastmod>2016-12-14T11:10:38.928Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -311,7 +311,7 @@
     </url>
 
     <url>
-        <loc>./scala-features/</loc>
+        <loc>./CODE/scala-features/</loc>
         <lastmod>2016-12-14T11:10:03.246Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -319,7 +319,7 @@
     </url>
 
     <url>
-        <loc>./scala-sbt/</loc>
+        <loc>./CODE/scala-sbt/</loc>
         <lastmod>2016-12-14T11:09:36.982Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -327,7 +327,7 @@
     </url>
 
     <url>
-        <loc>./scala-overview-4/</loc>
+        <loc>./CODE/scala-overview-4/</loc>
         <lastmod>2016-12-14T11:09:01.020Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -335,7 +335,7 @@
     </url>
 
     <url>
-        <loc>./maude-lang/</loc>
+        <loc>./zh_CN/maude-lang/</loc>
         <lastmod>2016-12-14T11:08:38.764Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -343,7 +343,7 @@
     </url>
 
     <url>
-        <loc>./scheme-lang/</loc>
+        <loc>./zh_CN/scheme-lang/</loc>
         <lastmod>2016-12-14T11:08:10.697Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -351,7 +351,7 @@
     </url>
 
     <url>
-        <loc>./modelica-basics/</loc>
+        <loc>./zh_CN/modelica-basics/</loc>
         <lastmod>2016-12-14T11:06:52.664Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -359,7 +359,7 @@
     </url>
 
     <url>
-        <loc>./modelica-modeling-2/</loc>
+        <loc>./zh_CN/modelica-modeling-2/</loc>
         <lastmod>2016-12-14T11:06:20.712Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -367,7 +367,7 @@
     </url>
 
     <url>
-        <loc>./datatype-abstraction/</loc>
+        <loc>./zh_CN/datatype-abstraction/</loc>
         <lastmod>2016-12-14T11:04:04.007Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -375,7 +375,7 @@
     </url>
 
     <url>
-        <loc>./apache-nutch/</loc>
+        <loc>./zh_CN/apache-nutch/</loc>
         <lastmod>2016-12-14T11:02:43.873Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -383,7 +383,7 @@
     </url>
 
     <url>
-        <loc>./stochastic-differential-equation-intro/</loc>
+        <loc>./zh_CN/stochastic-differential-equation-intro/</loc>
         <lastmod>2016-12-14T11:00:03.326Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -391,7 +391,7 @@
     </url>
 
     <url>
-        <loc>./%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E8%AF%AD%E8%A8%80/</loc>
+        <loc>./zh_CN/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E8%AF%AD%E8%A8%80/</loc>
         <lastmod>2016-12-14T08:55:53.041Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -399,7 +399,7 @@
     </url>
 
     <url>
-        <loc>./Linux-DHCP/</loc>
+        <loc>./ICTN/Linux-DHCP/</loc>
         <lastmod>2016-12-14T08:50:22.946Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -407,7 +407,7 @@
     </url>
 
     <url>
-        <loc>./%E5%A5%97%E6%8E%A5%E5%AD%97%E7%BC%96%E7%A8%8B/</loc>
+        <loc>./zh_CN/%E5%A5%97%E6%8E%A5%E5%AD%97%E7%BC%96%E7%A8%8B/</loc>
         <lastmod>2016-12-14T08:50:05.952Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -415,7 +415,7 @@
     </url>
 
     <url>
-        <loc>./%E5%91%A8%E6%9C%9F%E6%80%A7%E8%BF%9B%E7%A8%8B%E4%B8%8Ecrontab/</loc>
+        <loc>./zh_CN/%E5%91%A8%E6%9C%9F%E6%80%A7%E8%BF%9B%E7%A8%8B%E4%B8%8Ecrontab/</loc>
         <lastmod>2016-12-14T08:49:15.936Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -423,7 +423,7 @@
     </url>
 
     <url>
-        <loc>./Linux-Log/</loc>
+        <loc>./ICTN/Linux-Log/</loc>
         <lastmod>2016-12-14T08:49:02.987Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -431,7 +431,7 @@
     </url>
 
     <url>
-        <loc>./%E7%BA%BF%E7%A8%8B%E4%B8%8E%E8%B0%83%E5%BA%A6%E5%99%A8/</loc>
+        <loc>./zh_CN/%E7%BA%BF%E7%A8%8B%E4%B8%8E%E8%B0%83%E5%BA%A6%E5%99%A8/</loc>
         <lastmod>2016-12-14T08:47:54.256Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -439,7 +439,7 @@
     </url>
 
     <url>
-        <loc>./%E8%BF%9B%E7%A8%8B%E5%8E%9F%E7%90%86%E4%BA%8C/</loc>
+        <loc>./zh_CN/%E8%BF%9B%E7%A8%8B%E5%8E%9F%E7%90%86%E4%BA%8C/</loc>
         <lastmod>2016-12-14T08:47:39.650Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -447,7 +447,7 @@
     </url>
 
     <url>
-        <loc>./%E8%BF%9B%E7%A8%8B%E5%8E%9F%E7%90%86%E4%B8%80/</loc>
+        <loc>./zh_CN/%E8%BF%9B%E7%A8%8B%E5%8E%9F%E7%90%86%E4%B8%80/</loc>
         <lastmod>2016-12-14T08:47:31.657Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -455,7 +455,7 @@
     </url>
 
     <url>
-        <loc>./pxeliunux/</loc>
+        <loc>./ICTN/pxeliunux/</loc>
         <lastmod>2016-12-14T08:36:14.379Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -463,7 +463,7 @@
     </url>
 
     <url>
-        <loc>./PXEboot/</loc>
+        <loc>./ICTN/PXEboot/</loc>
         <lastmod>2016-12-14T08:36:14.107Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -471,7 +471,7 @@
     </url>
 
     <url>
-        <loc>./MathGL/</loc>
+        <loc>./zh_CN/MathGL/</loc>
         <lastmod>2016-12-14T08:36:13.567Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -479,7 +479,7 @@
     </url>
 
     <url>
-        <loc>./PythonPlot/</loc>
+        <loc>./zh_CN/PythonPlot/</loc>
         <lastmod>2016-12-14T08:36:10.659Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>

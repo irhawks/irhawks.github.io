@@ -1,0 +1,1083 @@
+<!doctype html>
+
+
+
+  
+
+
+<!--
+<html class="theme-next mist use-motion" lang="zh-Hans,en">
+-->
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="自举,bootstrap,人工智能,学术," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="80x24" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="最近人工智能在公众世界中变得很热。在各种技术应用铺天盖地的时候，肯定也有不少人在思考人工智能与人的思维的关系。在这里，我们首先关注的可能是这个很自然的问题：人工智能，或者干脆说智能机器，机器人，会不会取代人类。这里的取代，并不是说能够取代人的平常的工作，而是机器具有自主学习、自主决策的能力。完全不再需要人的干预。
+本文的标题的前一半，就来尝试这个问题。至于后一半“理解学术研究”，比较具体。因为一直">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用自举理解人工智能与学术研究">
+<meta property="og:url" content="./zh_CN/ai-and-bootstraping/index.html">
+<meta property="og:site_name" content="80x24">
+<meta property="og:description" content="最近人工智能在公众世界中变得很热。在各种技术应用铺天盖地的时候，肯定也有不少人在思考人工智能与人的思维的关系。在这里，我们首先关注的可能是这个很自然的问题：人工智能，或者干脆说智能机器，机器人，会不会取代人类。这里的取代，并不是说能够取代人的平常的工作，而是机器具有自主学习、自主决策的能力。完全不再需要人的干预。
+本文的标题的前一半，就来尝试这个问题。至于后一半“理解学术研究”，比较具体。因为一直">
+<meta property="og:updated_time" content="2016-12-14T11:15:56.908Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用自举理解人工智能与学术研究">
+<meta name="twitter:description" content="最近人工智能在公众世界中变得很热。在各种技术应用铺天盖地的时候，肯定也有不少人在思考人工智能与人的思维的关系。在这里，我们首先关注的可能是这个很自然的问题：人工智能，或者干脆说智能机器，机器人，会不会取代人类。这里的取代，并不是说能够取代人的平常的工作，而是机器具有自主学习、自主决策的能力。完全不再需要人的干预。
+本文的标题的前一半，就来尝试这个问题。至于后一半“理解学术研究”，比较具体。因为一直">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="./zh_CN/ai-and-bootstraping/"/>
+
+
+
+
+
+<!-- add highlight.js to render pandoc code blocks -->
+<!--
+<link href="http://cdn.bootcss.com/highlight.js/9.10.0/styles/github.min.css" rel="stylesheet">  
+-->
+<link href="/css/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>  
+<script src="/js/highlightjs-line-numbers.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.initLineNumbersOnLoad(); </script>
+
+  <title> 用自举理解人工智能与学术研究 | 80x24 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?763bee904aa6d81fdf017659d162188f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">80x24</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Keep Stupid, Keep Hungry</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-resources">
+          <a href="/resources" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-folder"></i> <br />
+            
+            资源
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+          <li class="menu-item"><a href="/zh_CN/ai-and-bootstraping/">简体中文</a></li>
+          
+          <li class="menu-item"><a href="/en/zh_CN/ai-and-bootstraping/">English (US)</a></li>
+          
+
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <!-- previous -->
+<script type="text/javascript">
+   var search_path = "<%= config.search.path %>";
+   if (search_path.length == 0) {
+       search_path = "search.xml";
+   }
+   var path = "<%= config.root %>" + search_path;
+   searchFunc(path, 'local-search-input', 'local-search-result');
+</script>
+<!-- optimized -->
+<div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+
+    </div>
+  
+
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="./zh_CN/ai-and-bootstraping/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Istyasna">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="80x24">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="80x24" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                用自举理解人工智能与学术研究
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-29T00:00:00+08:00">
+                2015-06-29
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              <span class="post-meta-item-text">更新于</span>
+              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T19:15:56+08:00">
+                2016-12-14
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/人工智能/" itemprop="url" rel="index">
+                    <span itemprop="name">人工智能</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/zh_CN/ai-and-bootstraping/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="zh_CN/ai-and-bootstraping/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近人工智能在公众世界中变得很热。在各种技术应用铺天盖地的时候，肯定也有不少人在思考人工智能与人的思维的关系。在这里，我们首先关注的可能是这个很自然的问题：人工智能，或者干脆说智能机器，机器人，会不会取代人类。这里的取代，并不是说能够取代人的平常的工作，而是机器具有自主学习、自主决策的能力。完全不再需要人的干预。</p>
+<p>本文的标题的前一半，就来尝试这个问题。至于后一半“理解学术研究”，比较具体。因为一直以来，科学研究活动都被视为是具有极高智力挑战的活动。同时，实际中的学术研究还是比较累的。单单做理论的工作，似乎很难合“学术共同体”的口味；而实践的工作，又上不了科学理论的台面。然而，科学活动的量级似乎越来越重。除了少数学科，如纯粹数学，研究方式变化没有那么大之外，几乎所有的科学都面临着数据处理的新的问题。“数据科学”，是否会成为所有的科学研究的基础？花费的代价越来越高的数值计算与模拟，是否越来越占据更大的份量？计算机在科学研究中的地位究竟是怎样的？</p>
+<a id="more"></a>
+<p>虽然<a href="http://en.wikipedia.org/wiki/Scientific_workflow_system" target="_blank" rel="external">科学工作流系统</a>、<a href="http://en.wikipedia.org/wiki/High-level_architecture" target="_blank" rel="external">高级体系结构</a>、科学数据可视化等对于提高相关活动的效率有极大的帮助，但是在自动化的层面似乎做的还不够好。我们肯定希望，如果有可能的话，编写数据处理的小脚本、可视化数据、甚至是选择计算环境等工作都能够分离出来，让我们有时间专心去思考某些问题，而不是花在没有什么含量的技术操作上。进一步地，许多活动该由计算机来做，比如计算机发现新的物质结构，由计算机来总结科学数据集中的结构，甚至是能够发现复杂的方程与约束的条件。最明显地，我们研究生是否能够花更多的时间在学术研究上，而不是花大量时间在做项目，做产品，或者是为理论找到一个合适的验证的平台上？</p>
+<p>本文这里尝试概要地理解问题的实质。受到计算机知识中的“自举”的启发，个人觉得，其实这两个问题在逻辑上的困境才是当前阻挡理解这个问题的关键。“自举”一个是指一个人在不借助于任何外力的情况下把自己提离地面。在机器是否超越人类，以及更具体的，让机器代替人进行科研活动创新的时候，类似的逻辑阴影似乎总是存在。“世界是满的”，个人相信肯定早就有人思考过这个问题。不过，其实花了一个下午来克服自己认识的局限效率还是要高一些。如果有类似的读物，可以<a href="kailto:irhawks@163.com" target="_blank" rel="external">发送邮件到这里</a>。</p>
+<h2 id="问题抽象">问题抽象</h2>
+<p>直接面对两个问题中的任何一个，都会使人产生思维上的困惑。很多时候，我们不知道在这样的语境下该如何走。这种情况可能是由于问题与我们自身的生活体验、生活环境、生存利益等太过相关，以至于不可能单独出来看问题。没有足够的证据，但是我们也可以合乎逻辑地说，从神经质一直到经历了许多社会变迁的老人，都不可能对任何事情都有完全客观的看法，在这种看法中，不掺杂任何主观的成份。很明显，因为我们都相信，人无完人。</p>
+<p>所以人类就有意或者无意地避开冲突领域。以一种抽象的、甚至与直接问题完全不相干的方式间接地解决问题的策略就被广泛使用了。大概哲学在解决问题的时候有一种抽象，甚至在任何创造性的活动中，都必须避开问题中某些特殊的语义，把问题中具有实际意义的概念变成只是一个符号。</p>
+<p>所以，“机器能否取代人”之类的问题，我们可以改写成几种抽象的场景：</p>
+<p>1.对象<span class="math inline">\(A\)</span>创造了对象<span class="math inline">\(B\)</span>（很有可能是让对象<span class="math inline">\(B\)</span>从虚空之中产生出来），然后对象<span class="math inline">\(B\)</span>能够取代对象<span class="math inline">\(A\)</span>，在某些属性上超越了<span class="math inline">\(A\)</span>，并且<span class="math inline">\(B\)</span>同样具有“创造比对象<span class="math inline">\(B\)</span>更强的对象”的能力。</p>
+<p>2.整体<span class="math inline">\(A\)</span>把<span class="math inline">\(B\)</span>作为它的一个部分，然后<span class="math inline">\(B\)</span>可以“整体作用”于<span class="math inline">\(A\)</span>，从而引起<span class="math inline">\(A\)</span>和<span class="math inline">\(B\)</span>的共同的变化。结果，就相当于<span class="math inline">\(B\)</span>间接地作用于自已。</p>
+<p>把<span class="math inline">\(A\)</span>看成是人类，把<span class="math inline">\(B\)</span>看成是机器，那么其实很自然地，我们如果不怀疑<span class="math inline">\(A\)</span>，那么自然“机器取代人类”是可能的一个命题；对于学术来说，学术研究是一个整体，数据处理是其中的一个部分，而数据处理的方式的变化，自然引起整个科学研究方式的变革。如果数据处理实现了自动化，那么科学研究自然也会引起一些变化。</p>
+<p>自然地，自举的模式也是类似的，因为有如下的场景：</p>
+<p>1.计算机系统刚开始只有一段BIOS程序来引导应用程序，这段BIOS把引导程序，如<code>grub</code>或者<code>syslinux</code>加载到内存当中。<code>grub</code>是可以执行lua脚本的，相当于一个微型的操作系统。不过，这个系统仅仅对文件系统访问提供有限的支持，唯一做的，经常是把操作系统内核如Linux加载到指定的位置，然后使它运行。而后Linux成为了一个“更强大的”操作系统。再加载一些桌面后，成为更完善的操作系统。在整个过程期间，BIOS、grub都相当于把自己从内存中“杀死”了。</p>
+<p>2.编译器的构建。<code>Ada编译器是用Ada写成的，C编译器是使用C写成的</code>。那么这种循环的情况该如何理解呢？自然而然地，刚开始没有Ada或者C这种东西，只能是其它的某种语言产生的。便使用低级语言构造一个基础的编译器。之后的过程是，高版本的编译器只使用低版本的编译器所支持的语法特性来编写，用低版本编译器编译，生成高版本的编译器，然后高版本的编译器在保持特性相容的条件下，重新编译自己的源代码。更复杂一点的GCC，源代码编译需要三次构建。</p>
+<p>在社会中也许我们可以看到更自然的形式，比如达尔文的《物种起源》被广泛接受之后，逐代进化的观念就保留了下来。与此同时，现代社会也认为社会是在不断向高级的形式进化的。从来没有人对这些提出疑问，那么为什么我们会对于机器取代人没法淡定了呢？</p>
+<h2 id="问题精化">问题精化</h2>
+<p>粗糙地看，提出的场景都是相似的。我们也就可以找到各自的特殊情况，以便相互借鉴解决问题的方法。比如说想象如下的问题：</p>
+<p>1.在场景中，居于中心地位的，明显是一对对象而已，比如人与机器、数据处理与科学研究、整体与部分、对象<span class="math inline">\(A\)</span>与对象<span class="math inline">\(B\)</span>、编译器与新版本的编译器。但是真的就只有这两个对象的参与么？其实也许还有环境的作用。比如，执行代码的主机。那么，在人与智能的关系中，其实人的进化也是有原因的，机器的进化也是有原因的。这种原因是什么呢？</p>
+<p>2.在编译器的构造中，我们知道，每个语言虽然是不完全的，但是在计算能力上面，往往图灵等价。这似乎在告诉我们，不管每个时间<span class="math inline">\(t\)</span>事物存在的情况如何，事物的轨迹构成成一个称为“全体”或者“空间”之类的东西。虽然我们在某一时刻或者短时间内只能看到其中的一部分，但是我们知道其中存在更多的可能。在智能上，是否人只是“智能的一种表现形式”，从而“人的智能”是“智能”的一个子空间呢？</p>
+<p>3.第三个问题，有些场景中，明显地涉及到“产生”这个概念。那么“从虚空中产生”究竟意味着什么呢？我们高中的物理知识告诉我们质量守恒与能量的守恒，后来是质能关系守恒，最近或许因为Higgs粒子的验证，或许又要修改另一种说法了。但是在能量之上，熵的增加却又成为了不争的事实。那么，世界是否任何对象都是“守恒”的，还是说，这些量仅仅是我们观测的量而已，它们并不无条件等同于世界？</p>
+<h2 id="问题类比">问题类比</h2>
+<p>一些共同的想法使我想到可能动力系统来比喻当前的问题。动力系统可以抽象人造的系统，也可以抽象现实世界中存在的一些运动机制；可以是小范围、少变量的，也可以是大范围的、复杂的系统；可以是离散的，连续的或者是混合的。既然“动力系统”只是一种数学的抽象，那么把人工智能与人的思维的关系建模成动力系统也是一种可能。</p>
+<p>大概我们可以把这类双因素相互作用的系统看成是普遍的模式。那么，如果一个变量的变化，受到两个变量的影响，那么长期情况下会出现什么行为呢？是否总会是趋于无穷呢？数学方程告诉我们未必。那么，其实人工智能的问题就更不用担心了：在简单的二元变量的情况下，系统的行为尚且可以如此复杂，那么，对于人与机器的相互作用，这样复杂的东西，是否仅仅考虑到长时间以后，人类就被机器取代了呢？第一，这得附加上一些边界条件。第二，即使取代人类，那么也是方程指定的结果。</p>
+<p>我想，在现实世界中，社会问题可能存在多种可能。每一种都有其存在的方式，存在的原因。要想了解具体的行为，还是得分析一些具体的量是怎样的。</p>
+<h2 id="初步结论">初步结论</h2>
+<p>讨论机器是否取代人，或者科学研究过程中数据与理论哪个更为复杂，可能没有太多的实际的意义。不管怎样说，在目前如果我们不去推动人工智能的发展，那么人工智能成了什么样子还是不好预测的。至少我们得参与其中，才有一些发言权。</p>
+<p>还有，目前机器能够的工作还是非常少。要相信人工智能可以取代人类，除非有人做出来机器代替目前研究生能够做的烦杂的劳动。否则我们怎样才能相信机器可以取代人？</p>
+<p>更根本的问题，或许是哪些事情应该由人来做，哪些事情应该由机器来做。人与机器的关系该是怎样的。目前，在机器取代人的工作的方面已经有一些进展了。在已有的经验的基础上，或许该发现“机器取代人工作的一些模式”，或者“人与机器共生的几个场景”一些例子。适当地总结下来，或许关键在于所谓的“能够把人与机器融合在一起的工作流”应该是怎样的。假如能够有这样一套系统的工作方法论，或许类似人与机器的可替代性的问题就太过基础和肤浅了。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/自举/" rel="tag"># 自举</a>
+          
+            <a href="/tags/bootstrap/" rel="tag"># bootstrap</a>
+          
+            <a href="/tags/人工智能/" rel="tag"># 人工智能</a>
+          
+            <a href="/tags/学术/" rel="tag"># 学术</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/EXPR/blog-solutions/" rel="next" title="个人主页项目的设计与管理">
+                <i class="fa fa-chevron-left"></i> 个人主页项目的设计与管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/CODE/scala-sentences/" rel="prev" title="Scala编程概要（二）：基本结构，常用模式">
+                Scala编程概要（二）：基本结构，常用模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="zh_CN/ai-and-bootstraping/"
+           data-title="用自举理解人工智能与学术研究" data-url="./zh_CN/ai-and-bootstraping/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Istyasna" />
+          <p class="site-author-name" itemprop="name">Istyasna</p>
+          <p class="site-description motion-element" itemprop="description">GO FORTH now and create masterpieces of the publishing art!</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">60</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">199</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/irhawks" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://code.aliyun.com/u/irhawks" target="_blank" title="Aliyun">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Aliyun
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="./" title="Homepage" target="_blank">Homepage</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hainu.edu.cn" title="Hainan University" target="_blank">Hainan University</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://qiqi789.github.io/" title="Qi Qi" target="_blank">Qi Qi</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题抽象"><span class="nav-number">1.</span> <span class="nav-text">问题抽象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题精化"><span class="nav-number">2.</span> <span class="nav-text">问题精化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题类比"><span class="nav-number">3.</span> <span class="nav-text">问题类比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初步结论"><span class="nav-number">4.</span> <span class="nav-text">初步结论</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Istyasna</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+<!-- I manually add this to enable bootstrap style dropdown menu -->
+<script type="text/javascript" src="/js/src/bootstrap/dropdown.js"></script>
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"irhawks"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: {
+          extensions: ["amsthm.js", "AMSmath.js","AMSsymbols.js", "autobold.js"],
+        },
+        tex2jax: {
+          <!--(disable $) inlineMath: [ ['$','$'], ["\\(","\\)"]  ],-->
+          inlineMath: [ ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        },
+        <!-- add zoom options for math equations-->
+        MathZoom: {
+          styles: { "#MathJax_Zoom": {
+              "background-color": "rgba(255,255,255,0.9)"
+            } }
+        },
+        extensions: ["[Contrib]/a11y/accessibility-menu.js"],
+        explorer: {
+          walker: 'syntactic',         // none, syntactic, semantic
+          highlight: 'none',           // none, hover, flame
+          background: 'blue',          // blue, red, green, yellow, cyan, magenta, white, black
+          foreground: 'black',         // black, white, magenta, cyan, yellow, green, red, blue
+          speech: true,                // true, false
+          generation: 'lazy',          // eager, mixed, lazy
+          subtitle: true,              // true, false
+          ruleset: 'mathspeak-default' // mathspeak-default, mathspeak-brief, mathspeak-sbrief, chromevox-default, chromevox-short, chromevox-alternative
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

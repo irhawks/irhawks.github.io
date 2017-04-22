@@ -70,14 +70,14 @@
     </url>
     
     <url>
-        <loc>./resources/others.html</loc>
+        <loc>./resources/database.html</loc>
         <lastmod>2016-12-18T11:40:53.933Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>./resources/database.html</loc>
+        <loc>./resources/others.html</loc>
         <lastmod>2016-12-18T11:40:53.933Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>

@@ -16,9 +16,9 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Pandoc&#39;s test for pandoc-crossref</title>
-    <link href="./blog-pandoc-crossref/"/>
-    <id>./blog-pandoc-crossref/</id>
+    <title>Pandoc&#39;s Test for Pandoc-Crossref</title>
+    <link href="./EXPR/blog-pandoc-crossref/"/>
+    <id>./EXPR/blog-pandoc-crossref/</id>
     <published>2016-12-15T10:36:04.000Z</published>
     <updated>2016-12-15T12:33:21.163Z</updated>
     
@@ -46,9 +46,9 @@
   </entry>
   
   <entry>
-    <title>Test the layout of images</title>
-    <link href="./blog-hexo-image-test/"/>
-    <id>./blog-hexo-image-test/</id>
+    <title>Test the Layout of Images</title>
+    <link href="./EXPR/blog-hexo-image-test/"/>
+    <id>./EXPR/blog-hexo-image-test/</id>
     <published>2016-12-14T16:00:00.000Z</published>
     <updated>2016-12-15T03:57:04.406Z</updated>
     
@@ -72,9 +72,9 @@
   </entry>
   
   <entry>
-    <title>Hello world from Hexo with NexT theme</title>
-    <link href="./hello-world/"/>
-    <id>./hello-world/</id>
+    <title>Hello World From Hexo With NexT Theme</title>
+    <link href="./EXPR/hello-world/"/>
+    <id>./EXPR/hello-world/</id>
     <published>2016-12-13T16:00:00.000Z</published>
     <updated>2016-12-15T03:53:40.035Z</updated>
     
@@ -99,8 +99,8 @@
   
   <entry>
     <title>Solr搜索介绍（继续）</title>
-    <link href="./solr-tutorial/"/>
-    <id>./solr-tutorial/</id>
+    <link href="./zh_CN/solr-tutorial/"/>
+    <id>./zh_CN/solr-tutorial/</id>
     <published>2016-06-02T16:00:00.000Z</published>
     <updated>2016-12-14T14:41:20.578Z</updated>
     
@@ -130,8 +130,8 @@ Hexo的Next主题可以识别&lt;! -- more --.&gt;，并且在主页当中展示
   
   <entry>
     <title>Apache Nutch的介绍与基本使用</title>
-    <link href="./apache-nutch/"/>
-    <id>./apache-nutch/</id>
+    <link href="./zh_CN/apache-nutch/"/>
+    <id>./zh_CN/apache-nutch/</id>
     <published>2016-05-31T16:00:00.000Z</published>
     <updated>2016-12-14T11:02:43.873Z</updated>
     
@@ -171,8 +171,8 @@ Hexo的Next主题可以识别&lt;! -- more --.&gt;，并且在主页当中展示
   
   <entry>
     <title>随机微分方程的一种引入方法</title>
-    <link href="./stochastic-differential-equation-intro/"/>
-    <id>./stochastic-differential-equation-intro/</id>
+    <link href="./zh_CN/stochastic-differential-equation-intro/"/>
+    <id>./zh_CN/stochastic-differential-equation-intro/</id>
     <published>2016-03-16T16:00:00.000Z</published>
     <updated>2016-12-14T11:00:03.326Z</updated>
     
@@ -197,8 +197,8 @@ Hexo的Next主题可以识别&lt;! -- more --.&gt;，并且在主页当中展示
   
   <entry>
     <title>快速了解Modelica与OpenModelica建模2-ModelicaML与方程</title>
-    <link href="./modelica-modeling-2/"/>
-    <id>./modelica-modeling-2/</id>
+    <link href="./zh_CN/modelica-modeling-2/"/>
+    <id>./zh_CN/modelica-modeling-2/</id>
     <published>2016-03-12T16:00:00.000Z</published>
     <updated>2016-12-14T11:06:20.712Z</updated>
     
@@ -218,9 +218,9 @@ Hexo的Next主题可以识别&lt;! -- more --.&gt;，并且在主页当中展示
     
       <category term="OpenModelica" scheme="./tags/OpenModelica/"/>
     
-      <category term="仿真" scheme="./tags/%E4%BB%BF%E7%9C%9F/"/>
-    
       <category term="ModelicaML" scheme="./tags/ModelicaML/"/>
+    
+      <category term="仿真" scheme="./tags/%E4%BB%BF%E7%9C%9F/"/>
     
       <category term="DAE" scheme="./tags/DAE/"/>
     
@@ -228,8 +228,8 @@ Hexo的Next主题可以识别&lt;! -- more --.&gt;，并且在主页当中展示
   
   <entry>
     <title>快速了解Modelica与OpenModelica建模1-基本知识</title>
-    <link href="./modelica-basics/"/>
-    <id>./modelica-basics/</id>
+    <link href="./zh_CN/modelica-basics/"/>
+    <id>./zh_CN/modelica-basics/</id>
     <published>2016-03-10T16:00:00.000Z</published>
     <updated>2016-12-14T11:06:52.664Z</updated>
     
@@ -262,8 +262,8 @@ end C&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>常见的数据结构的抽象</title>
-    <link href="./datatype-abstraction/"/>
-    <id>./datatype-abstraction/</id>
+    <link href="./zh_CN/datatype-abstraction/"/>
+    <id>./zh_CN/datatype-abstraction/</id>
     <published>2016-01-14T16:00:00.000Z</published>
     <updated>2016-12-14T11:04:04.007Z</updated>
     
@@ -303,8 +303,8 @@ end C&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>维基上定义的传递系统</title>
-    <link href="./wikipedia-transition-system/"/>
-    <id>./wikipedia-transition-system/</id>
+    <link href="./zh_CN/wikipedia-transition-system/"/>
+    <id>./zh_CN/wikipedia-transition-system/</id>
     <published>2016-01-12T16:00:00.000Z</published>
     <updated>2016-12-18T11:29:34.535Z</updated>
     
@@ -332,8 +332,8 @@ end C&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>信息几何简介</title>
-    <link href="./information-geometry/"/>
-    <id>./information-geometry/</id>
+    <link href="./zh_CN/information-geometry/"/>
+    <id>./zh_CN/information-geometry/</id>
     <published>2016-01-05T16:00:00.000Z</published>
     <updated>2016-12-14T11:13:56.024Z</updated>
     
@@ -360,9 +360,9 @@ end C&lt;/code&gt;&lt;/pre&gt;
   </entry>
   
   <entry>
-    <title>Hello World from the Hexo</title>
-    <link href="./blog-hexo-1/"/>
-    <id>./blog-hexo-1/</id>
+    <title>Hello World From the Hexo</title>
+    <link href="./EXPR/blog-hexo-1/"/>
+    <id>./EXPR/blog-hexo-1/</id>
     <published>2015-12-31T16:00:00.000Z</published>
     <updated>2016-12-15T03:53:01.363Z</updated>
     
@@ -387,8 +387,8 @@ end C&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>守护进程的编写思路（C与Python）</title>
-    <link href="./programming-daemon/"/>
-    <id>./programming-daemon/</id>
+    <link href="./zh_CN/programming-daemon/"/>
+    <id>./zh_CN/programming-daemon/</id>
     <published>2015-12-08T16:00:00.000Z</published>
     <updated>2016-12-14T11:18:28.344Z</updated>
     
@@ -409,13 +409,13 @@ end C&lt;/code&gt;&lt;/pre&gt;
       <category term="操作系统" scheme="./categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
     
-      <category term="linux" scheme="./tags/linux/"/>
-    
-      <category term="daemon" scheme="./tags/daemon/"/>
-    
       <category term="python" scheme="./tags/python/"/>
     
+      <category term="linux" scheme="./tags/linux/"/>
+    
       <category term="c" scheme="./tags/c/"/>
+    
+      <category term="daemon" scheme="./tags/daemon/"/>
     
       <category term="server" scheme="./tags/server/"/>
     
@@ -423,8 +423,8 @@ end C&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>Scheme语言概要</title>
-    <link href="./scheme-lang/"/>
-    <id>./scheme-lang/</id>
+    <link href="./zh_CN/scheme-lang/"/>
+    <id>./zh_CN/scheme-lang/</id>
     <published>2015-08-30T16:00:00.000Z</published>
     <updated>2016-12-14T11:08:10.697Z</updated>
     
@@ -441,9 +441,9 @@ end C&lt;/code&gt;&lt;/pre&gt;
       <category term="编程语言" scheme="./categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
     
     
-      <category term="语法" scheme="./tags/%E8%AF%AD%E6%B3%95/"/>
-    
       <category term="scheme" scheme="./tags/scheme/"/>
+    
+      <category term="语法" scheme="./tags/%E8%AF%AD%E6%B3%95/"/>
     
       <category term="guile" scheme="./tags/guile/"/>
     
@@ -451,8 +451,8 @@ end C&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>Maude语言</title>
-    <link href="./maude-lang/"/>
-    <id>./maude-lang/</id>
+    <link href="./zh_CN/maude-lang/"/>
+    <id>./zh_CN/maude-lang/</id>
     <published>2015-07-21T16:00:00.000Z</published>
     <updated>2016-12-14T11:08:38.764Z</updated>
     
@@ -476,9 +476,48 @@ end C&lt;/code&gt;&lt;/pre&gt;
   </entry>
   
   <entry>
+    <title>Scala编程概要（三）：进程控制与shell，函数式特性</title>
+    <link href="./CODE/scala-process-and-shell/"/>
+    <id>./CODE/scala-process-and-shell/</id>
+    <published>2015-07-01T16:00:00.000Z</published>
+    <updated>2016-12-14T11:14:50.274Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;应该说，这种特性是可以让人大吼大叫的。简单的示例如下：&lt;/p&gt;
+&lt;div class=&quot;sourceCode&quot;&gt;&lt;pre class=&quot;sourceCode scala&quot;&gt;&lt;code class=&quot;sourceCode scala&quot;&gt;&lt;span class=&quot;kw&quot;&gt;import&lt;/span&gt; sys.&lt;span class=&quot;fu&quot;&gt;process&lt;/span&gt;._
+&lt;span class=&quot;st&quot;&gt;&amp;quot;ls -al ..&amp;quot;&lt;/span&gt; !&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;之所以可以这样做，是因为sys.process包含一个从字符串到ProcessBuild对象的隐式类型转换。注意后面的&lt;code&gt;!&lt;/code&gt;号操作符，以ProcessBuild类型为参数类型，返回的是被执行程序的返回值。如果需要返回的是程序的输出的字符串，可以使用&lt;code&gt;!!&lt;/code&gt;代替&lt;code&gt;!&lt;/code&gt;号。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="编程语言" scheme="./categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="Scala" scheme="./categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Scala/"/>
+    
+    
+      <category term="正则表达式" scheme="./tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+      <category term="进程" scheme="./tags/%E8%BF%9B%E7%A8%8B/"/>
+    
+      <category term="scala" scheme="./tags/scala/"/>
+    
+      <category term="shell" scheme="./tags/shell/"/>
+    
+      <category term="特质" scheme="./tags/%E7%89%B9%E8%B4%A8/"/>
+    
+      <category term="运算符" scheme="./tags/%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
+    
+      <category term="高阶函数" scheme="./tags/%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/"/>
+    
+      <category term="柯里化" scheme="./tags/%E6%9F%AF%E9%87%8C%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Scala编程概要（四）：控制抽象, 集合, 模式匹配, 编译器</title>
-    <link href="./scala-overview-4/"/>
-    <id>./scala-overview-4/</id>
+    <link href="./CODE/scala-overview-4/"/>
+    <id>./CODE/scala-overview-4/</id>
     <published>2015-07-01T16:00:00.000Z</published>
     <updated>2016-12-14T11:09:01.020Z</updated>
     
@@ -510,48 +549,9 @@ end C&lt;/code&gt;&lt;/pre&gt;
   </entry>
   
   <entry>
-    <title>Scala编程概要（三）：进程控制与shell，函数式特性</title>
-    <link href="./scala-process-and-shell/"/>
-    <id>./scala-process-and-shell/</id>
-    <published>2015-07-01T16:00:00.000Z</published>
-    <updated>2016-12-14T11:14:50.274Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;应该说，这种特性是可以让人大吼大叫的。简单的示例如下：&lt;/p&gt;
-&lt;div class=&quot;sourceCode&quot;&gt;&lt;pre class=&quot;sourceCode scala&quot;&gt;&lt;code class=&quot;sourceCode scala&quot;&gt;&lt;span class=&quot;kw&quot;&gt;import&lt;/span&gt; sys.&lt;span class=&quot;fu&quot;&gt;process&lt;/span&gt;._
-&lt;span class=&quot;st&quot;&gt;&amp;quot;ls -al ..&amp;quot;&lt;/span&gt; !&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;之所以可以这样做，是因为sys.process包含一个从字符串到ProcessBuild对象的隐式类型转换。注意后面的&lt;code&gt;!&lt;/code&gt;号操作符，以ProcessBuild类型为参数类型，返回的是被执行程序的返回值。如果需要返回的是程序的输出的字符串，可以使用&lt;code&gt;!!&lt;/code&gt;代替&lt;code&gt;!&lt;/code&gt;号。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="编程语言" scheme="./categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
-    
-      <category term="Scala" scheme="./categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Scala/"/>
-    
-    
-      <category term="正则表达式" scheme="./tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
-    
-      <category term="scala" scheme="./tags/scala/"/>
-    
-      <category term="进程" scheme="./tags/%E8%BF%9B%E7%A8%8B/"/>
-    
-      <category term="shell" scheme="./tags/shell/"/>
-    
-      <category term="特质" scheme="./tags/%E7%89%B9%E8%B4%A8/"/>
-    
-      <category term="运算符" scheme="./tags/%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
-    
-      <category term="高阶函数" scheme="./tags/%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/"/>
-    
-      <category term="柯里化" scheme="./tags/%E6%9F%AF%E9%87%8C%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Scala编程概要（一）：文档，注释，面向对象</title>
-    <link href="./scala-tutorial-intro/"/>
-    <id>./scala-tutorial-intro/</id>
+    <link href="./CODE/scala-tutorial-intro/"/>
+    <id>./CODE/scala-tutorial-intro/</id>
     <published>2015-06-30T16:00:00.000Z</published>
     <updated>2016-12-14T11:15:35.130Z</updated>
     
@@ -577,8 +577,8 @@ end C&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>Scala编程概要（二）：基本结构，常用模式</title>
-    <link href="./scala-sentences/"/>
-    <id>./scala-sentences/</id>
+    <link href="./CODE/scala-sentences/"/>
+    <id>./CODE/scala-sentences/</id>
     <published>2015-06-30T16:00:00.000Z</published>
     <updated>2016-12-14T11:11:37.384Z</updated>
     
@@ -614,8 +614,8 @@ end C&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>用自举理解人工智能与学术研究</title>
-    <link href="./ai-and-bootstraping/"/>
-    <id>./ai-and-bootstraping/</id>
+    <link href="./zh_CN/ai-and-bootstraping/"/>
+    <id>./zh_CN/ai-and-bootstraping/</id>
     <published>2015-06-28T16:00:00.000Z</published>
     <updated>2016-12-14T11:15:56.908Z</updated>
     

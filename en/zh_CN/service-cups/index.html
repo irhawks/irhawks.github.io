@@ -30,10 +30,6 @@
 
 
 
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
 
 
 
@@ -138,7 +134,7 @@ unix打印支持
     root: '/',
     scheme: 'Mist',
     sidebar: {"position":"left","display":"post"},
-    fancybox: true,
+    fancybox: false,
     motion: true,
     duoshuo: {
       userId: 'undefined',
@@ -542,8 +538,8 @@ unix打印支持
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/zh_CN/周期性进程与crontab/" rel="next" title="周期性进程与Crontab">
-                <i class="fa fa-chevron-left"></i> 周期性进程与Crontab
+              <a href="/ICTN/Linux-Log/" rel="next" title="Linux下的日志记录及其策略">
+                <i class="fa fa-chevron-left"></i> Linux下的日志记录及其策略
               </a>
             
           </div>
@@ -839,8 +835,6 @@ unix打印支持
 
 
 
-  
-
 
 
   
@@ -857,9 +851,6 @@ unix打印支持
 
   
   <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
   
@@ -1098,6 +1089,21 @@ unix打印支持
   
 
   
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
 

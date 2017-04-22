@@ -30,10 +30,6 @@
 
 
 
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
 
 
 
@@ -129,7 +125,7 @@ lapack原来是用FORTRAN语言写成的，后来C语言得到了广泛的应用
     root: '/',
     scheme: 'Mist',
     sidebar: {"position":"left","display":"post"},
-    fancybox: true,
+    fancybox: false,
     motion: true,
     duoshuo: {
       userId: 'undefined',
@@ -812,8 +808,6 @@ info = LAPACKE_deqrf(LAPACK_COL_MAJOR, m, n, a, lda, tau);</code></pre></div>
 
 
 
-  
-
 
 
   
@@ -830,9 +824,6 @@ info = LAPACKE_deqrf(LAPACK_COL_MAJOR, m, n, a, lda, tau);</code></pre></div>
 
   
   <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
   
@@ -1071,6 +1062,21 @@ info = LAPACKE_deqrf(LAPACK_COL_MAJOR, m, n, a, lda, tau);</code></pre></div>
   
 
   
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
 

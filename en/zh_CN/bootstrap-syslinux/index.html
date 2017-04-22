@@ -30,10 +30,6 @@
 
 
 
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
 
 
 
@@ -132,7 +128,7 @@ BIOS通常让用户选择从哪一个设备引导。一旦确定引导设备，B
     root: '/',
     scheme: 'Mist',
     sidebar: {"position":"left","display":"post"},
-    fancybox: true,
+    fancybox: false,
     motion: true,
     duoshuo: {
       userId: 'undefined',
@@ -865,8 +861,6 @@ INITRD [files]: 该选项指定linux内核启动时所需的initrd文件，等�
 
 
 
-  
-
 
 
   
@@ -883,9 +877,6 @@ INITRD [files]: 该选项指定linux内核启动时所需的initrd文件，等�
 
   
   <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
   
@@ -1124,6 +1115,21 @@ INITRD [files]: 该选项指定linux内核启动时所需的initrd文件，等�
   
 
   
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
 

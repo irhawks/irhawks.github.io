@@ -30,10 +30,6 @@
 
 
 
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
 
 
 
@@ -129,7 +125,7 @@
     root: '/',
     scheme: 'Mist',
     sidebar: {"position":"left","display":"post"},
-    fancybox: true,
+    fancybox: false,
     motion: true,
     duoshuo: {
       userId: 'undefined',
@@ -539,8 +535,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/ICTN/Linux-Log/" rel="next" title="Linux下的日志记录及其策略">
-                <i class="fa fa-chevron-left"></i> Linux下的日志记录及其策略
+              <a href="/ICTN/Linux-Daemon/" rel="next" title="Linux下的守护进程">
+                <i class="fa fa-chevron-left"></i> Linux下的守护进程
               </a>
             
           </div>
@@ -549,8 +545,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/zh_CN/service-cups/" rel="prev" title="Cups打印服务介绍">
-                Cups打印服务介绍 <i class="fa fa-chevron-right"></i>
+              <a href="/ICTN/Linux-Log/" rel="prev" title="Linux下的日志记录及其策略">
+                Linux下的日志记录及其策略 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -836,8 +832,6 @@
 
 
 
-  
-
 
 
   
@@ -854,9 +848,6 @@
 
   
   <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
   
@@ -1095,6 +1086,21 @@
   
 
   
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
 

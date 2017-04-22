@@ -30,10 +30,6 @@
 
 
 
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
 
 
 
@@ -129,7 +125,7 @@
     root: '/',
     scheme: 'Mist',
     sidebar: {"position":"left","display":"post"},
-    fancybox: true,
+    fancybox: false,
     motion: true,
     duoshuo: {
       userId: 'undefined',
@@ -529,8 +525,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/CODE/scala-sentences/" rel="prev" title="Scala编程概要（二）：基本结构，常用模式">
-                Scala编程概要（二）：基本结构，常用模式 <i class="fa fa-chevron-right"></i>
+              <a href="/CODE/scala-tutorial-intro/" rel="prev" title="Scala编程概要（一）：文档，注释，面向对象">
+                Scala编程概要（一）：文档，注释，面向对象 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -816,8 +812,6 @@
 
 
 
-  
-
 
 
   
@@ -834,9 +828,6 @@
 
   
   <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
   
@@ -1075,6 +1066,21 @@
   
 
   
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
 

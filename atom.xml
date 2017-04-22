@@ -218,9 +218,9 @@ Hexo的Next主题可以识别&lt;! -- more --.&gt;，并且在主页当中展示
     
       <category term="OpenModelica" scheme="./tags/OpenModelica/"/>
     
-      <category term="ModelicaML" scheme="./tags/ModelicaML/"/>
-    
       <category term="仿真" scheme="./tags/%E4%BB%BF%E7%9C%9F/"/>
+    
+      <category term="ModelicaML" scheme="./tags/ModelicaML/"/>
     
       <category term="DAE" scheme="./tags/DAE/"/>
     
@@ -476,6 +476,40 @@ end C&lt;/code&gt;&lt;/pre&gt;
   </entry>
   
   <entry>
+    <title>Scala编程概要（四）：控制抽象, 集合, 模式匹配, 编译器</title>
+    <link href="./CODE/scala-overview-4/"/>
+    <id>./CODE/scala-overview-4/</id>
+    <published>2015-07-01T16:00:00.000Z</published>
+    <updated>2016-12-14T11:09:01.020Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;scala的控制抽象&quot;&gt;Scala的控制抽象&lt;/h3&gt;
+&lt;p&gt;Haskell有自己的抽制抽象。使用的是单体。但是在Scala中，没有必要做得那么纯函数式。所以为了调用控制流，Scala使用了&lt;code&gt;() =&amp;gt; Unit&lt;/code&gt;类型。比如说，我们要在某个线程当中创建一个过程：&lt;/p&gt;
+&lt;div class=&quot;sourceCode&quot;&gt;&lt;pre class=&quot;sourceCode scala&quot;&gt;&lt;code class=&quot;sourceCode scala&quot;&gt;&lt;span class=&quot;fu&quot;&gt;runInThread&lt;/span&gt;() { () =&amp;gt; &lt;span class=&quot;fu&quot;&gt;println&lt;/span&gt;(&lt;span class=&quot;st&quot;&gt;&amp;quot;Hi&amp;quot;&lt;/span&gt;); Thread.&lt;span class=&quot;fu&quot;&gt;sleep&lt;/span&gt;(&lt;span class=&quot;dv&quot;&gt;1000&lt;/span&gt;); &lt;span class=&quot;fu&quot;&gt;println&lt;/span&gt;(&lt;span class=&quot;st&quot;&gt;&amp;quot;Bye&amp;quot;&lt;/span&gt;) }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;其中定义的runInThead函数是：&lt;/p&gt;
+&lt;div class=&quot;sourceCode&quot;&gt;&lt;pre class=&quot;sourceCode scala&quot;&gt;&lt;code class=&quot;sourceCode scala&quot;&gt;&lt;span class=&quot;kw&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;runInThread&lt;/span&gt;( block : () =&amp;gt; Unit) {
+    &lt;span class=&quot;kw&quot;&gt;new&lt;/span&gt; Thread {
+        &lt;span class=&quot;kw&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;kw&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;run&lt;/span&gt;() { &lt;span class=&quot;fu&quot;&gt;block&lt;/span&gt;() }
+    }.&lt;span class=&quot;fu&quot;&gt;start&lt;/span&gt;()
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    
+    </summary>
+    
+    
+      <category term="scala" scheme="./tags/scala/"/>
+    
+      <category term="控制抽象" scheme="./tags/%E6%8E%A7%E5%88%B6%E6%8A%BD%E8%B1%A1/"/>
+    
+      <category term="集合" scheme="./tags/%E9%9B%86%E5%90%88/"/>
+    
+      <category term="模式匹配" scheme="./tags/%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D/"/>
+    
+      <category term="编译器" scheme="./tags/%E7%BC%96%E8%AF%91%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Scala编程概要（三）：进程控制与shell，函数式特性</title>
     <link href="./CODE/scala-process-and-shell/"/>
     <id>./CODE/scala-process-and-shell/</id>
@@ -515,67 +549,6 @@ end C&lt;/code&gt;&lt;/pre&gt;
   </entry>
   
   <entry>
-    <title>Scala编程概要（四）：控制抽象, 集合, 模式匹配, 编译器</title>
-    <link href="./CODE/scala-overview-4/"/>
-    <id>./CODE/scala-overview-4/</id>
-    <published>2015-07-01T16:00:00.000Z</published>
-    <updated>2016-12-14T11:09:01.020Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;scala的控制抽象&quot;&gt;Scala的控制抽象&lt;/h3&gt;
-&lt;p&gt;Haskell有自己的抽制抽象。使用的是单体。但是在Scala中，没有必要做得那么纯函数式。所以为了调用控制流，Scala使用了&lt;code&gt;() =&amp;gt; Unit&lt;/code&gt;类型。比如说，我们要在某个线程当中创建一个过程：&lt;/p&gt;
-&lt;div class=&quot;sourceCode&quot;&gt;&lt;pre class=&quot;sourceCode scala&quot;&gt;&lt;code class=&quot;sourceCode scala&quot;&gt;&lt;span class=&quot;fu&quot;&gt;runInThread&lt;/span&gt;() { () =&amp;gt; &lt;span class=&quot;fu&quot;&gt;println&lt;/span&gt;(&lt;span class=&quot;st&quot;&gt;&amp;quot;Hi&amp;quot;&lt;/span&gt;); Thread.&lt;span class=&quot;fu&quot;&gt;sleep&lt;/span&gt;(&lt;span class=&quot;dv&quot;&gt;1000&lt;/span&gt;); &lt;span class=&quot;fu&quot;&gt;println&lt;/span&gt;(&lt;span class=&quot;st&quot;&gt;&amp;quot;Bye&amp;quot;&lt;/span&gt;) }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;其中定义的runInThead函数是：&lt;/p&gt;
-&lt;div class=&quot;sourceCode&quot;&gt;&lt;pre class=&quot;sourceCode scala&quot;&gt;&lt;code class=&quot;sourceCode scala&quot;&gt;&lt;span class=&quot;kw&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;runInThread&lt;/span&gt;( block : () =&amp;gt; Unit) {
-    &lt;span class=&quot;kw&quot;&gt;new&lt;/span&gt; Thread {
-        &lt;span class=&quot;kw&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;kw&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;fu&quot;&gt;run&lt;/span&gt;() { &lt;span class=&quot;fu&quot;&gt;block&lt;/span&gt;() }
-    }.&lt;span class=&quot;fu&quot;&gt;start&lt;/span&gt;()
-}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-    
-    </summary>
-    
-    
-      <category term="scala" scheme="./tags/scala/"/>
-    
-      <category term="控制抽象" scheme="./tags/%E6%8E%A7%E5%88%B6%E6%8A%BD%E8%B1%A1/"/>
-    
-      <category term="集合" scheme="./tags/%E9%9B%86%E5%90%88/"/>
-    
-      <category term="模式匹配" scheme="./tags/%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D/"/>
-    
-      <category term="编译器" scheme="./tags/%E7%BC%96%E8%AF%91%E5%99%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Scala编程概要（一）：文档，注释，面向对象</title>
-    <link href="./CODE/scala-tutorial-intro/"/>
-    <id>./CODE/scala-tutorial-intro/</id>
-    <published>2015-06-30T16:00:00.000Z</published>
-    <updated>2016-12-14T11:15:35.130Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;虽然每次都是从头开始看Java与Scala的初级的教程，但是每次看的时候重点不一样，对于语言的理解也不一样。这一次的时候，强调的是，我们如何从初学者成为能够熟练运用一门语言的开发者？为了做到这一点，我们需要付出哪些努力？&lt;/p&gt;
-&lt;p&gt;现在的看法是这样的。第一，我们应该按照写书的方式写Scala的程序。所以，如何从应用程序中生成文档，以及介绍这个文档是最基本的。所以，在初学者的第一章的时候就应该学习使用scaladoc来写文档，以便能够注释出来自己所写的东西，表达出来自己所写的东西是什么样的意思。第二，或许是对于某些语言，使用REPL环境。但是学习一个语言可能更关键的是学习它适应的设计模式，与常见的实践，就像写学术文档一样写程序。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="编程语言" scheme="./categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
-    
-    
-      <category term="scala" scheme="./tags/scala/"/>
-    
-      <category term="面向对象" scheme="./tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
-    
-      <category term="文档" scheme="./tags/%E6%96%87%E6%A1%A3/"/>
-    
-      <category term="注释" scheme="./tags/%E6%B3%A8%E9%87%8A/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Scala编程概要（二）：基本结构，常用模式</title>
     <link href="./CODE/scala-sentences/"/>
     <id>./CODE/scala-sentences/</id>
@@ -609,6 +582,33 @@ end C&lt;/code&gt;&lt;/pre&gt;
       <category term="注解" scheme="./tags/%E6%B3%A8%E8%A7%A3/"/>
     
       <category term="序列化" scheme="./tags/%E5%BA%8F%E5%88%97%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Scala编程概要（一）：文档，注释，面向对象</title>
+    <link href="./CODE/scala-tutorial-intro/"/>
+    <id>./CODE/scala-tutorial-intro/</id>
+    <published>2015-06-30T16:00:00.000Z</published>
+    <updated>2016-12-14T11:15:35.130Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;虽然每次都是从头开始看Java与Scala的初级的教程，但是每次看的时候重点不一样，对于语言的理解也不一样。这一次的时候，强调的是，我们如何从初学者成为能够熟练运用一门语言的开发者？为了做到这一点，我们需要付出哪些努力？&lt;/p&gt;
+&lt;p&gt;现在的看法是这样的。第一，我们应该按照写书的方式写Scala的程序。所以，如何从应用程序中生成文档，以及介绍这个文档是最基本的。所以，在初学者的第一章的时候就应该学习使用scaladoc来写文档，以便能够注释出来自己所写的东西，表达出来自己所写的东西是什么样的意思。第二，或许是对于某些语言，使用REPL环境。但是学习一个语言可能更关键的是学习它适应的设计模式，与常见的实践，就像写学术文档一样写程序。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="编程语言" scheme="./categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+    
+      <category term="scala" scheme="./tags/scala/"/>
+    
+      <category term="面向对象" scheme="./tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
+    
+      <category term="文档" scheme="./tags/%E6%96%87%E6%A1%A3/"/>
+    
+      <category term="注释" scheme="./tags/%E6%B3%A8%E9%87%8A/"/>
     
   </entry>
   

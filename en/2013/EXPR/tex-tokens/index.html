@@ -1,0 +1,1159 @@
+<!doctype html>
+
+
+
+  
+
+
+<!--
+<html class="theme-next mist use-motion" lang="zh-Hans,en">
+-->
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="TeX,词法,控制系列," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Coding Poet, Coding Science" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="第二节 书籍排版与普通排版
+%%% 这部分实际上是介绍tex的输入与词法规则，算是编程基础
+当使用计算机排版，我们首先要知道传统排版与使用计算机输入字符的区别。本来计算机上面的字符并不是专门为了排版而设计的。为了使用现有的计算机键盘输入TeX的源文件，我们需要对原来的键盘符号进行一个重新定义。
+单引号，双引号
+键盘上，左单引号与右单引号是区分开来的。一个是好像重音符号的东西，另一个就是普通的单号">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LaTeX的编程原理">
+<meta property="og:url" content="./en/2013/EXPR/tex-tokens/index.html">
+<meta property="og:site_name" content="Coding Poet, Coding Science">
+<meta property="og:description" content="第二节 书籍排版与普通排版
+%%% 这部分实际上是介绍tex的输入与词法规则，算是编程基础
+当使用计算机排版，我们首先要知道传统排版与使用计算机输入字符的区别。本来计算机上面的字符并不是专门为了排版而设计的。为了使用现有的计算机键盘输入TeX的源文件，我们需要对原来的键盘符号进行一个重新定义。
+单引号，双引号
+键盘上，左单引号与右单引号是区分开来的。一个是好像重音符号的东西，另一个就是普通的单号">
+<meta property="og:updated_time" content="2016-12-14T13:48:57.083Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LaTeX的编程原理">
+<meta name="twitter:description" content="第二节 书籍排版与普通排版
+%%% 这部分实际上是介绍tex的输入与词法规则，算是编程基础
+当使用计算机排版，我们首先要知道传统排版与使用计算机输入字符的区别。本来计算机上面的字符并不是专门为了排版而设计的。为了使用现有的计算机键盘输入TeX的源文件，我们需要对原来的键盘符号进行一个重新定义。
+单引号，双引号
+键盘上，左单引号与右单引号是区分开来的。一个是好像重音符号的东西，另一个就是普通的单号">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: false,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="./en/2013/EXPR/tex-tokens/"/>
+
+
+
+
+
+<!-- add highlight.js to render pandoc code blocks -->
+<!--
+<link href="http://cdn.bootcss.com/highlight.js/9.10.0/styles/github.min.css" rel="stylesheet">  
+-->
+<link href="/css/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>  
+<script src="/js/highlightjs-line-numbers.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.initLineNumbersOnLoad(); </script>
+
+  <title> LaTeX的编程原理 | Coding Poet, Coding Science </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?763bee904aa6d81fdf017659d162188f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Coding Poet, Coding Science</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Keep Stupid, Keep Hungry</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-resources">
+          <a href="/resources" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-folder"></i> <br />
+            
+            Resources
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+          <li class="menu-item"><a href="/2013/EXPR/tex-tokens/">简体中文</a></li>
+          
+          <li class="menu-item"><a href="/en/2013/EXPR/tex-tokens/">English (US)</a></li>
+          
+
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <!-- previous -->
+<script type="text/javascript">
+   var search_path = "<%= config.search.path %>";
+   if (search_path.length == 0) {
+       search_path = "search.xml";
+   }
+   var path = "<%= config.root %>" + search_path;
+   searchFunc(path, 'local-search-input', 'local-search-result');
+</script>
+<!-- optimized -->
+<div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+
+    </div>
+  
+
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="./en/2013/EXPR/tex-tokens/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Istyasna">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Coding Poet, Coding Science">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Coding Poet, Coding Science" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                LaTeX的编程原理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2013-06-20T00:00:00+08:00">
+                2013-06-20
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              <span class="post-meta-item-text">Post modified</span>
+              <time title="Post modified" itemprop="dateModified" datetime="2016-12-14T21:48:57+08:00">
+                2016-12-14
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/出版/" itemprop="url" rel="index">
+                    <span itemprop="name">出版</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/出版/TeX/" itemprop="url" rel="index">
+                    <span itemprop="name">TeX</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/en/2013/EXPR/tex-tokens/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="en/2013/EXPR/tex-tokens/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <!-- 这部分是关于\TeX{}的输入与词法的。但是在texbook这本书中也介绍了不少的关于控制系列，以及中英文的括号的输入的问题。比如左单引号，双引号该怎样断开。因此有少数部分是关于正字法（比如英语与中文的标点符号约定）。有时间的话应该将这部分内容独立出来，放到语言与字体，或者放到正文内容排版规则当中。-->
+<h2 id="第二节-书籍排版与普通排版">第二节 书籍排版与普通排版</h2>
+<p>%%% 这部分实际上是介绍tex的输入与词法规则，算是编程基础</p>
+<p>当使用计算机排版，我们首先要知道传统排版与使用计算机输入字符的区别。本来计算机上面的字符并不是专门为了排版而设计的。为了使用现有的计算机键盘输入TeX的源文件，我们需要对原来的键盘符号进行一个重新定义。</p>
+<h3 id="单引号双引号">单引号，双引号</h3>
+<p>键盘上，左单引号与右单引号是区分开来的。一个是好像重音符号的东西，另一个就是普通的单号号。但是直接键入的时候，TeX将这个符号理解成左单引号。显然我们不能使用ASCII上的双引号排版双此号，因为那样无法区分左右。所以两个连在一起的左单引号代表左双引号，而两个连在一起的右单引号代表右双引号。</p>
+<a id="more"></a>
+<blockquote>
+<p>这种方式总让我想到那个m4编程语言，也使用<code>`</code> 与<code>'</code>代表成对的单引号。这样的标记有一个明显的好处，那就是我们可以利用它实现块的嵌套。而且我们可以根据引号的方向就可以看出来被括起来的文本是在这个括号的前面还是在这个括号的后面。</p>
+</blockquote>
+<h3 id="连字符短破折号破折号减号">连字符，短破折号，破折号，减号</h3>
+<p>在键盘上它们有一些相像。通常直接键入<code>-</code>产生一个连字符，<code>--</code>代表一个短破折号，而使用<code>---</code>代表一个破折号，最后的一个减号只在数学模式当中使用，方法是<code>$-$</code>。连字符常用在复合单词当中，短破折号常用来表示一个范围，比如<code>page12--23.</code>。其实也就是短破折号常用在表示数字范围上面。破折号是作为一个标点符号来看的。经常用于区分两个句子或者一个句子中不同的短语成分。我们可以想象，假设在符号<span class="math inline">\(X\)</span>前面有<span class="math inline">\(A\)</span>，后面有<span class="math inline">\(B\)</span>，那么连字符将<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>视为一个word,而短破折号将<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>视为一个number，破折号将<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>视为两个短语。至于减号，则是附加了运算符的意义。</p>
+<p>按照长度从长到短来说，破折号&gt; 减号&gt; 短破折号&gt; 连字符。</p>
+<p>在英文中，hyphen表示连字符，dash表示破折号，minus表示减号。在常用的文献当中，有时候也使用连字符代替短破折号以代表从第XX页到第YY页。不过，我们还是严格按照TeX当中的规定吧。以后就用<code>--</code>表示从第多少页到第多少页。</p>
+<p>ex2.1 [怎样键入单引号，双引号，连字符，破折号，短破折号，连字符]</p>
+<p>方法如上。</p>
+<p>ex2.2 当你在一行中连续键入四个连字符时会得到什么结果?</p>
+<p>按照最最长记号识别原则，应当是在第三个连字符后面断开，结果为一个破折号与一个连字符。</p>
+<p>在排版精良的书籍中，两个相近的字母有时候会连在一起，称为组合字。组合字常用在ff,fi,fl,ffi,ffl这样的组合当中。主要是提高可读性。我们可以以find为例查看一下排版效果(默认为根据单词的组合情况自动排成组合字的)。如果要取消组合字，可以在字母中间加上一对大括号，表示从这里断开分组，将前面的词视为一个完整的排版单元。</p>
+<p>在TeX当中，除了这样的调整外，还有字距的自动调整，比如<span class="math inline">\(V\)</span>与<span class="math inline">\(A\)</span>在合在一起的时候，会自动调整它们的间距，以使得排版更好看一些。</p>
+<p>一般而言，TeX直接排版的时候就好像在打字机上键入书稿一样，但是在前面所提到的情况，以及其它的一些细节会做好调整。</p>
+<p>如果我们的键盘上没有左引号或者又引号，可以使用控制序列<code>\lq</code>,<code>\rq</code>代替。注意TeX在识别记号的时候是遇到非字母符号的时候结束。如果控制序列后面是一个空白字符，那么控制序列后面的空白字符会被忽略，如果想使本控制序列结束，而后面的空格不被忽略，可以使用一个转义的空格，如<code>\rq\rq\</code>。</p>
+<p>ex2.4 好了，现在你知道怎样得到相邻引号的排版方法了吧。</p>
+<p>在单引号与双引号连续排版的时候，我们不能简单地敲入<code>'''</code>,<code>{'}''</code>等其它的任意设想的符号，按照习惯，在两者连续排版的时候，应当在单引号与双引号之间加入一个窄的空格，比如<code>'\thinspace''</code>。</p>
+<p>ex2.5 想一下作者为什么使用控制系统<code>\thinspace</code>而不是<code>\,</code>以解决相邻引号的问题?</p>
+<p>为什么使用<code>\thinspace</code>而不是<code>\,</code>呢? 我觉得可能根据TeX的设计原理，在<code>\thinspace</code>处不会发生断行吧。在进入数学模式之前与离开数学模式的时候可能会断行。所以可以设想一个TeX源文件有一个断行点。这个断行点决定了在那些位置可以断行。</p>
+<h2 id="tex的控制系列">TeX的控制系列</h2>
+<p>键盘所含的字符与所期望的显然是太少了，所以一些字符不得不转义使用。在TeX程序源代码中，使用反斜杠作为转义符。实际上，TeX允许使用任意字符作为转义符，但是一般采用反斜线。主要因为它在一般文本中很少被使用。</p>
+<p>操作系统的转义符通常是ESC按键，它与TeX系统的转义符根本不是同一个概念。</p>
+<p>TeX系统的转义序列由反斜杠加后面的一个单词构成，单词的定义是<code>[a-zA-Z]+,</code>因此既不能含有数字也不能含有下划线。</p>
+<p>常用的控制序列有<code>\input{STRING}</code>用于将目录名为STRING.tex的文件读入到当前文档里面并执行。而<code>\'</code>，<code>\&quot;</code>表示重音符(一个像是加拼音中的二声，另一个是上面加两个点)。而且在TeX当中使用\\并不表示换段(与LaTeX不同)，而是表示排版出反斜杠来。</p>
+<p>控制序列有两类，前面的一类我们已经介绍过了。实际上，<code>\'</code>这样的控制系列就是第二类，它们由反斜杠后面加上一个非字母符号构成。</p>
+<p>ex3.1 在<code>\I'm \exercise3·\\!</code>中，控制序列有哪些?</p>
+<p>有<code>\I</code>, <code>\exercise</code>, \\三个。</p>
+<p>ex3.2 键入各种重音符号。</p>
+<p>除了前面的<code>\'</code>、<code>\&quot;</code>外，还有其它的控制序列。</p>
+<ul>
+<li><code>\'</code> 产生一个类似于阳平的声调符号，acute accent, 尖调符号</li>
+<li><code>\.</code> 在字母上面产生一个点号， dot accent, 点调符号</li>
+<li><code>\=</code> 在字母上面产生一个，macron accent,平调符号</li>
+<li><code>\^</code> 在字母上面产生一个<code>^</code>、circumflex accent,长调符号</li>
+<li><code>\\`` 在字母上面产生一个\</code>,grave accent, 重调符号</li>
+<li><code>\&quot;</code> 在字母上面产生两点，umlaut accent,元音变音符号</li>
+<li><code>\~</code> 在字母上面产生一个波浪线</li>
+<li><code>\d</code> 下加点</li>
+<li><code>\H</code> 匈牙利元音变音符号</li>
+<li><code>\t</code> 连接两个字母的等号，</li>
+<li><code>\u</code> 上面加一个类似u的东西，</li>
+<li><code>\v</code> 上面加上一个类似v的东西，上声。</li>
+</ul>
+<p>由于<code>\v</code>是一个控制系列，所以我们后面得加上一个空格或者一对大括号以使它结束。控制系列的作用域实际上是它的参数，关于TeX的控制系列如何得到参数，可以参考后面的学习主题。</p>
+<p>在转义符后面跟一个空格表示的是一个不能被忽略的空格。它是第二类控制序列，所以在转义后的空格后面的所有字符都会被忽略。所以使用转义时，用<code>\ \ \</code>表示三个连续的不能忽略的空格。</p>
+<p>一般来说，在英文中，句子之间的间距要比空格大一些。因此打字员通常使用两个连续的空格以表示句子结束。但是在TeX中，连续的空白字符作用是一样的。并且，TeX会自动判断哪里是句子的结束，并在排版时自动计算出较大的间距。</p>
+<p>关于TeX标记的排版</p>
+<p>TeX标记本身用<code>\TeX</code>控制系列产生。但是它后面是没有自动排版括号的，所以如果将TeX作为一个单词来看，我们还必须在后面加一个转义的空格。</p>
+<p>TeX命令后面不加空格是有原因的，因为我们经常使用`’这样的括号，如果<code>\TeX</code>恰好后面是一个引号，如果有空格，就会产生错误的结果。</p>
+<p>TeX系统控制系列的情况</p>
+<p>TeX的内置控制系列大概有900个。其中有许多都是数学符号，如<code>\pi</code>,<code>\Pi</code>,<code>\aleph</code>,<code>\infty</code>, <code>\le</code>, <code>\ge</code>, <code>\ne</code>, <code>\oplus</code>,<code>\otimes</code> 等。</p>
+<p>记符号也是一件不容易的事情。如果是希腊字母，小写的用全小写的英文，大写的则使用首字母大写的控制序列，至于<code>\oplus</code>,<code>\otimes</code>,则可以看成是带圆圈的加法与乘法，在群论里面经常会用到。</p>
+<p>其中的大约300个称为原始控制系列，其中<code>\input</code> 就是一个原始控制系列。原始控制系列是很基本的。我们不妨看一下，<code>\TeX</code>,<code>\'</code>, <code>\oplus</code> 这些符号都不是原始系列，所以原始系列几乎可以看成是TeX语法当中的关键词。</p>
+<p>在TeX运行时的交互式环境下，用<code>\show</code>命令后跟控制序列可以查看它的类型与值。我们不如在交互式环境下面读<code>\show``\thinspace</code> 看一下结果。</p>
+<p>TeX的交互式环境下面有各种不同的提示符，当有两个星号时，表示需要输入一个文件名进行处理(因此进入TeX前我们先touch一个tex文档); 当有一个星号的时候，表示我们可以正常输入控制序列了。而问号表示我们进入了程序的菜单界面，这个时候按回车返回到一个星号的状态，使用X表示退出。当使用<code>\show</code>命令后，以&gt;开头的行表示控制序列的含义，-&gt;这一行表示控制系列的定义。</p>
+<p>通过测试<code>\&lt;回车&gt;</code>是一个高级控制序列</p>
+<p>ex3.4 有多少个两个字符的不同控制系列? 有多少三个字符的?</p>
+<p>逻辑上跟ASCII编码数有关。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/TeX/" rel="tag"># TeX</a>
+          
+            <a href="/tags/词法/" rel="tag"># 词法</a>
+          
+            <a href="/tags/控制系列/" rel="tag"># 控制系列</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/EXPR/LaTeX-grouping/" rel="next" title="TeX与LaTeX的编组">
+                <i class="fa fa-chevron-left"></i> TeX与LaTeX的编组
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/人工智能语言/" rel="prev" title="人工智能语言介绍">
+                人工智能语言介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="en/2013/EXPR/tex-tokens/"
+           data-title="LaTeX的编程原理" data-url="./2013/EXPR/tex-tokens/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Istyasna" />
+          <p class="site-author-name" itemprop="name">Istyasna</p>
+          <p class="site-description motion-element" itemprop="description">GO FORTH now and create masterpieces of the publishing art!</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">193</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/irhawks" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://code.aliyun.com/u/irhawks" target="_blank" title="Aliyun">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Aliyun
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="./" title="Homepage" target="_blank">Homepage</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hainu.edu.cn" title="Hainan University" target="_blank">Hainan University</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://qiqi789.github.io/" title="Qi Qi" target="_blank">Qi Qi</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第二节-书籍排版与普通排版"><span class="nav-number">1.</span> <span class="nav-text">第二节 书籍排版与普通排版</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单引号双引号"><span class="nav-number">1.1.</span> <span class="nav-text">单引号，双引号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连字符短破折号破折号减号"><span class="nav-number">1.2.</span> <span class="nav-text">连字符，短破折号，破折号，减号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tex的控制系列"><span class="nav-number">2.</span> <span class="nav-text">TeX的控制系列</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Istyasna</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+<!-- I manually add this to enable bootstrap style dropdown menu -->
+<script type="text/javascript" src="/js/src/bootstrap/dropdown.js"></script>
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"irhawks"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: {
+          extensions: ["amsthm.js", "AMSmath.js","AMSsymbols.js", "autobold.js"],
+        },
+        tex2jax: {
+          <!--(disable $) inlineMath: [ ['$','$'], ["\\(","\\)"]  ],-->
+          inlineMath: [ ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        },
+        <!-- add zoom options for math equations-->
+        MathZoom: {
+          styles: { "#MathJax_Zoom": {
+              "background-color": "rgba(255,255,255,0.9)"
+            } }
+        },
+        extensions: ["[Contrib]/a11y/accessibility-menu.js"],
+        explorer: {
+          walker: 'syntactic',         // none, syntactic, semantic
+          highlight: 'none',           // none, hover, flame
+          background: 'blue',          // blue, red, green, yellow, cyan, magenta, white, black
+          foreground: 'black',         // black, white, magenta, cyan, yellow, green, red, blue
+          speech: true,                // true, false
+          generation: 'lazy',          // eager, mixed, lazy
+          subtitle: true,              // true, false
+          ruleset: 'mathspeak-default' // mathspeak-default, mathspeak-brief, mathspeak-sbrief, chromevox-default, chromevox-short, chromevox-alternative
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>

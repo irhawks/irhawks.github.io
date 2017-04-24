@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>80x24</title>
+  <title>Coding Poet, Coding Science</title>
   <subtitle>Keep Stupid, Keep Hungry</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="./"/>
-  <updated>2016-12-15T12:33:21.163Z</updated>
+  <updated>2017-04-24T01:14:17.388Z</updated>
   <id>./</id>
   
   <author>
@@ -16,65 +16,52 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Pandoc&#39;s Test for Pandoc-Crossref</title>
-    <link href="./EXPR/blog-pandoc-crossref/"/>
-    <id>./EXPR/blog-pandoc-crossref/</id>
-    <published>2016-12-15T10:36:04.000Z</published>
-    <updated>2016-12-15T12:33:21.163Z</updated>
+    <title>博客文章功能指南</title>
+    <link href="./2016/EXPR/blog-function-spec/"/>
+    <id>./2016/EXPR/blog-function-spec/</id>
+    <published>2016-12-14T16:00:00.000Z</published>
+    <updated>2017-04-24T01:14:17.388Z</updated>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;sec:pandoc-crossref&quot;&gt;pandoc-crossref filter&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;http://hackage.haskell.org/package/pandoc-crossref&quot; id=&quot;link:crossref&quot;&gt;Pandoc crossref&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Homepage is sec. 1.1.&lt;/p&gt;
-&lt;h3 id=&quot;build-status&quot;&gt;Build status&lt;/h3&gt;
-&lt;p&gt;pandoc-crossref is a pandoc filter for numbering figures, equations, tables and cross-references to them.&lt;/p&gt;
-&lt;p&gt;Input file (like demo.md) can be converted into html, latex, pdf, md or other formats.&lt;/p&gt;
-&lt;p&gt;Optionally, you can use cleveref for latex/pdf output, e.g. cleveref pdf, cleveref latex, and listings package, e.g. listings pdf, listings latex&lt;/p&gt;
+      &lt;h1 id=&quot;整理github博客2014-09-13&quot;&gt;整理github博客[2014-09-13]&lt;/h1&gt;
+&lt;h2 id=&quot;代码展示功能&quot;&gt;代码展示功能&lt;/h2&gt;
+&lt;p&gt;测试了很多。现在的代码应该是正常的吧。&lt;/p&gt;
+&lt;p&gt;代码使用Python块，使用Markdown内嵌的支持。&lt;/p&gt;
+&lt;p&gt;A block of text.&lt;/p&gt;
+&lt;div class=&quot;sourceCode&quot;&gt;&lt;pre class=&quot;sourceCode python&quot;&gt;&lt;code class=&quot;sourceCode python&quot;&gt;&lt;span class=&quot;im&quot;&gt;import&lt;/span&gt; os
+&lt;span class=&quot;bu&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;st&quot;&gt;&amp;quot;hello,world&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;代码虽然不是很好看，但是也可以接受。&lt;/p&gt;
+&lt;h2 id=&quot;数学公式展示功能&quot;&gt;数学公式展示功能&lt;/h2&gt;
+&lt;p&gt;数学公式使用MathJax插件，下面的是勾股定理： &lt;span class=&quot;math display&quot;&gt;\[a^2+b^2=c^2.\]&lt;/span&gt;&lt;/p&gt;
+&lt;h1 id=&quot;github主页修整记&quot;&gt;Github主页修整记&lt;/h1&gt;
+&lt;p&gt;2015-06-20&lt;/p&gt;
+&lt;p&gt;建主页有许多种选择。这些方案可以分成静态主页方案与动态主页方案两大类。动态主页的托管的方式可能复杂一些，需要维护的代价似乎比较高。此外，动态主页里面的内容在转成可打印的版本的时候质量也会缩水。最理想的情况自然是一边能够生成HTML文档，另一方面，不经重新修改，可以转成其它的格式，特别是LaTeX的格式。&lt;/p&gt;
+&lt;p&gt;但是实际中能像LaTeX那样有表现力，又有丰富宏包支持的格式还真不多。Markdown等都过于简单了。之前的实践中，LaTeX格式与HTML对比中，主要的不一致有：&lt;/p&gt;
+&lt;ol style=&quot;list-style-type: decimal&quot;&gt;
+&lt;li&gt;&lt;p&gt;LaTeX中有wrapfigure、caption宏包可以调整图片，但是在HTML中的调整就得手工编码了。因为实在是没有学习HTML的排版细节问题；此外，LaTeX的表格转成HTML的表格也不太容易，特别是有对齐、指定宽度的表格，换到HTML页面上往往不好看。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;数学公式中，使用MathJax中也只能使用预定义的公式集。但是在编程语言中所用的符号，与在逻辑中所用的符号不同，范畴论的符号，跟在线性代数中也非常不同。在MathJax中能够自定义数学公式命令是必须的，但是又是比较麻烦的。高级的框架，如交换图、amssymb、eulervm宏包提供的符号，似乎也得重新配置。单配置来说并不困难，可是有时候需要变更宏包，这个时候又得手工同步。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
     
     </summary>
     
-      <category term="出版" scheme="./categories/%E5%87%BA%E7%89%88/"/>
+      <category term="写作" scheme="./categories/%E5%86%99%E4%BD%9C/"/>
     
-      <category term="Pandoc" scheme="./categories/%E5%87%BA%E7%89%88/Pandoc/"/>
+      <category term="Pandoc" scheme="./categories/%E5%86%99%E4%BD%9C/Pandoc/"/>
     
     
       <category term="pandoc" scheme="./tags/pandoc/"/>
     
       <category term="crossref" scheme="./tags/crossref/"/>
     
-  </entry>
-  
-  <entry>
-    <title>Test the Layout of Images</title>
-    <link href="./EXPR/blog-hexo-image-test/"/>
-    <id>./EXPR/blog-hexo-image-test/</id>
-    <published>2016-12-14T16:00:00.000Z</published>
-    <updated>2016-12-15T03:57:04.406Z</updated>
-    
-    <summary type="html">
-    
-      A short description of the blog
-    
-    </summary>
-    
-      <category term="出版" scheme="./categories/%E5%87%BA%E7%89%88/"/>
-    
-      <category term="博客" scheme="./categories/%E5%87%BA%E7%89%88/%E5%8D%9A%E5%AE%A2/"/>
-    
-    
       <category term="blog" scheme="./tags/blog/"/>
-    
-      <category term="hello" scheme="./tags/hello/"/>
-    
-      <category term="hexo" scheme="./tags/hexo/"/>
     
   </entry>
   
   <entry>
     <title>Hello World From Hexo With NexT Theme</title>
-    <link href="./EXPR/hello-world/"/>
-    <id>./EXPR/hello-world/</id>
+    <link href="./2016/EXPR/hello-world/"/>
+    <id>./2016/EXPR/hello-world/</id>
     <published>2016-12-13T16:00:00.000Z</published>
     <updated>2016-12-15T03:53:40.035Z</updated>
     
@@ -99,8 +86,8 @@
   
   <entry>
     <title>Solr搜索介绍（继续）</title>
-    <link href="./zh_CN/solr-tutorial/"/>
-    <id>./zh_CN/solr-tutorial/</id>
+    <link href="./2016/solr-tutorial/"/>
+    <id>./2016/solr-tutorial/</id>
     <published>2016-06-02T16:00:00.000Z</published>
     <updated>2016-12-14T14:41:20.578Z</updated>
     
@@ -130,8 +117,8 @@ Hexo的Next主题可以识别&lt;! -- more --.&gt;，并且在主页当中展示
   
   <entry>
     <title>Apache Nutch的介绍与基本使用</title>
-    <link href="./zh_CN/apache-nutch/"/>
-    <id>./zh_CN/apache-nutch/</id>
+    <link href="./2016/apache-nutch/"/>
+    <id>./2016/apache-nutch/</id>
     <published>2016-05-31T16:00:00.000Z</published>
     <updated>2016-12-14T11:02:43.873Z</updated>
     
@@ -171,8 +158,8 @@ Hexo的Next主题可以识别&lt;! -- more --.&gt;，并且在主页当中展示
   
   <entry>
     <title>随机微分方程的一种引入方法</title>
-    <link href="./zh_CN/stochastic-differential-equation-intro/"/>
-    <id>./zh_CN/stochastic-differential-equation-intro/</id>
+    <link href="./2016/stochastic-differential-equation-intro/"/>
+    <id>./2016/stochastic-differential-equation-intro/</id>
     <published>2016-03-16T16:00:00.000Z</published>
     <updated>2016-12-14T11:00:03.326Z</updated>
     
@@ -197,8 +184,8 @@ Hexo的Next主题可以识别&lt;! -- more --.&gt;，并且在主页当中展示
   
   <entry>
     <title>快速了解Modelica与OpenModelica建模2-ModelicaML与方程</title>
-    <link href="./zh_CN/modelica-modeling-2/"/>
-    <id>./zh_CN/modelica-modeling-2/</id>
+    <link href="./2016/modelica-modeling-2/"/>
+    <id>./2016/modelica-modeling-2/</id>
     <published>2016-03-12T16:00:00.000Z</published>
     <updated>2016-12-14T11:06:20.712Z</updated>
     
@@ -218,9 +205,9 @@ Hexo的Next主题可以识别&lt;! -- more --.&gt;，并且在主页当中展示
     
       <category term="OpenModelica" scheme="./tags/OpenModelica/"/>
     
-      <category term="仿真" scheme="./tags/%E4%BB%BF%E7%9C%9F/"/>
-    
       <category term="ModelicaML" scheme="./tags/ModelicaML/"/>
+    
+      <category term="仿真" scheme="./tags/%E4%BB%BF%E7%9C%9F/"/>
     
       <category term="DAE" scheme="./tags/DAE/"/>
     
@@ -228,8 +215,8 @@ Hexo的Next主题可以识别&lt;! -- more --.&gt;，并且在主页当中展示
   
   <entry>
     <title>快速了解Modelica与OpenModelica建模1-基本知识</title>
-    <link href="./zh_CN/modelica-basics/"/>
-    <id>./zh_CN/modelica-basics/</id>
+    <link href="./2016/modelica-basics/"/>
+    <id>./2016/modelica-basics/</id>
     <published>2016-03-10T16:00:00.000Z</published>
     <updated>2016-12-14T11:06:52.664Z</updated>
     
@@ -262,8 +249,8 @@ end C&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>常见的数据结构的抽象</title>
-    <link href="./zh_CN/datatype-abstraction/"/>
-    <id>./zh_CN/datatype-abstraction/</id>
+    <link href="./2016/datatype-abstraction/"/>
+    <id>./2016/datatype-abstraction/</id>
     <published>2016-01-14T16:00:00.000Z</published>
     <updated>2016-12-14T11:04:04.007Z</updated>
     
@@ -303,8 +290,8 @@ end C&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>维基上定义的传递系统</title>
-    <link href="./zh_CN/wikipedia-transition-system/"/>
-    <id>./zh_CN/wikipedia-transition-system/</id>
+    <link href="./2016/wikipedia-transition-system/"/>
+    <id>./2016/wikipedia-transition-system/</id>
     <published>2016-01-12T16:00:00.000Z</published>
     <updated>2016-12-18T11:29:34.535Z</updated>
     
@@ -332,8 +319,8 @@ end C&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>信息几何简介</title>
-    <link href="./zh_CN/information-geometry/"/>
-    <id>./zh_CN/information-geometry/</id>
+    <link href="./2016/information-geometry/"/>
+    <id>./2016/information-geometry/</id>
     <published>2016-01-05T16:00:00.000Z</published>
     <updated>2016-12-14T11:13:56.024Z</updated>
     
@@ -360,35 +347,9 @@ end C&lt;/code&gt;&lt;/pre&gt;
   </entry>
   
   <entry>
-    <title>Hello World From the Hexo</title>
-    <link href="./EXPR/blog-hexo-1/"/>
-    <id>./EXPR/blog-hexo-1/</id>
-    <published>2015-12-31T16:00:00.000Z</published>
-    <updated>2016-12-15T03:53:01.363Z</updated>
-    
-    <summary type="html">
-    
-      A short description of the blog
-    
-    </summary>
-    
-      <category term="出版" scheme="./categories/%E5%87%BA%E7%89%88/"/>
-    
-      <category term="博客" scheme="./categories/%E5%87%BA%E7%89%88/%E5%8D%9A%E5%AE%A2/"/>
-    
-    
-      <category term="blog" scheme="./tags/blog/"/>
-    
-      <category term="hello" scheme="./tags/hello/"/>
-    
-      <category term="hexo" scheme="./tags/hexo/"/>
-    
-  </entry>
-  
-  <entry>
     <title>守护进程的编写思路（C与Python）</title>
-    <link href="./zh_CN/programming-daemon/"/>
-    <id>./zh_CN/programming-daemon/</id>
+    <link href="./2015/programming-daemon/"/>
+    <id>./2015/programming-daemon/</id>
     <published>2015-12-08T16:00:00.000Z</published>
     <updated>2016-12-14T11:18:28.344Z</updated>
     
@@ -423,8 +384,8 @@ end C&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>Scheme语言概要</title>
-    <link href="./zh_CN/scheme-lang/"/>
-    <id>./zh_CN/scheme-lang/</id>
+    <link href="./2015/scheme-lang/"/>
+    <id>./2015/scheme-lang/</id>
     <published>2015-08-30T16:00:00.000Z</published>
     <updated>2016-12-14T11:08:10.697Z</updated>
     
@@ -451,8 +412,8 @@ end C&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>Maude语言</title>
-    <link href="./zh_CN/maude-lang/"/>
-    <id>./zh_CN/maude-lang/</id>
+    <link href="./2015/maude-lang/"/>
+    <id>./2015/maude-lang/</id>
     <published>2015-07-21T16:00:00.000Z</published>
     <updated>2016-12-14T11:08:38.764Z</updated>
     
@@ -477,8 +438,8 @@ end C&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>Scala编程概要（四）：控制抽象, 集合, 模式匹配, 编译器</title>
-    <link href="./CODE/scala-overview-4/"/>
-    <id>./CODE/scala-overview-4/</id>
+    <link href="./2015/CODE/scala-overview-4/"/>
+    <id>./2015/CODE/scala-overview-4/</id>
     <published>2015-07-01T16:00:00.000Z</published>
     <updated>2016-12-14T11:09:01.020Z</updated>
     
@@ -511,8 +472,8 @@ end C&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>Scala编程概要（三）：进程控制与shell，函数式特性</title>
-    <link href="./CODE/scala-process-and-shell/"/>
-    <id>./CODE/scala-process-and-shell/</id>
+    <link href="./2015/CODE/scala-process-and-shell/"/>
+    <id>./2015/CODE/scala-process-and-shell/</id>
     <published>2015-07-01T16:00:00.000Z</published>
     <updated>2016-12-14T11:14:50.274Z</updated>
     
@@ -550,8 +511,8 @@ end C&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>Scala编程概要（二）：基本结构，常用模式</title>
-    <link href="./CODE/scala-sentences/"/>
-    <id>./CODE/scala-sentences/</id>
+    <link href="./2015/CODE/scala-sentences/"/>
+    <id>./2015/CODE/scala-sentences/</id>
     <published>2015-06-30T16:00:00.000Z</published>
     <updated>2016-12-14T11:11:37.384Z</updated>
     
@@ -587,8 +548,8 @@ end C&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>Scala编程概要（一）：文档，注释，面向对象</title>
-    <link href="./CODE/scala-tutorial-intro/"/>
-    <id>./CODE/scala-tutorial-intro/</id>
+    <link href="./2015/CODE/scala-tutorial-intro/"/>
+    <id>./2015/CODE/scala-tutorial-intro/</id>
     <published>2015-06-30T16:00:00.000Z</published>
     <updated>2016-12-14T11:15:35.130Z</updated>
     
@@ -614,8 +575,8 @@ end C&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>用自举理解人工智能与学术研究</title>
-    <link href="./zh_CN/ai-and-bootstraping/"/>
-    <id>./zh_CN/ai-and-bootstraping/</id>
+    <link href="./2015/ai-and-bootstraping/"/>
+    <id>./2015/ai-and-bootstraping/</id>
     <published>2015-06-28T16:00:00.000Z</published>
     <updated>2016-12-14T11:15:56.908Z</updated>
     
@@ -636,6 +597,62 @@ end C&lt;/code&gt;&lt;/pre&gt;
       <category term="人工智能" scheme="./tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
     
       <category term="学术" scheme="./tags/%E5%AD%A6%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>博客文章平台指南</title>
+    <link href="./2015/EXPR/blog-solution-spec/"/>
+    <id>./2015/EXPR/blog-solution-spec/</id>
+    <published>2015-06-20T16:00:00.000Z</published>
+    <updated>2017-04-24T01:17:29.727Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;参考&lt;a href=&quot;http://web.engr.oregonstate.edu/~walkiner&quot;&gt;Eric Walkingshaw的主页&lt;/a&gt;、&lt;a href=&quot;http://www.skybluetrades.net&quot;&gt;Ian Ross的主页&lt;/a&gt;以及&lt;a href=&quot;http://yannesposito.com/&quot;&gt;yogsototh的支持多语言的主页&lt;/a&gt;的设计以决定该怎样布局个人的主页。&lt;/p&gt;
+&lt;p&gt;Hakyll下面的个人主页项目，似乎有把个人主页分成程序和资源两个部分的倾向。进一步地，site.hs，以及编译器属于程序，CSS、Markdown与HTML模板属于“资源”。那么我们会问，制作一个个人主页必须学会编程，特别是Haskell编程么？似乎前台的工作就已经足够让人烦了：个人主页中的CSS、HTML页面布局的设计就变得非常麻烦。鉴于所使用的后台对于个人主页没有任何直接的影响，我们不妨把构建网站的程序从网站代码当中分离出来。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="出版" scheme="./categories/%E5%87%BA%E7%89%88/"/>
+    
+      <category term="博客" scheme="./categories/%E5%87%BA%E7%89%88/%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+      <category term="hexo" scheme="./tags/hexo/"/>
+    
+      <category term="git" scheme="./tags/git/"/>
+    
+      <category term="hakyll" scheme="./tags/hakyll/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Agda语言介绍</title>
+    <link href="./2015/agda-lang/"/>
+    <id>./2015/agda-lang/</id>
+    <published>2015-06-07T16:00:00.000Z</published>
+    <updated>2016-12-14T11:17:12.142Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Agda语言是使用了依存类型的函数式编程语言。最初发表于2007年，是在Ulf Norell的博士论文里面。目前实践当中，函数式语言中使用依存类型还不多。但是依存类型在可以预见的未来内会继续发展。目前发展依存类型的函数式语言的动力在于形式证明。目前的版本是Agda2，基本上是重写了。Agda2不像Coq的地方在于，Agda没有对于tactics与函数式proofs的支持。Agda 2语言有对于数据类型、模式匹配、记录、模块、Haskell语法的支持。Agda 2是基于Zhaohui Luo的UTT类型理论，与Martin-L&amp;quot;of类型理论（也就是直觉类型论）有一点的不同。&lt;/p&gt;
+&lt;p&gt;Agda的值得提及的特性有归纳类型定义（这在Coq中也存在）、依存类型的模式匹配机制（允许在依存类型系统下使用模式匹配）、元变量（允许变量在运行的时候被细化和修改，因此支持程序在运行的时候增量构造，部分代替了tactics在Coq中的作用）、证明自动化（通过反射实现，以及允许程序在5s内枚举可能的证明），以及终止检查（因为Agda是一个完全的语言，能够保证每个程序都必然终止，以此保证语言的一致性，借助于Foetus termination checker实现终止检查）。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="编程语言" scheme="./categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+    
+      <category term="agda" scheme="./tags/agda/"/>
+    
+      <category term="haskell" scheme="./tags/haskell/"/>
+    
+      <category term="直觉类型论" scheme="./tags/%E7%9B%B4%E8%A7%89%E7%B1%BB%E5%9E%8B%E8%AE%BA/"/>
+    
+      <category term="函数式" scheme="./tags/%E5%87%BD%E6%95%B0%E5%BC%8F/"/>
+    
+      <category term="依存类型" scheme="./tags/%E4%BE%9D%E5%AD%98%E7%B1%BB%E5%9E%8B/"/>
     
   </entry>
   

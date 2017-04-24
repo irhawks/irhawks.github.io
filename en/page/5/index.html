@@ -91,7 +91,7 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="80x24" type="application/atom+xml" />
+  <link rel="alternate" href="/atom.xml" title="Coding Poet, Coding Science" type="application/atom+xml" />
 
 
 
@@ -105,12 +105,12 @@
 
 <meta name="description" content="GO FORTH now and create masterpieces of the publishing art!">
 <meta property="og:type" content="website">
-<meta property="og:title" content="80x24">
+<meta property="og:title" content="Coding Poet, Coding Science">
 <meta property="og:url" content="./en/page/5/index.html">
-<meta property="og:site_name" content="80x24">
+<meta property="og:site_name" content="Coding Poet, Coding Science">
 <meta property="og:description" content="GO FORTH now and create masterpieces of the publishing art!">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="80x24">
+<meta name="twitter:title" content="Coding Poet, Coding Science">
 <meta name="twitter:description" content="GO FORTH now and create masterpieces of the publishing art!">
 
 
@@ -155,7 +155,7 @@
 <script>hljs.initHighlightingOnLoad();</script>
 <script>hljs.initLineNumbersOnLoad(); </script>
 
-  <title> 80x24 </title>
+  <title> Coding Poet, Coding Science </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -198,7 +198,7 @@
   <div class="custom-logo-site-title">
     <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">80x24</span>
+      <span class="site-title">Coding Poet, Coding Science</span>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -338,7 +338,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="./EXPR/blog-solutions/">
+  <link itemprop="mainEntityOfPage" href="./2015/elixir-lang/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Istyasna">
@@ -347,9 +347,9 @@
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
+    <meta itemprop="name" content="Coding Poet, Coding Science">
     <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
+      <img style="display:none;" itemprop="url image" alt="Coding Poet, Coding Science" src="">
     </span>
   </span>
 
@@ -363,662 +363,7 @@
             
               
                 
-                <a class="post-title-link" href="/EXPR/blog-solutions/" itemprop="url">
-                  个人主页项目的设计与管理
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-21T00:00:00+08:00">
-                2015-06-21
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">Post modified</span>
-              <time title="Post modified" itemprop="dateModified" datetime="2017-04-08T09:27:24+08:00">
-                2017-04-08
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/出版/" itemprop="url" rel="index">
-                    <span itemprop="name">出版</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/出版/博客/" itemprop="url" rel="index">
-                    <span itemprop="name">博客</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/EXPR/blog-solutions/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="EXPR/blog-solutions/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>参考<a href="http://web.engr.oregonstate.edu/~walkiner">Eric Walkingshaw的主页</a>、<a href="http://www.skybluetrades.net">Ian Ross的主页</a>以及<a href="http://yannesposito.com/">yogsototh的支持多语言的主页</a>的设计以决定该怎样布局个人的主页。</p>
-<p>Hakyll下面的个人主页项目，似乎有把个人主页分成程序和资源两个部分的倾向。进一步地，site.hs，以及编译器属于程序，CSS、Markdown与HTML模板属于“资源”。那么我们会问，制作一个个人主页必须学会编程，特别是Haskell编程么？似乎前台的工作就已经足够让人烦了：个人主页中的CSS、HTML页面布局的设计就变得非常麻烦。鉴于所使用的后台对于个人主页没有任何直接的影响，我们不妨把构建网站的程序从网站代码当中分离出来。</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/EXPR/blog-solutions/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="./EXPR/blog-github-modify/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/EXPR/blog-github-modify/" itemprop="url">
-                  Github主页修整记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-20T00:00:00+08:00">
-                2015-06-20
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">Post modified</span>
-              <time title="Post modified" itemprop="dateModified" datetime="2016-12-14T19:27:10+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/出版/" itemprop="url" rel="index">
-                    <span itemprop="name">出版</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/出版/博客/" itemprop="url" rel="index">
-                    <span itemprop="name">博客</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/EXPR/blog-github-modify/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="EXPR/blog-github-modify/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>建主页有许多种选择。这些方案可以分成静态主页方案与动态主页方案两大类。动态主页的托管的方式可能复杂一些，需要维护的代价似乎比较高。此外，动态主页里面的内容在转成可打印的版本的时候质量也会缩水。最理想的情况自然是一边能够生成HTML文档，另一方面，不经重新修改，可以转成其它的格式，特别是LaTeX的格式。</p>
-<p>但是实际中能像LaTeX那样有表现力，又有丰富宏包支持的格式还真不多。Markdown等都过于简单了。之前的实践中，LaTeX格式与HTML对比中，主要的不一致有：</p>
-<ol style="list-style-type: decimal">
-<li><p>LaTeX中有wrapfigure、caption宏包可以调整图片，但是在HTML中的调整就得手工编码了。因为实在是没有学习HTML的排版细节问题；此外，LaTeX的表格转成HTML的表格也不太容易，特别是有对齐、指定宽度的表格，换到HTML页面上往往不好看。</p></li>
-<li><p>数学公式中，使用MathJax中也只能使用预定义的公式集。但是在编程语言中所用的符号，与在逻辑中所用的符号不同，范畴论的符号，跟在线性代数中也非常不同。在MathJax中能够自定义数学公式命令是必须的，但是又是比较麻烦的。高级的框架，如交换图、amssymb、eulervm宏包提供的符号，似乎也得重新配置。单配置来说并不困难，可是有时候需要变更宏包，这个时候又得手工同步。</p></li>
-</ol>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/EXPR/blog-github-modify/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="./zh_CN/agda-lang/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/zh_CN/agda-lang/" itemprop="url">
-                  Agda语言介绍
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-08T00:00:00+08:00">
-                2015-06-08
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">Post modified</span>
-              <time title="Post modified" itemprop="dateModified" datetime="2016-12-14T19:17:12+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程语言/" itemprop="url" rel="index">
-                    <span itemprop="name">编程语言</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/zh_CN/agda-lang/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="zh_CN/agda-lang/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Agda语言是使用了依存类型的函数式编程语言。最初发表于2007年，是在Ulf Norell的博士论文里面。目前实践当中，函数式语言中使用依存类型还不多。但是依存类型在可以预见的未来内会继续发展。目前发展依存类型的函数式语言的动力在于形式证明。目前的版本是Agda2，基本上是重写了。Agda2不像Coq的地方在于，Agda没有对于tactics与函数式proofs的支持。Agda 2语言有对于数据类型、模式匹配、记录、模块、Haskell语法的支持。Agda 2是基于Zhaohui Luo的UTT类型理论，与Martin-L&quot;of类型理论（也就是直觉类型论）有一点的不同。</p>
-<p>Agda的值得提及的特性有归纳类型定义（这在Coq中也存在）、依存类型的模式匹配机制（允许在依存类型系统下使用模式匹配）、元变量（允许变量在运行的时候被细化和修改，因此支持程序在运行的时候增量构造，部分代替了tactics在Coq中的作用）、证明自动化（通过反射实现，以及允许程序在5s内枚举可能的证明），以及终止检查（因为Agda是一个完全的语言，能够保证每个程序都必然终止，以此保证语言的一致性，借助于Foetus termination checker实现终止检查）。</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/zh_CN/agda-lang/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="./zh_CN/erlang-concurrency-test/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/zh_CN/erlang-concurrency-test/" itemprop="url">
-                  Erlang编程语言中的并发小测试
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-06T00:00:00+08:00">
-                2015-06-06
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              <span class="post-meta-item-text">Post modified</span>
-              <time title="Post modified" itemprop="dateModified" datetime="2016-12-14T19:21:30+08:00">
-                2016-12-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程语言/" itemprop="url" rel="index">
-                    <span itemprop="name">编程语言</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/zh_CN/erlang-concurrency-test/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="zh_CN/erlang-concurrency-test/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>已经接触了很多的编程语言。大概分成Lisp一系的、Haskell一系的，Erlang一系的、JVM一系的、C#一系的，以及OCaml一系的语言。但是自己感觉，分类上，可能还是按照类型的动态与静态，是否是纯函数式的，是否支持面向对象特性，是否支持自动类型推断（其实现代编程语言大概都支持了），求值的时候是否是惰性求值的，以及对于并发和并行的支持等。函数式语言的特性大概就这么看。其它的方面，说是语言的包管理系统、编译环境与版本控制。如果是在虚拟机上，那么对虚拟机上的原生语言的支持等。</p>
-<p>看到这么多编程语言，自己感觉很多的设计模式都是内置在函数式语言中的，比如自己设想的在改变一个变量的时候，同时产生一种日志记录，已经在Clojure中完美实现。其它的语言特性也很多。</p>
-<p>Erlang上面还建立有Eixir编程语言。语言更进一步。Erlang是运行在EVM虚拟机上的。有个时候，一些并发处理的机制与面向对象其实是不谋而合的。由于设计模式已经融入其中，自己感觉，设计模式是一种比较高级的抽象了。</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/zh_CN/erlang-concurrency-test/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="./zh_CN/elixir-lang/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Istyasna">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="80x24">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="80x24" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/zh_CN/elixir-lang/" itemprop="url">
+                <a class="post-title-link" href="/2015/elixir-lang/" itemprop="url">
                   Elixir：建立在Erlang虚拟机上的函数式语言
                 </a>
               
@@ -1077,8 +422,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/zh_CN/elixir-lang/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="zh_CN/elixir-lang/" itemprop="commentCount"></span>
+                <a href="/2015/elixir-lang/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/elixir-lang/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1111,7 +456,649 @@
 <pre class="shell"><code>erl -name node06@10.0.0.151 --cookie a</code></pre>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/zh_CN/elixir-lang/#more" rel="contents">
+            <a class="btn" href="/2015/elixir-lang/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="./2015/erlang-concurrency-test/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Istyasna">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Coding Poet, Coding Science">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Coding Poet, Coding Science" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/erlang-concurrency-test/" itemprop="url">
+                  Erlang编程语言中的并发小测试
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-06T00:00:00+08:00">
+                2015-06-06
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              <span class="post-meta-item-text">Post modified</span>
+              <time title="Post modified" itemprop="dateModified" datetime="2016-12-14T19:21:30+08:00">
+                2016-12-14
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程语言/" itemprop="url" rel="index">
+                    <span itemprop="name">编程语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2015/erlang-concurrency-test/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/erlang-concurrency-test/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>已经接触了很多的编程语言。大概分成Lisp一系的、Haskell一系的，Erlang一系的、JVM一系的、C#一系的，以及OCaml一系的语言。但是自己感觉，分类上，可能还是按照类型的动态与静态，是否是纯函数式的，是否支持面向对象特性，是否支持自动类型推断（其实现代编程语言大概都支持了），求值的时候是否是惰性求值的，以及对于并发和并行的支持等。函数式语言的特性大概就这么看。其它的方面，说是语言的包管理系统、编译环境与版本控制。如果是在虚拟机上，那么对虚拟机上的原生语言的支持等。</p>
+<p>看到这么多编程语言，自己感觉很多的设计模式都是内置在函数式语言中的，比如自己设想的在改变一个变量的时候，同时产生一种日志记录，已经在Clojure中完美实现。其它的语言特性也很多。</p>
+<p>Erlang上面还建立有Eixir编程语言。语言更进一步。Erlang是运行在EVM虚拟机上的。有个时候，一些并发处理的机制与面向对象其实是不谋而合的。由于设计模式已经融入其中，自己感觉，设计模式是一种比较高级的抽象了。</p>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/erlang-concurrency-test/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="./2015/elastic-search/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Istyasna">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Coding Poet, Coding Science">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Coding Poet, Coding Science" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/elastic-search/" itemprop="url">
+                  ElasticSearch搜索软件
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-02T00:00:00+08:00">
+                2015-06-02
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              <span class="post-meta-item-text">Post modified</span>
+              <time title="Post modified" itemprop="dateModified" datetime="2016-12-14T19:20:08+08:00">
+                2016-12-14
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/运行维护/" itemprop="url" rel="index">
+                    <span itemprop="name">运行维护</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2015/elastic-search/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/elastic-search/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>这里参考了Gitbook上面中文翻译的<a href="https://www.gitbook.com/book/fuxiaopang/learnelasticsearch/details" class="uri">https://www.gitbook.com/book/fuxiaopang/learnelasticsearch/details</a>。也就是ElasticSearch权威指南。自己觉得现在正面临的问题，也就是在文档中说的：已经被数据淹没，我们创造的系统产生的数据可以瞬间轻而易举地将我们压跨。现在的科技只是致力于如何存储数据，并能将拥有大量信息的数据仓库结构化。而一旦我们想从大量的数据中得出结做做决策的时候，美好的一天就要被毁灭了。不可否认的是，没有数据分析，数据确实要成为一种负担了。所以，我们必须建立能够分析数据的工具，帮助我们从数据中得到知识，得到决策的依据。</p>
+<p>ElasticSearch适用于全文搜索、结构化数据的实时统计。Elastic并不只是全文搜索，还具有结构化搜索，统计、查询过滤、地理定位、自动完成等。ElasticSearch也可以应用于生产的环境。所以对我们而言是比较合理的。自己理想中的文献检索，特别是学术文献检索系统，也应该就是这样的。个人感觉，希望ElasticSearch成为自己一生的小伙伴。</p>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/elastic-search/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="./2015/solr-and-lucene/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Istyasna">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Coding Poet, Coding Science">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Coding Poet, Coding Science" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/solr-and-lucene/" itemprop="url">
+                  Apache的企业搜索工具
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-01T00:00:00+08:00">
+                2015-06-01
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              <span class="post-meta-item-text">Post modified</span>
+              <time title="Post modified" itemprop="dateModified" datetime="2016-12-14T21:46:41+08:00">
+                2016-12-14
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机应用/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机应用</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机应用/网络/" itemprop="url" rel="index">
+                    <span itemprop="name">网络</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2015/solr-and-lucene/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/solr-and-lucene/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>企业级的应用相对于普通的软件相比，体现了更多的理性，体现了更多的需求的驱动。对普通的程序员来讲，学习企业级的软件提供了一个从底层的程序员上升到资深架构师的问题。不同层次的程序员，思考问题的方式也不一样。到了架构的层面，更多的时候讨论的是架构的缺点与优点。这个时候，根本不是一味地讨论程序有哪些功能。技术不等于产品，产品不等于市场，市场不等于盈利。但是一般程序员做的，只能是基本的技术。掌握架构师的技能，大概是可以做到高级的技术、产品以及市场。</p>
+<p>不多说然它的事情。今天的主要的目的是帮助实现一个全文搜索引擎。全文搜索引擎在企业中的应用可以说是信息检索的一个重要的应用。整个的框架的部分为自然语言处理等奠定了基础。没有人工智能的时候，可以是传统的检索的方式。有人工智能与自然语言处理的时候，可以以插件的形式提供新的功能。但是这个架构是稳定的。</p>
+<p>通过查找网络上的资料。比较有名的企业级应用的全文搜索引擎有Apache Solr、Sphinx、Elasticsearch等。其中，除了Sphinx，都是基于Lucene的。Java平台上还有所谓的Hibernate Search。一个技术到达企业级别的应用，一般而言是在编程与布署的层面上做一些更大的问题。比如，Lucene作为信息检索基础库，在编程层面上就可以做，许多软件的帮助文档就是使用Lucene作为索引的。但是到了企业级的应用上，Lucene就只是一个基本的IR（Information Retrival）库了。在Solr上面可能有更多的集成。所以，目前我们把Solr和Lucene的分界面看成是编程与架构的分界线。并以Lucene作为案例分析编程与架构是如何关联的。</p>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/solr-and-lucene/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="./2015/CODE/scala-sbt/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Istyasna">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Coding Poet, Coding Science">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Coding Poet, Coding Science" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/CODE/scala-sbt/" itemprop="url">
+                  在Debian/Ubuntu系统下面的Java与Scala包
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-05-24T00:00:00+08:00">
+                2015-05-24
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              <span class="post-meta-item-text">Post modified</span>
+              <time title="Post modified" itemprop="dateModified" datetime="2016-12-14T19:09:36+08:00">
+                2016-12-14
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程语言/" itemprop="url" rel="index">
+                    <span itemprop="name">编程语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2015/CODE/scala-sbt/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/CODE/scala-sbt/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="java包目前在ubuntu下面的管理">Java包目前在Ubuntu下面的管理</h2>
+<p>目前的情况是，许多的Java包也安装在系统当中，在系统中的路径是<code>/usr/share/doc</code>、<code>/usr/share/java</code>以及<code>/user/share/maven-repo</code>。三个路径中，<code>/usr/share/java</code>里面用于放置所需要的库，我们可以通过<code>apt-get source libjdom1-java</code>，并在当前目录下解包这个文件，然后就知道jdom1这个jar包是怎样被安装到系统当中去的了。</p>
+<p>这里有一个官方的“为Java库构建deb安装包” <a href="https://wiki.debian.org/Java/MavenBuilder" class="uri">https://wiki.debian.org/Java/MavenBuilder</a> 的指南。思想是利用Maven构建一个deb安装包。</p>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/CODE/scala-sbt/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1188,7 +1175,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">60</span>
+              <span class="site-state-item-count">56</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1196,7 +1183,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1205,7 +1192,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">199</span>
+                <span class="site-state-item-count">193</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -1322,6 +1309,22 @@
 
         
 
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
         
       </div>
     </footer>
@@ -1408,11 +1411,6 @@
     })();
   </script>
 
-  
-    
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
   
 
 

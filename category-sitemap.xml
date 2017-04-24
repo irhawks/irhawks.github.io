@@ -7,13 +7,6 @@
     </url>
 
     <url>
-        <loc>./categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-pxe-ubuntu/</loc>
-        <lastmod>2016-12-14T08:36:14.379Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>./categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA/</loc>
         <lastmod>2016-12-14T08:47:54.256Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -196,13 +189,6 @@
     </url>
 
     <url>
-        <loc>./categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/</loc>
-        <lastmod>2016-12-14T14:41:20.578Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>./categories/Publish/</loc>
         <lastmod>2016-12-15T03:53:40.035Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -212,13 +198,6 @@
     <url>
         <loc>./categories/Publish/Blog/</loc>
         <lastmod>2016-12-15T03:53:40.035Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>./categories/%E5%87%BA%E7%89%88/Pandoc/</loc>
-        <lastmod>2016-12-15T12:33:21.163Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -245,15 +224,50 @@
     </url>
 
     <url>
+        <loc>./categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/</loc>
+        <lastmod>2017-04-24T01:12:55.631Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
+        <lastmod>2017-04-24T01:12:55.631Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/</loc>
+        <lastmod>2017-04-24T01:12:55.631Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./categories/%E5%86%99%E4%BD%9C/</loc>
+        <lastmod>2017-04-24T01:14:17.388Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./categories/%E5%86%99%E4%BD%9C/Pandoc/</loc>
+        <lastmod>2017-04-24T01:14:17.388Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>./categories/%E5%87%BA%E7%89%88/</loc>
-        <lastmod>2017-04-08T01:27:24.072Z</lastmod>
+        <lastmod>2017-04-24T01:17:29.727Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>./categories/%E5%87%BA%E7%89%88/%E5%8D%9A%E5%AE%A2/</loc>
-        <lastmod>2017-04-08T01:27:24.072Z</lastmod>
+        <lastmod>2017-04-24T01:17:29.727Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

@@ -58,13 +58,6 @@
     </url>
 
     <url>
-        <loc>./tags/pxe-ubuntu-pxelinux-boot/</loc>
-        <lastmod>2016-12-14T08:36:14.379Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>./tags/%E6%9D%83%E9%99%90/</loc>
         <lastmod>2016-12-14T08:47:31.657Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -863,27 +856,6 @@
     </url>
 
     <url>
-        <loc>./tags/pelican/</loc>
-        <lastmod>2016-12-14T11:21:58.607Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>./tags/publishing/</loc>
-        <lastmod>2016-12-14T11:21:58.607Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>./tags/%E5%8D%9A%E5%AE%A2/</loc>
-        <lastmod>2016-12-14T11:21:58.607Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>./tags/%E7%BB%98%E5%9B%BE/</loc>
         <lastmod>2016-12-14T11:22:23.169Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1059,27 +1031,6 @@
     </url>
 
     <url>
-        <loc>./tags/github/</loc>
-        <lastmod>2016-12-14T11:27:10.196Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>./tags/%E4%B8%BB%E9%A1%B5/</loc>
-        <lastmod>2016-12-14T11:27:10.196Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>./tags/latex/</loc>
-        <lastmod>2016-12-14T11:27:10.196Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>./tags/apache/</loc>
         <lastmod>2016-12-14T13:46:41.039Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1206,41 +1157,6 @@
     </url>
 
     <url>
-        <loc>./tags/blog/</loc>
-        <lastmod>2016-12-15T03:57:04.406Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>./tags/hello/</loc>
-        <lastmod>2016-12-15T03:57:04.406Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>./tags/hexo/</loc>
-        <lastmod>2016-12-15T03:57:04.406Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>./tags/pandoc/</loc>
-        <lastmod>2016-12-15T12:33:21.163Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>./tags/crossref/</loc>
-        <lastmod>2016-12-15T12:33:21.163Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>./tags/TeX/</loc>
         <lastmod>2016-12-15T12:55:45.794Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1311,15 +1227,50 @@
     </url>
 
     <url>
+        <loc>./tags/pxe-ubuntu-pxelinux-boot/</loc>
+        <lastmod>2017-04-24T01:12:55.631Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./tags/pandoc/</loc>
+        <lastmod>2017-04-24T01:14:17.388Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./tags/crossref/</loc>
+        <lastmod>2017-04-24T01:14:17.388Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./tags/blog/</loc>
+        <lastmod>2017-04-24T01:14:17.388Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>./tags/hexo/</loc>
+        <lastmod>2017-04-24T01:17:29.727Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>./tags/git/</loc>
-        <lastmod>2017-04-08T01:27:24.072Z</lastmod>
+        <lastmod>2017-04-24T01:17:29.727Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>./tags/hakyll/</loc>
-        <lastmod>2017-04-08T01:27:24.072Z</lastmod>
+        <lastmod>2017-04-24T01:17:29.727Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

@@ -1,0 +1,1215 @@
+<!doctype html>
+
+
+
+  
+
+
+<!--
+<html class="theme-next mist use-motion" lang="zh-Hans,en">
+-->
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="linux,线程,调度器," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Coding Poet, Coding Science" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="线程的相关原理
+线程的基本概念
+这里所讲的线程都是用户所使用的线程，不说系统内核中存在的诸多线程。
+一般来说，linux的进程已经是轻量的了，创建多个进程有时候比多个线程更容易进行协调。而使用线程库是在用户空间进行的，存在效率和复杂度的问题。
+在linux下线程的实现是按照POSIX线程的规范，POSIX线程可以在内核的支持下实现，也可以在用记线程库下实现，对于linux来说，2.6版本以上的PO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="进程原理三：线程原理与编程、调度器">
+<meta property="og:url" content="./en/2012/线程与调度器/index.html">
+<meta property="og:site_name" content="Coding Poet, Coding Science">
+<meta property="og:description" content="线程的相关原理
+线程的基本概念
+这里所讲的线程都是用户所使用的线程，不说系统内核中存在的诸多线程。
+一般来说，linux的进程已经是轻量的了，创建多个进程有时候比多个线程更容易进行协调。而使用线程库是在用户空间进行的，存在效率和复杂度的问题。
+在linux下线程的实现是按照POSIX线程的规范，POSIX线程可以在内核的支持下实现，也可以在用记线程库下实现，对于linux来说，2.6版本以上的PO">
+<meta property="og:updated_time" content="2016-12-14T08:47:54.256Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="进程原理三：线程原理与编程、调度器">
+<meta name="twitter:description" content="线程的相关原理
+线程的基本概念
+这里所讲的线程都是用户所使用的线程，不说系统内核中存在的诸多线程。
+一般来说，linux的进程已经是轻量的了，创建多个进程有时候比多个线程更容易进行协调。而使用线程库是在用户空间进行的，存在效率和复杂度的问题。
+在linux下线程的实现是按照POSIX线程的规范，POSIX线程可以在内核的支持下实现，也可以在用记线程库下实现，对于linux来说，2.6版本以上的PO">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: false,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="./en/2012/线程与调度器/"/>
+
+
+
+
+
+<!-- add highlight.js to render pandoc code blocks -->
+<!--
+<link href="http://cdn.bootcss.com/highlight.js/9.10.0/styles/github.min.css" rel="stylesheet">  
+-->
+<link href="/css/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>  
+<script src="/js/highlightjs-line-numbers.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.initLineNumbersOnLoad(); </script>
+
+  <title> 进程原理三：线程原理与编程、调度器 | Coding Poet, Coding Science </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?763bee904aa6d81fdf017659d162188f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Coding Poet, Coding Science</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Keep Stupid, Keep Hungry</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-resources">
+          <a href="/resources" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-folder"></i> <br />
+            
+            Resources
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+          <li class="menu-item"><a href="/2012/线程与调度器/">简体中文</a></li>
+          
+          <li class="menu-item"><a href="/en/2012/线程与调度器/">English (US)</a></li>
+          
+
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <!-- previous -->
+<script type="text/javascript">
+   var search_path = "<%= config.search.path %>";
+   if (search_path.length == 0) {
+       search_path = "search.xml";
+   }
+   var path = "<%= config.root %>" + search_path;
+   searchFunc(path, 'local-search-input', 'local-search-result');
+</script>
+<!-- optimized -->
+<div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+
+    </div>
+  
+
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="./en/2012/线程与调度器/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Istyasna">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Coding Poet, Coding Science">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Coding Poet, Coding Science" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                进程原理三：线程原理与编程、调度器
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2012-12-30T00:00:00+08:00">
+                2012-12-30
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              <span class="post-meta-item-text">Post modified</span>
+              <time title="Post modified" itemprop="dateModified" datetime="2016-12-14T16:47:54+08:00">
+                2016-12-14
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/计算机/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/en/2012/线程与调度器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="en/2012/线程与调度器/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="线程的相关原理">线程的相关原理</h2>
+<h3 id="线程的基本概念">线程的基本概念</h3>
+<p>这里所讲的线程都是用户所使用的线程，不说系统内核中存在的诸多线程。</p>
+<p>一般来说，linux的进程已经是轻量的了，创建多个进程有时候比多个线程更容易进行协调。而使用线程库是在用户空间进行的，存在效率和复杂度的问题。</p>
+<p>在linux下线程的实现是按照POSIX线程的规范，POSIX线程可以在内核的支持下实现，也可以在用记线程库下实现，对于linux来说，2.6版本以上的POSIX线程的相关接口最终被放到内核中实现。</p>
+<p>在讲到进程是有提到clone函数，现在来看，这个函数相当于一个底层的接口，和POSIX提供的相关接口不在同样的层次上。因此我们只讲POSIX的线程接口。</p>
+<h3 id="为了防止主题分化下面讲一般的线程的原理">为了防止主题分化。下面讲一般的线程的原理</h3>
+<p>线程分为用户级线程ULT和内核级线程KLT.用户级线程在操作系统看来是一个进程当中的一部分代码，和同一进程中的其它线程不可分辨。</p>
+<p>实际中发现线程的调用很成问题啊，首先得到的两个线程PID一样的，然后貌似sleep的时间也不对。</p>
+<p>这种混淆主要是线程比较晚出现，导致原来调度器使用的进程概念被换成线程会使系统对外的接口发生很大的变化，因而带来不便。</p>
+<p>线程的核心我们定义为方便地共享数据，一切优点和缺点都是围绕着共享数据来进行的。</p>
+<p>实现的一个线程只需要最基本的调度标识符，进程控制块，其它的资源都由主进程所提供。它们共享其中的资源。既然如此，也就能够通过对共享数据的读写实现线程同步，这要比进程的同步容易一些。</p>
+<p>相应地，实现上难了，但对于开发者来说却在某种程度上容易了，所以线程还是对于程序员来说不着不小的意义。</p>
+<p>线程的切换在操作系统看来也要比进程切换容易，因为不需要把所有的上下文都保存。</p>
+<p>线程的一个积极意义吧，就是在多内核环境下的并行要容易一些。进程在多核环境下实现并行，最关键的如文件的共享，得改变文件缓存的机制。但是线程共享的数据结构相对来说比较高级，比如共享文件描述符，显然比共享一磁盘块本身要简单。</p>
+<p>这里的难的容易的问题是从要设计一个操作系统的解度来说的，这个时候还没有一个现成的操作系统可以使用，但是对于学习者来讲，容易和困难缺乏意义，因为一个实现已经存在了。已经做到的事情，谁会说它很困难呢，至多可称得上复杂。</p>
+<p>线程在一个复杂环境中特别有意义，因为程序中有的代码负责输入，有的负责输出，有的则是自行处理数据。如果让进程实现就不得不阻塞很久，所以这种场合恐怕是最适合多线程程序的。一个重要的方面就是网络应用。</p>
+<p>个人觉得操作系统原理应该说到网络环境下线程有重要的应用。</p>
+<p>要创建线程与创建进程表面上的不同是，创建进程可以在没有相关数据的情况下进行，但是创建线程却要在一个已有的环境下创建。这导致一个错误的认识，就是线程看起来是如此轻量，以致于很难想象还需要什么额外的工作。实际编程实现的时候，线程可以作为一个函数来执行。也就是说，一个线程负责运行特定的函数。在多线程程序中设计流程是非常困难的。Alan Cox 曾评论线程为“如何立刻让自己自讨苦吃。”</p>
+<h2 id="linux下线程的实现">linux下线程的实现</h2>
+<p>在linux下线程库的接口是一样的，在不同版本被实现为用户级线程或者内核级线程。其中的主要道理是，对于应用程序来说，区分用户级线程或者内核级线程没有多大的意义。在linux下查询线程是如何实现的，可使用命令<code>getconf GNU_LIBRPTHREAD_VERSION</code>查看使用的线程库的版本，如果是NPTL表示使用的是内核级的线程库。在linux当中原来的线程库被称为LinuxThread,它是用户级的线程库。</p>
+<p>在linux之下，共享的资源有各种类型，比如环境变量的共享也是单独的一个部分，新创建的进程也可以共享其FS,但是按照线程的定义，代码段，数据区都应该是共享的。操作系统在实现的时候，要将PCB中的相应指针指向内存中的同一个页面。</p>
+<p>讲进程的时候提到clone()函数，就当它不存在吧。也别管它是什么内核级线程的创建函数，实际中已经有一个高级库了，用不着再从底层做起。</p>
+<p>很重要的一点，使用NPTL线程库创建的线程，PID和主线程的一样，但是TID和主进程的不同。因此它们仍然共享一个<code>task_struct</code>结构，所以多线程程序和单线程程序的不同之处，仅在于多线程程序当中的<code>task_struct</code>结构里的线程队列链里有多个成员。创建新的线程的时候，只是相当于在<code>task_struct</code> 当中注册了新的线程栈。</p>
+<p>由此引起的问题是，调度时的单位是不是一个PID,因为使用NPTL内核级的线程库的时候，仍然是同一PID.所以在2.6之前的调度实体都是进程。</p>
+<p>NPTL的设计是仍然被视为同一进程，且仍然使用clone()系统调用。不过其中也运用了内核当中的特殊支持。NPTL是<span class="math inline">\(1*1\)</span>的线程库，使用一个<code>pthread_create()</code>就在内核当中创建了一个调度实体。一般来说，存在着<span class="math inline">\(m*n\)</span>的调度，这种情况下用户线程数大于内核调度实体的数目。</p>
+<p>这里涉及一大堆的概念。其一，我们称linux的进程为轻量进程，是因为不同的PID共享了相同的空间。而这部分仍是传统的FORK调用。进程与线程的详细情况，见下面的调度器笔记。</p>
+<p>linux下的线程使用的就是符合POSIX的线程库，要在程序当中使用线程，使用头文件pthead.h.</p>
+<p>使用线程的基本要求是不要使用进程的退出函数，这样会导致整个物理内存上的相关数据结构都被删除。因而带来不安全。</p>
+<p>线程库在linux下也可以看成是一个封装，其中含有相应的，类似fork这样分配PID的代码。</p>
+<p>一个系统中线程的数量参考：linuxThread线程库中线程数是在编译时就指定的，而NPTL支持动态的线程数，在一个IA-32系统上可达两百万个。关于线程的速度，则是如果使用NPTL,启动100000个进程只需2秒，而不使用NPTL需要15min.</p>
+<h3 id="posix线程库中创建线程的方法以c语言为例">POSIX线程库中创建线程的方法，以C语言为例</h3>
+<p>创建一个线程的函数原型是：</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">int</span> pthread_create(pthread_t *thread, pthread_attr_t *attr,
+<span class="dt">void</span> *(*start_routine)(<span class="dt">void</span> *), <span class="dt">void</span> *arg);</code></pre></div>
+<p>终止当前线程的函数原型是：</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">int</span> pthread_exit(<span class="dt">void</span> *retval);</code></pre></div>
+<p>看起来 <code>pthread_create</code> 函数使用了一大堆的指针，其实却很简单，返回值是否为零代表成功或者失败。第一个参数相当于线程控制块，第二个是线程的属性，第三个是线程的入口函数，第四个是需要传递给该函数的参数。</p>
+<p>UNIX函数的惯例是调用失败时返回-1,比如对于前面到的fork函数。0代表对函数来说有特殊含义的一个量，-1才代表一个调用错误，函数内部的代码无法完成所称的工作。</p>
+<p>函数要写成 <code>void *function(void *arg)</code> 的形式，以便正确地进行转换。下面是一个例子。可以和fork()相对比。</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;pthread.h&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;errno.h&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;string.h&gt;</span>
+<span class="dt">int</span> main(){
+<span class="dt">int</span> ret;
+pthread_t mythread;
+ret = pthread_create(&amp;mythread, NULL, myThread, NULL);
+<span class="cf">if</span> (ret != <span class="dv">0</span>){
+    printf(<span class="st">&quot;Cannot create thread (%s)</span><span class="sc">\n</span><span class="st">&quot;</span>, strerror(errno));
+    exit(-<span class="dv">1</span>);
+}
+<span class="cf">return</span> <span class="dv">0</span>;
+}
+<span class="dt">void</span> *myThread(<span class="dt">void</span> *arg){
+printf(<span class="st">&quot;Thread is running.</span><span class="sc">\n</span><span class="st">&quot;</span>);
+pthread_exit(arg);
+}</code></pre></div>
+<p>以上代码的重要之处如下：</p>
+<ol style="list-style-type: decimal">
+<li>返回值0代表线程正常创建了；</li>
+<li>当调用系统提供的函数出现错误的时候，建议使用strerror,这样一来错误会发到stderr设备。而且还会提供人人都能理解的错误信息。</li>
+<li>线程函数中退出不能使用exit()，而是用 <code>pthread_exit()</code> 并且参数中的数返回的是函数的退出代码。关键是这个退出号不能是一个局部变量，因为退出函数时候变量会被销毁导致错误号无法正常传出去。使用arg作为返回时的位置，是一个避免在主线程中重新定义一个变量的技巧。</li>
+<li>编译时，首先需要定义宏 <code>_REENTRANT</code> ,在有的系统上（不常见）还要定义 <code>_POSIX_C_SOURCE</code> 宏。如果系统默入不是用NPTL实现的，编译选项为：</li>
+</ol>
+<pre class="sourceCode shell"><code>cc -D _REENTRANT -I/usr/include/nptl thread1.c -o thread1 
+-L/usr/lib/nptl -lpthread</code></pre>
+<p>如果默认已经是用NPTL实现的，就使用</p>
+<pre class="sourceCode shell"><code>cc -D_REENTRANT thread1.c -o thread1 -lpthread</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>因此我们在编程上也知道了，函数使用exit()退出，return退出，还是代码执行完毕后自动退出，是有区别的。</li>
+</ol>
+<h3 id="posix线程的基本函数">POSIX线程的基本函数</h3>
+<p>父线程使用下面的函数等待子线程的终止，原型如下：</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">int</span> pthread_join(pthread_t thread, <span class="dt">void</span> ** status);</code></pre></div>
+<p>第一个参数标明要等待的子线程.线程的资源在父线程调用 <code>pthread_join</code>之后释放,相当于在进程当中子进程的资源在父进程调用wait()之后释放.</p>
+<p><code>pthread_self()</code> 函数返回当前线程的标识.</p>
+<p><strong>内核线程</strong></p>
+<p>在内核引导和启动的时候，诸多的内核功能模块也会被使用，它们的地址空间是整个实地址空间，因而互相能够访问到，syslogd就是其中的一个。在ps命令下我们看到它是一个不同PID的进程结构。所以内核线程大致是以轻量进程的方式实现的。（猜测而已）</p>
+<h2 id="linux的调度器">linux的调度器</h2>
+<h3 id="分类的必要性">分类的必要性</h3>
+<p>在操作系统当中，将调度器的时候都是在讲完进程之后，讲线程之前，但是带线程的调度器的进程调度器的不同之处太多了。</p>
+<p>进程调度的时候遵循调度的一般原理，一般来说，关键在于掌握调度算法，知道怎样给一个一个的调度实体分配CPU.但是调度器的工作实际上不只这些，它还要区分哪些是调度实体，把调度实体的相关代码和数据加载到适合于执行的位置。</p>
+<p>原理中那样讲的不好之处是，如果是用户级线程，就认为内核没有变化，如果是内核级线程，就把进程的区域交给其它线程共享。</p>
+<p>所以认为传统进程是一个单线程的“进程”，这种认识是肤浅的。下面将会指出实际情况。</p>
+<h3 id="带线程的进程模型">带线程的进程模型</h3>
+<p>当一个程序不带有额外的线程的时候，生成的进程的结构和传统进程一样，包括文本段，数据段。但是一个程序如果带有线程的话，就变得不同了。这种情况下，会多出一个线程栈。这样以来就会使得对外的表现仍然是，在加载程序的时候，整个代码都会被加载以形成一个调度的实体。这样的进程和传统进程是一样的。而这时的调度器，仍然以整个进程作为调度单位。如果进程中有多余的线程，是通过KLT实现的（这里我们不能称线程为内核线程，因为这个词已经有过了定义）。那么KLT的库负责的任务就是在程序有创建线程的需求的时候利用<code>task_struct</code>结构当中对线程的支持，分配一个线程栈，并告诉调度器这个线程栈是一个独立的实体。可以直接在其中执行代码的。</p>
+<p>在这一过程当中，编译器并不会感知到线程栈的存在，它仍然正常地生成有关函数的代码。当编译和连接按照流程走一遍之后，就生成了可执行文件。当程序加载执行的时候，运行到创建线程的时候，如果是KLT,就会实际上把传给它的函数的入口地址一直到结尾的部分分配到线程栈当中。告诉给调度器的也就是函数的入口地址和相关参数。因此我们认为，在KLT之下，一个线程就是一个单独运行的函数，这个函数的参数也是由线程库给出的，做完这些，函数代码就可以独立执行了，因此对于调度器来说，KLT线程是非常短小精悍的一段代码。</p>
+<p>我们这里的程序的含义是由源代码生成的一个文件。</p>
+<p>接下来讲ULT.虽然ULT不与调度器没有什么关系，不过对于程序执行还是有着影响，那就意味着会产生一个问题，如何让一个进程，一会儿执行这个线程上的代码，一会儿执行那个线程上的代码。</p>
+<p>对于LinuxThread这样的库来说，实现多线程的方式估计很多人都要泪流满面了。实际对于LinuxThread最基本的是clone()出来的多个进程。</p>
+<p>clone()函数有多个功能，其中一个最核心的功能，最准确的描述是产生一个新的进程，这个进程的地址空间始终和父进程相同。</p>
+<p>LinuxThread库的功能主要集中在使用信号量在不同进程之间进行同步，并借此达到实现线程的目的。</p>
+<p>以下就是澄清了的事实：</p>
+<p>clone()函数有多个功能，借助它可以实现用户级的线程库（LinuxThread），也可以实现内核级的线程库（NPTL）。如果是使用NPTL,就要做参数上的调整。这就是为什么在NPTL的介绍当中，单独把“使用clone()”作为一句话的原因，其言外之意，原来的clone()是用来实现用户级线程库的。</p>
+<p>有句话叫“在系统看来，用户级线程相当于一个进程，内核级线程相当于多个进程”。这句话是很有误导性的。准确的意思是，1.在调度程序看来，用户级线程之间共享一个时间片。分配时间的时候是一起的。但是在调度程序看来，无论是用户级线程，还是内核级线程，它们都被调度程序作为排队的不同成员。2.在操作系统加上线程库看来，用户级线程才相当于一个单位。</p>
+<p>解释其一，在Linux程序设计当中有这样的一句话，第417页上说，“…许多项目都在研究如何才能改善Linux对线程的支持，…,其中大部分工作都集中在如何将用户级的线程映射到内核级的线程。”。后面的词“映射”非比寻常。因此原来的线程库当中，是通过线程库把一个线程映射到不同的进程当中，线程库所做的工作就是如何调整不同进程之间的同步关系，使得在一个传统的操作系统下实现线程。因此在操作系统看来，这样的每一个线程都是一个进程，所以它们可以分别被调度。至于时间片的分配，只要在创建进程的时候，使得两个<code>task_struct</code>共享一个时间值，这样以来就可以在不共享PID的同时实现时间片的共享，因此是倒回到模拟实现去了。这样外在表现就好像是一个进程一样。</p>
+<p>解释其二，我们不难理解用户级线程慢的原因了，这倒不是说自己分配数据区很慢，而是说，实际上需要创建多个“病态的”进程结构。还可以知道，用户级线程容纳的线程数是非常有限的，因为系统容纳的进程数往往不是很多。在这样的系统当中实现多线程，潜能就不是很大，因为一个用户级线程被映射到一个操作系统进程。而内核级线程库的优势就在于在不改变可容纳进程数的前提下，仅通过调整可调度单位数，就能够创建出大量的线程来，并且不占用操作系统的PID资源。</p>
+<p>线程库和操作系统的关系需要一番思考。如果不对操作系统进行修改，操作系统的调度单位仍是一个一个的进程，线程库能做的，也只能是把程序分成多个进程，这样才能实现并行。当然，在支持KLT的系统中也可以设计出更复杂的用户级线程库。m:n的线程模型就是一个例子。</p>
+<p>因此说，不用修改操作系统，单靠线程库就可以实现用户线程也是不恰当的，如果非要那么做，线程的效率要低于普通的进程，所以运行效率上：</p>
+<p>内核线程<span class="math inline">\(&lt;\)</span>单个进程<span class="math inline">\(&lt;\)</span>内核线程之和<span class="math inline">\(&lt;\)</span>轻量进程上实现的用户线程<span class="math inline">\(&lt;\)</span>多个进程<span class="math inline">\(&lt;\)</span>单个进程加上同步形成的线程。但是从实现复杂度上，进程比轻量进程易，轻量进程比线程易，KLT比ULT易。</p>
+<p>摘自《Linux操作系统实验教程》：linux内核支持的用户线程都有一个用来维护它的<code>task_struct</code> 结构，该用户线程实质上是一个蛤备单独 <code>task_struct</code>结构的子进程。</p>
+<h3 id="调度的本质">调度的本质</h3>
+<p>以前总不能避免把一个 <code>task_struct</code> 看成一个调度单位，所以就认为一个结构就代表一个进程，所以ULT就是在一个进程当中，一个KLT就是占好几个 <code>task_struct</code> .恰恰和事实相反。</p>
+<p>轻量进程和内核线程应该算是实现线程的不同思路。前者的地位，相当于在一个传统的操作系统当中，不适合共享数据，内核从而进行机制上的改造，使之提高创建进程的速度，如果操作系统不这么做，用户级线程也不可能在linux上出现的那么早。</p>
+<p>因此我对内核线程的态度大为改善，以前以为它是通过创建大量的进程实现的。而这个认识被证明是完全错误的。对不起，内核线程，KLT,亲爱的NPLT.</p>
+<p>调度的本质应当是一段代码及其数据在处理器和内存之间的移动，因此调度的对象完全不必是一个进程。这点原理书上说的是正确的。但是一个操作系统必须有确定的调度对象，这个也是无法改变的。如果我们以调度的最本质的特点来看操作系统，就知道调度的思想来自于甚至还未有操作系统的时代。只是在操作系统发展的初期，只能以进程为完整单位进行调度，所以在操作系统这时的调度反而是最不灵活的。</p>
+<p>我们重新定义调度的对象，不再以进程作为根据。所以我们在线程调度的设计当中，更进一步了解了调度的实质。细化了调度的粒度。</p>
+<p>所以在linux中通过调整nice值改变进程优先级的意义对于内核级线程作用就很小了，而且也不是人们所期望的改变。所以可能有必要设计一个工具函数，能够细化到对进程内部的线程调整优先级。</p>
+<h2 id="linux的进程与作业管理">Linux的进程与作业管理</h2>
+<p>操作系统原理的时候从来没有讲过作业是怎么一回事，只讲到了进程及其相关的调度，现在我们就把要学的内容完整起来。</p>
+<p>Linux是一个多任务的操作系统。在计算机看来，系统上同时运行着多个进程。正在执行的一个或者多个相关的进程称为一个作业。使用作业控制，用户便可以同时运行多个作业，并在需要时于不同作业之间切换。</p>
+<p>Linux是一个多用户多任务的操作系统。多用户指多个用户可以同一时间使用计算机系统，多任务指的是可以同时执行几个任务。由操作系统负责管理多个用户的请求与多个任务。</p>
+<p>最关键的地方还是这些用户请求与任务直接由操作系统所识别。</p>
+<p>任务这个词比进程还要更基本一些，不只是传统的进程，也包括了用户作业，操作系统任务，邮件与打印作业等。它们出现的形式可以有多种多样的。这每一个单位称为一个任务。不过在Linux下面，所有运行的东西都可以被称为一个进程(调度的单位现在是线程了)。用户任务以及守护进程都可以称为进程。</p>
+<p>对进程比较正式的定义是，在自身的虚拟地址空间运行的一个单独的程序。Linux下面进程有三种类型，交互进程，批处理进程以及守护进程。三种进程各有各的作用，使用的场合也有所不同。</p>
+<p>一个正在执行的进程称为一个作业，然而一个作业可以包括一个或者多个命令，特别是在我们使用管道与重定向命令的时候。比如在Shell输入一串带有管道命令的命令，就执行了一个作业，然而有多个进程。</p>
+<p>作业控制指的是控制作业中正在运行的进程的行为，如控制作业的挂起或者暂停。许多Shell都有作业控制的特性，使用户可以在多个独立作业之间切换。</p>
+<p>一般而言，只有与作业控制相关联的进程才能被称为作业，不受作业控制的进程通常不划入作业的范围。大多数情况下，用户一个Shell只运行一个作业。</p>
+<p>进程一般有手动启动与调度启动两种方法。手动启动又有前台启动与后台启动之分。如果使用了管道，管道里面的各个进程是同时启动的。控制进程的启动，可以使用at,batch或者cron工具，而管理当前Shell里面的作业，可以使用信号，bg与fg.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+            <a href="/tags/线程/" rel="tag"># 线程</a>
+          
+            <a href="/tags/调度器/" rel="tag"># 调度器</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2012/进程原理二/" rel="next" title="进程原理二：进程控制块与进程详细介绍">
+                <i class="fa fa-chevron-left"></i> 进程原理二：进程控制块与进程详细介绍
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/regex-intro/" rel="prev" title="正则表达式实践">
+                正则表达式实践 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="en/2012/线程与调度器/"
+           data-title="进程原理三：线程原理与编程、调度器" data-url="./2012/线程与调度器/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Istyasna" />
+          <p class="site-author-name" itemprop="name">Istyasna</p>
+          <p class="site-description motion-element" itemprop="description">GO FORTH now and create masterpieces of the publishing art!</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">193</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/irhawks" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://code.aliyun.com/u/irhawks" target="_blank" title="Aliyun">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Aliyun
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="./" title="Homepage" target="_blank">Homepage</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hainu.edu.cn" title="Hainan University" target="_blank">Hainan University</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://qiqi789.github.io/" title="Qi Qi" target="_blank">Qi Qi</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的相关原理"><span class="nav-number">1.</span> <span class="nav-text">线程的相关原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程的基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">线程的基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为了防止主题分化下面讲一般的线程的原理"><span class="nav-number">1.2.</span> <span class="nav-text">为了防止主题分化。下面讲一般的线程的原理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux下线程的实现"><span class="nav-number">2.</span> <span class="nav-text">linux下线程的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#posix线程库中创建线程的方法以c语言为例"><span class="nav-number">2.1.</span> <span class="nav-text">POSIX线程库中创建线程的方法，以C语言为例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#posix线程的基本函数"><span class="nav-number">2.2.</span> <span class="nav-text">POSIX线程的基本函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux的调度器"><span class="nav-number">3.</span> <span class="nav-text">linux的调度器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分类的必要性"><span class="nav-number">3.1.</span> <span class="nav-text">分类的必要性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#带线程的进程模型"><span class="nav-number">3.2.</span> <span class="nav-text">带线程的进程模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度的本质"><span class="nav-number">3.3.</span> <span class="nav-text">调度的本质</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux的进程与作业管理"><span class="nav-number">4.</span> <span class="nav-text">Linux的进程与作业管理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Istyasna</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+<!-- I manually add this to enable bootstrap style dropdown menu -->
+<script type="text/javascript" src="/js/src/bootstrap/dropdown.js"></script>
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"irhawks"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: {
+          extensions: ["amsthm.js", "AMSmath.js","AMSsymbols.js", "autobold.js"],
+        },
+        tex2jax: {
+          <!--(disable $) inlineMath: [ ['$','$'], ["\\(","\\)"]  ],-->
+          inlineMath: [ ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        },
+        <!-- add zoom options for math equations-->
+        MathZoom: {
+          styles: { "#MathJax_Zoom": {
+              "background-color": "rgba(255,255,255,0.9)"
+            } }
+        },
+        extensions: ["[Contrib]/a11y/accessibility-menu.js"],
+        explorer: {
+          walker: 'syntactic',         // none, syntactic, semantic
+          highlight: 'none',           // none, hover, flame
+          background: 'blue',          // blue, red, green, yellow, cyan, magenta, white, black
+          foreground: 'black',         // black, white, magenta, cyan, yellow, green, red, blue
+          speech: true,                // true, false
+          generation: 'lazy',          // eager, mixed, lazy
+          subtitle: true,              // true, false
+          ruleset: 'mathspeak-default' // mathspeak-default, mathspeak-brief, mathspeak-sbrief, chromevox-default, chromevox-short, chromevox-alternative
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>

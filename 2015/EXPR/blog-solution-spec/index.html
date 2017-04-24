@@ -85,7 +85,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="hexo,git,hakyll," />
+  <meta name="keywords" content="git,hakyll,hexo," />
 
 
 
@@ -111,7 +111,7 @@ Hakyll下面的个人主页项目，似乎有把个人主页分成程序和资�
 <meta property="og:site_name" content="Coding Poet, Coding Science">
 <meta property="og:description" content="参考Eric Walkingshaw的主页、Ian Ross的主页以及yogsototh的支持多语言的主页的设计以决定该怎样布局个人的主页。
 Hakyll下面的个人主页项目，似乎有把个人主页分成程序和资源两个部分的倾向。进一步地，site.hs，以及编译器属于程序，CSS、Markdown与HTML模板属于“资源”。那么我们会问，制作一个个人主页必须学会编程，特别是Haskell编程么？似乎前台的">
-<meta property="og:updated_time" content="2017-04-24T01:17:29.727Z">
+<meta property="og:updated_time" content="2017-04-24T01:39:22.304Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="博客文章平台指南">
 <meta name="twitter:description" content="参考Eric Walkingshaw的主页、Ian Ross的主页以及yogsototh的支持多语言的主页的设计以决定该怎样布局个人的主页。
@@ -391,7 +391,7 @@ Hakyll下面的个人主页项目，似乎有把个人主页分成程序和资�
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               <span class="post-meta-item-text">更新于</span>
-              <time title="更新于" itemprop="dateModified" datetime="2017-04-24T09:17:29+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2017-04-24T09:39:22+08:00">
                 2017-04-24
               </time>
             
@@ -513,6 +513,11 @@ Hakyll下面的个人主页项目，似乎有把个人主页分成程序和资�
 <h3 id="deploy-to-remote-sites-1">Deploy to remote sites</h3>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">hexo</span> deploy</code></pre></div>
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+<h1 id="博客平台应具有的功能">博客平台应具有的功能</h1>
+<ol style="list-style-type: decimal">
+<li><p>文章发布模型。每个文章绑定一个博客主题。每篇文章可以经过不断修改以及与其它的文章合并，形成一个更完整的文章。因此，文章可以按照最近的修改时间排序。同时显示文章创建日期与文章修改日期。既可以按创建日期排序，也可以按照修改日期排序</p></li>
+<li><p>文章分类系统。文章分类系统应当结构清晰、覆盖全面，便于交流。</p></li>
+</ol>
 
       
     </div>
@@ -536,11 +541,11 @@ Hakyll下面的个人主页项目，似乎有把个人主页分成程序和资�
       
         <div class="post-tags">
           
-            <a href="/tags/hexo/" rel="tag"># hexo</a>
-          
             <a href="/tags/git/" rel="tag"># git</a>
           
             <a href="/tags/hakyll/" rel="tag"># hakyll</a>
+          
+            <a href="/tags/hexo/" rel="tag"># hexo</a>
           
         </div>
       
@@ -549,7 +554,7 @@ Hakyll下面的个人主页项目，似乎有把个人主页分成程序和资�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/agda-lang/" rel="next" title="Agda语言介绍">
+              <a href="/2015/CODE/agda-lang/" rel="next" title="Agda语言介绍">
                 <i class="fa fa-chevron-left"></i> Agda语言介绍
               </a>
             
@@ -671,7 +676,7 @@ Hakyll下面的个人主页项目，似乎有把个人主页分成程序和资�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">55</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -679,7 +684,7 @@ Hakyll下面的个人主页项目，似乎有把个人主页分成程序和资�
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -688,7 +693,7 @@ Hakyll下面的个人主页项目，似乎有把个人主页分成程序和资�
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">193</span>
+                <span class="site-state-item-count">189</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -778,7 +783,7 @@ Hakyll下面的个人主页项目，似乎有把个人主页分成程序和资�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#hello-world-from-the-hexo-2016-01-01"><span class="nav-number">1.</span> <span class="nav-text">Hello World from the Hexo 2016-01-01</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#quick-start"><span class="nav-number">1.1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#create-a-new-post"><span class="nav-number">1.1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#run-server"><span class="nav-number">1.1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#generate-static-files"><span class="nav-number">1.1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deploy-to-remote-sites"><span class="nav-number">1.1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo的从入门到精通12-15-2016-111101-cst"><span class="nav-number">1.2.</span> <span class="nav-text">Hexo的从入门到精通[12-15-2016 11:11:01 CST]</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hello-world-from-hexo-with-next-theme-2016-12-14"><span class="nav-number">2.</span> <span class="nav-text">Hello world from Hexo with NexT theme 2016-12-14</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#quick-start-1"><span class="nav-number">2.1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#create-a-new-post-1"><span class="nav-number">2.1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#run-server-1"><span class="nav-number">2.1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#generate-static-files-1"><span class="nav-number">2.1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deploy-to-remote-sites-1"><span class="nav-number">2.1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#hello-world-from-the-hexo-2016-01-01"><span class="nav-number">1.</span> <span class="nav-text">Hello World from the Hexo 2016-01-01</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#quick-start"><span class="nav-number">1.1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#create-a-new-post"><span class="nav-number">1.1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#run-server"><span class="nav-number">1.1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#generate-static-files"><span class="nav-number">1.1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deploy-to-remote-sites"><span class="nav-number">1.1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo的从入门到精通12-15-2016-111101-cst"><span class="nav-number">1.2.</span> <span class="nav-text">Hexo的从入门到精通[12-15-2016 11:11:01 CST]</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hello-world-from-hexo-with-next-theme-2016-12-14"><span class="nav-number">2.</span> <span class="nav-text">Hello world from Hexo with NexT theme 2016-12-14</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#quick-start-1"><span class="nav-number">2.1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#create-a-new-post-1"><span class="nav-number">2.1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#run-server-1"><span class="nav-number">2.1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#generate-static-files-1"><span class="nav-number">2.1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deploy-to-remote-sites-1"><span class="nav-number">2.1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#博客平台应具有的功能"><span class="nav-number">3.</span> <span class="nav-text">博客平台应具有的功能</span></a></li></ol></div>
             
 
           </div>

@@ -59,32 +59,6 @@
   </entry>
   
   <entry>
-    <title>Hello World From Hexo With NexT Theme</title>
-    <link href="./2016/EXPR/hello-world/"/>
-    <id>./2016/EXPR/hello-world/</id>
-    <published>2016-12-13T16:00:00.000Z</published>
-    <updated>2016-12-15T03:53:40.035Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-    
-    </summary>
-    
-      <category term="Publish" scheme="./categories/Publish/"/>
-    
-      <category term="Blog" scheme="./categories/Publish/Blog/"/>
-    
-    
-      <category term="Hexo" scheme="./tags/Hexo/"/>
-    
-      <category term="NexT" scheme="./tags/NexT/"/>
-    
-      <category term="Blog" scheme="./tags/Blog/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Solr搜索介绍（继续）</title>
     <link href="./2016/solr-tutorial/"/>
     <id>./2016/solr-tutorial/</id>
@@ -205,9 +179,9 @@ Hexo的Next主题可以识别&lt;! -- more --.&gt;，并且在主页当中展示
     
       <category term="OpenModelica" scheme="./tags/OpenModelica/"/>
     
-      <category term="ModelicaML" scheme="./tags/ModelicaML/"/>
-    
       <category term="仿真" scheme="./tags/%E4%BB%BF%E7%9C%9F/"/>
+    
+      <category term="ModelicaML" scheme="./tags/ModelicaML/"/>
     
       <category term="DAE" scheme="./tags/DAE/"/>
     
@@ -249,8 +223,8 @@ end C&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>常见的数据结构的抽象</title>
-    <link href="./2016/datatype-abstraction/"/>
-    <id>./2016/datatype-abstraction/</id>
+    <link href="./2016/INFA/datatype-abstraction/"/>
+    <id>./2016/INFA/datatype-abstraction/</id>
     <published>2016-01-14T16:00:00.000Z</published>
     <updated>2016-12-14T11:04:04.007Z</updated>
     
@@ -348,8 +322,8 @@ end C&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>守护进程的编写思路（C与Python）</title>
-    <link href="./2015/programming-daemon/"/>
-    <id>./2015/programming-daemon/</id>
+    <link href="./2015/ICTN/programming-daemon/"/>
+    <id>./2015/ICTN/programming-daemon/</id>
     <published>2015-12-08T16:00:00.000Z</published>
     <updated>2016-12-14T11:18:28.344Z</updated>
     
@@ -370,11 +344,11 @@ end C&lt;/code&gt;&lt;/pre&gt;
       <category term="操作系统" scheme="./categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
     
-      <category term="python" scheme="./tags/python/"/>
+      <category term="c" scheme="./tags/c/"/>
     
       <category term="linux" scheme="./tags/linux/"/>
     
-      <category term="c" scheme="./tags/c/"/>
+      <category term="python" scheme="./tags/python/"/>
     
       <category term="daemon" scheme="./tags/daemon/"/>
     
@@ -384,8 +358,8 @@ end C&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>Scheme语言概要</title>
-    <link href="./2015/scheme-lang/"/>
-    <id>./2015/scheme-lang/</id>
+    <link href="./2015/CODE/scheme-lang/"/>
+    <id>./2015/CODE/scheme-lang/</id>
     <published>2015-08-30T16:00:00.000Z</published>
     <updated>2016-12-14T11:08:10.697Z</updated>
     
@@ -402,9 +376,9 @@ end C&lt;/code&gt;&lt;/pre&gt;
       <category term="编程语言" scheme="./categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
     
     
-      <category term="scheme" scheme="./tags/scheme/"/>
-    
       <category term="语法" scheme="./tags/%E8%AF%AD%E6%B3%95/"/>
+    
+      <category term="scheme" scheme="./tags/scheme/"/>
     
       <category term="guile" scheme="./tags/guile/"/>
     
@@ -412,8 +386,8 @@ end C&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>Maude语言</title>
-    <link href="./2015/maude-lang/"/>
-    <id>./2015/maude-lang/</id>
+    <link href="./2015/CODE/maude-lang/"/>
+    <id>./2015/CODE/maude-lang/</id>
     <published>2015-07-21T16:00:00.000Z</published>
     <updated>2016-12-14T11:08:38.764Z</updated>
     
@@ -493,9 +467,9 @@ end C&lt;/code&gt;&lt;/pre&gt;
     
       <category term="正则表达式" scheme="./tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
     
-      <category term="进程" scheme="./tags/%E8%BF%9B%E7%A8%8B/"/>
-    
       <category term="scala" scheme="./tags/scala/"/>
+    
+      <category term="进程" scheme="./tags/%E8%BF%9B%E7%A8%8B/"/>
     
       <category term="shell" scheme="./tags/shell/"/>
     
@@ -605,7 +579,7 @@ end C&lt;/code&gt;&lt;/pre&gt;
     <link href="./2015/EXPR/blog-solution-spec/"/>
     <id>./2015/EXPR/blog-solution-spec/</id>
     <published>2015-06-20T16:00:00.000Z</published>
-    <updated>2017-04-24T01:17:29.727Z</updated>
+    <updated>2017-04-24T01:39:22.304Z</updated>
     
     <summary type="html">
     
@@ -619,18 +593,18 @@ end C&lt;/code&gt;&lt;/pre&gt;
       <category term="博客" scheme="./categories/%E5%87%BA%E7%89%88/%E5%8D%9A%E5%AE%A2/"/>
     
     
-      <category term="hexo" scheme="./tags/hexo/"/>
-    
       <category term="git" scheme="./tags/git/"/>
     
       <category term="hakyll" scheme="./tags/hakyll/"/>
+    
+      <category term="hexo" scheme="./tags/hexo/"/>
     
   </entry>
   
   <entry>
     <title>Agda语言介绍</title>
-    <link href="./2015/agda-lang/"/>
-    <id>./2015/agda-lang/</id>
+    <link href="./2015/CODE/agda-lang/"/>
+    <id>./2015/CODE/agda-lang/</id>
     <published>2015-06-07T16:00:00.000Z</published>
     <updated>2016-12-14T11:17:12.142Z</updated>
     
@@ -653,6 +627,35 @@ end C&lt;/code&gt;&lt;/pre&gt;
       <category term="函数式" scheme="./tags/%E5%87%BD%E6%95%B0%E5%BC%8F/"/>
     
       <category term="依存类型" scheme="./tags/%E4%BE%9D%E5%AD%98%E7%B1%BB%E5%9E%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Elixir：建立在Erlang虚拟机上的函数式语言</title>
+    <link href="./2015/CODE/elixir-lang/"/>
+    <id>./2015/CODE/elixir-lang/</id>
+    <published>2015-06-05T16:00:00.000Z</published>
+    <updated>2016-12-14T11:20:36.431Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Elixir是建立头Elrang虚拟机上的函数式、并发的、通用的编程语言。Elixir是一个BEAM（Erlang虚拟机的名称）上面的一个比较新的编程语言。Elixir的思想是所有的事物都看成是表达式。现代编程语言通常都具有开些诸如泛型编程、函数式编程、面向对象编程，对并发、并行、异步、非阻塞都有很好的支持，支持多态特性。在函数式编程方面上也支持模式匹配。类型系统当然更为严谨。此外，模式匹配、惰性求值、unicode支持、多态、文档注释甚至文学编程特性、高阶函数也往往都具备。&lt;/p&gt;
+&lt;p&gt;Elixir的REPL环境是iex命令。Elixir的语言的扩展名是exs。&lt;/p&gt;
+&lt;p&gt;Erlang的虚拟机的配置是&lt;/p&gt;
+&lt;pre class=&quot;shell&quot;&gt;&lt;code&gt;erl -name node06@10.0.0.151 --cookie a&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+      <category term="编程语言" scheme="./categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+    
+      <category term="函数式" scheme="./tags/%E5%87%BD%E6%95%B0%E5%BC%8F/"/>
+    
+      <category term="elixir" scheme="./tags/elixir/"/>
+    
+      <category term="erlang" scheme="./tags/erlang/"/>
+    
+      <category term="并发" scheme="./tags/%E5%B9%B6%E5%8F%91/"/>
     
   </entry>
   

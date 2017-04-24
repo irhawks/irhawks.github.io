@@ -1,0 +1,1180 @@
+<!doctype html>
+
+
+
+  
+
+
+<!--
+<html class="theme-next mist use-motion" lang="zh-Hans,en">
+-->
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="linux,进程,线程,权限," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Coding Poet, Coding Science" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="把进程管理放在操作系统中较后的位置，不是没有原因的。想一想，如果没有那么多的设备又何必设计存储管理，如果没有存储设备中内容的复杂性，又何来文件系统管理。如果没有文件系统提供那么多的资源，又何必设备多个程序，让它们按照可被调度的对象运行? 由此可见。在底层，在操作系统设计的时候，按照一个一个的模块来设计的。有了前面的准备，进程的运行才有一个良好的环境，才方便我们设计调度。
+进程管理中的进程被提供了一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="进程原理一：进程管理与Linux下面的进程">
+<meta property="og:url" content="./2012/ICTN/os-process-1/index.html">
+<meta property="og:site_name" content="Coding Poet, Coding Science">
+<meta property="og:description" content="把进程管理放在操作系统中较后的位置，不是没有原因的。想一想，如果没有那么多的设备又何必设计存储管理，如果没有存储设备中内容的复杂性，又何来文件系统管理。如果没有文件系统提供那么多的资源，又何必设备多个程序，让它们按照可被调度的对象运行? 由此可见。在底层，在操作系统设计的时候，按照一个一个的模块来设计的。有了前面的准备，进程的运行才有一个良好的环境，才方便我们设计调度。
+进程管理中的进程被提供了一">
+<meta property="og:updated_time" content="2016-12-14T08:47:31.657Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="进程原理一：进程管理与Linux下面的进程">
+<meta name="twitter:description" content="把进程管理放在操作系统中较后的位置，不是没有原因的。想一想，如果没有那么多的设备又何必设计存储管理，如果没有存储设备中内容的复杂性，又何来文件系统管理。如果没有文件系统提供那么多的资源，又何必设备多个程序，让它们按照可被调度的对象运行? 由此可见。在底层，在操作系统设计的时候，按照一个一个的模块来设计的。有了前面的准备，进程的运行才有一个良好的环境，才方便我们设计调度。
+进程管理中的进程被提供了一">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: false,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="./2012/ICTN/os-process-1/"/>
+
+
+
+
+
+<!-- add highlight.js to render pandoc code blocks -->
+<!--
+<link href="http://cdn.bootcss.com/highlight.js/9.10.0/styles/github.min.css" rel="stylesheet">  
+-->
+<link href="/css/github.min.css" rel="stylesheet">  
+<script src="http://cdn.bootcss.com/highlight.js/9.10.0/highlight.min.js"></script>  
+<script src="/js/highlightjs-line-numbers.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.initLineNumbersOnLoad(); </script>
+
+  <title> 进程原理一：进程管理与Linux下面的进程 | Coding Poet, Coding Science </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?763bee904aa6d81fdf017659d162188f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Coding Poet, Coding Science</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Keep Stupid, Keep Hungry</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-resources">
+          <a href="/resources" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-folder"></i> <br />
+            
+            资源
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+          <li class="menu-item"><a href="/2012/ICTN/os-process-1/">简体中文</a></li>
+          
+          <li class="menu-item"><a href="/en/2012/ICTN/os-process-1/">English (US)</a></li>
+          
+
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <!-- previous -->
+<script type="text/javascript">
+   var search_path = "<%= config.search.path %>";
+   if (search_path.length == 0) {
+       search_path = "search.xml";
+   }
+   var path = "<%= config.root %>" + search_path;
+   searchFunc(path, 'local-search-input', 'local-search-result');
+</script>
+<!-- optimized -->
+<div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+
+    </div>
+  
+
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="./2012/ICTN/os-process-1/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Istyasna">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Coding Poet, Coding Science">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Coding Poet, Coding Science" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                进程原理一：进程管理与Linux下面的进程
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2012-12-18T00:00:00+08:00">
+                2012-12-18
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              <span class="post-meta-item-text">更新于</span>
+              <time title="更新于" itemprop="dateModified" datetime="2016-12-14T16:47:31+08:00">
+                2016-12-14
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/计算机/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2012/ICTN/os-process-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2012/ICTN/os-process-1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>把进程管理放在操作系统中较后的位置，不是没有原因的。想一想，如果没有那么多的设备又何必设计存储管理，如果没有存储设备中内容的复杂性，又何来文件系统管理。如果没有文件系统提供那么多的资源，又何必设备多个程序，让它们按照可被调度的对象运行? 由此可见。在底层，在操作系统设计的时候，按照一个一个的模块来设计的。有了前面的准备，进程的运行才有一个良好的环境，才方便我们设计调度。</p>
+<p>进程管理中的进程被提供了一个抽象的体例。在进程中，也许应该首先使用虚拟地址空间，区分内核态与用户态，再联系处理器的权限管理的机制。这样对于为何进程有必要存在给了一个比较好的解释。</p>
+<p>在存储管理的层次上，可以按照所谓单一连续分配，固定分配，动态分配，分页或者分段的方法。但是这只是一个方面。这是进程的静态的结构，这时进程被看成是存储区域。但是还可以更高级地，把进程看成是运行着的文件。</p>
+<p>多用户情况下，进程的权限可以看成是由文件的权限演变而来，而且它访问的设备，都是这样的一种抽象。所以如果把进程管理放在最后的话，我们会更能看出进程技术的复杂性。在学习路线上，先设备后进程的方法也许是很适合的。</p>
+<p>在进程与编译技术上，刚开始的编译，只是按照实际地址空间的编译，自从有了进程与抽象之后，便可以使用可重定位的代码了。这样编译的技术也就可以更进一步。有了这些，我们才可能进一步讲解在操作系统之下的虚拟机，调试，安全优化这些内容。</p>
+<h2 id="进程与子进程的同步">进程与子进程的同步</h2>
+<ol style="list-style-type: decimal">
+<li>使用<code>_exit()</code>系统调用或者exit()库函数终止进程，或者等待进程代码执行完毕的时候退出，或者使用return()语句。通常并不直接使用系统调用。因为与<code>_exit()</code> 相比，exit()还执行了更多的清除工作。</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">void</span> _exit(<span class="dt">int</span> status);
+<span class="dt">void</span> exit(<span class="dt">int</span> status);</code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li><p>当一个进程创建一个子进程的时候，大多数情况下，紧跟其后的是调用exec语句。exec的用法这里不讲。</p></li>
+<li><p>等待进程死亡的系统调用是wait()。它的效果是在父进程执行它的地方被阻塞，直到有一个子进程死亡，wait得到它的状态返回，父进程因此继续执行。wait的不好之处是在这之前父进程可能创建了多个子进程，wait返回时，父进程并不知道是哪个子进程结束了。</p></li>
+</ol>
+<p>子进程先死亡的时候，子进程的进程表不会立即被释放。除非是init进程，有定时清理defunct进程的功能。</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">wait(<span class="dt">int</span> *exitstatus);</code></pre></div>
+<p>为了改进这一状态，可以选择使用waipid()函数代替。</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">pid_t waitpid(pid_t pid, <span class="dt">int</span> *stat_loc, <span class="dt">int</span> options);</code></pre></div>
+<p>第二个参数保存退出状态。options参数取WNOHANG,WUNTRACED,WCONTINUED之一或者其中的组合。有NOHANG的时候立即返回，不会阻塞。pid是所等待的进程。但是有些有特殊的意义。比如-1代表进程一直阻塞；0代表等待进程组中任何一个进程的死亡；<span class="math inline">\(pid&gt;0\)</span>时表示所等待的进程；<span class="math inline">\(pid&lt;0\)</span>时绝对值表示等待PGID等于pid绝对值的进程（组领导进程）死亡。</p>
+<p>进程组是Berkeley小组提出的一个概念，利用它可以控制一组具有共同特性的进程。组中每个进程有进程组标识号PGID,其值等于进程组领导者的PID</p>
+<p>不同shell中的特性也不一样，比如在Bourne Shell里，其中运行的命令与shell的PGID相同。C Shell, Korn Shell, Bash Shell中，处于同一管道的命令组成一个独立的进程组。具体来说。支持作业控制的Shell才会像后者一样。</p>
+<p>一个用户可以有多个进程组，只有一个进程组在前台，它连接到会话的控制终端。在按下CTRL-C的时候，我们实际上是向前台进程组里的所有进程发送SIGINT信号。因此在一堆管道命令当中，我们也可以使用一个CTRL-C.</p>
+<p>当后台进程组试图从终端读取数据的时候，终端驱动程序会发现这种行为，发送一个信号，挂起这个进程组。</p>
+<h2 id="使用环境变量">使用环境变量</h2>
+<p>环境变量是进程地址空间的一部分。在创建子进程时父进程的环境变量会传递给子进程。保存在一个外部变量里。使用如下的语句声明它：</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="kw">extern</span> <span class="dt">char</span> **environ;</code></pre></div>
+<p>这个指针数组的每一分量是name=value的形式。</p>
+<p>POSIX规范定义了如下的两个函数分别用于求取和设置环境变量的值：</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">char</span> *getenv(<span class="dt">const</span> <span class="dt">char</span> *name);
+<span class="dt">int</span> setenv(<span class="dt">const</span> <span class="dt">char</span>*envname, <span class="dt">const</span> <span class="dt">char</span> * envval, <span class="dt">int</span> overwrite);</code></pre></div>
+<p>其中overwrite的含义是：非零值代表如果已有环境变量，其值被覆盖。</p>
+<p>和C语言非零值代表true的约定是一样的。</p>
+<h2 id="程序设计中的进程控制">程序设计中的进程控制</h2>
+<p>进程控制块是进程存在的根据，在进程控制块中有许多的内容可以使用。内容在上个笔记中已经有介绍了。</p>
+<ol start="0" style="list-style-type: decimal">
+<li>创建进程使用fork()函数，返回 <code>pid_t</code> 类型。向父进程返回子进程PID,向子进程返回0.父进程从从那时创建fork()调用的下一行开始。</li>
+</ol>
+<p>使用 <code>pid_t</code> 类型的一个好处是，我们不知道 <code>pid_t</code> 的真正类型是什么，因而也就无需考虑这个类型的加法减法有什么意义了，反而落得清静。</p>
+<ol style="list-style-type: decimal">
+<li><p>进程号相关的方法getpid()与getppid()分别获取当前进程ID和其父进程ID.</p></li>
+<li><p>进程用户属性getuid(),getgid(),geteuid()与getegid()。</p></li>
+</ol>
+<p>设计父进程和子进程的机制可以稍微从POSIX的规定中看到一些，比如说，因为多用户的环境下所有的进程如果彼此独立的话，对于系统程序设计是一个挑战。</p>
+<p>进程控制的确是一个技术思路的问题，而非一个科学上的问题，不仅如此，很多在操作系统原理上学的也是几个技术实现，并不能称上是计算机科学。</p>
+<h2 id="进程创建的机制">进程创建的机制</h2>
+<p>一个进程的创建明显有三个阶段，需要调用三个重要的系统调用或系统函数。它们分别是fork,exec,wait.当我们在shell里执行一个命令<code>${CMD}</code>的时候，shell会另外创建一个shell进程，新创建的进程映象载入<code>${CMD}</code>映象，<code>${CMD}</code>进程开始运行。SHELL父进程等待<code>${CMD}</code>的执行结束，并获取<code>${CMD}</code>的退出状态值。</p>
+<p>对于进程之间的关系来说，以下的属性比较重要：</p>
+<ol style="list-style-type: upper-alpha">
+<li>进程的真实UID和GID</li>
+<li>进程的有效UID和GID</li>
+<li>进程启动时所在的目录</li>
+<li>所有由父进程打开的文件描述符</li>
+<li>环境变量</li>
+</ol>
+<p>其中有效UID与有效GID和SUID和SGID有关。对于有些设置了SUID或SGID属性的程序有用，用于一个程序以它的UID和GID启动，而不是当前用户。</p>
+<p>操作系统原理讲的很简略的，没有讲过进程之间父子关系这些东西。但是我们可以自己把它理解成人为加上去的属性，不影响进程的调度。</p>
+<p>当一个进程死亡的时候，会立即转入僵尸状态，直到它的父进程从进程表中获取它的状态值。然后内核从进程表中删除这个记录。处于僵尸状态的进程是一个无害的子进程，但是我们不能终止它。</p>
+<p>倘若在子进程之前，父进程已经死亡，此时这个子进程成为一个孤儿，内核将指派init成为所有孤儿进程的父进程。而特殊之处是中有所有子进程都死亡之后，init才会死亡。</p>
+<p>由此我们补充进程的几个阶段当中，一旦执行完毕，并不会直接就从PCB中消失，而是还要经过一系列的处理过程。</p>
+<p>僵尸进程和孤儿进程的不同定义。</p>
+<p>关于进程有很多的主题，在操作系统当中学习的是进程管理，并发控制，进程调度，在这里学习的是进程控制，虽然也是进程管理的一部分但是没有包含在操作系统原理当中。</p>
+<h2 id="对于进程的理解">对于进程的理解</h2>
+<p>学习的进程实际上并不是最深层的原理。进程本身的机制还是我们不能了解的。所以就当操作系统为我们提供了进程这样的一个机制。在其中我们进行进程的创建和管理等等工作。</p>
+<p>计算机程序运行状态分为内核态和用户态。我们把进程想象成什么比较好呢？在原来的环境下，正如天地始于混沌一样，代码是不分彼此的。后来为了独立出来问题才有了这样的分别。计算机之所以成为计算机而不是计算器，本质在于其理论上的通用性。在原来的操作系统理论当中，引入多道程序设计的目的是提高运行的效率。这个方面的因素不能说没有吧。但相对来说，计算机的功能整合其实发生了很重要的作用。</p>
+<p>我们这样反思在计算机初期的发展原理。当时具有中央机与外围机，中央机的作用只是进行所谓的运算。这样一来就有了“单道”的程序环境。随着输入速度的提高，在实践中开始暴露出许许多多的问题。计算机当时没有什么理论性，或者说其理论还是作为业余人员的兴趣在被谈论，并未指导用于计算机的工业制造。工业上真正的变化是因为计算机速度的提高，使输入和输出跟不上计算性能，所以当时的首要问题和现在相反，是计算能力不能满足科学的需求，但这是因为人们不能在输入和输出上跟上计算机。</p>
+<p>在这种情况下首要的任务自然是对外围机进行整合，由更加高速的设备和控制逻辑代替某些人工操作。其中蕴含着可以实现通用计算的机会。因此计算机才开始进入整合的时期，才进行输入，运算，存储和输出的整合。在这种情况下当然一个紧密相关的系统的产生就是不可避免的了。既然如此，就不可能不让众多的功能聚在一起。在这种融合下，首先发生的变化就是和运算器，数理逻辑结合在一起。两个发现方向，其一，实用科学的计算需求，其二，人们对于可计算性的思考，之间的结合，是促使计算机原理化的第一动力。</p>
+<p>其次才是多道程序设计的产生。这个现象并不是遇然的，前面的理论已经为它的产生做好了准备。多道程序发生的第一因素是中央机和外围机对应不同功能需要使用不同的程序逻辑实现。在实际发展当中，我们还看到60年代的机器，越来越显得中央机太快，因此在我们的输入进行提高的同时，针对计算机空闲的现象，还试图在同一中央机当中添加多道程序，以提高运算器的使用效率。所以多道程序设计的原理在这个时候已经需要成熟。</p>
+<p>所以多道程序设计的必要性至少在计算机实体与计算性理论相结合的时候，多道程序就已经实现了。甚至在90年代，我们从WINDOWS作为DOS上的一层外壳，也能看出多道程序设计在萌发阶段的表现。典型的就是操作系统还只是一个软件中间件，程序员和使用者能够清楚地看到硬件结构。</p>
+<p>因此我们把进程想象成一群有交往关系的个体。这些个体要生活在同样的一个环境当中，我们需要合理安排，否则因为它们非常笨，会导致什么事情都做不了。它们做不了事情，我们的生命也就失去了意义了。</p>
+<p>所以原始的方法是我们在一个较弱的界面上实现一个较强的功能，但是我们拥有了相当程度的知识之后，就要想办法使整个系统有很高的整合度，特别是需要很简单。</p>
+<p>以我们的观点来看，计算机是我们认识世界的窗口，其中的有些道理和人类世界是相通的。</p>
+<h3 id="进程最基本的一面">进程最基本的一面</h3>
+<p>我们先讲的是进程机制。所以整个事情有显得没有什么必然的联系。实际上却是还有一些思想在其中的。</p>
+<p>首先要看到进程的结构为什么是这样的。底部的细节已经是是为我们屏蔽了的，比如分页机制与分段机制，还有虚拟内存。所以现在我们以编程人员探寻进程的实质为理由学习操作系统。然后我们就可以进行抽象了。</p>
+<p>那么程序执行的实质过程是什么呢？编译器封装了很多的细节。所幸可以根据汇编语言来进行推测。其结果就是所谓的数据段，文本段，BSS段。</p>
+<p>学习汇编语言的恰当时机个的认为是在学习了一门不太高级的高级语言如C之后，因为C语言的实用性最高，和汇编语言比较容易联系起来，技术性比较强，反观JAVA等就比较复杂，还得学习编译原理之后才会有一个比较明确的理解。所以学习一个面向过程，甚至直接学习汇编，皆是面向机器编程所需，这样以来，可以很好了解操作系统提供特性，执行的过程。更因为学习嵌入式实际上也算其中有操作系统，而其中的代码就和机器比较紧密，所以我们知道操作系统原理应该在裸机上学，在一个屏蔽了机器细节的机器上学习。这个和编译器生成的中间代码是处在同一个层次。</p>
+<p>所以整个计算机课程学习的过程就是中间代码可以算是一个分水岭。在其上生长了丰富的思想，在其下生长着各种性能的器件。</p>
+<p>数据结构在一门编程语言和操作系统之间。</p>
+<p>所以操作系统的进程一开始涉及的是进程段的分配。而内存我们很容易就可以想象成一个线性的地址序列，所以也没有什么困难的地方，即使我们将内存想象成一个一个的空格组成的空间也可以。</p>
+<p>接下来就涉及进程空间的分配。内存只有一条，但是我们在编程的时候由于都要转化成操作符和操作数的络式，所以地址就成了一个重要的问题。操作系统的解决手段相当于说，自己当成一个中介，代表每个进程进行分配。这就像一群人有东西要分，但是没有人出来做协调，于是就有一个比较聪明的人站出来给大家出谋划策，当然不是无条件的，它本身也要占据一些资源，不过结果在家都能满意。这说明这人确实有才能，不过目的却并不怎么光明磊落，就像微软在DOS上加了一系列WINDOWS的库让大家用一样。</p>
+<p>操作系统利用的是硬件提供的机制，形成的是进程空间这样的一个抽象。背后利用的当然是分段或者分页。我们就当操作系统在执行程序代码的时候自动对程序的地址进行变换，就可以了。或者干脆说，被体系拦住了。</p>
+<p>在硬件上我们知道有MMU等机制。</p>
+<p>进程因此被操作系统所管理。操作系统使用的数据结构称为进程控制块PCB.</p>
+<h3 id="操作系统完成对进程的抽象">操作系统完成对进程的抽象</h3>
+<p>但是进程不需要知道它的存在，完成自己的事情就可以了，所以如果把计算机系统看成一个人的生命周期，开关机和保存状态都和生命的存在有关，但是一个进程的灭亡，只是相当于一个细胞的死亡。重要的器官还都存在着。</p>
+<p>对于一个人而言，就知道，会玩游戏只是会一个程序，它终究是会死亡的，我们使用计算机的意义不在于那个程序，而在于我们使用那些功能，留下了那些重要的数据。或者说，我们的思想有什么收获。</p>
+<p>所以现在我们开始讨论一个有限生命，这就不得不拿出生理学的淡定态度来。</p>
+<p>在操作系统看来进程有四个部分，进程控制块，进程程序块，进程内核栈，进程数据块。</p>
+<p>一个一个解释这些内容显得好琐碎，这样说吧，一个是进程控制块为操作系统所用，相当于进程的身份信息。其余的内容都相当于进程告诉操作系统哪些在执行时用到，哪些是先注册好的资源。这样系统知道在执行切换的时候如何安排，因为就相当于一次旅游，操作系统要把人送到目的地，人总要说，自己有哪些行李是要带到那个地方使用的。</p>
+<p>在unix看来，后三个具有RWX类的权限，各自为R-X RW-RW-。这是因为在unix看来，写不只是向硬盘中去写，内存，甚至寄存器也有这样的概念。所以unix操作系统的权限设定是从头到尾的，任何可能的位置都赋予了相应的权限。</p>
+<p>缺少其中任何之一就不称为进程，如果只有前三项就称为线程，如果用户空间共享，则称为用户线程。如果没有用户空间，就称为内核线程。</p>
+<p>所以线程的定义是非常不严谨的。</p>
+<p>在实现的时候，由于进程程序块里的内容不会被改变，所以系统也可以透明地让其它的进程使用，只是开始的位置可能不同而已，没有必要记录下所有的内容。</p>
+<p>与操作系统原理的对应是，程序段代表其中的内容会被取指令所操作。数据段则是进程地应程序加工处理的原始数据或者中间结果。进程控制块是系统统一管理调度进程的一个数据结构。</p>
+<p>所以说系统与进程的地位就有些混乱了。有时候操作系统好像过分控制了进程。对此我只能说这种不公正对特进程的现象只能是操作系统自身的原因，一个好的操作系统，应当能够让用户保证对自己来说有意义的程序得到最好最恰当的调度。</p>
+<p>先不考虑读写磁盘，只考虑程序执行过程中涉及运算的那个部分。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+            <a href="/tags/进程/" rel="tag"># 进程</a>
+          
+            <a href="/tags/线程/" rel="tag"># 线程</a>
+          
+            <a href="/tags/权限/" rel="tag"># 权限</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2012/ICTN/os-process-2/" rel="prev" title="进程原理二：进程控制块与进程详细介绍">
+                进程原理二：进程控制块与进程详细介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2012/ICTN/os-process-1/"
+           data-title="进程原理一：进程管理与Linux下面的进程" data-url="./2012/ICTN/os-process-1/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Istyasna" />
+          <p class="site-author-name" itemprop="name">Istyasna</p>
+          <p class="site-description motion-element" itemprop="description">GO FORTH now and create masterpieces of the publishing art!</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">189</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/irhawks" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://code.aliyun.com/u/irhawks" target="_blank" title="Aliyun">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Aliyun
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="./" title="Homepage" target="_blank">Homepage</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hainu.edu.cn" title="Hainan University" target="_blank">Hainan University</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://qiqi789.github.io/" title="Qi Qi" target="_blank">Qi Qi</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程与子进程的同步"><span class="nav-number">1.</span> <span class="nav-text">进程与子进程的同步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用环境变量"><span class="nav-number">2.</span> <span class="nav-text">使用环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序设计中的进程控制"><span class="nav-number">3.</span> <span class="nav-text">程序设计中的进程控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程创建的机制"><span class="nav-number">4.</span> <span class="nav-text">进程创建的机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对于进程的理解"><span class="nav-number">5.</span> <span class="nav-text">对于进程的理解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程最基本的一面"><span class="nav-number">5.1.</span> <span class="nav-text">进程最基本的一面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统完成对进程的抽象"><span class="nav-number">5.2.</span> <span class="nav-text">操作系统完成对进程的抽象</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Istyasna</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+<!-- I manually add this to enable bootstrap style dropdown menu -->
+<script type="text/javascript" src="/js/src/bootstrap/dropdown.js"></script>
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"irhawks"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: {
+          extensions: ["amsthm.js", "AMSmath.js","AMSsymbols.js", "autobold.js"],
+        },
+        tex2jax: {
+          <!--(disable $) inlineMath: [ ['$','$'], ["\\(","\\)"]  ],-->
+          inlineMath: [ ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        },
+        <!-- add zoom options for math equations-->
+        MathZoom: {
+          styles: { "#MathJax_Zoom": {
+              "background-color": "rgba(255,255,255,0.9)"
+            } }
+        },
+        extensions: ["[Contrib]/a11y/accessibility-menu.js"],
+        explorer: {
+          walker: 'syntactic',         // none, syntactic, semantic
+          highlight: 'none',           // none, hover, flame
+          background: 'blue',          // blue, red, green, yellow, cyan, magenta, white, black
+          foreground: 'black',         // black, white, magenta, cyan, yellow, green, red, blue
+          speech: true,                // true, false
+          generation: 'lazy',          // eager, mixed, lazy
+          subtitle: true,              // true, false
+          ruleset: 'mathspeak-default' // mathspeak-default, mathspeak-brief, mathspeak-sbrief, chromevox-default, chromevox-short, chromevox-alternative
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>

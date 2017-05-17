@@ -392,8 +392,8 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               <span class="post-meta-item-text">Post modified</span>
-              <time title="Post modified" itemprop="dateModified" datetime="2017-04-24T09:14:17+08:00">
-                2017-04-24
+              <time title="Post modified" itemprop="dateModified" datetime="2017-05-17T16:46:02+08:00">
+                2017-05-17
               </time>
             
           </span>
@@ -434,7 +434,7 @@
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <a href="/2016/EXPR/blog-function-spec/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/EXPR/blog-function-spec/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/EXPR/blog-function-spec/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -461,23 +461,31 @@
 
       
         
-          <h1 id="整理github博客2014-09-13">整理github博客[2014-09-13]</h1>
-<h2 id="代码展示功能">代码展示功能</h2>
-<p>测试了很多。现在的代码应该是正常的吧。</p>
-<p>代码使用Python块，使用Markdown内嵌的支持。</p>
-<p>A block of text.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> os
-<span class="bu">print</span> <span class="st">&quot;hello,world&quot;</span></code></pre></div>
-<p>代码虽然不是很好看，但是也可以接受。</p>
-<h2 id="数学公式展示功能">数学公式展示功能</h2>
-<p>数学公式使用MathJax插件，下面的是勾股定理： <span class="math display">\[a^2+b^2=c^2.\]</span></p>
-<h1 id="github主页修整记">Github主页修整记</h1>
-<p>2015-06-20</p>
-<p>建主页有许多种选择。这些方案可以分成静态主页方案与动态主页方案两大类。动态主页的托管的方式可能复杂一些，需要维护的代价似乎比较高。此外，动态主页里面的内容在转成可打印的版本的时候质量也会缩水。最理想的情况自然是一边能够生成HTML文档，另一方面，不经重新修改，可以转成其它的格式，特别是LaTeX的格式。</p>
-<p>但是实际中能像LaTeX那样有表现力，又有丰富宏包支持的格式还真不多。Markdown等都过于简单了。之前的实践中，LaTeX格式与HTML对比中，主要的不一致有：</p>
+          <!--------------------------------------------------------------------->
+<!--------------------------------------------------------------------->
+<!--------------------------------------------------------------------->
+<h1 id="描述文章内容的格式与需求">描述文章内容的格式与需求</h1>
+<h2 id="适应各种展示场合的标记语言">适应各种展示场合的标记语言</h2>
+<p>建立主页可以使用基于静态主页的方案或者基于动态主页的方案。动态主页虽然提供的内容类型较为丰富，但是托管方式比较复杂，创作代价比较高，受运行时环境的影响较大，难以同时适应网页、打印等不同场景的需求。我们需要一种</p>
+<ol>
+<li>内容与格式相分离的描述，以允许我们<strong>写作时仅需要关注标记内容</strong>。这种描述语言要<strong>具有强大的表现力</strong>，以适应丰富的表现需求（高亮、文本块、编号、代码高亮、表格、抄录、引用、参考文献等）；同时又要足够<strong>简洁</strong>，尽可能自动地计算出渲染需求。</li>
+<li>这种格式能够向HTML网页、LaTeX、PDF、Word以及维基等多种格式转换。在转换的时候需要人工处理的内容要尽量少。因为我们希望<strong>复用博客里面的文章到不同场合(不同网站、不同目的、不同输出)的时候尽可能不需要改动</strong>。</li>
+</ol>
+<p>然而，这诸多需求之间存在显著的矛盾。在这些矛盾的折衷中，我们看到基于Pandoc的Markdown标记相对而言最接近于我们理想的情况。这是因为：</p>
+<ol>
+<li>现在已有许多Markdown渲染器作为渲染内容的后端程序。许多人员在根据需求不断地改进Markdown；</li>
+<li>虽然Markdown方言很多。但是Pandoc博采众家之长，兼容多种Markdown格式，同时还可以在自家的Markdown和其它Markdown格式之间互转；</li>
+<li>采用Pandoc标准的Markdown格式，可以向HTML、PDF、演示文稿、Word地格式转换。在转换过程中，基本元素（标题、文字加粗倾斜、列表、图片等）均可以展示出来；在表格、插图、参考文献当中也有部分的支持；</li>
+<li>可以使用过滤器手动改进Pandoc元素的渲染方式。</li>
+</ol>
+<h2 id="具有最好展示效果的标记语言">具有最好展示效果的标记语言</h2>
+<p>LaTeX目前是已知的一种在表现内容方面质量最高的文本标记形式。除了LaTeX本身在设计理念上的优势，丰富的宏包支持以及庞大用户群的持续贡献也是选择LaTeX的重要的因素。然而，LaTeX语法比较复杂，要生成PDF之外的其它格式，同时保持排版效果是比较困难的。在LaTeX世界当中可以找到处理浮动体、编号、文本块高亮以及图表处理的许多有价值的方案。比如</p>
 <ol style="list-style-type: decimal">
-<li><p>LaTeX中有wrapfigure、caption宏包可以调整图片，但是在HTML中的调整就得手工编码了。因为实在是没有学习HTML的排版细节问题；此外，LaTeX的表格转成HTML的表格也不太容易，特别是有对齐、指定宽度的表格，换到HTML页面上往往不好看。</p></li>
-<li><p>数学公式中，使用MathJax中也只能使用预定义的公式集。但是在编程语言中所用的符号，与在逻辑中所用的符号不同，范畴论的符号，跟在线性代数中也非常不同。在MathJax中能够自定义数学公式命令是必须的，但是又是比较麻烦的。高级的框架，如交换图、amssymb、eulervm宏包提供的符号，似乎也得重新配置。单配置来说并不困难，可是有时候需要变更宏包，这个时候又得手工同步。</p></li>
+<li>通过LaTeX的<code>subfig</code>、<code>wrapfigure</code>、<code>caption</code>等宏包提供的环境与命令可以方便地调整图表的组合、编号以及出现位置。</li>
+<li>通过LaTeX的<code>longtable</code>、<code>tabularx</code>、<code>tabu</code>等宏包提供的环境可以指定表格的宽度、对齐、高亮样式等。Markdown对表格的支持没有LaTeX那样方便。</li>
+<li>LaTeX可以通过<code>amssymb</code>和<code>eulervm</code>等宏包使用更多的数学符号，还可以自定义数学符号与排版还境，比如范畴论中用到的交换图。这些命令可以在LaTeX文档的导言区中进行配置。</li>
+<li>LaTeX有算法宏包<code>algorithmicx</code>、语法高亮宏包<code>listings</code>与<code>minted</code>、化学公式宏包<code>chemfig</code>、UML类图宏包<code>umlcd</code>、乐谱排版宏包<code>abc</code>、<code>lilypond</code>、<code>musixtex</code>等，可以支持领域特定元素的展示。</li>
+<li>总而言之，LaTeX在做到格式与内容分离的同时，还保持了强大的定制格式的能力。</li>
 </ol>
           <!--noindex-->
           <div class="post-more-link text-center">
@@ -607,7 +615,7 @@
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <a href="/2016/solr-tutorial/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/solr-tutorial/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/solr-tutorial/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -752,7 +760,7 @@ Hexo的Next主题可以识别<! -- more --.>，并且在主页当中展示文章
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <a href="/2016/apache-nutch/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/apache-nutch/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/apache-nutch/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -932,7 +940,7 @@ Hexo的Next主题可以识别<! -- more --.>，并且在主页当中展示文章
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <a href="/2016/stochastic-differential-equation-intro/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/stochastic-differential-equation-intro/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/stochastic-differential-equation-intro/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1072,7 +1080,7 @@ Hexo的Next主题可以识别<! -- more --.>，并且在主页当中展示文章
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <a href="/2016/modelica-modeling-2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/modelica-modeling-2/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/modelica-modeling-2/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1401,27 +1409,31 @@ Hexo的Next主题可以识别<! -- more --.>，并且在主页当中展示文章
 
   
 
-  
-    
-  
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"irhawks"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
 
   
 
+    <script type="text/javascript">
+      var disqus_shortname = 'irhawks';
+      var disqus_identifier = 'en/index.html';
+
+      var disqus_title = "";
 
 
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+
+    </script>
+  
 
 
 

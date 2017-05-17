@@ -7,8 +7,16 @@
     </url>
 
     <url>
+        <loc>./2016/EXPR/blog-function-spec/</loc>
+        <lastmod>2017-05-17T08:46:02.060Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>./2015/EXPR/blog-solution-spec/</loc>
-        <lastmod>2017-04-24T01:39:22.304Z</lastmod>
+        <lastmod>2017-05-17T01:59:24.933Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -17,14 +25,6 @@
     <url>
         <loc>./2014/EXPR/draw-gnuplot/</loc>
         <lastmod>2017-04-24T01:23:10.539Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>./2016/EXPR/blog-function-spec/</loc>
-        <lastmod>2017-04-24T01:14:17.388Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

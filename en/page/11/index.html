@@ -423,7 +423,7 @@
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <a href="/2013/ICTN/Linux-Daemon/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/ICTN/Linux-Daemon/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2013/ICTN/Linux-Daemon/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -595,7 +595,7 @@
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <a href="/2013/regex-intro/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/regex-intro/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2013/regex-intro/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -764,7 +764,7 @@
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <a href="/2012/ICTN/os-threads-1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2012/ICTN/os-threads-1/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2012/ICTN/os-threads-1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1047,7 +1047,7 @@ pthread_exit(arg);
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <a href="/2012/ICTN/os-process-2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2012/ICTN/os-process-2/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2012/ICTN/os-process-2/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1285,7 +1285,7 @@ _exit(<span class="dv">0</span>);</code></pre></div>
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <a href="/2012/ICTN/os-process-1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2012/ICTN/os-process-1/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2012/ICTN/os-process-1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1703,27 +1703,31 @@ _exit(<span class="dv">0</span>);</code></pre></div>
 
   
 
-  
-    
-  
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"irhawks"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
 
   
 
+    <script type="text/javascript">
+      var disqus_shortname = 'irhawks';
+      var disqus_identifier = 'en/page/11/index.html';
+
+      var disqus_title = "";
 
 
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+
+    </script>
+  
 
 
 
